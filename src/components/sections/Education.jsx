@@ -3,66 +3,66 @@ import { motion } from 'framer-motion';
 import { GraduationCap, Award, Calendar } from 'lucide-react';
 
 const Education = () => {
-    return (
-        <section id="education" className="education-section">
-            <div className="section-header">
-                <h2 className="section-title">
-                    <span className="hash">#</span> Education & Certifications
-                </h2>
-                <p className="section-subtitle">
-                    Academic background and professional certifications.
-                </p>
+  return (
+    <section id="education" className="education-section">
+      <div className="section-header">
+        <h2 className="section-title">
+          <span className="hash">#</span> Education & Certifications
+        </h2>
+        <p className="section-subtitle">
+          Academic background and professional certifications.
+        </p>
+      </div>
+
+      <div className="education-grid">
+        <motion.div
+          className="edu-card"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="card-header">
+            <GraduationCap className="icon" size={24} />
+            <h3>Education</h3>
+          </div>
+          <div className="card-content">
+            <div className="edu-item">
+              <h4>Bachelors of Computer Applications</h4>
+              <p className="institution">K. P. B. Hinduja College of Commerce</p>
+              <div className="meta">
+                <span className="location">Mumbai, Maharashtra</span>
+                <span className="date"><Calendar size={14} /> 10/2021</span>
+              </div>
+              <p className="grade">CGPA: 8.20</p>
             </div>
+          </div>
+        </motion.div>
 
-            <div className="education-grid">
-                <motion.div
-                    className="edu-card"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                >
-                    <div className="card-header">
-                        <GraduationCap className="icon" size={24} />
-                        <h3>Education</h3>
-                    </div>
-                    <div className="card-content">
-                        <div className="edu-item">
-                            <h4>Bachelors of Computer Applications</h4>
-                            <p className="institution">K. P. B. Hinduja College of Commerce</p>
-                            <div className="meta">
-                                <span className="location">Mumbai, Maharashtra</span>
-                                <span className="date"><Calendar size={14} /> 10/2021</span>
-                            </div>
-                            <p className="grade">CGPA: 8.20</p>
-                        </div>
-                    </div>
-                </motion.div>
-
-                <motion.div
-                    className="edu-card"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                >
-                    <div className="card-header">
-                        <Award className="icon" size={24} />
-                        <h3>Certifications</h3>
-                    </div>
-                    <div className="card-content">
-                        <div className="cert-item">
-                            <h4>Rest API (Intermediate)</h4>
-                            <p className="issuer">HackerRank</p>
-                        </div>
-                        <div className="cert-item">
-                            <h4>Certified Python - Advanced</h4>
-                            <p className="issuer">CutShort</p>
-                        </div>
-                    </div>
-                </motion.div>
+        <motion.div
+          className="edu-card"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="card-header">
+            <Award className="icon" size={24} />
+            <h3>Certifications</h3>
+          </div>
+          <div className="card-content">
+            <div className="cert-item">
+              <h4>CutShort Certified Python - Advanced</h4>
+              <p className="issuer">CutShort</p>
             </div>
+            <div className="cert-item">
+              <h4>Rest API (Intermediate) Certificate</h4>
+              <p className="issuer">HackerRank</p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
 
-            <style>{`
+      <style>{`
         .education-section {
           padding: var(--spacing-xl) 0;
         }
@@ -143,8 +143,8 @@ const Education = () => {
           font-weight: 600;
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 };
 
 export default Education;

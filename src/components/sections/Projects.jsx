@@ -6,16 +6,16 @@ const Projects = () => {
   const projects = [
     {
       title: "Agency Website (BizAssist)",
-      desc: "A full-stack agency website built with modern technologies.",
+      desc: "Full-stack agency website delivering scalable client solutions with Next.js, Tailwind, Node.js, and MongoDB, deployed on Vercel.",
       tags: ["Next.js", "Tailwind", "Node.js", "MongoDB", "Vercel"],
       links: {
-        demo: "#", // No demo link provided
+        demo: "#",
         code: "https://github.com/suresh-3x/bizAssist"
       }
     },
     {
       title: "News3x",
-      desc: "iOS News application using SwiftUI and CoreData.",
+      desc: "iOS news aggregator built with SwiftUI and CoreData, offering real-time updates and offline reading.",
       tags: ["SwiftUI", "CoreData", "iOS"],
       links: {
         demo: "#",
@@ -24,11 +24,29 @@ const Projects = () => {
     },
     {
       title: "Vision Clothing",
-      desc: "E-commerce mobile application built with Flutter.",
+      desc: "E-commerce mobile app crafted in Flutter, showcasing material design and seamless checkout flow.",
       tags: ["Flutter", "Dart", "Material Design"],
       links: {
         demo: "#",
         code: "https://github.com/suresh-3x/vision-clo"
+      }
+    },
+    {
+      title: "JordanSoldOutChecker",
+      desc: "High-performance inventory checker built in Go, utilizing concurrency and efficient HTTP client to process massive SKU lists.",
+      tags: ["Go", "Concurrency", "HTTP", "CLI"],
+      links: {
+        demo: "#",
+        code: "https://github.com/suresh-3x/jordanSoldOutChecker"
+      }
+    },
+    {
+      title: "Tasker",
+      desc: "Cross-platform task management app built with Flutter and Dart, featuring offline sync and intuitive UI.",
+      tags: ["Flutter", "Dart", "SQLite", "Mobile"],
+      links: {
+        demo: "#",
+        code: "https://github.com/suresh-3x/Tasker"
       }
     }
   ];

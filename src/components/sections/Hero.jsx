@@ -4,7 +4,7 @@ import { Terminal, ArrowRight, Database, Server, Globe } from 'lucide-react';
 
 const Hero = () => {
   const [text, setText] = useState('');
-  const fullText = "Initializing system...\nLoading modules...\n> Backend Engineer ready.";
+  const fullText = "Loading backend modules...\nInitializing mobile frameworks...\nOptimizing system architecture...\n> Polymath Engineer ready.";
 
   useEffect(() => {
     let index = 0;
@@ -27,15 +27,16 @@ const Hero = () => {
         >
           <div className="badge">
             <span className="status-dot"></span>
-            Available for hire
+            {/* Available for hire */}
+            Online
           </div>
           <h1>
             Suresh <span className="highlight">Bhandari</span><br />
             Backend Software Engineer
           </h1>
           <p className="subtitle">
-            Passionate Software Development Engineer with over a decade of hands-on coding experience.
-            Specializing in backend-heavy web development, building scalable, high-performance systems with Node.js, Django, FastAPI, and AWS.
+            <strong>Polymath</strong> & Software Engineer with 10+ years of experience.
+            Architecting high-performance, scalable backend systems while continuously expanding expertise across diverse domains.
           </p>
 
           <div className="cta-group">
@@ -49,8 +50,8 @@ const Hero = () => {
 
           <div className="tech-stack-preview">
             <div className="tech-item"><Server size={16} /> Microservices</div>
-            <div className="tech-item"><Database size={16} /> PostgreSQL</div>
-            <div className="tech-item"><Globe size={16} /> REST/gRPC</div>
+            <div className="tech-item"><Database size={16} /> High-Scale DBs</div>
+            <div className="tech-item"><Globe size={16} /> Distributed Systems</div>
           </div>
         </motion.div>
 
@@ -72,7 +73,7 @@ const Hero = () => {
             <div className="terminal-body">
               <pre>
                 <code>
-                  <span className="prompt">user@server:~$</span> ./start_portfolio.sh<br />
+                  <span className="prompt">user@server:~$</span> ./init_polymath.sh<br />
                   {text}
                   <span className="cursor">_</span>
                 </code>
@@ -81,15 +82,15 @@ const Hero = () => {
               <div className="system-stats">
                 <div className="stat-row">
                   <span className="label">UPTIME</span>
-                  <span className="value">99.99%</span>
+                  <span className="value">99.999%</span>
                 </div>
                 <div className="stat-row">
                   <span className="label">LATENCY</span>
-                  <span className="value text-green">12ms</span>
+                  <span className="value text-green">&lt;10ms</span>
                 </div>
                 <div className="stat-row">
                   <span className="label">STATUS</span>
-                  <span className="value text-blue">OPERATIONAL</span>
+                  <span className="value text-blue">OPTIMIZED</span>
                 </div>
               </div>
             </div>

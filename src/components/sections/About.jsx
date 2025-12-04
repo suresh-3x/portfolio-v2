@@ -6,18 +6,18 @@ const About = () => {
   const features = [
     {
       icon: <Cpu size={24} />,
-      title: "System Architecture",
-      desc: "Designing scalable, fault-tolerant distributed systems that handle high throughput."
+      title: "Distributed Systems",
+      desc: "Architecting fault-tolerant microservices capable of handling 10k+ concurrent requests."
     },
     {
       icon: <Zap size={24} />,
-      title: "Performance Optimization",
-      desc: "Deep diving into database queries and runtime efficiency to shave off milliseconds."
+      title: "High-Performance Engineering",
+      desc: "Optimizing database queries and runtime execution to achieve <50ms response times."
     },
     {
       icon: <Shield size={24} />,
-      title: "Security First",
-      desc: "Implementing robust authentication and authorization protocols from the ground up."
+      title: "Enterprise Security",
+      desc: "Implementing OAuth2, JWT, and RBAC to ensure bank-grade security standards."
     }
   ];
 
@@ -35,12 +35,10 @@ const About = () => {
       <div className="about-grid">
         <div className="about-text">
           <p>
-            I am a <strong>Passionate Software Development Engineer</strong> with over a decade of hands-on coding experience, starting at age 13.
-            I specialize in <strong>backend-heavy web development</strong>, building scalable, high-performance systems with Node.js, Django, FastAPI, and AWS.
+            As a <strong>Polymath & Software Engineer</strong> with over a decade of experience, I specialize in orchestrating complex, high-availability systems. My expertise spans the entire software lifecycle, from architecting resilient backend infrastructure to crafting intuitive mobile experiences.
           </p>
           <p>
-            I am adept at architecting robust APIs, streamlining infrastructure, and delivering seamless integrations that power complex business workflows.
-            A continuous learner and natural problem solver, focused on driving innovation and staying ahead of modern development trends.
+            I excel in <strong>optimizing system performance</strong>, consistently delivering solutions that handle high throughput with sub-millisecond latency. My approach combines rigorous engineering principles with creative problem-solving to build scalable, secure, and efficient applications that drive business value.
           </p>
         </div>
 

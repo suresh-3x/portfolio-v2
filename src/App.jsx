@@ -8,6 +8,9 @@ import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Skills from './components/sections/Skills';
 
+import GithubStats from './components/sections/GithubStats';
+import Resume from './components/sections/Resume';
+
 
 function App() {
   return (
@@ -17,7 +20,9 @@ function App() {
       <Experience />
       <Skills />
       <Projects />
+      <GithubStats />
       <Education />
+      <Resume />
       <Contact />
     </Layout>
   );
