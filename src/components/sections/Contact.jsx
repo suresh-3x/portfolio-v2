@@ -36,18 +36,6 @@ const Contact = () => {
               <p>Mumbai, Maharashtra</p>
             </div>
           </div>
-
-          <div className="social-links">
-            <a href="https://github.com/suresh-3x" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Github size={24} />
-            </a>
-            <a href="https://linkedin.com/in/suresh-3x" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Linkedin size={24} />
-            </a>
-            <a href="https://stackoverflow.com/users/1234567/suresh-3x" target="_blank" rel="noopener noreferrer" aria-label="Stack Overflow">
-              <Code size={24} />
-            </a>
-          </div>
         </div>
       </div>
 

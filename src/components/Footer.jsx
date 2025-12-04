@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Mail, ArrowUp, Terminal, Heart } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowUp, Terminal, Heart, Code } from 'lucide-react';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -46,6 +46,9 @@ const Footer = () => {
             <a href="mailto:suresh.37x@gmail.com" className="social-link" aria-label="Email">
               <Mail size={20} />
             </a>
+            <a href="https://stackoverflow.com/users/15631949/suresh-bhandari" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Stack Overflow">
+              <Code size={20} />
+            </a>
           </div>
         </div>
       </div>
@@ -54,9 +57,6 @@ const Footer = () => {
       <div className="footer-bottom">
         <div className="copyright">
           <p>&copy; {new Date().getFullYear()} Suresh Bhandari. All rights reserved.</p>
-        </div>
-        <div className="built-with">
-          <span>Built with React & Vite</span>
         </div>
         <button onClick={scrollToTop} className="scroll-top" aria-label="Scroll to top">
           <ArrowUp size={16} />
@@ -76,8 +76,9 @@ const Footer = () => {
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 var(--spacing-md);
-          display: grid;
-          grid-template-columns: 2fr 1fr 1fr;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
           gap: var(--spacing-xl);
           margin-bottom: var(--spacing-lg);
         }
@@ -214,14 +215,26 @@ const Footer = () => {
           border-color: var(--accent-primary);
         }
 
+        /* Social Section Alignment */
+        .footer-section.social {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+        }
+
         @media (max-width: 768px) {
           .footer-content {
-            grid-template-columns: 1fr;
+            flex-direction: column;
+            align-items: center;
             gap: var(--spacing-lg);
             text-align: center;
           }
 
           .footer-section.brand {
+            align-items: center;
+          }
+
+          .footer-section.social {
             align-items: center;
           }
 

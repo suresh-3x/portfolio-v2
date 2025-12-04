@@ -1,28 +1,48 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Server, Cpu, Code, Cloud } from 'lucide-react'; // Added this import
+import { Server, Cpu, Code, Cloud, Globe, Eye, Smartphone, Terminal, Layers } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
     {
-      title: "Backend Development",
+      title: "Fullstack Development",
+      icon: <Layers size={24} />,
+      skills: ["React", "Next.js", "Node.js", "TypeScript", "Tailwind CSS", "GraphQL", "Redux"]
+    },
+    {
+      title: "Backend Engineering",
       icon: <Server size={24} />,
-      skills: ["Python", "JavaScript", "TypeScript", "Golang", "Django", "FastAPI", "Express.js", "Next.js", "MySQL", "PostgreSQL", "MongoDB", "Redis", "RabbitMQ", "Nginx"]
+      skills: ["Python", "Golang", "Django", "FastAPI", "Express.js", "PostgreSQL", "MongoDB", "Redis", "RabbitMQ"]
     },
     {
       title: "AI & Machine Learning",
       icon: <Cpu size={24} />,
-      skills: ["Python", "PyTorch", "TensorFlow", "NumPy", "Pandas", "Scikit-learn", "OpenCV", "Computer Vision", "Model Training"]
+      skills: ["PyTorch", "TensorFlow", "Scikit-learn", "Pandas", "NumPy", "LLMs", "LangChain", "AI Agents"]
     },
     {
-      title: "Frontend & Mobile",
-      icon: <Code size={24} />,
-      skills: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS", "Bootstrap", "SwiftUI", "iOS Development", "Core Data"]
-    },
-    {
-      title: "Cloud & Networking",
+      title: "DevOps & Cloud",
       icon: <Cloud size={24} />,
-      skills: ["AWS", "GCP", "Azure", "Docker", "Kubernetes", "TCP/UDP", "WebSockets", "gRPC", "DNS", "DHCP"]
+      skills: ["AWS", "GCP", "Docker", "Kubernetes", "Terraform", "CI/CD", "Prometheus", "Grafana"]
+    },
+    {
+      title: "Networking",
+      icon: <Globe size={24} />,
+      skills: ["TCP/IP", "DNS", "HTTP/HTTPS", "WebSockets", "gRPC", "Load Balancing", "Nginx"]
+    },
+    {
+      title: "Computer Vision",
+      icon: <Eye size={24} />,
+      skills: ["OpenCV", "YOLO", "Image Processing", "Object Detection", "Face Recognition", "Video Analytics"]
+    },
+    {
+      title: "Mobile App Dev",
+      icon: <Smartphone size={24} />,
+      skills: ["React Native", "SwiftUI", "iOS", "Android", "Mobile Web", "Expo"]
+    },
+    {
+      title: "Linux & Systems",
+      icon: <Terminal size={24} />,
+      skills: ["Bash Scripting", "Shell", "System Admin", "OS Internals", "Process Management", "Cron Jobs"]
     }
   ];
 
