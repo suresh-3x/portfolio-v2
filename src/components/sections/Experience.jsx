@@ -15,17 +15,7 @@ const Experience = () => {
                 "Collaborating closely with UI/UX and mobile teams to deliver seamless, production-ready features."
             ]
         },
-        {
-            role: "Back End Developer (Contract)",
-            company: "T-Systems",
-            location: "Pune",
-            period: "Sept 2025 - Present",
-            description: [
-                "Developing and maintaining backend systems powering various client projects with a focus on reliability and modular design.",
-                "Implementing API integrations, optimizing database queries, and enhancing system performance.",
-                "Collaborating closely with UI/UX and mobile teams to deliver seamless, production-ready features."
-            ]
-        },
+
         {
             role: "Tech Lead (Freelance)",
             company: "BizAssist",
@@ -234,6 +224,24 @@ const Experience = () => {
         .exp-description li {
           margin-bottom: 5px;
           line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .timeline {
+                padding-left: 20px;
+            }
+            .timeline::before {
+                left: 9px;
+            }
+            .timeline-marker {
+                left: 4px;
+            }
+            .timeline-content {
+                padding: var(--spacing-md);
+            }
+            .exp-header h3 {
+                font-size: 1.1rem;
+            }
         }
       `}</style>
         </section>

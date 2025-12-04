@@ -67,8 +67,8 @@ const Footer = () => {
         .footer {
           background: var(--bg-secondary);
           border-top: 1px solid var(--border-color);
-          padding: var(--spacing-xl) 0 var(--spacing-lg);
-          margin-top: var(--spacing-xl);
+          padding: var(--spacing-lg) 0 var(--spacing-md);
+          margin-top: var(--spacing-lg);
           position: relative;
         }
 
@@ -79,7 +79,7 @@ const Footer = () => {
           display: grid;
           grid-template-columns: 2fr 1fr 1fr;
           gap: var(--spacing-xl);
-          margin-bottom: var(--spacing-xl);
+          margin-bottom: var(--spacing-lg);
         }
 
         /* Brand Section */
