@@ -104,12 +104,13 @@ const Hero = () => {
           display: flex;
           align-items: center;
           padding: var(--spacing-xl) 0;
+          position: relative;
         }
 
         .hero-content {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--spacing-xl);
+          grid-template-columns: 1.2fr 1fr;
+          gap: var(--spacing-2xl);
           align-items: center;
         }
 
@@ -117,78 +118,86 @@ const Hero = () => {
           display: inline-flex;
           align-items: center;
           gap: var(--spacing-sm);
-          padding: var(--spacing-xs) var(--spacing-sm);
-          background: rgba(0, 255, 157, 0.1);
+          padding: 6px 16px;
+          background: rgba(0, 255, 157, 0.05);
           border: 1px solid rgba(0, 255, 157, 0.2);
           border-radius: 100px;
           color: var(--accent-primary);
           font-size: 0.8rem;
           font-family: var(--font-mono);
-          margin-bottom: var(--spacing-md);
+          margin-bottom: var(--spacing-lg);
+          letter-spacing: 0.5px;
         }
 
         .status-dot {
-          width: 6px;
-          height: 6px;
+          width: 8px;
+          height: 8px;
           background: var(--accent-primary);
           border-radius: 50%;
           box-shadow: 0 0 10px var(--accent-primary);
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.4); }
+          70% { box-shadow: 0 0 0 6px rgba(0, 255, 157, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
         }
 
         h1 {
-          font-size: 3.5rem;
+          font-size: 4rem;
           margin-bottom: var(--spacing-md);
           line-height: 1.1;
+          font-weight: 800;
+          letter-spacing: -1px;
         }
 
         .highlight {
-          color: var(--accent-secondary);
+          background: linear-gradient(120deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
           position: relative;
-        }
-        
-        .highlight::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: var(--accent-secondary);
-          opacity: 0.5;
         }
 
         .subtitle {
-          font-size: 1.1rem;
+          font-size: 1.2rem;
           color: var(--text-secondary);
-          margin-bottom: var(--spacing-lg);
-          max-width: 500px;
+          margin-bottom: var(--spacing-xl);
+          max-width: 540px;
+          line-height: 1.6;
         }
 
         .cta-group {
           display: flex;
           gap: var(--spacing-md);
-          margin-bottom: var(--spacing-lg);
+          margin-bottom: var(--spacing-xl);
         }
 
         .btn {
           display: inline-flex;
           align-items: center;
           gap: var(--spacing-sm);
-          padding: 0.8rem 1.5rem;
-          border-radius: 4px;
+          padding: 1rem 2rem;
+          border-radius: 6px;
           font-weight: 600;
+          font-size: 1rem;
           transition: all var(--transition-fast);
           cursor: pointer;
+          letter-spacing: 0.5px;
         }
 
         .btn-primary {
           background: var(--accent-primary);
           color: var(--bg-primary);
+          box-shadow: 0 4px 20px rgba(0, 255, 157, 0.2);
+          border: 1px solid var(--accent-primary);
         }
 
         .btn-primary:hover {
-          background: #00cc7d;
+          background: transparent;
+          color: var(--accent-primary);
           transform: translateY(-2px);
+          box-shadow: 0 6px 25px rgba(0, 255, 157, 0.3);
         }
 
         .btn-secondary {
@@ -199,12 +208,13 @@ const Hero = () => {
 
         .btn-secondary:hover {
           border-color: var(--text-primary);
+          background: rgba(255, 255, 255, 0.05);
         }
 
         .tech-stack-preview {
           display: flex;
           gap: var(--spacing-md);
-          padding-top: var(--spacing-md);
+          padding-top: var(--spacing-lg);
           border-top: 1px solid var(--border-color);
         }
 
@@ -212,24 +222,29 @@ const Hero = () => {
           display: flex;
           align-items: center;
           gap: var(--spacing-xs);
-          color: var(--text-muted);
+          color: var(--text-secondary);
           font-size: 0.9rem;
           font-family: var(--font-mono);
+          background: var(--bg-secondary);
+          padding: 6px 12px;
+          border-radius: 4px;
+          border: 1px solid var(--border-color);
         }
 
         /* Terminal Visual */
         .terminal-window {
           background: #0f0f0f;
-          border-radius: 8px;
+          border-radius: 12px;
           border: 1px solid var(--border-color);
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
           overflow: hidden;
           font-family: var(--font-mono);
+          position: relative;
         }
 
         .terminal-header {
           background: #1a1a1a;
-          padding: 10px 15px;
+          padding: 12px 16px;
           display: flex;
           align-items: center;
           border-bottom: 1px solid var(--border-color);
@@ -255,46 +270,71 @@ const Hero = () => {
           text-align: center;
           color: var(--text-muted);
           font-size: 0.8rem;
+          opacity: 0.7;
         }
 
         .terminal-body {
-          padding: 20px;
-          min-height: 300px;
+          padding: 24px;
+          min-height: 340px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          background: rgba(10, 10, 10, 0.95);
         }
 
-        .prompt { color: var(--accent-primary); margin-right: 8px; }
-        .cursor { animation: blink 1s step-end infinite; }
+        pre {
+          margin: 0;
+          white-space: pre-wrap;
+        }
+
+        code {
+          font-family: 'Fira Code', monospace;
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: #e0e0e0;
+        }
+
+        .prompt { color: var(--accent-primary); margin-right: 10px; font-weight: bold; }
+        .cursor { 
+          display: inline-block;
+          width: 8px;
+          height: 16px;
+          background: var(--text-secondary);
+          vertical-align: middle;
+          animation: blink 1s step-end infinite;
+          margin-left: 4px;
+        }
 
         @keyframes blink {
           50% { opacity: 0; }
         }
 
         .system-stats {
-          margin-top: 20px;
-          padding-top: 20px;
+          margin-top: 24px;
+          padding-top: 24px;
           border-top: 1px dashed var(--border-color);
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 10px;
+          gap: 16px;
         }
 
         .stat-row {
           display: flex;
           flex-direction: column;
-          gap: 5px;
+          gap: 6px;
         }
 
         .stat-row .label {
           font-size: 0.7rem;
           color: var(--text-muted);
+          text-transform: uppercase;
+          letter-spacing: 1px;
         }
 
         .stat-row .value {
-          font-size: 0.9rem;
+          font-size: 1rem;
           font-weight: 600;
+          font-family: var(--font-mono);
         }
 
         .text-green { color: var(--accent-primary); }
@@ -304,12 +344,19 @@ const Hero = () => {
           .hero-content {
             grid-template-columns: 1fr;
             text-align: center;
+            gap: var(--spacing-xl);
           }
           
           .hero-text {
             display: flex;
             flex-direction: column;
             align-items: center;
+            order: 2; /* Put text below visual on mobile if preferred, or keep as is */
+            order: 1;
+          }
+
+          .hero-visual {
+            order: 2;
           }
 
           .subtitle {
@@ -319,10 +366,21 @@ const Hero = () => {
 
           .tech-stack-preview {
             justify-content: center;
+            flex-wrap: wrap;
           }
           
           h1 {
             font-size: 2.5rem;
+          }
+
+          .cta-group {
+            flex-direction: column;
+            width: 100%;
+          }
+
+          .btn {
+            width: 100%;
+            justify-content: center;
           }
         }
       `}</style>

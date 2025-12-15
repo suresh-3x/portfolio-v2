@@ -77,26 +77,6 @@ const Experience = () => {
                 "Independently designed and developed the entire back-end system, encompassing assessments, landing pages, and the CMS.",
                 "Provided Software-as-a-Service (SaaS) solutions to additional clients, expanding the reach and impact of the assessment platform."
             ]
-        },
-        {
-            role: "Customer Service Executive",
-            company: "Teleperformance",
-            location: "Indore, Madhya Pradesh",
-            period: "Sept 2020 - Nov 2020",
-            description: [
-                "Handled customer queries and provided effective solutions.",
-                "Maintained high levels of customer satisfaction."
-            ]
-        },
-        {
-            role: "Customer Service Executive",
-            company: "Epicenter Technologies Pvt. Ltd",
-            location: "Mumbai, Maharashtra",
-            period: "March 2018 - Aug 2018",
-            description: [
-                "Provided customer support and resolved issues efficiently.",
-                "Collaborated with team members to meet service targets."
-            ]
         }
     ];
 
