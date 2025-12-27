@@ -9,7 +9,7 @@ const Projects = () => {
       desc: "Full-stack agency website delivering scalable client solutions with Next.js, Tailwind, Node.js, and MongoDB, deployed on Vercel.",
       tags: ["Next.js", "Tailwind", "Node.js", "MongoDB", "Vercel"],
       links: {
-        demo: "#",
+        demo: "https://www.bizassist.online/",
         code: "https://github.com/suresh-3x/bizAssist"
       }
     },
@@ -105,7 +105,7 @@ const Projects = () => {
 
         .projects-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
           gap: var(--spacing-lg);
         }
 

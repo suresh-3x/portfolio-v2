@@ -125,7 +125,7 @@ const GithubStats = () => {
 
         .calendar-img {
           width: 100%;
-          min-width: 700px;
+          min-width: unset; /* Allow shrinking */
           height: auto;
         }
 

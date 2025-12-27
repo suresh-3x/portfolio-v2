@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Zap, Shield } from 'lucide-react';
+import { Cpu, Zap, Shield, Cloud, Bot, Smartphone } from 'lucide-react';
 
 const About = () => {
   const features = [
@@ -11,13 +11,28 @@ const About = () => {
     },
     {
       icon: <Zap size={24} />,
-      title: "High-Performance Engineering",
+      title: "High-Performance",
       desc: "Optimizing database queries and runtime execution to achieve <50ms response times."
     },
     {
       icon: <Shield size={24} />,
       title: "Enterprise Security",
       desc: "Implementing OAuth2, JWT, and RBAC to ensure bank-grade security standards."
+    },
+    {
+      icon: <Cloud size={24} />,
+      title: "Cloud Native",
+      desc: "Designing scalable infrastructure using AWS, Docker, and Kubernetes for seamless deployments."
+    },
+    {
+      icon: <Bot size={24} />,
+      title: "AI & LLM Integration",
+      desc: "Building intelligent agents and integrating LLMs to automate complex business workflows."
+    },
+    {
+      icon: <Smartphone size={24} />,
+      title: "Mobile Engineering",
+      desc: "Crafting intuitive, cross-platform mobile experiences using Flutter and native technologies."
     }
   ];
 
@@ -66,30 +81,9 @@ const About = () => {
           position: relative;
         }
 
-        .section-header {
-          margin-bottom: var(--spacing-2xl);
-        }
-
-        .section-title {
-          font-size: 2.5rem;
-          margin-bottom: var(--spacing-sm);
-          display: flex;
-          align-items: center;
-          gap: var(--spacing-sm);
-          font-weight: 700;
-        }
-
-        .hash {
-          color: var(--accent-primary);
-          font-family: var(--font-mono);
-          opacity: 0.8;
-        }
-
-        .section-subtitle {
-          color: var(--text-secondary);
-          max-width: 600px;
-          font-size: 1.1rem;
-          line-height: 1.6;
+        .about-section {
+          padding: var(--spacing-2xl) 0;
+          position: relative;
         }
 
         .about-grid {
@@ -101,7 +95,7 @@ const About = () => {
           font-size: 1.1rem;
           line-height: 1.8;
           color: var(--text-secondary);
-          max-width: 900px;
+          max-width: 100%;
         }
 
         .about-text strong {
@@ -121,7 +115,7 @@ const About = () => {
         }
 
         .feature-card {
-          background: var(--bg-secondary);
+          background: rgba(10, 10, 10, 0.6);
           padding: var(--spacing-xl);
           border: 1px solid var(--border-color);
           border-radius: 12px;
@@ -131,6 +125,7 @@ const About = () => {
           height: 100%;
           position: relative;
           overflow: hidden;
+          backdrop-filter: blur(5px);
         }
 
         .feature-card::before {
@@ -139,21 +134,21 @@ const About = () => {
           top: 0;
           left: 0;
           width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, var(--accent-primary), transparent);
+          height: 1px; /* Changed to top border line like experience or keep as gradient? Experience has top border gradient. Kept as per Experience style but check direction. Experience uses 1px height top gradient. */
+          background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
           opacity: 0;
-          transition: opacity var(--transition-fast);
+          transition: opacity var(--transition-normal);
         }
 
         .feature-card:hover {
-          transform: translateY(-8px);
+          transform: translateY(-5px);
           border-color: rgba(0, 255, 157, 0.3);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-          background: rgba(255, 255, 255, 0.03);
+          box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+          background: rgba(15, 15, 15, 0.8);
         }
 
         .feature-card:hover::before {
-          opacity: 1;
+          opacity: 0.5;
         }
 
         .feature-icon {

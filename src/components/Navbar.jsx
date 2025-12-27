@@ -80,16 +80,32 @@ const Navbar = () => {
           display: flex;
           gap: var(--spacing-lg);
           list-style: none;
+          align-items: center;  /* Ensure items are aligned vertically in the bar */
         }
 
         .nav-link {
           display: flex;
           align-items: center;
-          gap: var(--spacing-xs);
+          gap: 8px; /* Fixed gap for better consistency */
           color: var(--text-secondary);
           font-size: 0.9rem;
           transition: color var(--transition-fast);
           text-decoration: none;
+          line-height: 1.2; /* Reset line height to prevent shifts */
+          padding: 0.5rem 0; /* Increase hit area and visual balance */
+        }
+
+        .nav-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 20px; /* specific height to match icon size */
+        }
+
+        .nav-label {
+            font-weight: 500;
+            position: relative;
+            top: 1px; /* Optical adjustment if needed, or just rely on flex */
         }
 
         .nav-link:hover {
@@ -106,18 +122,16 @@ const Navbar = () => {
 
         @media (max-width: 768px) {
           .menu-toggle {
-            display: block;
+            display: block !important;
             z-index: 200;
           }
           
           .nav-links {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
-            height: 100dvh; /* Use dynamic viewport height */
-            background: rgba(5, 5, 5, 0.98);
-            backdrop-filter: blur(20px);
+            height: 100vh;
+            background: var(--bg-secondary);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -127,6 +141,8 @@ const Navbar = () => {
             visibility: hidden;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 150;
+            padding: 0;
+            margin: 0;
           }
 
           .nav-links.open {

@@ -15,27 +15,27 @@ const Contact = () => {
 
       <div className="contact-content">
         <div className="contact-info">
-          <div className="info-item">
+          <a href="mailto:suresh.37x@gmail.com" className="info-item">
             <Mail className="icon" />
             <div>
               <h3>Email</h3>
               <a href="mailto:suresh.37x@gmail.com">suresh.37x@gmail.com</a>
             </div>
-          </div>
-          <div className="info-item">
+          </a>
+          <a href="tel:+918451985962" className="info-item">
             <Phone className="icon" />
             <div>
               <h3>Phone</h3>
               <a href="tel:+918451985962">+91 8451985962</a>
             </div>
-          </div>
-          <div className="info-item">
+          </a>
+          <a href="https://www.google.com/maps/place/Mumbai,+Maharashtra" target="_blank" rel="noopener noreferrer" className="info-item">
             <MapPin className="icon" />
             <div>
               <h3>Location</h3>
               <p>Mumbai, Maharashtra</p>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 

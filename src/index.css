@@ -3,13 +3,15 @@
   --bg-primary: #050505;
   --bg-secondary: #0a0a0a;
   --bg-tertiary: #111111;
-  
+
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0a0;
   --text-muted: #505050;
 
-  --accent-primary: #00ff9d; /* Terminal Green */
-  --accent-secondary: #00f0ff; /* Electric Blue */
+  --accent-primary: #00ff9d;
+  /* Terminal Green */
+  --accent-secondary: #00f0ff;
+  /* Electric Blue */
   --accent-error: #ff0055;
 
   --border-color: #222;
@@ -37,16 +39,27 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-mono);
   font-weight: 600;
   line-height: 1.2;
@@ -77,4 +90,27 @@ code {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--border-hover);
+}
+
+/* Global Section Header Styles */
+.section-header {
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.section-title {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+.hash {
+  color: var(--accent-primary);
 }
