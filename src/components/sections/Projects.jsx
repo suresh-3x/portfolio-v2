@@ -11,7 +11,6 @@ const Projects = () => {
       title: "Agency Website (BizAssist)",
       desc: "Full-stack agency website delivering scalable client solutions with Next.js, Tailwind, Node.js, and MongoDB.",
       tags: ["Next.js", "Tailwind", "Node.js", "MongoDB", "Vercel"],
-      color: "#3fb950", // Green (RGB Primary)
       links: {
         demo: "https://www.bizassist.online/",
         code: "https://github.com/suresh-3x/bizAssist"
@@ -21,7 +20,6 @@ const Projects = () => {
       title: "News3x",
       desc: "iOS news aggregator built with SwiftUI and CoreData, offering real-time updates and offline reading.",
       tags: ["SwiftUI", "CoreData", "iOS"],
-      color: "#3f52fd", // Blue (RGB Secondary)
       links: {
         demo: "#",
         code: "https://github.com/suresh-3x/News3x"
@@ -31,7 +29,6 @@ const Projects = () => {
       title: "Vision Clothing",
       desc: "E-commerce mobile app crafted in Flutter, showcasing material design and seamless checkout flow.",
       tags: ["Flutter", "Dart", "Material Design"],
-      color: "#ff4b4b", // Red (RGB Tertiary)
       links: {
         demo: "#",
         code: "https://github.com/suresh-3x/vision-clo"
@@ -41,7 +38,6 @@ const Projects = () => {
       title: "JordanSoldOutChecker",
       desc: "High-performance inventory checker built in Go, utilizing concurrency to process massive SKU lists.",
       tags: ["Go", "Concurrency", "HTTP", "CLI"],
-      color: "#3fb950", // Green (RGB Primary)
       links: {
         demo: "#",
         code: "https://github.com/suresh-3x/jordanSoldOutChecker"
@@ -51,7 +47,6 @@ const Projects = () => {
       title: "Tasker",
       desc: "Cross-platform task management app built with Flutter and Dart, featuring offline sync and intuitive UI.",
       tags: ["Flutter", "Dart", "SQLite", "Mobile"],
-      color: "#3f52fd", // Blue (RGB Secondary)
       links: {
         demo: "#",
         code: "https://github.com/suresh-3x/Tasker"
