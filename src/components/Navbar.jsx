@@ -30,22 +30,17 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="nav-container">
         <div className="logo-v4">
-          <img
-            src="/logo.png"
-            alt="SB Logo"
-            className="sb-logo-img"
-            style={{
-              height: '44px',
-              width: 'auto',
-              filter: (theme === 'dawn' || theme === 'mono-light') ? 'invert(1)' : 'none',
-              mixBlendMode: (theme === 'dawn' || theme === 'mono-light') ? 'multiply' : 'screen',
-              transition: 'all 0.5s ease',
-              borderRadius: '4px'
-            }}
-          />
+          <div className="sb-logo-svg">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="36" height="36" rx="8" stroke="var(--accent-primary)" strokeWidth="2" fill="rgba(var(--accent-primary-rgb), 0.1)" />
+              <path d="M12 14H20C22.2091 14 24 15.7909 24 18V18C24 20.2091 22.2091 22 20 22H12V14Z" stroke="var(--text-primary)" strokeWidth="2" strokeLinecap="round" />
+              <path d="M12 22H20C22.2091 22 24 23.7909 24 26V26C24 28.2091 22.2091 30 20 30H12V22Z" stroke="var(--text-primary)" strokeWidth="2" strokeLinecap="round" />
+              <path d="M26 25C26 23.8954 26.8954 23 28 23H28" stroke="var(--accent-primary)" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </div>
           <div className="sb-details">
             <span className="sb-name">SURESH</span>
-            <span className="sb-sys">CORE_SYSTEMS</span>
+            <span className="sb-sys">BHANDARI</span>
           </div>
         </div>
         <div className="nav-right">
@@ -93,52 +88,17 @@ const Navbar = () => {
           cursor: pointer;
         }
 
-        .sb-identity {
-          position: relative;
+        .sb-logo-svg {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 42px;
-          height: 42px;
-          background: var(--bg-primary-color);
-          border: 1px solid var(--accent-primary);
-          border-radius: 4px;
+          transition: transform 0.3s ease;
+          border-radius: 8px; /* Matching default SVG */
+          overflow: hidden;
         }
 
-        .sb-initials {
-          font-family: var(--font-mono);
-          font-weight: 800;
-          font-size: 1.1rem;
-          color: var(--accent-primary);
-          letter-spacing: -1px;
-        }
-
-        .sb-badge {
-          position: absolute;
-          top: -8px;
-          right: -8px;
-          background: var(--accent-primary);
-          padding: 2px 6px;
-          border-radius: 20px;
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb), 0.3);
-        }
-
-        .sb-dot {
-          width: 5px;
-          height: 5px;
-          background: #fff;
-          border-radius: 50%;
-          animation: pulse 1s infinite;
-        }
-
-        .sb-version {
-          font-size: 0.55rem;
-          font-weight: 900;
-          color: #fff;
-          font-family: var(--font-mono);
+        .logo-v4:hover .sb-logo-svg {
+          transform: scale(1.05);
         }
 
         .sb-details {

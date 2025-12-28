@@ -1,22 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Terminal, Database, Cloud, Layout, Sun, Moon, Circle, FileText, Settings, Cpu, Code, Zap } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
+import { ArrowRight, Terminal, Database, Cloud, Layout, FileText } from 'lucide-react';
 import Card from '../ui/Card';
 
 const Hero = () => {
-  const { theme, setTheme, mode, setMode } = useTheme();
 
-  const handleModeToggle = () => {
-    const newMode = mode === 'system' ? 'ambient' : 'system';
-    setMode(newMode);
-    // Automatically switch to the first theme of the new mode
-    if (newMode === 'ambient') {
-      setTheme('dawn');
-    } else {
-      setTheme('dusk');
-    }
-  };
 
   // Theme Switcher Component
   // const ThemeSwitcher = () => (
@@ -90,13 +78,10 @@ const Hero = () => {
   //   </div>
   // );
 
-  const ThemeSwitcher = () => (
-    <></>
-  );
+
 
   return (
     <section className="hero-section" id="home">
-      <ThemeSwitcher />
 
       <div className="hero-container">
         {/* Left: Narrative */}
@@ -155,7 +140,7 @@ const Hero = () => {
                 showStrip={true}
                 noPadding={true}
                 style={{
-                  '--accent-primary': 'var(--accent-primary)',
+                  '--accent-primary': 'var(--accent-secondary)', // Forced to Green (Secondary)
                   borderRadius: '4px'
                 }}
               >
@@ -205,7 +190,7 @@ const Hero = () => {
                 showStrip={true}
                 noPadding={true}
                 style={{
-                  '--accent-primary': 'var(--accent-secondary)',
+                  '--accent-primary': 'var(--accent-primary)', // Forced to Red (Primary)
                   borderRadius: '4px'
                 }}
               >
@@ -373,12 +358,12 @@ const Hero = () => {
           gap: 12px;
           font-family: var(--font-mono);
           font-size: 0.8rem;
-          color: var(--accent-primary);
+          color: var(--accent-secondary);
           margin-bottom: 2rem;
-          background: rgba(var(--accent-primary-rgb), 0.1);
+          background: rgba(var(--accent-secondary-rgb), 0.1);
           padding: 8px 16px;
           border-radius: 4px;
-          border: 1px solid rgba(var(--accent-primary-rgb), 0.2);
+          border: 1px solid rgba(var(--accent-secondary-rgb), 0.2);
           text-transform: uppercase;
           letter-spacing: 1px;
         }
@@ -401,7 +386,7 @@ const Hero = () => {
         }
 
         .highlight {
-          color: var(--accent-primary);
+          color: var(--accent-secondary);
         }
 
         .role-container {
@@ -415,7 +400,7 @@ const Hero = () => {
         }
 
         .separator {
-          color: var(--accent-primary);
+          color: var(--accent-secondary);
           opacity: 0.5;
         }
 
@@ -456,9 +441,9 @@ const Hero = () => {
 
         .primary-btn:hover {
           transform: translateY(-3px);
-          background: var(--accent-primary);
+          background: var(--accent-secondary);
           color: white;
-          box-shadow: 0 15px 40px rgba(var(--accent-primary-rgb), 0.3);
+          box-shadow: 0 15px 40px rgba(var(--accent-secondary-rgb), 0.3);
         }
 
         .secondary-btn {

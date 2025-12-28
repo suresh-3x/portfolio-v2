@@ -10,8 +10,6 @@ import Skills from './components/sections/Skills';
 
 import GithubStats from './components/sections/GithubStats';
 
-import ThemePopup from './components/ThemePopup';
-
 function App() {
   return (
     <Layout>
@@ -23,7 +21,6 @@ function App() {
       <GithubStats />
       <Education />
       <Contact />
-      <ThemePopup />
     </Layout>
   );
 }

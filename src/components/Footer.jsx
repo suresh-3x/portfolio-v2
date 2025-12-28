@@ -111,8 +111,8 @@ const Footer = () => {
           align-items: center;
           gap: 8px;
           padding: 6px 12px;
-          background: rgba(0, 255, 157, 0.05);
-          border: 1px solid rgba(0, 255, 157, 0.2);
+          background: rgba(var(--accent-primary-rgb), 0.05);
+          border: 1px solid rgba(var(--accent-primary-rgb), 0.2);
           border-radius: 20px;
           color: var(--accent-primary);
           font-size: 0.8rem;

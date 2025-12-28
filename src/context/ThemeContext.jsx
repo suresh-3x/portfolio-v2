@@ -97,10 +97,12 @@ export const ThemeProvider = ({ children }) => {
             '--bg-secondary': '#f6f8fa',
             '--text-primary': '#1f2328',
             '--text-secondary': '#656d76',
-            '--accent-primary': '#1a7f37',   /* G-PRIMARY: Green */
-            '--accent-primary-rgb': '26, 127, 55',
-            '--accent-secondary': '#cf222e', /* R-SECONDARY: Red */
+            '--accent-primary': '#cf222e',   /* R-PRIMARY: Red */
+            '--accent-primary-rgb': '207, 34, 46',
+            '--accent-secondary': '#1a7f37', /* G-SECONDARY: Green */
+            '--accent-secondary-rgb': '26, 127, 55',
             '--accent-tertiary': '#0969da',  /* B-TERTIARY: Blue */
+            '--accent-tertiary-rgb': '9, 105, 218',
             '--border-color': 'rgba(27, 31, 35, 0.15)',
             '--card-bg': 'rgba(255, 255, 255, 0.9)',
             '--card-border': 'rgba(27, 31, 35, 0.15)',
@@ -108,8 +110,8 @@ export const ThemeProvider = ({ children }) => {
             '--shadow-soft': '0 8px 32px rgba(0, 0, 0, 0.08)',
             '--terminal-bg': '#ffffff',
             '--terminal-header': '#f6f8fa',
-            '--bg-pattern': 'radial-gradient(circle at 1px 1px, rgba(26, 127, 55, 0.1) 1px, transparent 0)',
-            '--grid-color': 'rgba(26, 127, 55, 0.05)',
+            '--bg-pattern': 'radial-gradient(circle at 1px 1px, rgba(207, 34, 46, 0.1) 1px, transparent 0)',
+            '--grid-color': 'rgba(207, 34, 46, 0.05)',
             '--is-monochrome': '0'
         },
         dusk: {
@@ -118,10 +120,12 @@ export const ThemeProvider = ({ children }) => {
             '--bg-secondary': '#161b22',
             '--text-primary': '#e6edf3',
             '--text-secondary': '#8b949e',
-            '--accent-primary': '#3fb950',   /* G-PRIMARY: Green */
-            '--accent-primary-rgb': '63, 185, 80',
-            '--accent-secondary': '#f85149', /* R-SECONDARY: Red */
+            '--accent-primary': '#f85149',   /* R-PRIMARY: Red */
+            '--accent-primary-rgb': '248, 81, 73',
+            '--accent-secondary': '#3fb950', /* G-SECONDARY: Green */
+            '--accent-secondary-rgb': '63, 185, 80',
             '--accent-tertiary': '#58a6ff',  /* B-TERTIARY: Blue */
+            '--accent-tertiary-rgb': '88, 166, 255',
             '--border-color': '#30363d',
             '--card-bg': 'rgba(22, 27, 34, 0.85)',
             '--card-border': '#30363d',
@@ -129,8 +133,8 @@ export const ThemeProvider = ({ children }) => {
             '--shadow-soft': '0 12px 48px rgba(0,0,0,0.5)',
             '--terminal-bg': '#0d1117',
             '--terminal-header': '#161b22',
-            '--bg-pattern': 'radial-gradient(circle at 1px 1px, rgba(63, 185, 80, 0.1) 1px, transparent 0)',
-            '--grid-color': 'rgba(63, 185, 80, 0.05)',
+            '--bg-pattern': 'radial-gradient(circle at 1px 1px, rgba(248, 81, 73, 0.1) 1px, transparent 0)',
+            '--grid-color': 'rgba(248, 81, 73, 0.05)',
             '--is-monochrome': '0'
         },
         'mono-light': {

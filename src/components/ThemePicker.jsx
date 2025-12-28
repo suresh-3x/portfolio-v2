@@ -12,7 +12,7 @@ const ThemePicker = () => {
       id: 'dawn',
       name: 'Aurora',
       preview: 'linear-gradient(135deg, #ffffff 0%, #f0f2f5 100%)',
-      accentColor: '#1a7f37',
+      accentColor: '#cf222e',
       textColor: '#1f2328',
       icon: Sun
     },
@@ -20,7 +20,7 @@ const ThemePicker = () => {
       id: 'dusk',
       name: 'Midnight',
       preview: 'linear-gradient(135deg, #161b22 0%, #0d1117 100%)',
-      accentColor: '#3fb950',
+      accentColor: '#f85149',
       textColor: '#e6edf3',
       icon: Sunset
     },
