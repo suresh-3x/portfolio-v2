@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Layout from './components/Layout';
 import Education from './components/sections/Education';
 import Experience from './components/sections/Experience';
@@ -7,21 +8,43 @@ import Contact from './components/sections/Contact';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Skills from './components/sections/Skills';
-
 import GithubStats from './components/sections/GithubStats';
+import Loader from './components/ui/Loader';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <Layout>
-      <Hero />
-      <About />
-      <Experience />
-      <Skills />
-      <Projects />
-      <GithubStats />
-      <Education />
-      <Contact />
-    </Layout>
+    <AnimatePresence mode="wait">
+      {loading ? (
+        <Loader key="loader" />
+      ) : (
+        <motion.div
+          key="app"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Layout>
+            <Hero />
+            <About />
+            <Experience />
+            <Skills />
+            <Projects />
+            <GithubStats />
+            <Education />
+            <Contact />
+          </Layout>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 

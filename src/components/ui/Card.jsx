@@ -19,13 +19,14 @@ const Card = ({ children, className = '', hover = true, showStrip = true, noPadd
         .custom-card {
           position: relative;
           background: var(--card-bg);
-          border: 1px solid var(--card-border);
+          border: 2px solid var(--card-border);
           border-radius: 12px;
           overflow: hidden;
           transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
           display: flex !important;
           flex-direction: row !important;
           align-items: stretch;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .card-strip {
@@ -37,7 +38,7 @@ const Card = ({ children, className = '', hover = true, showStrip = true, noPadd
 
         .custom-card:hover {
           border-color: var(--accent-primary);
-          box-shadow: var(--shadow-soft);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         }
 
         .custom-card:hover .card-strip {

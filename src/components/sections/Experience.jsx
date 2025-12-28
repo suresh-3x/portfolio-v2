@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Building2, ExternalLink, Briefcase } from 'lucide-react';
+import { Calendar, MapPin, Building2, ExternalLink, Briefcase, Clock } from 'lucide-react';
 import Card from '../ui/Card';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -12,7 +12,6 @@ const Experience = () => {
       role: "Back End Developer",
       company: "Pixeldust Technologies",
       website: "https://www.pixeldust.in",
-      themeColor: "linear-gradient(135deg, #fd7f38, #f43d68)",
       location: "Mumbai",
       period: "Sept 2025 - Present",
       type: "Hybrid",
@@ -28,7 +27,6 @@ const Experience = () => {
       role: "Technical Lead",
       company: "Stride Ahead",
       website: "https://strideahead.in",
-      themeColor: "#3f52fd", // New Specific Blue
       location: "Delhi",
       period: "May 2025 - August 2025",
       type: "Remote",
@@ -44,7 +42,6 @@ const Experience = () => {
       role: "Tech Lead",
       company: "BizAssist",
       website: "#",
-      themeColor: "rgb(0, 107, 255)", // Brand Blue
       location: "Mumbai",
       period: "Oct 2024 - Sept 2025",
       type: "Remote",
@@ -60,7 +57,6 @@ const Experience = () => {
       role: "System Engineer",
       company: "Gridlogic",
       website: "https://gridlogic.in",
-      themeColor: "#E63946", // Now Red
       location: "Gurgaon",
       period: "March 2023 - May 2025",
       type: "Remote",
@@ -76,7 +72,6 @@ const Experience = () => {
       role: "Senior Software Development Engineer",
       company: "Stride Ahead",
       website: "https://strideahead.in",
-      themeColor: "#3f52fd", // Stride Ahead Blue
       location: "Delhi",
       period: "Jan 2022 - March 2023",
       type: "Remote",
@@ -92,7 +87,6 @@ const Experience = () => {
       role: "Software Development Engineer",
       company: "Stride Ahead",
       website: "https://strideahead.in",
-      themeColor: "#3f52fd", // Stride Ahead Blue
       location: "Delhi",
       period: "March 2021 - Jan 2022",
       type: "Remote",
@@ -106,29 +100,137 @@ const Experience = () => {
     }
   ];
 
-  // Intelligent Sorting Logic (Newest First)
-  const experiences = useMemo(() => {
-    return [...RawData].sort((a, b) => {
-      if (a.year !== b.year) return b.year - a.year;
-      return b.month - a.month;
+  // Duration Helper
+  const calculateTotalDuration = (roles) => {
+    const parseDate = (str) => {
+      if (!str) return new Date();
+      if (str.toLowerCase() === 'present') return new Date();
+      return new Date(str);
+    };
+
+    // 1. Get all intervals
+    const intervals = roles.map(role => {
+      const parts = role.period.split(' - ');
+      if (parts.length !== 2) return null;
+      return {
+        start: parseDate(parts[0]),
+        end: parseDate(parts[1])
+      };
+    }).filter(Boolean);
+
+    if (intervals.length === 0) return "";
+
+    // 2. Sort by start date
+    intervals.sort((a, b) => a.start - b.start);
+
+    // 3. Merge overlapping intervals
+    const merged = [];
+    if (intervals.length > 0) {
+      let current = intervals[0];
+
+      for (let i = 1; i < intervals.length; i++) {
+        const next = intervals[i];
+
+        // If overlap or adjacent (within 30 days?), merge
+        // Actually, just strict date comparison is fine for "Month Year" resolution
+        if (next.start <= current.end) {
+          // Extend current end if next end is later
+          if (next.end > current.end) {
+            current.end = next.end;
+          }
+        } else {
+          // No overlap, push current and start new
+          merged.push(current);
+          current = next;
+        }
+      }
+      merged.push(current);
+    }
+
+    // 4. Calculate total months
+    let totalMonths = 0;
+    merged.forEach(interval => {
+      let months = (interval.end.getFullYear() - interval.start.getFullYear()) * 12;
+      months += interval.end.getMonth() - interval.start.getMonth();
+      // Add 1 month to be inclusive (Jan to Jan is 1 month of work usually implied?)
+      // Actually standard diff for "Jan - Feb" is 1. If we want inclusive count e.g. "Jan - Mar" = 3 months (Jan, Feb, Mar)?
+      // Usually "Jan 2022 - Jan 2023" = 12 months.
+      // "Jan - Jan" usually means 1 month or 0? 
+      // Let's treat standard difference + 1 for inclusive month count if we consider 'working during that month'.
+      // If result is 0 (same month), count as 1.
+      months = Math.max(1, months + (interval.end.getDate() >= interval.start.getDate() ? 0 : -1));
+
+      // Let's stick to simple month diff + 1 for inclusive start/end month
+      // Re-calcing simpler:
+      const diffBytes = (interval.end.getFullYear() - interval.start.getFullYear()) * 12 + (interval.end.getMonth() - interval.start.getMonth());
+      totalMonths += Math.max(1, diffBytes + 1);
     });
+
+    const years = Math.floor(totalMonths / 12);
+    const remMonths = totalMonths % 12;
+
+    if (years > 0) {
+      return `${years} yr${years > 1 ? 's' : ''} ${remMonths > 0 ? `${remMonths} mos` : ''}`;
+    }
+    return `${totalMonths} mos`;
+  };
+
+  // Group experiences by company and sort
+  const groupedExperiences = useMemo(() => {
+    const groups = {};
+
+    RawData.forEach(role => {
+      if (!groups[role.company]) {
+        groups[role.company] = {
+          company: role.company,
+          website: role.website,
+          location: role.location,
+          latestYear: role.year,
+          latestMonth: role.month,
+          roles: []
+        };
+      } else {
+        if (role.year > groups[role.company].latestYear ||
+          (role.year === groups[role.company].latestYear && role.month > groups[role.company].latestMonth)) {
+          groups[role.company].latestYear = role.year;
+          groups[role.company].latestMonth = role.month;
+        }
+      }
+      groups[role.company].roles.push(role);
+    });
+
+    const groupArray = Object.values(groups).sort((a, b) => {
+      if (a.latestYear !== b.latestYear) return b.latestYear - a.latestYear;
+      return b.latestMonth - a.latestMonth;
+    });
+
+    groupArray.forEach(group => {
+      group.totalDuration = calculateTotalDuration(group.roles);
+      group.roles.sort((a, b) => {
+        if (a.year !== b.year) return b.year - a.year;
+        return b.month - a.month;
+      });
+    });
+
+    return groupArray;
   }, []);
 
-  const uniqueCompanies = useMemo(() => [...new Set(experiences.map(e => e.company))], [experiences]);
-
-  const getSolidColor = (colorStr) => {
-    if (colorStr.includes('gradient')) {
-      const matches = colorStr.match(/#[a-fA-F0-9]{3,6}|rgba?\([^)]+\)/g);
-      return matches && matches.length > 1 ? matches[1] : (matches ? matches[0] : '#fd7f38');
-    }
-    return colorStr;
+  const getThemeVariable = (index) => {
+    const vars = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-tertiary)'];
+    // Experience needs specific Green cycle check
+    // Actually, "RGB" cycle requested, but Experience Header is Green.
+    // If we want consistency:
+    // About (R) -> Exp (G) -> Skills (B) -> Projects (R) -> Contact (G/Cycle)
+    // The "Exp Header" is Green.
+    // The "Connector Lines" / "Accents" inside Experience? R->G->B cycle is fine.
+    return vars[index % 3];
   };
 
   return (
     <section id="experience" className="experience-section">
       <div className="section-header">
         <h2 className="section-title">
-          <span className="hash">#</span> Experience
+          <span className="hash" style={{ color: 'var(--accent-secondary)' }}>#</span> Experience
         </h2>
         <p className="section-subtitle">
           Professional trajectory across industry-leading organizations.
@@ -136,105 +238,81 @@ const Experience = () => {
       </div>
 
       <div className="experience-timeline">
-        {experiences.map((exp, index) => {
-          const isMultiple = experiences.filter(e => e.company === exp.company).length > 1;
-          const isFirstInGroup = index === 0 || experiences[index - 1].company !== exp.company;
-          const isLastInGroup = index === experiences.length - 1 || experiences[index + 1].company !== exp.company;
-
-          // Cycle through theme variables for all themes to ensure strict adherence to the palette
-          const getThemeVariable = (companyName) => {
-            const companyIdx = uniqueCompanies.indexOf(companyName);
-            const vars = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-tertiary)'];
-            return vars[companyIdx % 3];
-          };
-
-          const currentAccent = getThemeVariable(exp.company);
-          const nextAccent = experiences[index + 1] ? getThemeVariable(experiences[index + 1].company) : currentAccent;
-
-          const solidColor = currentAccent;
-          const nextSolidColor = nextAccent;
-
-          const isMonochrome = theme.startsWith('mono');
+        {groupedExperiences.map((group, groupIndex) => {
+          const accentColor = getThemeVariable(groupIndex);
+          const cardStyle = { borderRadius: '4px' };
+          if (accentColor !== 'var(--accent-primary)') {
+            cardStyle['--accent-primary'] = accentColor;
+          }
 
           return (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`timeline-item ${isMultiple ? 'is-multi' : ''}`}
+              key={group.company}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: groupIndex * 0.1 }}
+              className="experience-group"
             >
-              {/* Vertical Connector */}
-              <div className="timeline-rail">
-                <div
-                  className="rail-line"
-                  style={{
-                    background: index === experiences.length - 1 ? 'transparent' : `linear-gradient(to bottom, ${solidColor}, ${nextSolidColor})`,
-                    opacity: isMultiple && !isLastInGroup && experiences[index + 1]?.company === exp.company ? 1 : 0.3
-                  }}
-                ></div>
-                <div
-                  className="rail-node"
-                  style={{
-                    background: solidColor,
-                    boxShadow: isMonochrome ? 'none' : `0 0 10px ${solidColor}`
-                  }}
-                >
-                  <Briefcase size={12} color="var(--bg-primary-color)" />
+              {/* Timeline Connector */}
+              <div className="timeline-connector">
+                <div className="timeline-dot" style={{ backgroundColor: accentColor, boxShadow: `0 0 0 4px rgba(var(--bg-primary-rgb), 1)` }}>
+                  <Building2 size={14} color="var(--bg-primary-color)" />
                 </div>
+                <div className="timeline-line" style={{ background: `linear-gradient(to bottom, ${accentColor}, transparent)` }} />
               </div>
 
-              <div className="timeline-content">
-                <div className="item-header">
-                  <div className="company-group">
-                    <a
-                      href={exp.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="company-link"
-                      style={{ color: solidColor }}
-                    >
-                      <span className="name">{exp.company}</span>
-                      <ExternalLink size={12} className="ext-icon" />
+              <Card
+                className="experience-card"
+                showStrip={true}
+                noPadding={false}
+                style={cardStyle}
+              >
+                <div className="card-header-group">
+                  <div className="company-info-row">
+                    <h3 className="company-name" style={{ color: accentColor }}>
+                      {group.company}
+                    </h3>
+                    <a href={group.website} target="_blank" rel="noopener noreferrer" className="company-link" aria-label={`Visit ${group.company}`}>
+                      <ExternalLink size={14} />
                     </a>
-                  </div>
-                  <div className="time-meta">
-                    <Calendar size={12} />
-                    <span>{exp.period}</span>
+
+                    <div className="badges-row">
+                      {group.totalDuration && (
+                        <div className="duration-badge">
+                          <Clock size={12} />
+                          {group.totalDuration}
+                        </div>
+                      )}
+                      <div className="location-badge">
+                        <MapPin size={12} />
+                        {group.location}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <Card
-                  className="experience-entry-card"
-                  showStrip={true}
-                  noPadding={true}
-                  style={{ '--accent-primary': solidColor }}
-                >
-                  <div className="card-body">
-                    <div className="role-top">
-                      <h3>{exp.role}</h3>
-                      <span className="type-pill" style={{
-                        borderColor: isMonochrome ? 'var(--text-secondary)' : solidColor,
-                        color: isMonochrome ? 'var(--text-secondary)' : solidColor,
-                        opacity: 0.9
-                      }}>
-                        {exp.type}
-                      </span>
+                <div className="roles-list">
+                  {group.roles.map((role, rIndex) => (
+                    <div key={rIndex} className={`role-item ${rIndex !== group.roles.length - 1 ? 'has-border' : ''}`}>
+                      <div className="role-header">
+                        <h4 className="role-title">{role.role}</h4>
+                        <div className="role-meta">
+                          <span className="period">
+                            <Calendar size={12} /> {role.period}
+                          </span>
+                          <span className="type-badge">{role.type}</span>
+                        </div>
+                      </div>
+                      <ul className="role-description">
+                        {role.description.map((desc, i) => (
+                          <li key={i}>{desc}</li>
+                        ))}
+                      </ul>
                     </div>
-
-                    <div className="location-info">
-                      <MapPin size={12} /> {exp.location}
-                    </div>
-
-                    <ul className="description-list">
-                      {exp.description.map((point, i) => (
-                        <li key={i}>{point}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </Card>
-              </div>
+                  ))}
+                </div>
+              </Card>
             </motion.div>
           );
         })}
@@ -250,175 +328,209 @@ const Experience = () => {
           max-width: 1200px;
           margin: 0 auto;
           position: relative;
-          padding-left: 50px;
+          padding-left: 2rem;
+          padding-right: 1rem;
         }
 
-        .timeline-item {
-          display: flex;
-          gap: 2.5rem;
-          margin-bottom: 4rem;
+        .experience-group {
           position: relative;
+          margin-bottom: 3rem;
+          padding-left: 2.5rem;
         }
 
-        .timeline-item:last-child {
-          margin-bottom: 0;
-        }
-
-        .timeline-rail {
+        /* Timeline Connector */
+        .timeline-connector {
           position: absolute;
-          left: -40px;
+          left: 0;
           top: 0;
-          bottom: 0;
-          width: 30px;
+          bottom: -3rem;
+          width: 2px;
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding-top: 5px;
         }
 
-        .rail-line {
-          position: absolute;
-          top: 30px;
-          bottom: -4rem;
-          width: 2px;
-          z-index: 1;
+        .experience-group:last-child .timeline-connector {
+           bottom: auto;
+           height: 100%;
+        }
+        
+        .experience-group:last-child .timeline-line {
+            display: none;
         }
 
-        .rail-node {
-          width: 24px;
-          height: 24px;
-          border-radius: 4px;
+        .timeline-dot {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          z-index: 2;
           display: flex;
           align-items: center;
           justify-content: center;
-          z-index: 5;
-          margin-bottom: 10px;
-          transition: transform 0.3s ease;
+          flex-shrink: 0;
         }
 
-        .timeline-item:hover .rail-node {
-          transform: scale(1.15) rotate(5deg);
-        }
-
-        .timeline-content {
+        .timeline-line {
+          width: 2px;
           flex-grow: 1;
+          margin-top: 4px;
+          opacity: 0.3;
+        }
+
+        /* Card Content */
+        .experience-card {
           width: 100%;
           position: relative;
         }
 
-        .item-header {
+        .card-header-group {
+          margin-bottom: 1.5rem;
+          border-bottom: 1px solid var(--border-color);
+          padding-bottom: 1rem;
+        }
+
+        .company-info-row {
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          margin-bottom: 1rem;
-          font-family: var(--font-mono);
-          position: relative;
-          z-index: 2;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        .company-name {
+          font-size: 1.4rem;
+          font-weight: 700;
+          margin: 0;
         }
 
         .company-link {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          text-decoration: none;
-          font-weight: 700;
-          font-size: 1.1rem;
-          transition: opacity 0.3s;
+          color: var(--text-secondary);
+          transition: color 0.2s;
         }
 
         .company-link:hover {
-          opacity: 0.8;
-          text-decoration: underline;
+          color: var(--text-primary);
         }
 
-        .ext-icon {
-          opacity: 0.5;
-        }
-
-        .time-meta {
-          color: var(--text-secondary);
-          font-size: 0.85rem;
+        .badges-row {
           display: flex;
           align-items: center;
-          gap: 6px;
-          opacity: 0.7;
+          gap: 8px;
+          margin-left: auto;
         }
 
-        .experience-entry-card {
-          border-radius: 4px !important;
-          z-index: 2;
+        .location-badge, .duration-badge {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 0.8rem;
+          color: var(--text-secondary);
+          background: var(--bg-secondary);
+          padding: 4px 10px;
+          border-radius: 12px;
+          border: 1px solid var(--border-color);
         }
 
-        .card-body {
-          padding: 2rem;
+        /* Roles List */
+        .roles-list {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
         }
 
-        .role-top {
+        .role-item {
+          position: relative;
+        }
+        
+        .role-item.has-border {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .role-header {
           display: flex;
           justify-content: space-between;
-          align-items: center;
-          margin-bottom: 0.5rem;
+          align-items: flex-start;
+          margin-bottom: 0.8rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
         }
 
-        .role-top h3 {
-          font-size: 1.4rem;
-          margin: 0;
+        .role-title {
+          font-size: 1.1rem;
+          font-weight: 600;
           color: var(--text-primary);
-          letter-spacing: -0.02em;
-          font-weight: 800;
         }
 
-        .type-pill {
-          font-size: 0.7rem;
-          text-transform: uppercase;
-          padding: 2px 10px;
-          border: 1px solid;
-          border-radius: 12px;
-          font-weight: 700;
-          letter-spacing: 0.5px;
-        }
-
-        .location-info {
+        .role-meta {
+          display: flex;
+          align-items: center;
+          gap: 12px;
           font-size: 0.85rem;
-          color: var(--text-secondary);
+        }
+
+        .period {
           display: flex;
           align-items: center;
           gap: 6px;
-          margin-bottom: 1.5rem;
-          opacity: 0.8;
+          color: var(--text-secondary);
+          font-family: var(--font-mono);
         }
 
-        .description-list {
+        .type-badge {
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          border: 1px solid var(--border-color);
+          padding: 2px 6px;
+          border-radius: 4px;
+          color: var(--text-secondary);
+        }
+
+        .role-description {
           list-style: none;
           padding: 0;
           margin: 0;
-          display: grid;
-          gap: 0.8rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
         }
 
-        .description-list li {
-          font-size: 0.95rem;
-          line-height: 1.6;
-          color: var(--text-secondary);
-          padding-left: 1.5rem;
+        .role-description li {
           position: relative;
+          padding-left: 1.2rem;
+          font-size: 0.95rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
         }
 
-        .description-list li::before {
+        .role-description li::before {
           content: '→';
           position: absolute;
           left: 0;
+          top: 0px;
           color: var(--accent-primary);
-          font-weight: 700;
+          font-size: 1rem;
+          opacity: 0.7;
         }
 
         @media (max-width: 768px) {
-          .experience-timeline { padding-left: 30px; }
-          .timeline-rail { left: -30px; }
-          .item-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-          .time-meta { margin-left: 26px; }
-          .role-top { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-          .card-body { padding: 1.5rem; }
+          .experience-timeline {
+            padding-left: 1rem;
+            max-width: 100%;
+          }
+          .experience-group {
+            padding-left: 0;
+            margin-left: 2rem; 
+          }
+          .timeline-connector {
+            left: -2rem;
+          }
+          .role-header {
+            flex-direction: column;
+          }
+          .badges-row {
+             margin-left: 0;
+             flex-wrap: wrap;
+          }
         }
       `}</style>
     </section>

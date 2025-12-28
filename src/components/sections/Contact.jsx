@@ -34,7 +34,7 @@ const Contact = () => {
     <section id="contact" className="contact-section">
       <div className="section-header">
         <h2 className="section-title">
-          <span className="hash">#</span> Contact
+          <span className="hash" style={{ color: 'var(--accent-primary)' }}>#</span> Contact
         </h2>
         <p className="section-subtitle">
           Let's discuss your next project or industry-scale opportunity.
@@ -45,12 +45,17 @@ const Contact = () => {
         <div className="contact-grid-v2">
           {contactItems.map((item, index) => {
             const accentColors = [
-              'var(--accent-tertiary)', // Email -> Blue (Tertiary)
-              'var(--accent-primary)',  // Phone -> Green (Primary)
-              'var(--accent-secondary)' // Location -> Red (Secondary)
+              'var(--accent-primary)',
+              'var(--accent-secondary)',
+              'var(--accent-tertiary)'
             ];
 
             const accentColor = accentColors[index % 3];
+
+            const cardStyle = { borderRadius: '4px' };
+            if (accentColor !== 'var(--accent-primary)') {
+              cardStyle['--accent-primary'] = accentColor;
+            }
 
             return (
               <a key={index} href={item.link} target={index === 2 ? "_blank" : "_self"} rel="noopener noreferrer" className="contact-card-link">
@@ -58,7 +63,7 @@ const Contact = () => {
                   className="contact-v2-card"
                   showStrip={true}
                   noPadding={true}
-                  style={{ '--accent-primary': accentColor, borderRadius: '4px' }}
+                  style={cardStyle}
                 >
                   <div className="contact-v2-inner">
                     <div className="contact-v2-top">

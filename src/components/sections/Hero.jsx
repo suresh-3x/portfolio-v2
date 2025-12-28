@@ -1,84 +1,37 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Terminal, Database, Cloud, Layout, FileText } from 'lucide-react';
+import { ArrowRight, Terminal, Database, Cloud, Layout, FileText, Zap, Wind, Server, Triangle, Smartphone, Layers, Code, Palette, Cpu, Globe, Box, Container } from 'lucide-react';
 import Card from '../ui/Card';
 
 const Hero = () => {
 
+  const getTechIcon = (tag) => {
+    const size = 10;
+    switch (tag.toLowerCase()) {
+      case 'python': return <Code size={size} />;
+      case 'go': return <Terminal size={size} />;
+      case 'node': return <Server size={size} />;
+      case 'postgres': return <Database size={size} />;
+      case 'redis': return <Layers size={size} />;
+      case 'aws': return <Cloud size={size} />;
+      case 'k8s': return <Box size={size} />;
+      case 'docker': return <Container size={size} />;
+      case 'react': return <Code size={size} />; // React specific if available or Code
+      case 'next.js': return <Zap size={size} />;
+      default: return <Code size={size} />;
+    }
+  };
 
-  // Theme Switcher Component
-  // const ThemeSwitcher = () => (
-  //   <div className="dual-theme-container">
-  //     {/* Left Type Toggle */}
-  //     <div className="mode-selector">
-  //       <button
-  //         onClick={handleModeToggle}
-  //         className={`mode-btn ${mode === 'ambient' ? 'ambient-active' : 'system-active'}`}
-  //         title={mode === 'ambient' ? "Switch to System Precision" : "Switch to Ambient Comfort"}
-  //       >
-  //         {mode === 'ambient' ? <Zap size={18} /> : <Cpu size={18} />}
-  //         <span className="mode-label-hint">{mode === 'ambient' ? 'AMBIENT' : 'SYSTEM'}</span>
-  //       </button>
-  //     </div>
-
-  //     <div className="vertical-divider"></div>
-
-  //     {/* Right Theme Selector */}
-  //     <div className="theme-options">
-  //       <AnimatePresence mode="wait">
-  //         {mode === 'ambient' ? (
-  //           <motion.div
-  //             key="ambient-themes"
-  //             initial={{ opacity: 0, x: 10 }}
-  //             animate={{ opacity: 1, x: 0 }}
-  //             exit={{ opacity: 0, x: -10 }}
-  //             className="option-group"
-  //           >
-  //             <button
-  //               onClick={() => setTheme('dawn')}
-  //               className={`option-btn ${theme === 'dawn' ? 'active' : ''}`}
-  //               title="Dawn (Mist)"
-  //             >
-  //               <Sun size={18} />
-  //             </button>
-  //             <button
-  //               onClick={() => setTheme('dusk')}
-  //               className={`option-btn ${theme === 'dusk' ? 'active' : ''}`}
-  //               title="Dusk (Twilight)"
-  //             >
-  //               <Circle size={14} fill={theme === 'dusk' ? 'currentColor' : 'none'} />
-  //             </button>
-  //           </motion.div>
-  //         ) : (
-  //           <motion.div
-  //             key="system-themes"
-  //             initial={{ opacity: 0, x: 10 }}
-  //             animate={{ opacity: 1, x: 0 }}
-  //             exit={{ opacity: 0, x: -10 }}
-  //             className="option-group"
-  //           >
-  //             <button
-  //               onClick={() => setTheme('rgb')}
-  //               className={`option-btn ${theme === 'rgb' ? 'active' : ''}`}
-  //               title="RGB (Precision)"
-  //             >
-  //               <div className="rgb-indicator"></div>
-  //             </button>
-  //             <button
-  //               onClick={() => setTheme('monochrome')}
-  //               className={`option-btn ${theme === 'monochrome' ? 'active' : ''}`}
-  //               title="Monochrome (Industrial)"
-  //             >
-  //               <Code size={18} />
-  //             </button>
-  //           </motion.div>
-  //         )}
-  //       </AnimatePresence>
-  //     </div>
-  //   </div>
-  // );
-
-
+  const renderStackTags = (tags) => (
+    <div className="stack-tags">
+      {tags.map((tag, idx) => (
+        <span key={idx} className="stack-tag">
+          {getTechIcon(tag)}
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
 
   return (
     <section className="hero-section" id="home">
@@ -133,22 +86,23 @@ const Hero = () => {
             <motion.div
               className="stack-card-wrapper backend"
               animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             >
               <Card
                 className="stack-card"
                 showStrip={true}
                 noPadding={true}
                 style={{
-                  '--accent-primary': 'var(--accent-secondary)', // Forced to Green (Secondary)
                   borderRadius: '4px'
                 }}
               >
                 <div className="card-inner-box">
-                  <Terminal size={24} className="stack-icon" style={{ color: 'var(--accent-primary)' }} />
+                  <div className="icon-box-hero" style={{ color: 'var(--accent-primary)' }}>
+                    <Terminal size={24} />
+                  </div>
                   <div className="stack-info">
                     <h3>Backend</h3>
-                    <p>Python, Go, Node</p>
+                    {renderStackTags(['Python', 'Go', 'Node'])}
                   </div>
                 </div>
               </Card>
@@ -165,15 +119,17 @@ const Hero = () => {
                 showStrip={true}
                 noPadding={true}
                 style={{
-                  '--accent-primary': 'var(--accent-tertiary)',
+                  '--accent-primary': 'var(--accent-tertiary)', // Blue (Right Col)
                   borderRadius: '4px'
                 }}
               >
                 <div className="card-inner-box">
-                  <Database size={24} className="stack-icon" style={{ color: 'var(--accent-primary)' }} />
+                  <div className="icon-box-hero" style={{ color: 'var(--accent-primary)' }}>
+                    <Database size={24} />
+                  </div>
                   <div className="stack-info">
                     <h3>Data</h3>
-                    <p>Postgres, Redis</p>
+                    {renderStackTags(['Postgres', 'Redis'])}
                   </div>
                 </div>
               </Card>
@@ -190,15 +146,16 @@ const Hero = () => {
                 showStrip={true}
                 noPadding={true}
                 style={{
-                  '--accent-primary': 'var(--accent-primary)', // Forced to Red (Primary)
                   borderRadius: '4px'
                 }}
               >
                 <div className="card-inner-box">
-                  <Cloud size={24} className="stack-icon" style={{ color: 'var(--accent-primary)' }} />
+                  <div className="icon-box-hero" style={{ color: 'var(--accent-primary)' }}>
+                    <Cloud size={24} />
+                  </div>
                   <div className="stack-info">
                     <h3>Infrastructure</h3>
-                    <p>AWS, K8s, Docker</p>
+                    {renderStackTags(['AWS', 'K8s', 'Docker'])}
                   </div>
                 </div>
               </Card>
@@ -215,15 +172,17 @@ const Hero = () => {
                 showStrip={true}
                 noPadding={true}
                 style={{
-                  '--accent-primary': 'var(--accent-tertiary)',
+                  '--accent-primary': 'var(--accent-tertiary)', // Blue (Right Col)
                   borderRadius: '4px'
                 }}
               >
                 <div className="card-inner-box">
-                  <Layout size={24} className="stack-icon" style={{ color: 'var(--accent-primary)' }} />
+                  <div className="icon-box-hero" style={{ color: 'var(--accent-primary)' }}>
+                    <Layout size={24} />
+                  </div>
                   <div className="stack-info">
                     <h3>Interface</h3>
-                    <p>React, Next.js</p>
+                    {renderStackTags(['React', 'Next.js'])}
                   </div>
                 </div>
               </Card>
@@ -255,101 +214,99 @@ const Hero = () => {
           z-index: 2;
         }
 
-        /* Dual Theme Toggle Styles */
-        .dual-theme-container {
-          position: fixed;
-          top: 2rem;
-          right: 2rem;
+        .card-inner-box {
           display: flex;
-          align-items: center;
-          background: var(--card-bg);
-          backdrop-filter: blur(var(--glass-blur));
-          padding: 6px 16px;
-          border-radius: 100px;
-          border: 1px solid var(--border-color);
-          box-shadow: var(--shadow-soft);
-          z-index: 1000;
-          gap: 16px;
-        }
-
-        .mode-selector {
-          display: flex;
-          align-items: center;
-        }
-
-        .mode-btn {
-          background: none;
-          border: none;
-          padding: 8px 12px;
-          border-radius: 20px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          color: var(--text-secondary);
-        }
-
-        .mode-label-hint {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            opacity: 0.8;
-        }
-
-        .mode-btn.ambient-active {
-            color: #5a78af;
-            background: rgba(90, 120, 175, 0.1);
-        }
-
-        .mode-btn.system-active {
-            color: var(--accent-primary);
-            background: rgba(var(--accent-primary-rgb), 0.1);
-        }
-
-        .vertical-divider {
-            width: 1px;
-            height: 24px;
-            background: var(--border-color);
-        }
-
-        .theme-options {
-            display: flex;
-            align-items: center;
-            min-width: 100px;
-        }
-
-        .option-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .option-btn {
-          background: none;
-          border: none;
-          color: var(--text-secondary);
-          padding: 8px;
-          border-radius: 50%;
-          cursor: pointer;
-          display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
-          transition: all 0.3s;
+          gap: 16px;
+          padding: 2rem;
+          height: 100%;
+          text-align: center;
+        }
+        
+        .icon-box-hero {
+            margin-bottom: 4px;
+            margin-top: 0;
+            flex-shrink: 0;
         }
 
-        .option-btn.active {
-          background: var(--bg-primary-color);
+        .stack-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .stack-info h3 {
+          margin: 0 0 8px 0;
+          font-size: 1rem;
+          font-weight: 800;
+          color: var(--text-primary);
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          font-family: var(--font-mono);
+        }
+
+        .stack-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .stack-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: rgba(var(--bg-primary-rgb), 0.5);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            line-height: 1;
+            white-space: nowrap;
+        }
+        
+        .stack-tag svg {
+            opacity: 0.8;
+            color: var(--text-primary);
+        }
+
+        .stack-assembler {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+          width: 100%;
+          max-width: 540px;
+        }
+
+        .stack-card {
+           padding: 0 !important;
+           width: 100% !important;
+           min-height: 130px;
+           height: auto !important;
+           border-radius: 4px !important;
+           background: var(--card-bg) !important;
+           backdrop-filter: blur(var(--glass-blur)) !important;
+        }
+
+        .stack-icon {
           color: var(--accent-primary);
-          box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+          flex-shrink: 0;
+          opacity: 0.9;
         }
 
-        .rgb-indicator {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
-            border: 1px solid rgba(255,255,255,0.2);
+        .stack-info p {
+          margin: 0;
+          font-size: 0.8rem;
+          color: var(--text-secondary);
+          opacity: 0.8;
+          font-family: var(--font-mono);
+          line-height: 1.4;
         }
 
         .system-status {
@@ -437,6 +394,7 @@ const Hero = () => {
           gap: 12px;
           transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          text-decoration: none;
         }
 
         .primary-btn:hover {
@@ -459,63 +417,13 @@ const Hero = () => {
           color: var(--text-primary);
           transition: all 0.3s;
           background: transparent;
+          text-decoration: none;
         }
 
         .secondary-btn:hover {
           background: var(--bg-secondary);
           border-color: var(--text-primary);
           transform: translateY(-2px);
-        }
-
-        .stack-assembler {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
-          width: 100%;
-          max-width: 540px;
-        }
-
-        .stack-card {
-           padding: 0 !important;
-           width: 100% !important;
-           min-height: 130px;
-           height: auto !important;
-           border-radius: 4px !important;
-           background: var(--card-bg) !important;
-           backdrop-filter: blur(var(--glass-blur)) !important;
-        }
-
-        .card-inner-box {
-          display: flex;
-          align-items: center;
-          gap: 20px;
-          padding: 1.5rem;
-          height: 100%;
-        }
-
-        .stack-icon {
-          color: var(--accent-primary);
-          flex-shrink: 0;
-          opacity: 0.9;
-        }
-
-        .stack-info h3 {
-          margin: 0 0 4px 0;
-          font-size: 1rem;
-          font-weight: 800;
-          color: var(--text-primary);
-          letter-spacing: -0.01em;
-          text-transform: uppercase;
-          font-family: var(--font-mono);
-        }
-
-        .stack-info p {
-          margin: 0;
-          font-size: 0.8rem;
-          color: var(--text-secondary);
-          opacity: 0.8;
-          font-family: var(--font-mono);
-          line-height: 1.4;
         }
 
         @keyframes pulse {
@@ -529,32 +437,36 @@ const Hero = () => {
            .hero-container { gap: 3rem; }
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 968px) {
+           /* Adjusted breakpoint for tablet/small laptop */
           .hero-container {
             grid-template-columns: 1fr;
             text-align: center;
-            gap: 4rem;
+            gap: 3rem;
           }
           .hero-content {
             display: flex;
             flex-direction: column;
             align-items: center;
           }
+          h1 { font-size: 4rem; }
           .bio-text { margin: 0 auto 3rem; }
           .hero-visual { width: 100%; display: flex; justify-content: center; }
           .action-row { justify-content: center; }
           .stack-assembler { max-width: 500px; }
+          .card-inner-box { align-items: center; text-align: center; }
+          .stack-tags { justify-content: center; }
         }
 
-        @media (max-width: 600px) {
-          h1 { font-size: 3.5rem; letter-spacing: -2px; }
+        @media (max-width: 500px) {
+          h1 { font-size: 3rem; letter-spacing: -2px; }
           .role-container { font-size: 1.2rem; flex-direction: column; gap: 8px; }
           .separator { display: none; }
+          /* Keep stack assembler as 2 cols if possible, swapping to 1 only if very narrow */
           .stack-assembler { grid-template-columns: 1fr; width: 100%; max-width: 350px; }
           .action-row { flex-direction: column; width: 100%; }
           .primary-btn, .secondary-btn { width: 100%; justify-content: center; }
           .hero-section { padding: 6rem 1rem; }
-          .dual-theme-container { top: 1rem; right: 1rem; padding: 4px 8px; zoom: 0.9; }
         }
       `}</style>
     </section>

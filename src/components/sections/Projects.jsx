@@ -1,11 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Folder } from 'lucide-react';
+import { Github, ExternalLink, Folder, Zap, Wind, Server, Database, Triangle, Smartphone, Layers, Code, Palette, Terminal, Cpu, Globe, Box, Layout } from 'lucide-react';
 import Card from '../ui/Card';
 import { useTheme } from '../../context/ThemeContext';
 
 const Projects = () => {
   const { theme } = useTheme();
+
+  const getTechIcon = (tag) => {
+    const size = 12;
+    // Map common tech to Lucide icons
+    switch (tag.toLowerCase()) {
+      case 'next.js': return <Zap size={size} />;
+      case 'tailwind': return <Wind size={size} />;
+      case 'node.js': return <Server size={size} />;
+      case 'mongodb': return <Database size={size} />;
+      case 'vercel': return <Triangle size={size} />;
+      case 'swiftui': return <Smartphone size={size} />;
+      case 'coredata': return <Database size={size} />;
+      case 'ios': return <Smartphone size={size} />;
+      case 'flutter': return <Layers size={size} />;
+      case 'dart': return <Code size={size} />;
+      case 'material design': return <Palette size={size} />;
+      case 'go': return <Terminal size={size} />;
+      case 'concurrency': return <Cpu size={size} />;
+      case 'http': return <Globe size={size} />;
+      case 'cli': return <Terminal size={size} />;
+      case 'sqlite': return <Database size={size} />;
+      case 'mobile': return <Smartphone size={size} />;
+      default: return null; // Or <Code size={size} /> if you want a default
+    }
+  };
+
   const projects = [
     {
       title: "Agency Website (BizAssist)",
@@ -58,7 +84,7 @@ const Projects = () => {
     <section id="projects" className="projects-section">
       <div className="section-header">
         <h2 className="section-title">
-          <span className="hash">#</span> Featured Projects
+          <span className="hash" style={{ color: 'var(--accent-primary)' }}>#</span> Featured Projects
         </h2>
         <p className="section-subtitle">
           A selection of technical challenges I've solved.
@@ -74,6 +100,11 @@ const Projects = () => {
           ];
           const accentColor = accentColors[index % 3];
 
+          const cardStyle = { borderRadius: '4px' };
+          if (accentColor !== 'var(--accent-primary)') {
+            cardStyle['--accent-primary'] = accentColor;
+          }
+
           return (
             <motion.div
               key={index}
@@ -87,10 +118,7 @@ const Projects = () => {
                 className="project-card"
                 showStrip={true}
                 noPadding={true}
-                style={{
-                  '--accent-primary': accentColor,
-                  borderRadius: '4px'
-                }}
+                style={cardStyle}
               >
                 <div className="project-card-inner">
                   <div className="project-top">
@@ -116,7 +144,10 @@ const Projects = () => {
 
                   <div className="project-tags">
                     {project.tags.map((tag, tIdx) => (
-                      <span key={tIdx} className="tag-module">{tag}</span>
+                      <span key={tIdx} className="tag-module">
+                        {getTechIcon(tag)}
+                        {tag}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -222,13 +253,21 @@ const Projects = () => {
         }
 
         .tag-module {
+          display: flex;
+          align-items: center;
+          gap: 6px;
           font-family: var(--font-mono);
           font-size: 0.75rem;
           color: var(--text-muted);
           background: rgba(255, 255, 255, 0.03);
-          padding: 2px 8px;
+          padding: 4px 10px;
           border-radius: 4px;
           border: 1px solid var(--border-color);
+          line-height: 1;
+        }
+        
+        .tag-module svg {
+            opacity: 0.7;
         }
 
         @media (max-width: 768px) {

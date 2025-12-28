@@ -33,7 +33,7 @@ const Education = () => {
     <section id="education" className="education-section">
       <div className="section-header">
         <h2 className="section-title">
-          <span className="hash">#</span> Education & Certifications
+          <span className="hash" style={{ color: 'var(--accent-tertiary)' }}>#</span> Education & Certifications
         </h2>
         <p className="section-subtitle">
           Academic background and professional certifications.
@@ -42,8 +42,20 @@ const Education = () => {
 
       <div className="education-grid">
         {(() => {
-          const eduAccent = 'var(--accent-secondary)';
-          const certAccent = 'var(--accent-tertiary)';
+          const eduAccent = 'var(--accent-primary)';
+          const certAccent = 'var(--accent-secondary)';
+
+          const eduCardStyle = { borderRadius: '4px' };
+          // Prevent circular reference for primary color
+          // If accent is primary, we perform no override (it defaults to primary), or specifically check
+          if (eduAccent !== 'var(--accent-primary)') {
+            eduCardStyle['--accent-primary'] = eduAccent;
+          }
+
+          const certCardStyle = { borderRadius: '4px' };
+          if (certAccent !== 'var(--accent-primary)') {
+            certCardStyle['--accent-primary'] = certAccent;
+          }
 
           return (
             <>
@@ -58,7 +70,7 @@ const Education = () => {
                   className="edu-card"
                   showStrip={true}
                   noPadding={true}
-                  style={{ '--accent-primary': eduAccent, borderRadius: '4px' }}
+                  style={eduCardStyle}
                 >
                   <div className="card-inner-box">
                     <div className="card-header-v2">
@@ -94,7 +106,7 @@ const Education = () => {
                   className="edu-card"
                   showStrip={true}
                   noPadding={true}
-                  style={{ '--accent-primary': certAccent, borderRadius: '4px' }}
+                  style={certCardStyle}
                 >
                   <div className="card-inner-box">
                     <div className="card-header-v2">
@@ -105,7 +117,7 @@ const Education = () => {
                     </div>
                     <div className="card-content-v2">
                       {certifications.map((cert, i) => {
-                        const individualCertAccent = i % 2 === 0 ? 'var(--accent-tertiary)' : 'var(--accent-primary)';
+                        const individualCertAccent = 'var(--accent-secondary)';
 
                         return (
                           <div key={i} className="cert-item-v2" style={{ borderLeftColor: individualCertAccent }}>

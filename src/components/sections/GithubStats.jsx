@@ -56,7 +56,7 @@ const GithubStats = () => {
     <section id="github-stats" className="github-section">
       <div className="section-header">
         <h2 className="section-title">
-          <span className="hash">#</span> Open Source
+          <span className="hash" style={{ color: 'var(--accent-secondary)' }}>#</span> Open Source
         </h2>
         <p className="section-subtitle">
           Contributions and technical activity on GitHub.
@@ -84,9 +84,9 @@ const GithubStats = () => {
 
           <Card
             className="github-master-card"
-            showStrip={true}
+            showStrip={false}
             noPadding={true}
-            style={{ '--accent-primary': accentColor, borderRadius: '4px' }}
+            style={{ borderRadius: '4px' }}
           >
             <div className="master-card-inner">
               {/* Top Section: Quick Stats */}
@@ -101,7 +101,11 @@ const GithubStats = () => {
                   const statAccent = accentColors[index % 4];
 
                   return (
-                    <div key={index} className="minimal-stat">
+                    <div
+                      key={index}
+                      className="minimal-stat"
+                      style={{ borderLeft: `3px solid ${statAccent}` }}
+                    >
                       <div className="stat-header">
                         <div className="icon-circle" style={{
                           color: statAccent,
@@ -202,25 +206,29 @@ const GithubStats = () => {
         .smart-action-bar {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .smart-btn {
-            background: transparent;
-            border: none;
-            padding: 0;
+            display: flex;
+            align-items: center;
             gap: 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
             font-size: 0.85rem;
             color: var(--text-secondary);
-            opacity: 0.7;
             font-weight: 600;
+            transition: all 0.2s ease;
+            text-decoration: none;
         }
 
         .smart-btn:hover {
-            opacity: 1;
-            color: var(--accent-primary);
-            background: transparent;
-            border-color: transparent;
+            border-color: var(--accent-secondary);
+            color: var(--text-primary);
+            background: rgba(var(--accent-secondary-rgb), 0.1);
+            transform: translateY(-1px);
         }
 
         @media (max-width: 1024px) {

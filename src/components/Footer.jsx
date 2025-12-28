@@ -1,5 +1,6 @@
 import React from 'react';
-import { Github, Linkedin, Mail, ArrowUp, Terminal, Heart, Code } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowUp, Heart, Code } from 'lucide-react';
+import Logo from './Logo';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -12,7 +13,7 @@ const Footer = () => {
         {/* Brand Section */}
         <div className="footer-section brand">
           <div className="logo">
-            <Terminal size={24} className="logo-icon" />
+            <Logo size={32} />
             <span className="logo-text">Suresh.dev</span>
           </div>
           <p className="tagline">Building digital experiences with code & creativity.</p>
@@ -94,7 +95,7 @@ const Footer = () => {
           display: flex;
           align-items: center;
           gap: var(--spacing-sm);
-          color: var(--accent-primary);
+          color: var(--accent-secondary);
           font-family: var(--font-mono);
           font-weight: bold;
           font-size: 1.2rem;
@@ -111,10 +112,10 @@ const Footer = () => {
           align-items: center;
           gap: 8px;
           padding: 6px 12px;
-          background: rgba(var(--accent-primary-rgb), 0.05);
-          border: 1px solid rgba(var(--accent-primary-rgb), 0.2);
+          background: rgba(var(--accent-secondary-rgb), 0.05);
+          border: 1px solid rgba(var(--accent-secondary-rgb), 0.2);
           border-radius: 20px;
-          color: var(--accent-primary);
+          color: var(--accent-secondary);
           font-size: 0.8rem;
           font-family: var(--font-mono);
           width: fit-content;
@@ -123,9 +124,10 @@ const Footer = () => {
         .status-dot {
           width: 6px;
           height: 6px;
-          background: var(--accent-primary);
+          background: var(--accent-secondary);
           border-radius: 50%;
-          box-shadow: 0 0 8px var(--accent-primary);
+          box-shadow: 0 0 8px var(--accent-secondary);
+          animation: pulse 2s infinite;
         }
 
         /* Section Titles */
@@ -152,7 +154,7 @@ const Footer = () => {
         }
 
         .nav-link:hover {
-          color: var(--accent-primary);
+          color: var(--accent-secondary);
           transform: translateX(4px);
         }
 
@@ -176,10 +178,29 @@ const Footer = () => {
         }
 
         .social-link:hover {
-          background: var(--bg-primary);
-          color: var(--accent-primary);
-          border-color: var(--accent-primary);
           transform: translateY(-2px);
+          color: white;
+          border-color: transparent;
+        }
+
+        .social-link:nth-child(1):hover { /* Github */
+          background: var(--accent-secondary);
+          box-shadow: 0 4px 12px rgba(var(--accent-secondary-rgb), 0.4);
+        }
+
+        .social-link:nth-child(2):hover { /* LinkedIn */
+          background: var(--accent-tertiary);
+          box-shadow: 0 4px 12px rgba(var(--accent-tertiary-rgb), 0.4);
+        }
+
+        .social-link:nth-child(3):hover { /* Mail */
+          background: var(--accent-primary);
+          box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.4);
+        }
+
+        .social-link:nth-child(4):hover { /* StackOverflow */
+          background: #f48024;
+          box-shadow: 0 4px 12px rgba(244, 128, 36, 0.4);
         }
 
         /* Bottom Bar */
@@ -211,8 +232,8 @@ const Footer = () => {
 
         .scroll-top:hover {
           background: var(--bg-primary);
-          color: var(--accent-primary);
-          border-color: var(--accent-primary);
+          color: var(--accent-secondary);
+          border-color: var(--accent-secondary);
         }
 
         /* Social Section Alignment */

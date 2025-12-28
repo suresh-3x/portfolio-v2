@@ -13,38 +13,32 @@ const About = () => {
     {
       icon: <Cpu size={18} />,
       title: "Distributed Systems",
-      desc: "Fault-tolerant microservices for 10k+ concurrent requests.",
-      color: "#3fb950" // Green (RGB Primary)
+      desc: "Fault-tolerant microservices for 10k+ concurrent requests."
     },
     {
       icon: <Zap size={18} />,
       title: "High-Performance",
-      desc: "Optimizing database queries for sub-50ms execution.",
-      color: "#3f52fd" // Blue (RGB Secondary)
+      desc: "Optimizing database queries for sub-50ms execution."
     },
     {
       icon: <Shield size={18} />,
       title: "Enterprise Security",
-      desc: "Robust OAuth2, JWT, and RBAC security standards.",
-      color: "#ff4b4b" // Red (RGB Tertiary)
+      desc: "Robust OAuth2, JWT, and RBAC security standards."
     },
     {
       icon: <Cloud size={18} />,
       title: "Cloud Native",
-      desc: "Scalable AWS, Docker, and Kubernetes infrastructure.",
-      color: "#3fb950" // Green (RGB Primary)
+      desc: "Scalable AWS, Docker, and Kubernetes infrastructure."
     },
     {
       icon: <Bot size={18} />,
       title: "AI & LLM Integration",
-      desc: "Intelligent agents automating complex business workflows.",
-      color: "#3f52fd" // Blue (RGB Secondary)
+      desc: "Intelligent agents automating complex business workflows."
     },
     {
       icon: <Smartphone size={18} />,
       title: "Mobile Engineering",
-      desc: "Cross-platform mobile experiences with Flutter.",
-      color: "#ff4b4b" // Red (RGB Tertiary)
+      desc: "Cross-platform mobile experiences with Flutter."
     }
   ];
 
@@ -52,7 +46,7 @@ const About = () => {
     <section id="about" className="about-section">
       <div className="section-header">
         <h2 className="section-title">
-          <span className="hash">#</span> About Me
+          <span className="hash" style={{ color: 'var(--accent-primary)' }}>#</span> About Me
         </h2>
         <p className="section-subtitle">
           More than just code. I build the engines that power the web.
@@ -93,6 +87,12 @@ const About = () => {
             ];
             const accentColor = accentColors[index % 3];
 
+            const cardStyle = { borderRadius: '4px' };
+            // Fix: avoid circular variable reference for primary color
+            if (accentColor !== 'var(--accent-primary)') {
+              cardStyle['--accent-primary'] = accentColor;
+            }
+
             return (
               <motion.div
                 key={index}
@@ -105,10 +105,7 @@ const About = () => {
                   className="compact-cap-card"
                   noPadding={true}
                   showStrip={true}
-                  style={{
-                    '--accent-primary': accentColor,
-                    borderRadius: '4px'
-                  }}
+                  style={cardStyle}
                 >
                   <div className="cap-content-horizontal">
                     <div className="cap-icon-box" style={{ color: accentColor }}>

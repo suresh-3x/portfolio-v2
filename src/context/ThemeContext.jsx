@@ -92,8 +92,8 @@ export const ThemeProvider = ({ children }) => {
     // Theme Data Definitions
     const themes = {
         dawn: {
-            '--bg-primary-color': '#ffffff',
-            '--bg-primary-gradient': 'linear-gradient(135deg, #ffffff 0%, #f0f2f5 100%)',
+            '--bg-primary-color': '#f4f6f8',
+            '--bg-primary-gradient': 'linear-gradient(135deg, #f4f6f8 0%, #e1e4e8 100%)',
             '--bg-secondary': '#f6f8fa',
             '--text-primary': '#1f2328',
             '--text-secondary': '#656d76',
@@ -185,10 +185,13 @@ export const ThemeProvider = ({ children }) => {
         }
     };
 
-    // Apply CSS Variables
+    // Apply CSS Variables and Data Attribute
     useEffect(() => {
         const root = document.documentElement;
         const currentTheme = themes[theme];
+
+        // Set data-theme attribute for CSS selectors
+        root.setAttribute('data-theme', theme);
 
         if (currentTheme) {
             Object.entries(currentTheme).forEach(([key, value]) => {

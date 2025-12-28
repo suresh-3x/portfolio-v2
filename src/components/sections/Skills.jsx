@@ -63,49 +63,41 @@ const Skills = () => {
     {
       title: "Backend Engineering",
       icon: <Server size={18} />,
-      color: "#3fb950", // Green (RGB Primary)
       skills: ["Python", "Golang", "Django", "FastAPI", "Express.js", "PostgreSQL", "MongoDB", "Redis", "RabbitMQ"]
     },
     {
       title: "Fullstack Dev",
       icon: <Layers size={18} />,
-      color: "#3f52fd", // Blue (RGB Secondary)
       skills: ["React", "Next.js", "Node.js", "TypeScript", "Tailwind", "GraphQL", "Redux"]
     },
     {
       title: "AI & ML",
       icon: <Cpu size={18} />,
-      color: "#ff4b4b", // Red (RGB Tertiary)
       skills: ["PyTorch", "TensorFlow", "Scikit-learn", "Pandas", "LLMs", "LangChain", "AI Agents"]
     },
     {
       title: "DevOps & Cloud",
       icon: <Cloud size={18} />,
-      color: "#3fb950", // Green (RGB Primary)
       skills: ["AWS", "GCP", "Docker", "Kubernetes", "Terraform", "CI/CD", "Grafana"]
     },
     {
       title: "System Networking",
       icon: <Globe size={18} />,
-      color: "#3f52fd", // Blue (RGB Secondary)
       skills: ["TCP/IP", "DNS", "WebSockets", "gRPC", "Nginx", "Load Balancing"]
     },
     {
       title: "Computer Vision",
       icon: <Eye size={18} />,
-      color: "#ff4b4b", // Red (RGB Tertiary)
       skills: ["OpenCV", "YOLO", "Image Processing", "Object Detection", "Video Analytics"]
     },
     {
       title: "Mobile Dev",
       icon: <Smartphone size={18} />,
-      color: "#3fb950", // Green (RGB Primary)
       skills: ["React Native", "SwiftUI", "Android", "Mobile Web", "Expo"]
     },
     {
       title: "Systems & Linux",
       icon: <Terminal size={18} />,
-      color: "#3f52fd", // Blue (RGB Secondary)
       skills: ["Bash", "Shell", "Process Mgmt", "Cron Jobs", "Security Hardening"]
     }
   ];
@@ -114,7 +106,7 @@ const Skills = () => {
     <section id="skills" className="skills-section">
       <div className="section-header">
         <h2 className="section-title">
-          <span className="hash">#</span> System Modules
+          <span className="hash" style={{ color: 'var(--accent-tertiary)' }}>#</span> System Modules
         </h2>
         <p className="section-subtitle">
           Core technical components and deployment stack.
@@ -130,6 +122,11 @@ const Skills = () => {
           ];
           const accentColor = accentColors[idx % 3];
 
+          const cardStyle = { borderRadius: '4px' };
+          if (accentColor !== 'var(--accent-primary)') {
+            cardStyle['--accent-primary'] = accentColor;
+          }
+
           return (
             <motion.div
               key={idx}
@@ -142,10 +139,7 @@ const Skills = () => {
                 className="module-card"
                 showStrip={true}
                 noPadding={true}
-                style={{
-                  '--accent-primary': accentColor,
-                  borderRadius: '4px'
-                }}
+                style={cardStyle}
               >
                 <div className="module-inner">
                   <div className="module-header" style={{ borderBottomColor: `${accentColor}20` }}>
