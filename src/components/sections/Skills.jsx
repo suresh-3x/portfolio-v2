@@ -123,16 +123,12 @@ const Skills = () => {
 
       <div className="skills-compact-grid">
         {skillCategories.map((category, idx) => {
-          const isMonochrome = theme === 'monochrome';
-          const isRGB = theme === 'rgb';
-
-          const RGB_COLORS = ['#3fb950', '#3f52fd', '#ff4b4b']; // Green, Blue, Red
-
-          const accentColor = isMonochrome
-            ? '#ffffff'
-            : (isRGB
-              ? RGB_COLORS[idx % 3]
-              : category.color);
+          const accentColors = [
+            'var(--accent-primary)',
+            'var(--accent-secondary)',
+            'var(--accent-tertiary)'
+          ];
+          const accentColor = accentColors[idx % 3];
 
           return (
             <motion.div
@@ -152,7 +148,7 @@ const Skills = () => {
                 }}
               >
                 <div className="module-inner">
-                  <div className="module-header" style={{ borderBottomColor: isMonochrome ? 'var(--border-color)' : `${accentColor}20` }}>
+                  <div className="module-header" style={{ borderBottomColor: `${accentColor}20` }}>
                     <div className="module-icon-box" style={{ color: accentColor }}>{category.icon}</div>
                     <h3 className="module-title">{category.title}</h3>
                   </div>

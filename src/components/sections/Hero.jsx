@@ -14,7 +14,7 @@ const Hero = () => {
     if (newMode === 'ambient') {
       setTheme('dawn');
     } else {
-      setTheme('rgb');
+      setTheme('dusk');
     }
   };
 
@@ -155,12 +155,12 @@ const Hero = () => {
                 showStrip={true}
                 noPadding={true}
                 style={{
-                  '--accent-primary': theme === 'monochrome' ? '#ffffff' : (theme === 'rgb' ? '#3fb950' : '#3fb950'), // Green
+                  '--accent-primary': 'var(--accent-primary)',
                   borderRadius: '4px'
                 }}
               >
                 <div className="card-inner-box">
-                  <Terminal size={24} className="stack-icon" style={{ color: theme === 'monochrome' ? '#ffffff' : (theme === 'rgb' ? '#3fb950' : '#3fb950') }} />
+                  <Terminal size={24} className="stack-icon" style={{ color: 'var(--accent-primary)' }} />
                   <div className="stack-info">
                     <h3>Backend</h3>
                     <p>Python, Go, Node</p>
@@ -180,12 +180,12 @@ const Hero = () => {
                 showStrip={true}
                 noPadding={true}
                 style={{
-                  '--accent-primary': theme === 'monochrome' ? '#ffffff' : (theme === 'rgb' ? '#3f52fd' : '#4dabf7'), // Blue
+                  '--accent-primary': 'var(--accent-tertiary)',
                   borderRadius: '4px'
                 }}
               >
                 <div className="card-inner-box">
-                  <Database size={24} className="stack-icon" style={{ color: theme === 'monochrome' ? '#ffffff' : (theme === 'rgb' ? '#3f52fd' : '#4dabf7') }} />
+                  <Database size={24} className="stack-icon" style={{ color: 'var(--accent-primary)' }} />
                   <div className="stack-info">
                     <h3>Data</h3>
                     <p>Postgres, Redis</p>
@@ -205,12 +205,12 @@ const Hero = () => {
                 showStrip={true}
                 noPadding={true}
                 style={{
-                  '--accent-primary': theme === 'monochrome' ? '#ffffff' : (theme === 'rgb' ? '#ff4b4b' : '#ffc078'), // Red
+                  '--accent-primary': 'var(--accent-secondary)',
                   borderRadius: '4px'
                 }}
               >
                 <div className="card-inner-box">
-                  <Cloud size={24} className="stack-icon" style={{ color: theme === 'monochrome' ? '#ffffff' : (theme === 'rgb' ? '#ff4b4b' : '#ffc078') }} />
+                  <Cloud size={24} className="stack-icon" style={{ color: 'var(--accent-primary)' }} />
                   <div className="stack-info">
                     <h3>Infrastructure</h3>
                     <p>AWS, K8s, Docker</p>
@@ -230,12 +230,12 @@ const Hero = () => {
                 showStrip={true}
                 noPadding={true}
                 style={{
-                  '--accent-primary': theme === 'monochrome' ? '#ffffff' : (theme === 'rgb' ? '#3f52fd' : '#ff8787'), // Blue
+                  '--accent-primary': 'var(--accent-tertiary)',
                   borderRadius: '4px'
                 }}
               >
                 <div className="card-inner-box">
-                  <Layout size={24} className="stack-icon" style={{ color: theme === 'monochrome' ? '#ffffff' : (theme === 'rgb' ? '#3f52fd' : '#ff8787') }} />
+                  <Layout size={24} className="stack-icon" style={{ color: 'var(--accent-primary)' }} />
                   <div className="stack-info">
                     <h3>Interface</h3>
                     <p>React, Next.js</p>

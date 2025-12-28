@@ -141,31 +141,20 @@ const Experience = () => {
           const isFirstInGroup = index === 0 || experiences[index - 1].company !== exp.company;
           const isLastInGroup = index === experiences.length - 1 || experiences[index + 1].company !== exp.company;
 
-          const isMonochrome = theme === 'monochrome';
-          const isRGB = theme === 'rgb';
-
-          const RGB_COLORS = {
-            primary: '#3fb950',   // Green
-            secondary: '#3f52fd', // Blue
-            tertiary: '#ff4b4b'   // Red
+          // Cycle through theme variables for all themes to ensure strict adherence to the palette
+          const getThemeVariable = (companyName) => {
+            const companyIdx = uniqueCompanies.indexOf(companyName);
+            const vars = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-tertiary)'];
+            return vars[companyIdx % 3];
           };
 
-          const getThemeAccent = (companyName) => {
-            if (isMonochrome) return '#ffffff';
-            if (isRGB) {
-              const companyIdx = uniqueCompanies.indexOf(companyName);
-              const colors = [RGB_COLORS.primary, RGB_COLORS.secondary, RGB_COLORS.tertiary];
-              return colors[companyIdx % 3];
-            }
-            return null;
-          };
+          const currentAccent = getThemeVariable(exp.company);
+          const nextAccent = experiences[index + 1] ? getThemeVariable(experiences[index + 1].company) : currentAccent;
 
-          const currentAccent = getThemeAccent(exp.company);
-          const nextAccent = experiences[index + 1] ? getThemeAccent(experiences[index + 1].company) : null;
+          const solidColor = currentAccent;
+          const nextSolidColor = nextAccent;
 
-          const solidColor = currentAccent || getSolidColor(exp.themeColor);
-          const nextSolidColor = nextAccent || (experiences[index + 1] ? getSolidColor(experiences[index + 1].themeColor) : solidColor);
-          const displayColor = currentAccent || exp.themeColor;
+          const isMonochrome = theme.startsWith('mono');
 
           return (
             <motion.div
@@ -189,10 +178,10 @@ const Experience = () => {
                   className="rail-node"
                   style={{
                     background: solidColor,
-                    boxShadow: isMonochrome ? 'none' : `0 0 15px ${solidColor}50`
+                    boxShadow: isMonochrome ? 'none' : `0 0 10px ${solidColor}`
                   }}
                 >
-                  <Briefcase size={12} color={isMonochrome ? '#000' : '#fff'} />
+                  <Briefcase size={12} color="var(--bg-primary-color)" />
                 </div>
               </div>
 
@@ -226,8 +215,9 @@ const Experience = () => {
                     <div className="role-top">
                       <h3>{exp.role}</h3>
                       <span className="type-pill" style={{
-                        borderColor: isMonochrome ? 'var(--text-secondary)' : solidColor + '40',
-                        color: isMonochrome ? 'var(--text-secondary)' : solidColor
+                        borderColor: isMonochrome ? 'var(--text-secondary)' : solidColor,
+                        color: isMonochrome ? 'var(--text-secondary)' : solidColor,
+                        opacity: 0.9
                       }}>
                         {exp.type}
                       </span>

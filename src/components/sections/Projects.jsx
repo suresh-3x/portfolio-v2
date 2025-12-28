@@ -72,16 +72,12 @@ const Projects = () => {
 
       <div className="projects-grid">
         {projects.map((project, index) => {
-          const isMonochrome = theme === 'monochrome';
-          const isRGB = theme === 'rgb';
-
-          const RGB_COLORS = ['#3fb950', '#3f52fd', '#ff4b4b']; // Green, Blue, Red
-
-          const accentColor = isMonochrome
-            ? '#ffffff'
-            : (isRGB
-              ? RGB_COLORS[index % 3]
-              : project.color);
+          const accentColors = [
+            'var(--accent-primary)',
+            'var(--accent-secondary)',
+            'var(--accent-tertiary)'
+          ];
+          const accentColor = accentColors[index % 3];
 
           return (
             <motion.div

@@ -44,16 +44,13 @@ const Contact = () => {
       <div className="contact-container-v2">
         <div className="contact-grid-v2">
           {contactItems.map((item, index) => {
-            const isMonochrome = theme === 'monochrome';
-            const isRGB = theme === 'rgb';
+            const accentColors = [
+              'var(--accent-tertiary)', // Email -> Blue (Tertiary)
+              'var(--accent-primary)',  // Phone -> Green (Primary)
+              'var(--accent-secondary)' // Location -> Red (Secondary)
+            ];
 
-            const RGB_COLORS = ['#3fb950', '#3f52fd', '#ff4b4b']; // Green, Blue, Red
-
-            const accentColor = isMonochrome
-              ? '#ffffff'
-              : (isRGB
-                ? RGB_COLORS[index % 3]
-                : item.color);
+            const accentColor = accentColors[index % 3];
 
             return (
               <a key={index} href={item.link} target={index === 2 ? "_blank" : "_self"} rel="noopener noreferrer" className="contact-card-link">

@@ -14,11 +14,10 @@ const GithubStats = () => {
   });
   const [loading, setLoading] = useState(true);
 
-  const isMonochrome = theme === 'monochrome';
-  const isRGB = theme === 'rgb';
-  const accentColor = (isMonochrome || isRGB) ? "var(--accent-primary)" : "#3fb950";
+  const accentColor = "var(--accent-primary)";
 
   useEffect(() => {
+    // ... useEffect remains same ...
     const fetchStats = async () => {
       try {
         const userRes = await fetch('https://api.github.com/users/suresh-3x');
@@ -47,10 +46,10 @@ const GithubStats = () => {
   }, []);
 
   const statItems = [
-    { label: 'Repos', value: stats.public_repos, icon: <BookOpen size={16} />, color: "#3fb950" }, // Green
-    { label: 'Stars', value: stats.total_stars, icon: <Star size={16} />, color: "#3f52fd" }, // Blue
-    { label: 'Followers', value: stats.followers, icon: <Users size={16} />, color: "#ff4b4b" }, // Red
-    { label: 'Following', value: stats.following, icon: <Users size={16} />, color: "#3fb950" }, // Green
+    { label: 'Repos', value: stats.public_repos, icon: <BookOpen size={16} /> },
+    { label: 'Stars', value: stats.total_stars, icon: <Star size={16} /> },
+    { label: 'Followers', value: stats.followers, icon: <Users size={16} /> },
+    { label: 'Following', value: stats.following, icon: <Users size={16} /> },
   ];
 
   return (
@@ -93,20 +92,20 @@ const GithubStats = () => {
               {/* Top Section: Quick Stats */}
               <div className="stats-row">
                 {statItems.map((item, index) => {
-                  const RGB_COLORS = ['#3fb950', '#3f52fd', '#ff4b4b']; // Green, Blue, Red
-
-                  const statAccent = isMonochrome
-                    ? '#ffffff'
-                    : (isRGB
-                      ? RGB_COLORS[index % 3]
-                      : item.color);
+                  const accentColors = [
+                    'var(--accent-primary)',
+                    'var(--accent-secondary)',
+                    'var(--accent-tertiary)',
+                    'var(--accent-primary)'
+                  ];
+                  const statAccent = accentColors[index % 4];
 
                   return (
                     <div key={index} className="minimal-stat">
                       <div className="stat-header">
                         <div className="icon-circle" style={{
                           color: statAccent,
-                          backgroundColor: isMonochrome ? 'rgba(255,255,255,0.05)' : (isRGB ? 'rgba(255,255,255,0.03)' : `${statAccent}10`)
+                          backgroundColor: 'rgba(255, 255, 255, 0.05)'
                         }}>
                           {item.icon}
                         </div>

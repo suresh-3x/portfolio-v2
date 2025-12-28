@@ -37,8 +37,8 @@ const Navbar = () => {
             style={{
               height: '44px',
               width: 'auto',
-              filter: theme === 'dawn' ? 'invert(1)' : 'none',
-              mixBlendMode: theme === 'dawn' ? 'multiply' : 'screen',
+              filter: (theme === 'dawn' || theme === 'mono-light') ? 'invert(1)' : 'none',
+              mixBlendMode: (theme === 'dawn' || theme === 'mono-light') ? 'multiply' : 'screen',
               transition: 'all 0.5s ease',
               borderRadius: '4px'
             }}

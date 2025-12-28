@@ -42,11 +42,8 @@ const Education = () => {
 
       <div className="education-grid">
         {(() => {
-          const isMonochrome = theme === 'monochrome';
-          const isRGB = theme === 'rgb';
-
-          const eduAccent = isMonochrome ? '#ffffff' : (isRGB ? '#3fb950' : education.color); // Green
-          const certAccent = isMonochrome ? '#ffffff' : (isRGB ? '#ff4b4b' : certifications[0].color); // Red
+          const eduAccent = 'var(--accent-secondary)';
+          const certAccent = 'var(--accent-tertiary)';
 
           return (
             <>
@@ -68,15 +65,15 @@ const Education = () => {
                       <div className="icon-box" style={{ color: eduAccent }}>
                         <GraduationCap size={24} />
                       </div>
-                      <h3 style={{ color: isMonochrome ? '#ffffff' : '' }}>Education</h3>
+                      <h3>Education</h3>
                     </div>
                     <div className="card-content-v2">
                       <div className="edu-item-v2">
-                        <h4 style={{ color: isMonochrome ? '#ffffff' : '' }}>{education.title}</h4>
-                        <p className="institution-v2" style={{ color: isMonochrome ? '#888888' : '' }}>{education.institution}</p>
+                        <h4>{education.title}</h4>
+                        <p className="institution-v2">{education.institution}</p>
                         <div className="meta-v2">
-                          <span className="location-v2" style={{ color: isMonochrome ? '#666666' : '' }}>{education.location}</span>
-                          <span className="date-v2" style={{ color: isMonochrome ? '#666666' : '' }}><Calendar size={14} /> {education.date}</span>
+                          <span className="location-v2">{education.location}</span>
+                          <span className="date-v2"><Calendar size={14} /> {education.date}</span>
                         </div>
                         <p className="grade-v2" style={{ color: eduAccent }}>{education.grade}</p>
                       </div>
@@ -108,15 +105,11 @@ const Education = () => {
                     </div>
                     <div className="card-content-v2">
                       {certifications.map((cert, i) => {
-                        const individualCertAccent = isMonochrome
-                          ? '#a0a0a0'
-                          : (isRGB
-                            ? (i % 2 === 0 ? '#ff4b4b' : '#3f52fd') // Red, Blue
-                            : cert.color);
+                        const individualCertAccent = i % 2 === 0 ? 'var(--accent-tertiary)' : 'var(--accent-primary)';
 
                         return (
-                          <div key={i} className="cert-item-v2" style={{ borderLeftColor: isMonochrome ? '#444444' : individualCertAccent }}>
-                            <h4 style={{ color: isMonochrome ? '#ffffff' : '' }}>{cert.title}</h4>
+                          <div key={i} className="cert-item-v2" style={{ borderLeftColor: individualCertAccent }}>
+                            <h4>{cert.title}</h4>
                             <p className="issuer-v2" style={{ color: individualCertAccent }}>{cert.issuer}</p>
                           </div>
                         );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Palette, Check, Sun, Moon, Terminal, Sunset } from 'lucide-react';
+import { Palette, Check, Sun, Moon, Terminal, Sunset, FileText } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const ThemePicker = () => {
@@ -11,31 +11,31 @@ const ThemePicker = () => {
     {
       id: 'dawn',
       name: 'Aurora',
-      preview: 'linear-gradient(135deg, #f5f7fa 0%, #dfe4eb 100%)',
-      accentColor: '#5a78af',
-      textColor: '#1a1d23',
+      preview: 'linear-gradient(135deg, #ffffff 0%, #f0f2f5 100%)',
+      accentColor: '#1a7f37',
+      textColor: '#1f2328',
       icon: Sun
     },
     {
       id: 'dusk',
       name: 'Midnight',
-      preview: 'linear-gradient(135deg, #232326 0%, #1a1a1c 100%)',
-      accentColor: '#cc8a8a',
-      textColor: '#cbd5e0',
+      preview: 'linear-gradient(135deg, #161b22 0%, #0d1117 100%)',
+      accentColor: '#3fb950',
+      textColor: '#e6edf3',
       icon: Sunset
     },
     {
-      id: 'rgb',
-      name: 'Matrix',
-      preview: 'linear-gradient(135deg, #000000 0%, #0a0a0a 100%)',
-      accentColor: '#3fb950',
-      textColor: '#ffffff',
-      icon: Terminal
+      id: 'mono-light',
+      name: 'Mono Light',
+      preview: '#ffffff',
+      accentColor: '#000000',
+      textColor: '#000000',
+      icon: FileText
     },
     {
-      id: 'monochrome',
-      name: 'Noir',
-      preview: 'linear-gradient(135deg, #000000 0%, #1a1a1a 100%)',
+      id: 'mono-dark',
+      name: 'Mono Dark',
+      preview: '#000000',
       accentColor: '#ffffff',
       textColor: '#ffffff',
       icon: Moon

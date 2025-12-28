@@ -3,8 +3,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-    // Default theme is 'rgb' (Matrix) as requested
-    const [theme, setTheme] = useState('rgb');
+    // Default theme is 'dusk'
+    const [theme, setTheme] = useState('dusk');
     // 'ambient' (dawn, dusk) or 'system' (rgb, monochrome) - keeping for legacy, though specific themes override this
     const [mode, setMode] = useState('system');
 
@@ -22,10 +22,12 @@ export const ThemeProvider = ({ children }) => {
             'dawn': 'dawn',
             'midnight': 'dusk',
             'dusk': 'dusk',
-            'matrix': 'rgb',
-            'rgb': 'rgb',
-            'noir': 'monochrome',
-            'monochrome': 'monochrome'
+            'matrix': 'dusk',     // Fallback for legacy
+            'rgb': 'dusk',        // Fallback for legacy
+            'noir': 'mono-dark',
+            'monochrome': 'mono-dark',
+            'mono-light': 'mono-light',
+            'mono-dark': 'mono-dark'
         };
 
         if (themeParam && themeMap[themeParam.toLowerCase()]) {
@@ -90,92 +92,92 @@ export const ThemeProvider = ({ children }) => {
     // Theme Data Definitions
     const themes = {
         dawn: {
-            '--bg-primary-color': '#f5f7fa',
-            '--bg-primary-gradient': 'linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 50%, #dfe4eb 100%)',
-            '--bg-secondary': '#eef2f7',
-            '--text-primary': '#1a1d23',
-            '--text-secondary': '#4a5568',
-            '--accent-primary': '#5a78af',
-            '--accent-primary-rgb': '90, 120, 175',
-            '--accent-secondary': '#e2a285',
-            '--border-color': 'rgba(0, 0, 0, 0.08)',
-            '--card-bg': 'rgba(255, 255, 255, 0.75)',
-            '--card-border': 'rgba(0, 0, 0, 0.06)',
+            '--bg-primary-color': '#ffffff',
+            '--bg-primary-gradient': 'linear-gradient(135deg, #ffffff 0%, #f0f2f5 100%)',
+            '--bg-secondary': '#f6f8fa',
+            '--text-primary': '#1f2328',
+            '--text-secondary': '#656d76',
+            '--accent-primary': '#1a7f37',   /* G-PRIMARY: Green */
+            '--accent-primary-rgb': '26, 127, 55',
+            '--accent-secondary': '#cf222e', /* R-SECONDARY: Red */
+            '--accent-tertiary': '#0969da',  /* B-TERTIARY: Blue */
+            '--border-color': 'rgba(27, 31, 35, 0.15)',
+            '--card-bg': 'rgba(255, 255, 255, 0.9)',
+            '--card-border': 'rgba(27, 31, 35, 0.15)',
             '--glass-blur': '16px',
-            '--shadow-soft': '0 8px 32px rgba(0, 0, 0, 0.06)',
+            '--shadow-soft': '0 8px 32px rgba(0, 0, 0, 0.08)',
             '--terminal-bg': '#ffffff',
-            '--terminal-header': '#f1f3f5',
-            '--bg-pattern': 'radial-gradient(circle at 1px 1px, rgba(90, 120, 175, 0.08) 1px, transparent 0)',
-            '--grid-color': 'rgba(90, 120, 175, 0.04)',
+            '--terminal-header': '#f6f8fa',
+            '--bg-pattern': 'radial-gradient(circle at 1px 1px, rgba(26, 127, 55, 0.1) 1px, transparent 0)',
+            '--grid-color': 'rgba(26, 127, 55, 0.05)',
             '--is-monochrome': '0'
         },
         dusk: {
-            '--bg-primary-color': '#1a1a1c',
-            '--bg-primary-gradient': 'linear-gradient(135deg, #232326 0%, #1a1a1c 100%)',
-            '--bg-secondary': '#2b2b2f',
-            '--text-primary': '#cbd5e0',
-            '--text-secondary': '#a0aec0',
-            '--accent-primary': '#cc8a8a',
-            '--accent-primary-rgb': '204, 138, 138',
-            '--accent-secondary': '#a399b2',
-            '--border-color': 'rgba(255, 255, 255, 0.06)',
-            '--card-bg': 'rgba(43, 43, 47, 0.75)',
-            '--card-border': 'rgba(255, 255, 255, 0.03)',
+            '--bg-primary-color': '#0d1117',
+            '--bg-primary-gradient': 'linear-gradient(135deg, #161b22 0%, #0d1117 100%)',
+            '--bg-secondary': '#161b22',
+            '--text-primary': '#e6edf3',
+            '--text-secondary': '#8b949e',
+            '--accent-primary': '#3fb950',   /* G-PRIMARY: Green */
+            '--accent-primary-rgb': '63, 185, 80',
+            '--accent-secondary': '#f85149', /* R-SECONDARY: Red */
+            '--accent-tertiary': '#58a6ff',  /* B-TERTIARY: Blue */
+            '--border-color': '#30363d',
+            '--card-bg': 'rgba(22, 27, 34, 0.85)',
+            '--card-border': '#30363d',
             '--glass-blur': '16px',
-            '--shadow-soft': '0 12px 48px rgba(0,0,0,0.25)',
-            '--terminal-bg': '#1a1a1c',
-            '--terminal-header': '#232326',
-            '--bg-pattern': 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.015) 1px, transparent 0)',
-            '--grid-color': 'rgba(255,255,255,0.015)',
+            '--shadow-soft': '0 12px 48px rgba(0,0,0,0.5)',
+            '--terminal-bg': '#0d1117',
+            '--terminal-header': '#161b22',
+            '--bg-pattern': 'radial-gradient(circle at 1px 1px, rgba(63, 185, 80, 0.1) 1px, transparent 0)',
+            '--grid-color': 'rgba(63, 185, 80, 0.05)',
             '--is-monochrome': '0'
         },
-        rgb: {
-            // STRICTLY 3 COLORS: Green, Blue, Amber
-            '--bg-primary-color': '#000000',
-            '--bg-primary-gradient': '#000000',
-            '--bg-secondary': '#050505',
-            '--text-primary': '#ffffff',
-            '--text-secondary': '#949494',
-            '--text-muted': '#555555',
-            '--accent-primary': '#3fb950',   /* 1. Primary: Green */
-            '--accent-primary-rgb': '63, 185, 80',
-            '--accent-secondary': '#3f52fd', /* 2. Secondary: Blue */
-            '--accent-tertiary': '#ff4b4b',  /* 3. Tertiary: Red */
-            '--border-color': '#21262d',
-            '--card-bg': 'rgba(1, 4, 9, 0.85)',
-            '--card-border': '#30363d',
-            '--glass-blur': '20px',
-            '--shadow-soft': '0 10px 40px rgba(0,0,0,0.95)',
-            '--terminal-bg': '#000000',
-            '--terminal-header': '#161b22',
-            '--bg-pattern': 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0)',
-            '--grid-color': 'rgba(255, 255, 255, 0.035)',
-            '--is-monochrome': '0',
-            '--is-rgb': '1'
+        'mono-light': {
+            // Monochrome with Greyscale Accents
+            '--bg-primary-color': '#ffffff',
+            '--bg-primary-gradient': '#ffffff',
+            '--bg-secondary': '#f8f9fa',
+            '--text-primary': '#000000',
+            '--text-secondary': '#444444',
+            '--text-muted': '#666666',
+            '--accent-primary': '#333333',   /* Dark Grey */
+            '--accent-primary-rgb': '51, 51, 51',
+            '--accent-secondary': '#666666', /* Medium Grey */
+            '--accent-tertiary': '#999999',  /* Light Grey */
+            '--border-color': '#e1e4e8',
+            '--card-bg': '#ffffff',
+            '--card-border': '#e1e4e8',
+            '--glass-blur': '0px',
+            '--shadow-soft': '0 4px 12px rgba(0,0,0,0.05)',
+            '--terminal-bg': '#ffffff',
+            '--terminal-header': '#f4f4f4',
+            '--bg-pattern': 'none',
+            '--grid-color': 'rgba(0, 0, 0, 0.05)',
+            '--is-monochrome': '1'
         },
-        monochrome: {
-            // STRICTLY 3 COLORS: White, Black, Gray
+        'mono-dark': {
+            // Monochrome with Greyscale Accents
             '--bg-primary-color': '#000000',
             '--bg-primary-gradient': '#000000',
-            '--bg-secondary': '#080808',
+            '--bg-secondary': '#0a0a0a',
             '--text-primary': '#ffffff',
-            '--text-secondary': '#a0a0a0', // Light Gray
-            '--text-muted': '#666666',      // Medium Gray
-            '--accent-primary': '#ffffff',  // White Strips
-            '--accent-primary-rgb': '255, 255, 255',
-            '--accent-secondary': '#888888', // Industrial Gray
-            '--accent-tertiary': '#444444',  // Dark Gray markers
-            '--border-color': '#222222',
-            '--card-bg': 'rgba(8, 8, 8, 0.95)',
+            '--text-secondary': '#cccccc',
+            '--text-muted': '#888888',
+            '--accent-primary': '#e0e0e0',   /* Light Grey */
+            '--accent-primary-rgb': '224, 224, 224',
+            '--accent-secondary': '#a0a0a0', /* Medium Grey */
+            '--accent-tertiary': '#606060',  /* Dark Grey */
+            '--border-color': '#333333',
+            '--card-bg': '#000000',
             '--card-border': '#333333',
-            '--glass-blur': '20px',
-            '--shadow-soft': '0 10px 40px rgba(0,0,0,0.95)',
+            '--glass-blur': '0px',
+            '--shadow-soft': 'none',
             '--terminal-bg': '#000000',
             '--terminal-header': '#111111',
-            '--bg-pattern': 'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.02) 1px, transparent 0)',
-            '--grid-color': 'rgba(255,255,255,0.015)',
-            '--is-monochrome': '1',
-            '--is-rgb': '0'
+            '--bg-pattern': 'none',
+            '--grid-color': 'rgba(255, 255, 255, 0.08)',
+            '--is-monochrome': '1'
         }
     };
 
