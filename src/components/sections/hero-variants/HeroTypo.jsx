@@ -33,7 +33,7 @@ const HeroTypo = () => {
                 flex-direction: column;
                 justify-content: center;
                 overflow: hidden;
-                background: #e0e0e0;
+                background: var(--bg-primary);
                 color: #111;
             }
 
@@ -91,7 +91,7 @@ const HeroTypo = () => {
             .marquee span {
                 font-size: 5rem;
                 font-weight: 900;
-                color: rgba(0,0,0,0.05);
+                color: rgba(255,255,255,0.03);
                 text-transform: uppercase;
             }
 

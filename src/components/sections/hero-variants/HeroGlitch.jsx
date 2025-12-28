@@ -29,7 +29,7 @@ const HeroGlitch = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          background-color: #050505;
+          background-color: var(--bg-primary);
           position: relative;
           overflow: hidden;
         }
@@ -38,7 +38,7 @@ const HeroGlitch = () => {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(0, 255, 157, 0.06), rgba(0, 240, 255, 0.06), rgba(0, 0, 255, 0.06));
             background-size: 100% 2px, 3px 100%;
             pointer-events: none;
             z-index: 10;
@@ -73,14 +73,14 @@ const HeroGlitch = () => {
 
         .glitch::before {
             left: 2px;
-            text-shadow: -1px 0 #ff00c1;
+            text-shadow: -1px 0 var(--accent-secondary);
             clip: rect(44px, 450px, 56px, 0);
             animation: glitch-anim 5s infinite linear alternate-reverse;
         }
 
         .glitch::after {
             left: -2px;
-            text-shadow: -1px 0 #00fff9;
+            text-shadow: -1px 0 var(--accent-primary);
             clip: rect(44px, 450px, 56px, 0);
             animation: glitch-anim2 5s infinite linear alternate-reverse;
         }

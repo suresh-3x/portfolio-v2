@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Terminal, User, Code, Folder, Mail, Briefcase, Menu, X } from 'lucide-react';
+import ThemePicker from './ThemePicker';
+
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (menuOpen) {
@@ -11,6 +15,8 @@ const Navbar = () => {
       document.body.style.overflow = 'unset';
     }
   }, [menuOpen]);
+
+
 
   const navItems = [
     { label: 'About', icon: <User size={18} />, href: '#about' },
@@ -23,23 +29,41 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <div className="logo">
-          <Terminal size={24} color="var(--accent-primary)" />
-          <span className="logo-text">~/portfolio</span>
+        <div className="logo-v4">
+          <img
+            src="/logo.png"
+            alt="SB Logo"
+            className="sb-logo-img"
+            style={{
+              height: '44px',
+              width: 'auto',
+              filter: theme === 'dawn' ? 'invert(1)' : 'none',
+              mixBlendMode: theme === 'dawn' ? 'multiply' : 'screen',
+              transition: 'all 0.5s ease',
+              borderRadius: '4px'
+            }}
+          />
+          <div className="sb-details">
+            <span className="sb-name">SURESH</span>
+            <span className="sb-sys">CORE_SYSTEMS</span>
+          </div>
         </div>
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-        <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          {navItems.map((item, index) => (
-            <li key={item.label} style={{ transitionDelay: `${index * 100}ms` }}>
-              <a href={item.href} className="nav-link" onClick={() => setMenuOpen(false)}>
-                <span className="nav-icon">{item.icon}</span>
-                <span className="nav-label">{item.label}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="nav-right">
+          <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+            {navItems.map((item, index) => (
+              <li key={item.label} style={{ transitionDelay: `${index * 100}ms` }}>
+                <a href={item.href} className="nav-link" onClick={() => setMenuOpen(false)}>
+                  <span className="nav-icon">{item.icon}</span>
+                  <span className="nav-label">{item.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <ThemePicker />
+          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       <style>{`
@@ -47,8 +71,8 @@ const Navbar = () => {
           position: sticky;
           top: 0;
           z-index: 100;
-          background: rgba(5, 5, 5, 0.85);
-          backdrop-filter: blur(12px);
+          background: var(--card-bg);
+          backdrop-filter: blur(var(--glass-blur));
           border-bottom: 1px solid var(--border-color);
           padding: 1rem 0;
         }
@@ -62,18 +86,89 @@ const Navbar = () => {
           align-items: center;
         }
 
-        .logo {
+        .logo-v4 {
           display: flex;
           align-items: center;
-          gap: var(--spacing-sm);
-          font-family: var(--font-mono);
-          font-weight: 700;
-          font-size: 1.2rem;
-          color: var(--text-primary);
+          gap: 16px;
+          cursor: pointer;
         }
 
-        .logo-text {
-          letter-spacing: -0.5px;
+        .sb-identity {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 42px;
+          height: 42px;
+          background: var(--bg-primary-color);
+          border: 1px solid var(--accent-primary);
+          border-radius: 4px;
+        }
+
+        .sb-initials {
+          font-family: var(--font-mono);
+          font-weight: 800;
+          font-size: 1.1rem;
+          color: var(--accent-primary);
+          letter-spacing: -1px;
+        }
+
+        .sb-badge {
+          position: absolute;
+          top: -8px;
+          right: -8px;
+          background: var(--accent-primary);
+          padding: 2px 6px;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb), 0.3);
+        }
+
+        .sb-dot {
+          width: 5px;
+          height: 5px;
+          background: #fff;
+          border-radius: 50%;
+          animation: pulse 1s infinite;
+        }
+
+        .sb-version {
+          font-size: 0.55rem;
+          font-weight: 900;
+          color: #fff;
+          font-family: var(--font-mono);
+        }
+
+        .sb-details {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+
+        .sb-name {
+          font-family: var(--font-mono);
+          font-weight: 800;
+          font-size: 0.95rem;
+          color: var(--text-primary);
+          letter-spacing: 1px;
+        }
+
+        .sb-sys {
+          font-family: var(--font-mono);
+          font-size: 0.6rem;
+          font-weight: 700;
+          color: var(--accent-primary);
+          opacity: 0.8;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+        }
+
+        .nav-right {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
         }
 
         .nav-links {

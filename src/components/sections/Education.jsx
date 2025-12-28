@@ -1,8 +1,34 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, Award, Calendar } from 'lucide-react';
+import Card from '../ui/Card';
+import { useTheme } from '../../context/ThemeContext';
 
 const Education = () => {
+  const { theme } = useTheme();
+
+  const education = {
+    title: "Bachelors of Computer Applications",
+    institution: "K. P. B. Hinduja College of Commerce",
+    location: "Mumbai, Maharashtra",
+    date: "10/2021",
+    grade: "CGPA: 8.20",
+    color: "#bd00ff" // Purple
+  };
+
+  const certifications = [
+    {
+      title: "CutShort Certified Python - Advanced",
+      issuer: "CutShort",
+      color: "#ffc078" // Amber
+    },
+    {
+      title: "Rest API (Intermediate) Certificate",
+      issuer: "HackerRank",
+      color: "#ff8787" // Coral
+    }
+  ];
+
   return (
     <section id="education" className="education-section">
       <div className="section-header">
@@ -15,132 +41,208 @@ const Education = () => {
       </div>
 
       <div className="education-grid">
-        <motion.div
-          className="edu-card"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <div className="card-header">
-            <GraduationCap className="icon" size={24} />
-            <h3>Education</h3>
-          </div>
-          <div className="card-content">
-            <div className="edu-item">
-              <h4>Bachelors of Computer Applications</h4>
-              <p className="institution">K. P. B. Hinduja College of Commerce</p>
-              <div className="meta">
-                <span className="location">Mumbai, Maharashtra</span>
-                <span className="date"><Calendar size={14} /> 10/2021</span>
-              </div>
-              <p className="grade">CGPA: 8.20</p>
-            </div>
-          </div>
-        </motion.div>
+        {(() => {
+          const isMonochrome = theme === 'monochrome';
+          const isRGB = theme === 'rgb';
 
-        <motion.div
-          className="edu-card"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="card-header">
-            <Award className="icon" size={24} />
-            <h3>Certifications</h3>
-          </div>
-          <div className="card-content">
-            <div className="cert-item">
-              <h4>CutShort Certified Python - Advanced</h4>
-              <p className="issuer">CutShort</p>
-            </div>
-            <div className="cert-item">
-              <h4>Rest API (Intermediate) Certificate</h4>
-              <p className="issuer">HackerRank</p>
-            </div>
-          </div>
-        </motion.div>
+          const eduAccent = isMonochrome ? '#ffffff' : (isRGB ? '#3fb950' : education.color); // Green
+          const certAccent = isMonochrome ? '#ffffff' : (isRGB ? '#ff4b4b' : certifications[0].color); // Red
+
+          return (
+            <>
+              <motion.div
+                className="edu-wrapper"
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                style={{ height: '100%' }}
+              >
+                <Card
+                  className="edu-card"
+                  showStrip={true}
+                  noPadding={true}
+                  style={{ '--accent-primary': eduAccent, borderRadius: '4px' }}
+                >
+                  <div className="card-inner-box">
+                    <div className="card-header-v2">
+                      <div className="icon-box" style={{ color: eduAccent }}>
+                        <GraduationCap size={24} />
+                      </div>
+                      <h3 style={{ color: isMonochrome ? '#ffffff' : '' }}>Education</h3>
+                    </div>
+                    <div className="card-content-v2">
+                      <div className="edu-item-v2">
+                        <h4 style={{ color: isMonochrome ? '#ffffff' : '' }}>{education.title}</h4>
+                        <p className="institution-v2" style={{ color: isMonochrome ? '#888888' : '' }}>{education.institution}</p>
+                        <div className="meta-v2">
+                          <span className="location-v2" style={{ color: isMonochrome ? '#666666' : '' }}>{education.location}</span>
+                          <span className="date-v2" style={{ color: isMonochrome ? '#666666' : '' }}><Calendar size={14} /> {education.date}</span>
+                        </div>
+                        <p className="grade-v2" style={{ color: eduAccent }}>{education.grade}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                className="edu-wrapper"
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                style={{ height: '100%' }}
+              >
+                <Card
+                  className="edu-card"
+                  showStrip={true}
+                  noPadding={true}
+                  style={{ '--accent-primary': certAccent, borderRadius: '4px' }}
+                >
+                  <div className="card-inner-box">
+                    <div className="card-header-v2">
+                      <div className="icon-box" style={{ color: certAccent }}>
+                        <Award size={24} />
+                      </div>
+                      <h3>Certifications</h3>
+                    </div>
+                    <div className="card-content-v2">
+                      {certifications.map((cert, i) => {
+                        const individualCertAccent = isMonochrome
+                          ? '#a0a0a0'
+                          : (isRGB
+                            ? (i % 2 === 0 ? '#ff4b4b' : '#3f52fd') // Red, Blue
+                            : cert.color);
+
+                        return (
+                          <div key={i} className="cert-item-v2" style={{ borderLeftColor: isMonochrome ? '#444444' : individualCertAccent }}>
+                            <h4 style={{ color: isMonochrome ? '#ffffff' : '' }}>{cert.title}</h4>
+                            <p className="issuer-v2" style={{ color: individualCertAccent }}>{cert.issuer}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+            </>
+          );
+        })()}
       </div>
 
       <style>{`
         .education-section {
-          padding: var(--spacing-xl) 0;
+          padding: 6rem 0;
         }
 
         .education-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: var(--spacing-lg);
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 1.5rem;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 1rem;
         }
 
         .edu-card {
-          background: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          border-radius: 8px;
-          padding: var(--spacing-lg);
-          transition: transform var(--transition-fast);
+           height: 100%;
+           border: 1px solid var(--border-color);
+           background: rgba(255, 255, 255, 0.01);
         }
 
-        .edu-card:hover {
-          transform: translateY(-5px);
-          border-color: var(--accent-primary);
+        .card-inner-box {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            height: 100%;
         }
 
-        .card-header {
+        .card-header-v2 {
           display: flex;
           align-items: center;
-          gap: var(--spacing-md);
-          margin-bottom: var(--spacing-lg);
-          padding-bottom: var(--spacing-md);
+          gap: 1rem;
           border-bottom: 1px solid var(--border-color);
+          padding-bottom: 1.25rem;
         }
 
-        .card-header .icon {
-          color: var(--accent-primary);
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.9;
         }
 
-        .card-header h3 {
+        .card-header-v2 h3 {
+          font-family: var(--font-mono);
+          font-size: 1rem;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: var(--text-primary);
+          margin: 0;
+        }
+
+        .edu-item-v2 h4, .cert-item-v2 h4 {
           font-size: 1.2rem;
+          font-weight: 800;
           color: var(--text-primary);
+          margin-bottom: 0.5rem;
+          letter-spacing: -0.01em;
         }
 
-        .edu-item, .cert-item {
-          margin-bottom: var(--spacing-md);
-        }
-
-        .edu-item:last-child, .cert-item:last-child {
-          margin-bottom: 0;
-        }
-
-        .edu-item h4, .cert-item h4 {
-          font-size: 1.1rem;
-          color: var(--text-primary);
-          margin-bottom: 5px;
-        }
-
-        .institution, .issuer {
+        .institution-v2, .issuer-v2 {
           color: var(--text-secondary);
-          margin-bottom: 5px;
+          margin-bottom: 0.75rem;
+          font-weight: 600;
         }
 
-        .meta {
+        .meta-v2 {
           display: flex;
-          gap: var(--spacing-md);
-          font-size: 0.9rem;
+          gap: 1.5rem;
+          font-size: 0.85rem;
           color: var(--text-muted);
-          margin-bottom: 5px;
+          margin-bottom: 1rem;
         }
 
-        .meta span {
+        .location-v2, .date-v2 {
           display: flex;
           align-items: center;
-          gap: 5px;
+          gap: 6px;
         }
 
-        .grade {
+        .grade-v2 {
+          font-family: var(--font-mono);
           font-size: 0.9rem;
-          color: var(--accent-secondary);
-          font-weight: 600;
+          font-weight: 700;
+        }
+
+        .cert-item-v2 {
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid;
+            transition: all 0.3s ease;
+        }
+
+        .cert-item-v2:last-child {
+            margin-bottom: 0;
+        }
+
+        .cert-item-v2:hover {
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 768px) {
+          .education-section {
+            padding: 4rem 1rem;
+          }
+          .education-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+          }
+           .card-inner-box {
+            padding: 1.5rem;
+          }
         }
       `}</style>
     </section>

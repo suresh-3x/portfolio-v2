@@ -37,7 +37,7 @@ const HeroSplit = () => {
                 align-items: center;
                 justify-content: center;
                 padding: 4rem;
-                background: #0a0a0a;
+                background: var(--bg-primary);
             }
 
             .content-wrapper {
@@ -84,7 +84,7 @@ const HeroSplit = () => {
             }
 
             .split-right {
-                background: #111;
+                background: var(--bg-secondary);
                 position: relative;
                 overflow: hidden;
                 display: flex;

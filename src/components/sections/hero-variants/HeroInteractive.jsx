@@ -23,7 +23,9 @@ const HeroInteractive = () => {
             }
 
             draw() {
-                ctx.fillStyle = 'rgba(0, 255, 157, 0.8)';
+                // Get accent color from computed style or fallback
+                const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim() || '#00ff9d';
+                ctx.fillStyle = accent;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.closePath();

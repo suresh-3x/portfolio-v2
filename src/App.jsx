@@ -9,8 +9,8 @@ import About from './components/sections/About';
 import Skills from './components/sections/Skills';
 
 import GithubStats from './components/sections/GithubStats';
-import Resume from './components/sections/Resume';
 
+import ThemePopup from './components/ThemePopup';
 
 function App() {
   return (
@@ -22,8 +22,8 @@ function App() {
       <Projects />
       <GithubStats />
       <Education />
-      <Resume />
       <Contact />
+      <ThemePopup />
     </Layout>
   );
 }

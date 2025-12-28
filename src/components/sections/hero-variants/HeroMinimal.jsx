@@ -3,32 +3,32 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 const HeroMinimal = () => {
-    return (
-        <section className="hero-minimal" id="home">
-            <motion.div
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="minimal-content"
-            >
-                <span className="overline">Architecture • Systems • Scale</span>
-                <h1>
-                    Suresh <br />
-                    <span className="hollow">Bhandari</span>
-                </h1>
-                <p className="intro">
-                    I build the digital infrastructure that powers global businesses.
-                    <br />
-                    Backend Expert. Polymath. Engineer.
-                </p>
+  return (
+    <section className="hero-minimal" id="home">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="minimal-content"
+      >
+        <span className="overline">Architecture • Systems • Scale</span>
+        <h1>
+          Suresh <br />
+          <span className="hollow">Bhandari</span>
+        </h1>
+        <p className="intro">
+          I build the digital infrastructure that powers global businesses.
+          <br />
+          Backend Expert. Polymath. Engineer.
+        </p>
 
-                <div className="links">
-                    <a href="#projects" className="link-item">View Work</a>
-                    <a href="#contact" className="link-item">Get in Touch <ArrowRight size={16} /></a>
-                </div>
-            </motion.div>
+        <div className="links">
+          <a href="#projects" className="link-item">View Work</a>
+          <a href="#contact" className="link-item">Get in Touch <ArrowRight size={16} /></a>
+        </div>
+      </motion.div>
 
-            <style>{`
+      <style>{`
         .hero-minimal {
           min-height: 80vh;
           display: flex;
@@ -36,10 +36,27 @@ const HeroMinimal = () => {
           justify-content: center;
           text-align: center;
           padding: var(--spacing-2xl) 0;
-          background: radial-gradient(circle at center, rgba(30, 30, 30, 0.4) 0%, transparent 70%);
+          background: var(--bg-primary);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hero-minimal::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
         }
 
         .minimal-content {
+          position: relative;
+          z-index: 1;
           max-width: 800px;
           display: flex;
           flex-direction: column;
@@ -70,7 +87,8 @@ const HeroMinimal = () => {
         }
         
         .hollow:hover {
-          color: var(--text-primary);
+          color: var(--accent-primary);
+          -webkit-text-stroke: 2px var(--accent-primary);
         }
 
         .intro {
@@ -112,8 +130,8 @@ const HeroMinimal = () => {
           width: 100%;
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 };
 
 export default HeroMinimal;

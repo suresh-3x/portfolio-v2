@@ -35,7 +35,7 @@ const HeroGradient = () => {
                 align-items: center;
                 justify-content: center;
                 overflow: hidden;
-                background: #000;
+                background: var(--bg-primary);
             }
 
             .gradient-bg {
@@ -55,7 +55,7 @@ const HeroGradient = () => {
             .blob-1 {
                 width: 500px;
                 height: 500px;
-                background: #4f46e5;
+                background: var(--accent-secondary);
                 top: -100px;
                 left: -100px;
                 animation-delay: 0s;
@@ -64,7 +64,7 @@ const HeroGradient = () => {
             .blob-2 {
                 width: 400px;
                 height: 400px;
-                background: #ec4899;
+                background: var(--accent-error);
                 bottom: -50px;
                 right: -50px;
                 animation-delay: -2s;
@@ -73,7 +73,7 @@ const HeroGradient = () => {
             .blob-3 {
                 width: 600px;
                 height: 600px;
-                background: #06b6d4;
+                background: var(--accent-primary);
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);

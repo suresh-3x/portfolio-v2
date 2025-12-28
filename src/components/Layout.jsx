@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
         {children}
       </main>
       <Footer />
-      
+
       <style>{`
         .layout {
           min-height: 100vh;
@@ -27,8 +27,8 @@ const Layout = ({ children }) => {
           width: 100%;
           height: 100%;
           background-image: 
-            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            linear-gradient(var(--grid-color) 1px, transparent 1px),
+            linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
           background-size: 50px 50px;
           pointer-events: none;
           z-index: -1;
