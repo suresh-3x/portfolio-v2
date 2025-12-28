@@ -50,17 +50,22 @@ const SkeletonLoader = () => {
                     align-items: center;
                 }
 
-                /* Pulse Animation */
-                @keyframes sk-pulse {
-                    0% { opacity: 0.3; }
-                    50% { opacity: 0.15; }
-                    100% { opacity: 0.3; }
+                /* Shimmer Animation */
+                @keyframes shimmer {
+                    0% { background-position: -200% 0; }
+                    100% { background-position: 200% 0; }
                 }
 
                 .sk-status, .sk-title, .sk-subtitle, .sk-desc, .sk-btn, .sk-card {
-                    background: var(--text-primary);
+                    background: linear-gradient(
+                        90deg,
+                        rgba(125, 125, 125, 0.1) 25%,
+                        rgba(125, 125, 125, 0.2) 37%,
+                        rgba(125, 125, 125, 0.1) 63%
+                    );
+                    background-size: 400% 100%;
                     border-radius: 4px;
-                    animation: sk-pulse 1.5s ease-in-out infinite;
+                    animation: shimmer 1.4s ease infinite;
                 }
 
                 .sk-status { width: 120px; height: 32px; margin-bottom: 2rem; border-radius: 100px; }

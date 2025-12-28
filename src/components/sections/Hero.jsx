@@ -328,10 +328,34 @@ const Hero = () => {
         .status-dot {
           width: 8px;
           height: 8px;
-          background: currentColor;
+          background: var(--accent-secondary);
           border-radius: 50%;
-          box-shadow: 0 0 10px currentColor;
+          box-shadow: 0 0 12px var(--accent-secondary);
           animation: pulse 2s infinite;
+        }
+
+        /* ... existing H1 etc ... */
+
+        /* Add hover effect to stack cards by targeting them via wrapper if possible, or just the card class */
+        /* Since .stack-card is a component class, we can target it in global CSS or here if it renders as a class */
+        /* Assuming Card component passes className 'stack-card' to the DOM element */
+        
+        .stack-card {
+           padding: 0 !important;
+           width: 100% !important;
+           min-height: 130px;
+           height: auto !important;
+           border-radius: 4px !important;
+           background: var(--card-bg) !important;
+           backdrop-filter: blur(var(--glass-blur)) !important;
+           transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+           border: 1px solid var(--border-color);
+        }
+
+        .stack-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+            border-color: var(--accent-primary);
         }
 
         h1 {

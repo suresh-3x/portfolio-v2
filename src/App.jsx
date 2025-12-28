@@ -12,38 +12,28 @@ import GithubStats from './components/sections/GithubStats';
 import Loader from './components/ui/Loader';
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  // No artificial loading delay
+  // The app will render immediately once mounted
 
   return (
     <AnimatePresence mode="wait">
-      {loading ? (
-        <Loader key="loader" />
-      ) : (
-        <motion.div
-          key="app"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Layout>
-            <Hero />
-            <About />
-            <Experience />
-            <Skills />
-            <Projects />
-            <GithubStats />
-            <Education />
-            <Contact />
-          </Layout>
-        </motion.div>
-      )}
+      <motion.div
+        key="app"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Layout>
+          <Hero />
+          <About />
+          <Experience />
+          <Skills />
+          <Projects />
+          <GithubStats />
+          <Education />
+          <Contact />
+        </Layout>
+      </motion.div>
     </AnimatePresence>
   );
 }

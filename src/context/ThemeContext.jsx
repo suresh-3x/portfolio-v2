@@ -3,8 +3,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-    // Default theme is 'dusk'
-    const [theme, setTheme] = useState('dusk');
+    // Default theme is 'mono-dark'
+    const [theme, setTheme] = useState('mono-dark');
     // 'ambient' (dawn, dusk) or 'system' (rgb, monochrome) - keeping for legacy, though specific themes override this
     const [mode, setMode] = useState('system');
 
