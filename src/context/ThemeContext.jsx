@@ -138,6 +138,23 @@ export const ThemeProvider = ({ children }) => {
         document.body.style.backgroundColor = currentTheme['--bg-primary-color'];
         document.body.style.color = currentTheme['--text-primary'];
 
+        // Update favicon based on theme
+        // Light themes (dawn, mono-light) use dark favicon
+        // Dark themes (dusk, mono-dark) use light favicon
+        const isLightTheme = theme === 'dawn' || theme === 'mono-light';
+        const faviconPath = isLightTheme ? '/favicon-dark.svg' : '/favicon-light.svg';
+        
+        // Remove existing favicon links
+        const existingFavicons = document.querySelectorAll('link[rel="icon"]');
+        existingFavicons.forEach(link => link.remove());
+        
+        // Add new favicon
+        const link = document.createElement('link');
+        link.rel = 'icon';
+        link.type = 'image/svg+xml';
+        link.href = faviconPath;
+        document.head.appendChild(link);
+
     }, [theme]);
 
     return (
