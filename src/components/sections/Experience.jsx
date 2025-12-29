@@ -1,11 +1,9 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Building2, ExternalLink, Briefcase, Clock } from 'lucide-react';
+import { Calendar, MapPin, Building2, ExternalLink, Clock } from 'lucide-react';
 import Card from '../ui/Card';
-import { useTheme } from '../../context/ThemeContext';
 
 const Experience = () => {
-  const { theme } = useTheme();
 
   const RawData = [
     {
@@ -217,25 +215,12 @@ const Experience = () => {
 
   const getThemeVariable = (index) => {
     const vars = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-tertiary)'];
-    // Experience needs specific Green cycle check
-    // Actually, "RGB" cycle requested, but Experience Header is Green.
-    // If we want consistency:
-    // About (R) -> Exp (G) -> Skills (B) -> Projects (R) -> Contact (G/Cycle)
-    // The "Exp Header" is Green.
-    // The "Connector Lines" / "Accents" inside Experience? R->G->B cycle is fine.
     return vars[index % 3];
   };
 
   return (
     <section id="experience" className="experience-section">
-      <div className="section-header">
-        <h2 className="section-title">
-          <span className="hash" style={{ color: 'var(--accent-secondary)' }}>#</span> Experience
-        </h2>
-        <p className="section-subtitle">
-          Professional trajectory across industry-leading organizations.
-        </p>
-      </div>
+
 
       <div className="experience-timeline">
         {groupedExperiences.map((group, groupIndex) => {
@@ -320,7 +305,6 @@ const Experience = () => {
 
       <style>{`
         .experience-section {
-          padding: 6rem 0;
           position: relative;
         }
 
@@ -328,8 +312,8 @@ const Experience = () => {
           max-width: 1200px;
           margin: 0 auto;
           position: relative;
-          padding-left: 2rem;
-          padding-right: 1rem;
+          padding-left: 0;
+          padding-right: 0;
         }
 
         .experience-group {
@@ -514,22 +498,50 @@ const Experience = () => {
 
         @media (max-width: 768px) {
           .experience-timeline {
-            padding-left: 1rem;
+            padding-left: 0.25rem; /* Minimized to give space to cards */
             max-width: 100%;
           }
           .experience-group {
-            padding-left: 0;
-            margin-left: 2rem; 
+            padding-left: 1.25rem; /* Reduced from 2rem to give cards more room */
+            margin-left: 0.25rem;
+            margin-bottom: 3.5rem;
+            position: relative;
           }
           .timeline-connector {
-            left: -2rem;
+            left: -0.75rem; 
+            top: 1.5rem;
+            bottom: -3.5rem;
+          }
+          .timeline-dot {
+              width: 20px;
+              height: 20px;
+              left: -10px;
+              top: -4px;
+          }
+          .timeline-line {
+              left: -1px;
+          }
+          .company-name {
+              font-size: 1.1rem;
           }
           .role-header {
             flex-direction: column;
+            gap: 4px;
+            align-items: flex-start;
           }
           .badges-row {
-             margin-left: 0;
-             flex-wrap: wrap;
+             display: none; /* Simplify on mobile */
+          }
+          .role-description {
+              padding-left: 1.25rem;
+          }
+          .role-description li {
+              font-size: 0.85rem;
+              margin-bottom: 0.75rem;
+          }
+          .company-logo {
+              width: 38px;
+              height: 38px;
           }
         }
       `}</style>

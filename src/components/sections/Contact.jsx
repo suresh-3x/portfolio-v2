@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import Card from '../ui/Card';
-import { useTheme } from '../../context/ThemeContext';
+const STEVE_JOBS_QUOTES = [
+  "Design is not just what it looks like and feels like. Design is how it works.",
+  "Be a yardstick of quality. Some people aren't used to an environment where excellence is expected.",
+  "The only way to do great work is to love what you do.",
+  "Innovation distinguishes between a leader and a follower.",
+  "Details matter, it's worth waiting to get it right.",
+  "Stay hungry, stay foolish.",
+  "Quality is more important than quantity. One home run is much better than two doubles.",
+  "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work.",
+  "Think different.",
+  "It's really hard to design products by focus groups. A lot of times, people don't know what they want until you show it to them.",
+  "Simple can be harder than complex: You have to work hard to get your thinking clean to make it simple.",
+  "I'm convinced that about half of what separates successful entrepreneurs from the non-successful ones is pure perseverance."
+];
 
 const Contact = () => {
-  const { theme } = useTheme();
+  const randomQuote = useMemo(() => {
+    const randomIndex = Math.floor(Math.random() * STEVE_JOBS_QUOTES.length);
+    return STEVE_JOBS_QUOTES[randomIndex];
+  }, []);
 
   const contactItems = [
     {
@@ -32,160 +48,302 @@ const Contact = () => {
 
   return (
     <section id="contact" className="contact-section">
-      <div className="section-header">
-        <h2 className="section-title">
-          <span className="hash" style={{ color: 'var(--accent-primary)' }}>#</span> Contact
-        </h2>
-        <p className="section-subtitle">
-          Let's discuss your next project or industry-scale opportunity.
-        </p>
-      </div>
 
-      <div className="contact-container-v2">
-        <div className="contact-grid-v2">
-          {contactItems.map((item, index) => {
-            const accentColors = [
-              'var(--accent-primary)',
-              'var(--accent-secondary)',
-              'var(--accent-tertiary)'
-            ];
 
-            const accentColor = accentColors[index % 3];
+      <div className="contact-container-v3">
+        <Card className="contact-main-card" showStrip={false} noPadding={true}>
+          <div className="contact-card-bg">
+            <div className="bg-orb orb-1"></div>
+            <div className="bg-orb orb-2"></div>
+          </div>
 
-            const cardStyle = { borderRadius: '4px' };
-            if (accentColor !== 'var(--accent-primary)') {
-              cardStyle['--accent-primary'] = accentColor;
-            }
+          <div className="contact-grid-v3">
+            {contactItems.map((item, index) => {
+              const accentColors = [
+                'var(--accent-primary)',
+                'var(--accent-secondary)',
+                'var(--accent-tertiary)'
+              ];
+              const accentColor = accentColors[index % 3];
 
-            return (
-              <a key={index} href={item.link} target={index === 2 ? "_blank" : "_self"} rel="noopener noreferrer" className="contact-card-link">
-                <Card
-                  className="contact-v2-card"
-                  showStrip={true}
-                  noPadding={true}
-                  style={cardStyle}
-                >
-                  <div className="contact-v2-inner">
-                    <div className="contact-v2-top">
-                      <div className="contact-v2-icon" style={{ color: accentColor }}>
-                        {item.icon}
-                      </div>
-                      <ArrowUpRight size={16} className="contact-v2-arrow" />
-                    </div>
-                    <div className="contact-v2-info">
-                      <span className="contact-v2-label">{item.label}</span>
-                      <h3 className="contact-v2-value">{item.value}</h3>
-                    </div>
+              return (
+                <a key={index} href={item.link} target={index === 2 ? "_blank" : "_self"} rel="noopener noreferrer" className="contact-item-v3">
+                  <div className="contact-icon-wrapper" style={{ '--item-accent': accentColor }}>
+                    <div className="icon-glow"></div>
+                    {item.icon}
                   </div>
-                </Card>
-              </a>
-            );
-          })}
+                  <div className="contact-info-v3">
+                    <span className="contact-label-v3">{item.label}</span>
+                    <h3 className="contact-value-v3">{item.value}</h3>
+                  </div>
+                  <ArrowUpRight size={18} className="contact-arrow-v3" />
+                </a>
+              );
+            })}
+          </div>
+        </Card>
+
+        {/* Jobs Wisdom Module */}
+        <div className="jobs-wisdom-module">
+          <div className="wisdom-divider"></div>
+          <div className="quote-container">
+            <span className="quote-mark">"</span>
+            <p className="wisdom-quote">{randomQuote}</p>
+            <div className="wisdom-attribution">
+              <span className="attribution-line"></span>
+              <span className="attribution-name">STEVE JOBS</span>
+              <span className="attribution-label">// ARCHITECT_OF_EXPERIENCE</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <style>{`
         .contact-section {
-          padding: 6rem 0 10rem;
+          position: relative;
         }
 
-        .contact-container-v2 {
+        .contact-container-v3 {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0 1rem;
+          perspective: 1000px;
         }
 
-        .contact-grid-v2 {
+        .contact-main-card {
+          background: rgba(var(--text-primary-rgb), 0.02) !important;
+          border: 1px solid var(--border-color) !important;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .contact-card-bg {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          pointer-events: none;
+          opacity: 0.4;
+        }
+
+        .bg-orb {
+          position: absolute;
+          width: 300px;
+          height: 300px;
+          border-radius: 50%;
+          filter: blur(80px);
+        }
+
+        .orb-1 {
+          background: var(--accent-primary);
+          top: -150px;
+          left: -150px;
+          opacity: 0.1;
+        }
+
+        .orb-2 {
+          background: var(--accent-tertiary);
+          bottom: -150px;
+          right: -150px;
+          opacity: 0.1;
+        }
+
+        .contact-grid-v3 {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
+          position: relative;
+          z-index: 2;
+        }
+
+        .contact-item-v3 {
+          padding: 3.5rem 2.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
           gap: 1.5rem;
+          text-decoration: none;
+          color: inherit;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          border-right: 1px solid var(--border-color);
+          position: relative;
         }
 
-        .contact-card-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            height: 100%;
+        .contact-item-v3:last-child {
+          border-right: none;
         }
 
-        .contact-v2-card {
-            border: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.01);
-            height: 100%;
-            transition: all 0.3s ease;
+        .contact-item-v3:hover {
+          background: rgba(var(--text-primary-rgb), 0.03);
+          transform: translateY(-4px);
         }
 
-        .contact-v2-card:hover {
-            border-color: var(--accent-primary);
-            background: rgba(var(--accent-primary-rgb), 0.02);
-            transform: translateY(-5px);
+        .contact-icon-wrapper {
+          width: 60px;
+          height: 60px;
+          border-radius: 18px;
+          background: rgba(var(--text-primary-rgb), 0.03);
+          border: 1px solid var(--border-color);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--item-accent);
+          position: relative;
+          transition: all 0.4s ease;
         }
 
-        .contact-v2-inner {
-            padding: 2.5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
-            height: 100%;
+        .icon-glow {
+          position: absolute;
+          inset: 0;
+          background: var(--item-accent);
+          border-radius: inherit;
+          filter: blur(15px);
+          opacity: 0;
+          transition: all 0.4s ease;
         }
 
-        .contact-v2-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+        .contact-item-v3:hover .contact-icon-wrapper {
+          transform: scale(1.1) rotate(8deg);
+          border-color: var(--item-accent);
+          background: white;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
-        .contact-v2-icon {
-            opacity: 0.9;
-            transition: transform 0.3s ease;
+        .contact-item-v3:hover .icon-glow {
+          opacity: 0.15;
         }
 
-        .contact-v2-card:hover .contact-v2-icon {
-            transform: scale(1.1) rotate(-5deg);
+        .contact-info-v3 {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
         }
 
-        .contact-v2-arrow {
-            opacity: 0.2;
-            color: var(--text-muted);
-            transition: all 0.3s ease;
+        .contact-label-v3 {
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          color: var(--text-secondary);
+          opacity: 0.6;
         }
 
-        .contact-v2-card:hover .contact-v2-arrow {
-            opacity: 1;
+        .contact-value-v3 {
+          font-size: 1rem;
+          font-weight: 800;
+          color: var(--text-primary);
+          word-break: break-all;
+        }
+
+        .contact-arrow-v3 {
+          position: absolute;
+          top: 1.5rem;
+          right: 1.5rem;
+          opacity: 0;
+          color: var(--text-secondary);
+          transition: all 0.3s ease;
+          transform: translate(-10px, 10px);
+        }
+
+        .contact-item-v3:hover .contact-arrow-v3 {
+          opacity: 0.5;
+          transform: translate(0, 0);
+        }
+
+        @media (max-width: 968px) {
+          .contact-grid-v3 {
+            grid-template-columns: 1fr;
+          }
+          .contact-item-v3 {
+            border-right: none;
+            border-bottom: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+          }
+          .contact-item-v3:last-child {
+            border-bottom: none;
+          }
+        }
+
+        .jobs-wisdom-module {
+            margin-top: 8rem;
+            margin-bottom: 6rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .wisdom-divider {
+            height: 1px;
+            width: 100px;
+            background: var(--border-color);
+            margin: 0 auto 4rem;
+            opacity: 0.3;
+        }
+
+        .quote-container {
+            position: relative;
+            padding: 0 2rem;
+        }
+
+        .quote-mark {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 6rem;
+            font-family: serif;
             color: var(--accent-primary);
-            transform: translate(2px, -2px);
+            opacity: 0.1;
+            line-height: 1;
         }
 
-        .contact-v2-info {
+        .wisdom-quote {
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 1.4;
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .wisdom-attribution {
             display: flex;
             flex-direction: column;
+            align-items: center;
             gap: 0.5rem;
         }
 
-        .contact-v2-label {
+        .attribution-line {
+            width: 24px;
+            height: 1px;
+            background: var(--accent-primary);
+            margin-bottom: 0.5rem;
+            opacity: 0.5;
+        }
+
+        .attribution-name {
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-muted);
-        }
-
-        .contact-v2-value {
-            font-size: 1.15rem;
             font-weight: 800;
+            letter-spacing: 4px;
             color: var(--text-primary);
-            letter-spacing: -0.01em;
-            word-break: break-all;
         }
 
-        @media (max-width: 1024px) {
-            .contact-grid-v2 {
-                grid-template-columns: 1fr;
-                gap: 1rem;
+        .attribution-label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .wisdom-quote {
+                font-size: 1.25rem;
             }
-            .contact-v2-inner {
-                padding: 2rem;
-                gap: 2rem;
+            .jobs-wisdom-module {
+                margin-top: 5rem;
+                margin-bottom: 4rem;
             }
         }
       `}</style>

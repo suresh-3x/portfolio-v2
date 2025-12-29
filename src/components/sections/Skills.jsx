@@ -7,10 +7,8 @@ import {
   GitBranch, Container, HardDrive, Share2
 } from 'lucide-react';
 import Card from '../ui/Card';
-import { useTheme } from '../../context/ThemeContext';
 
 const Skills = () => {
-  const { theme } = useTheme();
 
   // Helper to get icon for specific skills
   const getSkillIcon = (skill) => {
@@ -104,14 +102,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="skills-section">
-      <div className="section-header">
-        <h2 className="section-title">
-          <span className="hash" style={{ color: 'var(--accent-tertiary)' }}>#</span> System Modules
-        </h2>
-        <p className="section-subtitle">
-          Core technical components and deployment stack.
-        </p>
-      </div>
+
 
       <div className="skills-compact-grid">
         {skillCategories.map((category, idx) => {
@@ -122,7 +113,7 @@ const Skills = () => {
           ];
           const accentColor = accentColors[idx % 3];
 
-          const cardStyle = { borderRadius: '4px' };
+          const cardStyle = {};
           if (accentColor !== 'var(--accent-primary)') {
             cardStyle['--accent-primary'] = accentColor;
           }
@@ -137,7 +128,7 @@ const Skills = () => {
             >
               <Card
                 className="module-card"
-                showStrip={true}
+                showStrip={false}
                 noPadding={true}
                 style={cardStyle}
               >
@@ -164,29 +155,28 @@ const Skills = () => {
       </div>
 
       <style>{`
-        .skills-section {
-          padding: 6rem 0;
-        }
-
         .skills-compact-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          grid-template-columns: repeat(3, 1fr);
           gap: 1.25rem;
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0 1rem;
+          padding: 0;
+        }
+
+        .contact-container-v2 {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0;
         }
 
         .module-card {
           height: 100%;
-          border: 1px solid var(--border-color);
-          background: rgba(255, 255, 255, 0.01);
-          transition: all 0.3s ease;
         }
 
         .module-card:hover {
             border-color: var(--accent-primary);
-            background: rgba(var(--accent-primary-rgb), 0.02);
+            background: rgba(var(--accent-primary-rgb), 0.05);
         }
 
         .module-inner {
@@ -268,7 +258,7 @@ const Skills = () => {
 
         @media (max-width: 768px) {
           .skills-section {
-            padding: 4rem 1rem;
+            padding: 4rem 0;
           }
           .skills-compact-grid {
             grid-template-columns: 1fr;

@@ -164,7 +164,7 @@ const HeroStack = () => {
                 }
 
                 @media (max-width: 968px) {
-                    .hero-stack { height: auto; padding: 6rem 0; }
+                    .hero-stack { height: auto; }
                     .stack-container { grid-template-columns: 1fr; gap: 3rem; }
                     .stack-grid { transform: none; }
                 }

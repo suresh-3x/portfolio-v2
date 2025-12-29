@@ -2,10 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, Folder, Zap, Wind, Server, Database, Triangle, Smartphone, Layers, Code, Palette, Terminal, Cpu, Globe, Box, Layout } from 'lucide-react';
 import Card from '../ui/Card';
-import { useTheme } from '../../context/ThemeContext';
 
 const Projects = () => {
-  const { theme } = useTheme();
 
   const getTechIcon = (tag) => {
     const size = 12;
@@ -82,14 +80,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="projects-section">
-      <div className="section-header">
-        <h2 className="section-title">
-          <span className="hash" style={{ color: 'var(--accent-primary)' }}>#</span> Featured Projects
-        </h2>
-        <p className="section-subtitle">
-          A selection of technical challenges I've solved.
-        </p>
-      </div>
+
 
       <div className="projects-grid">
         {projects.map((project, index) => {
@@ -100,7 +91,7 @@ const Projects = () => {
           ];
           const accentColor = accentColors[index % 3];
 
-          const cardStyle = { borderRadius: '4px' };
+          const cardStyle = {};
           if (accentColor !== 'var(--accent-primary)') {
             cardStyle['--accent-primary'] = accentColor;
           }
@@ -116,7 +107,7 @@ const Projects = () => {
             >
               <Card
                 className="project-card"
-                showStrip={true}
+                showStrip={false}
                 noPadding={true}
                 style={cardStyle}
               >
@@ -158,29 +149,22 @@ const Projects = () => {
       </div>
 
       <style>{`
-        .projects-section {
-          padding: 6rem 0;
-        }
-
         .projects-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+          grid-template-columns: repeat(3, 1fr);
           gap: 1.5rem;
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0 1rem;
+          padding: 0;
         }
 
         .project-card {
            height: 100%;
-           border: 1px solid var(--border-color);
-           background: rgba(255, 255, 255, 0.01);
-           transition: all 0.3s ease;
         }
 
         .project-card:hover {
             border-color: var(--accent-primary);
-            background: rgba(var(--accent-primary-rgb), 0.02);
+            background: rgba(var(--accent-primary-rgb), 0.05);
             transform: translateY(-5px);
         }
 
@@ -272,10 +256,21 @@ const Projects = () => {
 
         @media (max-width: 768px) {
           .projects-section {
-            padding: 4rem 1rem;
+            padding: 4rem 0;
+          }
+          .projects-grid {
+             grid-template-columns: 1fr;
+             gap: 1.25rem;
+             padding: 0;
           }
           .project-card-inner {
-            padding: 1.5rem;
+            padding: 1.25rem;
+          }
+          .project-title {
+              font-size: 1.1rem;
+          }
+          .project-desc {
+              font-size: 0.85rem;
           }
         }
       `}</style>

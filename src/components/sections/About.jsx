@@ -1,262 +1,409 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Zap, Shield, Cloud, Bot, Smartphone, ExternalLink, FileText } from 'lucide-react';
+import { Cpu, Zap, Shield, Cloud, Bot, Smartphone, ExternalLink } from 'lucide-react';
 import Card from '../ui/Card';
-import { useTheme } from '../../context/ThemeContext';
 
 const About = () => {
-  const { theme } = useTheme();
 
   const resumeLink = "https://gwl1cw03d070bspa.public.blob.vercel-storage.com/resume-sde-0.pdf";
 
   const features = [
     {
       icon: <Cpu size={18} />,
-      title: "Distributed Systems",
-      desc: "Fault-tolerant microservices for 10k+ concurrent requests."
+      title: "Concurrent Systems",
+      desc: "Architecting fault-tolerant microservices for massive scale."
     },
     {
       icon: <Zap size={18} />,
-      title: "High-Performance",
-      desc: "Optimizing database queries for sub-50ms execution."
+      title: "Performance tuning",
+      desc: "Deep-level optimization for mission-critical throughput."
     },
     {
       icon: <Shield size={18} />,
-      title: "Enterprise Security",
-      desc: "Robust OAuth2, JWT, and RBAC security standards."
+      title: "Security & Auth",
+      desc: "Robust IAM, OAuth2, and multi-layered encryption."
     },
     {
       icon: <Cloud size={18} />,
-      title: "Cloud Native",
-      desc: "Scalable AWS, Docker, and Kubernetes infrastructure."
+      title: "Cloud Strategy",
+      desc: "Multi-cloud orchestration and containerized delivery."
     },
     {
       icon: <Bot size={18} />,
-      title: "AI & LLM Integration",
-      desc: "Intelligent agents automating complex business workflows."
+      title: "AI Integration",
+      desc: "Embedding advanced LLMs into automated business workflows."
     },
     {
       icon: <Smartphone size={18} />,
-      title: "Mobile Engineering",
-      desc: "Cross-platform mobile experiences with Flutter."
+      title: "Universal Apps",
+      desc: "High-end cross-platform experiences for mobile and web."
     }
   ];
 
   return (
     <section id="about" className="about-section">
-      <div className="section-header">
-        <h2 className="section-title">
-          <span className="hash" style={{ color: 'var(--accent-primary)' }}>#</span> About Me
-        </h2>
-        <p className="section-subtitle">
-          More than just code. I build the engines that power the web.
-        </p>
-      </div>
-
       <div className="about-container">
-        <div className="about-hero-block">
-          <div className="about-bio-alt">
-            <p style={{ marginBottom: '1rem' }}>
-              As a <strong>Polymath & Software Engineer</strong> with over a decade of experience, I specialize in orchestrating complex, high-availability systems. My expertise spans the entire software lifecycle, from architecting resilient backend infrastructure to crafting intuitive mobile experiences.
+        <div className="about-grid">
+          {/* Narrative Side */}
+          <div className="about-narrative">
+
+
+            <p className="narrative-p main">
+              I don't just write code; I engineer <strong>resilient digital ecosystems</strong>. My approach is rooted in the belief that great software is a synthesis of rigorous performance standards and intuitive human-centered design.
             </p>
-            <p>
-              I excel in <strong>optimizing system performance</strong>, consistently delivering solutions that handle high throughput with sub-millisecond latency. My approach combines rigorous engineering principles with creative problem-solving to build scalable, secure, and efficient applications that drive business value.
+
+            <p className="narrative-p">
+              With a decade of experience navigating the complexities of high-throughput systems, I've developed a philosophy centered on <strong>scalability by design</strong>. Whether I'm orchestrating distributed backends or crafting precise interfaces, my focus remains constant: delivering technical excellence that translates directly into business growth.
             </p>
+
+            <div className="about-tags">
+              <span className="about-tag">ARCHITECT</span>
+              <span className="about-tag">POLYMATH</span>
+            </div>
           </div>
 
-          <motion.div
-            className="resume-cta-v2"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <a href={resumeLink} target="_blank" rel="noopener noreferrer" className="about-resume-btn">
-              <FileText size={16} />
-              <span>View Resume</span>
-              <ExternalLink size={14} className="ext-icon" />
-            </a>
-          </motion.div>
-        </div>
+          {/* Resume Side */}
+          <div className="about-visual">
+            <div className="resume-card-container">
+              {/* Architectural Background Illustration */}
+              <div className="system-logic-illustration">
+                <div className="logic-node n-1"></div>
+                <div className="logic-node n-2"></div>
+                <div className="logic-node n-3"></div>
+                <svg className="logic-grid" viewBox="0 0 400 400" fill="none">
+                  <path d="M50 100 L350 100 M200 100 L200 300 M100 200 L300 200" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
+                  <circle cx="200" cy="100" r="2" fill="currentColor" />
+                  <circle cx="200" cy="300" r="2" fill="currentColor" />
+                  <circle cx="100" cy="200" r="2" fill="currentColor" />
+                  <circle cx="300" cy="200" r="2" fill="currentColor" />
+                </svg>
+              </div>
 
-        <div className="capabilities-compact-grid">
-          {features.map((feature, index) => {
-            const accentColors = [
-              'var(--accent-primary)',
-              'var(--accent-secondary)',
-              'var(--accent-tertiary)'
-            ];
-            const accentColor = accentColors[index % 3];
-
-            const cardStyle = { borderRadius: '4px' };
-            // Fix: avoid circular variable reference for primary color
-            if (accentColor !== 'var(--accent-primary)') {
-              cardStyle['--accent-primary'] = accentColor;
-            }
-
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.98 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-              >
-                <Card
-                  className="compact-cap-card"
-                  noPadding={true}
-                  showStrip={true}
-                  style={cardStyle}
-                >
-                  <div className="cap-content-horizontal">
-                    <div className="cap-icon-box" style={{ color: accentColor }}>
-                      {feature.icon}
-                    </div>
-                    <div className="cap-info-box">
-                      <h4>{feature.title}</h4>
-                      <p>{feature.desc}</p>
+              <Card className="resume-blade-card" showStrip={false}>
+                <div className="resume-card-inner">
+                  <div className="resume-visual-box">
+                    <div className="mini-spec-doc">
+                      <div className="spec-lines">
+                        <span className="s-line l"></span>
+                        <span className="s-line m"></span>
+                        <span className="s-line s"></span>
+                      </div>
+                      <div className="spec-node"></div>
+                      <div className="spec-glint"></div>
                     </div>
                   </div>
-                </Card>
-              </motion.div>
-            );
-          })}
+                  <div className="resume-info">
+                    <span className="resume-label">PROFESSIONAL_MANIFEST</span>
+                    <h3 className="resume-status">ENGINEERING_RESUME_v25</h3>
+                  </div>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <a href={resumeLink} target="_blank" rel="noopener noreferrer" className="resume-action-btn">
+                      <span>VIEW</span>
+                      <ExternalLink size={14} />
+                    </a>
+                  </motion.div>
+                </div>
+                <div className="resume-card-footer">
+                  <span>DOC_AUTH: VERIFIED</span>
+                  <span>SIZE: 142KB</span>
+                </div>
+              </Card>
+              <div className="resume-blade-aura"></div>
+            </div>
+          </div>
         </div>
       </div>
 
       <style>{`
-        .about-section {
-          padding: 6rem 0;
-          position: relative;
-        }
-
         .about-container {
-          max-width: 1200px;
-          margin: 0 auto;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        .about-hero-block {
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .narrative-p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .narrative-p.main {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .narrative-p strong {
+            color: var(--accent-primary);
+        }
+
+        .about-tags {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 4rem;
-            margin-bottom: 4rem;
-            padding: 0 1rem;
+            gap: 12px;
+            margin-top: 2rem;
         }
 
-        .about-bio-alt {
-          font-size: 1.15rem;
-          line-height: 1.7;
-          color: var(--text-secondary);
-          max-width: 750px;
+        .about-tag {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            border-radius: 4px;
+            letter-spacing: 1px;
         }
 
-        .about-bio-alt strong {
-          color: var(--accent-primary);
+        .resume-card-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
         }
 
-        .about-resume-btn {
+        .resume-blade-card {
+            background: rgba(var(--text-primary-rgb), 0.02) !important;
+            border: 1px solid var(--border-color) !important;
+        }
+
+        .resume-card-inner {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 24px;
-            background: rgba(var(--accent-primary-rgb), 0.05);
-            border: 1px solid var(--accent-primary);
-            border-radius: 4px;
-            color: var(--accent-primary);
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            white-space: nowrap;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
         }
 
-        .about-resume-btn:hover {
+        .resume-visual-box {
+            width: 60px;
+            height: 70px;
+            background: rgba(var(--text-primary-rgb), 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .mini-spec-doc {
+            width: 30px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            position: relative;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            padding: 6px;
+            gap: 4px;
+        }
+
+        .spec-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            opacity: 0.3;
+        }
+
+        .s-line {
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 1px;
+        }
+
+        .s-line.l { width: 100%; }
+        .s-line.m { width: 60%; }
+        .s-line.s { width: 40%; }
+
+        .spec-node {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 4px;
+            height: 4px;
             background: var(--accent-primary);
-            color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-primary);
+            animation: node-pulse-mini 2s infinite;
+        }
+
+        @keyframes node-pulse-mini {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        .spec-glint {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent, rgba(var(--accent-primary-rgb), 0.05), transparent);
+            animation: spec-scan 4s infinite linear;
+        }
+
+        @keyframes spec-scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .resume-info {
+            flex-grow: 1;
+        }
+
+        .resume-label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .resume-status {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .resume-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--text-primary);
+            color: var(--bg-primary-color);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 800;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .resume-action-btn:hover {
+            background: var(--accent-primary);
+            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(var(--accent-primary-rgb), 0.3);
         }
 
-        .about-resume-btn .ext-icon {
-            opacity: 0.7;
+        .resume-card-footer {
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            opacity: 0.6;
         }
 
-        .capabilities-compact-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 1.25rem;
-          padding: 0 1rem;
+        .resume-blade-aura {
+            position: absolute;
+            inset: -40px;
+            background: radial-gradient(circle, rgba(var(--accent-primary-rgb), 0.04) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
         }
 
-        .compact-cap-card {
-          height: 100%;
-          border: 1px solid var(--border-color);
-          background: rgba(255, 255, 255, 0.01);
+        .system-logic-illustration {
+            position: absolute;
+            inset: -60px;
+            pointer-events: none;
+            z-index: -1;
+            color: var(--border-color);
+            opacity: 0.4;
         }
 
-        .cap-content-horizontal {
-          display: flex;
-          align-items: flex-start;
-          gap: 1.25rem;
-          padding: 1.25rem;
+        .logic-grid {
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
         }
 
-        .cap-icon-box {
-          flex-shrink: 0;
-          padding-top: 3px;
-          opacity: 0.9;
+        .logic-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-primary);
+            animation: float-node 8s infinite ease-in-out;
         }
 
-        .cap-info-box h4 {
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          margin-bottom: 4px;
-          font-family: var(--font-mono);
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
+        .logic-node.n-1 { top: 20%; left: 30%; animation-delay: 0s; }
+        .logic-node.n-2 { bottom: 30%; right: 25%; animation-delay: -2s; }
+        .logic-node.n-3 { top: 50%; right: 40%; animation-delay: -4s; }
 
-        .cap-info-box p {
-          font-size: 0.8rem;
-          color: var(--text-secondary);
-          line-height: 1.5;
-          opacity: 0.8;
-          margin: 0;
+        @keyframes float-node {
+            0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+            50% { transform: translate(10px, -20px); opacity: 0.8; }
         }
 
         @media (max-width: 1024px) {
-            .about-hero-block {
-                flex-direction: column;
-                gap: 2rem;
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                text-align: center;
             }
-            .capabilities-compact-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            .resume-card-container {
+                margin: 0 auto;
+            }
+            .about-tags {
+                justify-content: center;
             }
         }
 
         @media (max-width: 768px) {
-          .about-section {
-            padding: 4rem 1rem;
+          .narrative-p.main {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
           }
-          .about-hero-block {
-            padding: 0;
-            margin-bottom: 3rem;
-          }
-          .about-bio-alt {
+          .narrative-p {
             font-size: 1rem;
+            line-height: 1.6;
           }
-          .capabilities-compact-grid {
-            grid-template-columns: 1fr;
-            padding: 0;
+          .resume-card-inner {
+            flex-direction: column;
+            text-align: center;
+            padding: 2rem 1rem;
+            gap: 1rem;
           }
-          .cap-content-horizontal {
-            padding: 1.25rem;
+          .resume-visual-box {
+            margin: 0 auto;
+          }
+          .resume-action-btn {
+              width: 100%;
+              justify-content: center;
+          }
+          .system-logic-illustration {
+              inset: -20px;
+              opacity: 0.2;
           }
         }
+
+        @media (max-width: 480px) {
+            .about-container {
+                padding: 0 1.25rem;
+            }
+            .resume-status {
+                font-size: 0.7rem;
+            }
+        }
+
       `}</style>
     </section>
   );

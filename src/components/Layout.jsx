@@ -2,11 +2,11 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, highlightColor }) => {
   return (
     <div className="layout">
       <div className="grid-background"></div>
-      <Navbar />
+      <Navbar highlightColor={highlightColor} />
       <main className="main-content">
         {children}
       </main>
@@ -24,14 +24,16 @@ const Layout = ({ children }) => {
           position: fixed;
           top: 0;
           left: 0;
-          width: 100%;
-          height: 100%;
+          width: 100vw;
+          height: 100vh;
           background-image: 
             linear-gradient(var(--grid-color) 1px, transparent 1px),
             linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
           background-size: 50px 50px;
           pointer-events: none;
           z-index: -1;
+          transform: translateZ(0); /* Hardware acceleration */
+          will-change: transform;
         }
 
         .main-content {

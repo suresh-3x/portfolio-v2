@@ -18,15 +18,18 @@ const Card = ({ children, className = '', hover = true, showStrip = true, noPadd
       <style>{`
         .custom-card {
           position: relative;
-          background: var(--card-bg);
-          border: 2px solid var(--card-border);
+          background: rgba(var(--text-primary-rgb), 0.02);
+          border: 1px solid var(--border-color);
           border-radius: 12px;
           overflow: hidden;
-          transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           display: flex !important;
           flex-direction: row !important;
           align-items: stretch;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          box-shadow: var(--shadow-soft);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          will-change: transform;
         }
 
         .card-strip {
@@ -38,7 +41,7 @@ const Card = ({ children, className = '', hover = true, showStrip = true, noPadd
 
         .custom-card:hover {
           border-color: var(--accent-primary);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .custom-card:hover .card-strip {
@@ -52,6 +55,12 @@ const Card = ({ children, className = '', hover = true, showStrip = true, noPadd
 
         .card-content.no-padding {
             padding: 0;
+        }
+
+        @media (max-width: 480px) {
+            .card-content:not(.no-padding) {
+                padding: 1.25rem 1rem;
+            }
         }
       `}</style>
     </motion.div>

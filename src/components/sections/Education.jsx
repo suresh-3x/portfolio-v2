@@ -2,10 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, Award, Calendar } from 'lucide-react';
 import Card from '../ui/Card';
-import { useTheme } from '../../context/ThemeContext';
 
 const Education = () => {
-  const { theme } = useTheme();
 
   const education = {
     title: "Bachelors of Computer Applications",
@@ -31,34 +29,19 @@ const Education = () => {
 
   return (
     <section id="education" className="education-section">
-      <div className="section-header">
-        <h2 className="section-title">
-          <span className="hash" style={{ color: 'var(--accent-tertiary)' }}>#</span> Education & Certifications
-        </h2>
-        <p className="section-subtitle">
-          Academic background and professional certifications.
-        </p>
-      </div>
+
 
       <div className="education-grid">
         {(() => {
-          const eduAccent = 'var(--accent-primary)';
-          const certAccent = 'var(--accent-secondary)';
-
-          const eduCardStyle = { borderRadius: '4px' };
-          // Prevent circular reference for primary color
-          // If accent is primary, we perform no override (it defaults to primary), or specifically check
-          if (eduAccent !== 'var(--accent-primary)') {
-            eduCardStyle['--accent-primary'] = eduAccent;
-          }
-
-          const certCardStyle = { borderRadius: '4px' };
-          if (certAccent !== 'var(--accent-primary)') {
-            certCardStyle['--accent-primary'] = certAccent;
-          }
+          const accentColors = [
+            'var(--accent-primary)',
+            'var(--accent-secondary)',
+            'var(--accent-tertiary)'
+          ];
 
           return (
             <>
+              {/* Card 1: Education (Red) */}
               <motion.div
                 className="edu-wrapper"
                 initial={{ opacity: 0, scale: 0.98 }}
@@ -68,13 +51,13 @@ const Education = () => {
               >
                 <Card
                   className="edu-card"
-                  showStrip={true}
+                  showStrip={false}
                   noPadding={true}
-                  style={eduCardStyle}
+                  style={accentColors[0] !== 'var(--accent-primary)' ? { '--accent-primary': accentColors[0] } : {}}
                 >
                   <div className="card-inner-box">
                     <div className="card-header-v2">
-                      <div className="icon-box" style={{ color: eduAccent }}>
+                      <div className="icon-box" style={{ color: accentColors[0] }}>
                         <GraduationCap size={24} />
                       </div>
                       <h3>Education</h3>
@@ -87,13 +70,46 @@ const Education = () => {
                           <span className="location-v2">{education.location}</span>
                           <span className="date-v2"><Calendar size={14} /> {education.date}</span>
                         </div>
-                        <p className="grade-v2" style={{ color: eduAccent }}>{education.grade}</p>
+                        <p className="grade-v2" style={{ color: accentColors[0] }}>{education.grade}</p>
                       </div>
                     </div>
                   </div>
                 </Card>
               </motion.div>
 
+              {/* Card 2: Certification 1 (Green) */}
+              <motion.div
+                className="edu-wrapper"
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                style={{ height: '100%' }}
+              >
+                <Card
+                  className="edu-card"
+                  showStrip={false}
+                  noPadding={true}
+                  style={{ '--accent-primary': accentColors[1] }}
+                >
+                  <div className="card-inner-box">
+                    <div className="card-header-v2">
+                      <div className="icon-box" style={{ color: accentColors[1] }}>
+                        <Award size={24} />
+                      </div>
+                      <h3>Certification</h3>
+                    </div>
+                    <div className="card-content-v2">
+                      <div className="cert-item-v2" style={{ borderLeftColor: accentColors[1] }}>
+                        <h4>{certifications[0].title}</h4>
+                        <p className="issuer-v2" style={{ color: accentColors[1] }}>{certifications[0].issuer}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+
+              {/* Card 3: Certification 2 (Blue) */}
               <motion.div
                 className="edu-wrapper"
                 initial={{ opacity: 0, scale: 0.98 }}
@@ -104,28 +120,22 @@ const Education = () => {
               >
                 <Card
                   className="edu-card"
-                  showStrip={true}
+                  showStrip={false}
                   noPadding={true}
-                  style={certCardStyle}
+                  style={{ '--accent-primary': accentColors[2] }}
                 >
                   <div className="card-inner-box">
                     <div className="card-header-v2">
-                      <div className="icon-box" style={{ color: certAccent }}>
+                      <div className="icon-box" style={{ color: accentColors[2] }}>
                         <Award size={24} />
                       </div>
-                      <h3>Certifications</h3>
+                      <h3>Certification</h3>
                     </div>
                     <div className="card-content-v2">
-                      {certifications.map((cert, i) => {
-                        const individualCertAccent = 'var(--accent-secondary)';
-
-                        return (
-                          <div key={i} className="cert-item-v2" style={{ borderLeftColor: individualCertAccent }}>
-                            <h4>{cert.title}</h4>
-                            <p className="issuer-v2" style={{ color: individualCertAccent }}>{cert.issuer}</p>
-                          </div>
-                        );
-                      })}
+                      <div className="cert-item-v2" style={{ borderLeftColor: accentColors[2] }}>
+                        <h4>{certifications[1].title}</h4>
+                        <p className="issuer-v2" style={{ color: accentColors[2] }}>{certifications[1].issuer}</p>
+                      </div>
                     </div>
                   </div>
                 </Card>
@@ -136,30 +146,24 @@ const Education = () => {
       </div>
 
       <style>{`
-        .education-section {
-          padding: 6rem 0;
-        }
-
         .education-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          grid-template-columns: repeat(3, 1fr);
           gap: 1.5rem;
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0 1rem;
+          padding: 0;
         }
 
         .edu-card {
            height: 100%;
-           border: 1px solid var(--border-color);
-           background: rgba(255, 255, 255, 0.01);
         }
 
         .card-inner-box {
-            padding: 2rem;
+            padding: 2.25rem;
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 2.5rem;
             height: 100%;
         }
 
@@ -239,14 +243,14 @@ const Education = () => {
 
         @media (max-width: 768px) {
           .education-section {
-            padding: 4rem 1rem;
+            padding: 4rem 0;
           }
           .education-grid {
             grid-template-columns: 1fr;
-            gap: 1.5rem;
+            gap: 1.25rem;
           }
            .card-inner-box {
-            padding: 1.5rem;
+            padding: 1.75rem;
           }
         }
       `}</style>

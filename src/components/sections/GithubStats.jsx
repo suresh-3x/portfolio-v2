@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Star, Users, BookOpen, ExternalLink, ArrowRight } from 'lucide-react';
 import Card from '../ui/Card';
-import { useTheme } from '../../context/ThemeContext';
 
 const GithubStats = () => {
-  const { theme } = useTheme();
   const [stats, setStats] = useState({
     followers: 0,
     public_repos: 0,
@@ -54,149 +52,112 @@ const GithubStats = () => {
 
   return (
     <section id="github-stats" className="github-section">
-      <div className="section-header">
-        <h2 className="section-title">
-          <span className="hash" style={{ color: 'var(--accent-secondary)' }}>#</span> Open Source
-        </h2>
-        <p className="section-subtitle">
-          Contributions and technical activity on GitHub.
-        </p>
-      </div>
+
 
       <div className="github-single-block">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-        >
-          <div className="smart-action-bar">
-            <a
-              href="https://github.com/suresh-3x"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="v3-user-badge smart-btn"
-            >
-              <Github size={14} />
-              <span>suresh-3x</span>
-              <ExternalLink size={12} className="opacity-50" />
-            </a>
-          </div>
-
-          <Card
-            className="github-master-card"
-            showStrip={false}
-            noPadding={true}
-            style={{ borderRadius: '4px' }}
+        <div className="smart-action-bar">
+          <a
+            href="https://github.com/suresh-3x"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="v3-user-badge smart-btn"
           >
-            <div className="master-card-inner">
-              {/* Top Section: Quick Stats */}
-              <div className="stats-row">
-                {statItems.map((item, index) => {
-                  const accentColors = [
-                    'var(--accent-primary)',
-                    'var(--accent-secondary)',
-                    'var(--accent-tertiary)',
-                    'var(--accent-primary)'
-                  ];
-                  const statAccent = accentColors[index % 4];
+            <Github size={14} />
+            <span>suresh-3x</span>
+            <ExternalLink size={12} className="opacity-50" />
+          </a>
+        </div>
 
-                  return (
-                    <div
-                      key={index}
-                      className="minimal-stat"
-                      style={{ borderLeft: `3px solid ${statAccent}` }}
-                    >
-                      <div className="stat-header">
-                        <div className="icon-circle" style={{
-                          color: statAccent,
-                          backgroundColor: 'rgba(255, 255, 255, 0.05)'
-                        }}>
-                          {item.icon}
-                        </div>
-                        <span className="label-v3">{item.label}</span>
+        <div className="stats-grid-v4">
+          {statItems.map((item, index) => {
+            const accentColors = [
+              'var(--accent-primary)',
+              'var(--accent-secondary)',
+              'var(--accent-tertiary)'
+            ];
+            const statAccent = accentColors[index % 3];
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card
+                  className="github-stat-card-v4"
+                  showStrip={false}
+                  noPadding={true}
+                  style={statAccent !== 'var(--accent-primary)' ? { '--accent-primary': statAccent } : {}}
+                >
+                  <div className="stat-card-inner-v4">
+                    <div className="stat-header-v4">
+                      <div className="icon-box-v4" style={{ color: statAccent }}>
+                        {item.icon}
                       </div>
-                      <span className="value-v3">{loading ? '...' : item.value}</span>
+                      <span className="label-v4">{item.label}</span>
                     </div>
-                  );
-                })}
-              </div>
-
-            </div>
-          </Card>
-        </motion.div>
+                    <span className="value-v4">{loading ? '...' : item.value}</span>
+                  </div>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
 
       <style>{`
-        .github-section {
-          padding: 6rem 0;
-        }
-
         .github-single-block {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 1rem;
-        }
-
-        .github-master-card {
-            border: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.01);
-            overflow: hidden;
-        }
-
-        .master-card-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
             display: flex;
             flex-direction: column;
+            gap: 1.5rem;
         }
 
-        .stats-row {
+        .stats-grid-v4 {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            background: rgba(255, 255, 255, 0.01);
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
         }
 
-        .minimal-stat {
-            padding: 2.5rem 2rem;
+        .stat-card-inner-v4 {
+            padding: 2rem 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            border-right: 1px solid var(--border-color);
-            transition: background 0.3s ease;
+            gap: 1.5rem;
         }
 
-        .minimal-stat:last-child {
-            border-right: none;
-        }
-
-        .minimal-stat:hover {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .stat-header {
+        .stat-header-v4 {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .icon-circle {
+        .icon-box-v4 {
             width: 32px;
             height: 32px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(var(--text-primary-rgb), 0.03);
+            border: 1px solid var(--border-color);
         }
 
-        .label-v3 {
+        .label-v4 {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-weight: 700;
         }
 
-        .value-v3 {
-            font-size: 2.25rem;
+        .value-v4 {
+            font-size: 2rem;
             font-weight: 800;
             color: var(--text-primary);
             letter-spacing: -0.04em;
@@ -206,62 +167,44 @@ const GithubStats = () => {
         .smart-action-bar {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 16px;
+            margin-bottom: 0;
         }
 
         .smart-btn {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             font-weight: 600;
             transition: all 0.2s ease;
             text-decoration: none;
+            font-family: var(--font-mono);
         }
 
         .smart-btn:hover {
             border-color: var(--accent-secondary);
             color: var(--text-primary);
             background: rgba(var(--accent-secondary-rgb), 0.1);
-            transform: translateY(-1px);
         }
 
         @media (max-width: 1024px) {
-            .stats-row {
+            .stats-grid-v4 {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .minimal-stat:nth-child(2) {
-                border-right: none;
-            }
-            .minimal-stat:nth-child(3), .minimal-stat:nth-child(4) {
-                border-top: 1px solid var(--border-color);
-            }
         }
 
-        @media (max-width: 768px) {
-            .github-section { padding: 4rem 0; }
-            .value-v3 { font-size: 1.8rem; }
-            .stats-row { grid-template-columns: repeat(2, 1fr); }
-            .smart-action-bar { margin-bottom: 8px; }
-        }
-
-        @media (max-width: 480px) {
-            .stats-row {
+        @media (max-width: 640px) {
+            .stats-grid-v4 {
                 grid-template-columns: 1fr;
             }
-            .minimal-stat {
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
-                padding: 1.5rem;
-            }
-            .minimal-stat:last-child {
-                border-bottom: none;
-            }
+            .github-section { padding: 4rem 0; }
+            .stat-card-inner-v4 { padding: 1.5rem; }
+            .value-v4 { font-size: 1.75rem; }
         }
       `}</style>
     </section>

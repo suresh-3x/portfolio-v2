@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Terminal, Database, Cloud, Layout, FileText, Zap, Wind, Server, Triangle, Smartphone, Layers, Code, Palette, Cpu, Globe, Box, Container } from 'lucide-react';
+import { ArrowRight, Terminal, Database, Cloud, Layout, FileText, Zap, Wind, Server, Triangle, Smartphone, Layers, Code, Palette, Cpu, Globe, Box, Container, Hexagon, Atom, Compass } from 'lucide-react';
 import Card from '../ui/Card';
 
-const Hero = () => {
-
+const Hero = ({ highlightColor }) => {
   const getTechIcon = (tag) => {
     const size = 10;
     switch (tag.toLowerCase()) {
@@ -50,13 +49,13 @@ const Hero = () => {
           </div>
 
           <h1>
-            Suresh <span className="highlight">Bhandari</span>
+            Suresh <span className="highlight" style={{ color: highlightColor }}>Bhandari</span>
           </h1>
 
           <div className="role-container">
             <span className="role-text">Full-Stack Engineer</span>
             <span className="separator">//</span>
-            <span className="role-text muted">Polymath</span>
+            <span className="role-text muted highlight" style={{ color: highlightColor }}>Polymath</span>
           </div>
 
           <p className="bio-text">
@@ -81,119 +80,111 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="stack-assembler">
-            {/* Backend */}
-            <motion.div
-              className="stack-card-wrapper backend"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <Card
-                className="stack-card"
-                showStrip={true}
-                noPadding={true}
-                style={{
-                  borderRadius: '4px'
-                }}
-              >
-                <div className="card-inner-box">
-                  <div className="icon-box-hero" style={{ color: 'var(--accent-primary)' }}>
-                    <Terminal size={24} />
-                  </div>
-                  <div className="stack-info">
-                    <h3>Backend</h3>
-                    {renderStackTags(['Python', 'Go', 'Node'])}
-                  </div>
+          <div className="system-blade-container">
+            <div className="system-blade">
+              {/* Visual Header / System Status */}
+              <div className="blade-header">
+                <div className="blade-id">CORE_ENGINE // v2.5</div>
+                <div className="blade-status">
+                  <span className="status-dot pulsing"></span>
+                  SYSTEM_ACTIVE
                 </div>
-              </Card>
-            </motion.div>
+              </div>
 
-            {/* Data */}
-            <motion.div
-              className="stack-card-wrapper data"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            >
-              <Card
-                className="stack-card"
-                showStrip={true}
-                noPadding={true}
-                style={{
-                  '--accent-primary': 'var(--accent-tertiary)', // Blue (Right Col)
-                  borderRadius: '4px'
-                }}
-              >
-                <div className="card-inner-box">
-                  <div className="icon-box-hero" style={{ color: 'var(--accent-primary)' }}>
-                    <Database size={24} />
+              {/* Module 01: Backend */}
+              <div className="blade-module" style={{ '--accent': 'var(--accent-primary)' }}>
+                <div className="module-indicator"></div>
+                <div className="module-icon-container">
+                  <Server size={22} strokeWidth={1.5} />
+                </div>
+                <div className="module-content">
+                  <div className="module-head">
+                    <span className="module-title">BACKEND</span>
                   </div>
-                  <div className="stack-info">
-                    <h3>Data</h3>
-                    {renderStackTags(['Postgres', 'Redis'])}
+                  <div className="module-tags">
+                    <span><Terminal size={10} /> Python</span>
+                    <span><Cpu size={10} /> Go</span>
+                    <span><Hexagon size={10} /> Node</span>
                   </div>
                 </div>
-              </Card>
-            </motion.div>
+                <div className="module-specs">01 // TRC</div>
+              </div>
 
-            {/* Infrastructure */}
-            <motion.div
-              className="stack-card-wrapper cloud"
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            >
-              <Card
-                className="stack-card"
-                showStrip={true}
-                noPadding={true}
-                style={{
-                  borderRadius: '4px'
-                }}
-              >
-                <div className="card-inner-box">
-                  <div className="icon-box-hero" style={{ color: 'var(--accent-primary)' }}>
-                    <Cloud size={24} />
+              {/* Module 02: Data */}
+              <div className="blade-module" style={{ '--accent': 'var(--accent-tertiary)' }}>
+                <div className="module-indicator"></div>
+                <div className="module-icon-container">
+                  <Database size={22} strokeWidth={1.5} />
+                </div>
+                <div className="module-content">
+                  <div className="module-head">
+                    <span className="module-title">DATA</span>
                   </div>
-                  <div className="stack-info">
-                    <h3>Infrastructure</h3>
-                    {renderStackTags(['AWS', 'K8s', 'Docker'])}
+                  <div className="module-tags">
+                    <span><Database size={10} /> Postgres</span>
+                    <span><Zap size={10} /> Redis</span>
                   </div>
                 </div>
-              </Card>
-            </motion.div>
+                <div className="module-specs">02 // STR</div>
+              </div>
 
-            {/* Interface */}
-            <motion.div
-              className="stack-card-wrapper frontend"
-              animate={{ y: [0, -9, 0] }}
-              transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-            >
-              <Card
-                className="stack-card"
-                showStrip={true}
-                noPadding={true}
-                style={{
-                  '--accent-primary': 'var(--accent-tertiary)', // Blue (Right Col)
-                  borderRadius: '4px'
-                }}
-              >
-                <div className="card-inner-box">
-                  <div className="icon-box-hero" style={{ color: 'var(--accent-primary)' }}>
-                    <Layout size={24} />
+              {/* Module 03: Infra */}
+              <div className="blade-module" style={{ '--accent': 'var(--accent-primary)' }}>
+                <div className="module-indicator"></div>
+                <div className="module-icon-container">
+                  <Cloud size={22} strokeWidth={1.5} />
+                </div>
+                <div className="module-content">
+                  <div className="module-head">
+                    <span className="module-title">INFRASTRUCTURE</span>
                   </div>
-                  <div className="stack-info">
-                    <h3>Interface</h3>
-                    {renderStackTags(['React', 'Next.js'])}
+                  <div className="module-tags">
+                    <span><Cloud size={10} /> AWS</span>
+                    <span><Compass size={10} /> K8s</span>
+                    <span><Box size={10} /> Docker</span>
                   </div>
                 </div>
-              </Card>
-            </motion.div>
+                <div className="module-specs">03 // CLD</div>
+              </div>
+
+              {/* Module 04: Interface */}
+              <div className="blade-module" style={{ '--accent': 'var(--accent-tertiary)' }}>
+                <div className="module-indicator"></div>
+                <div className="module-icon-container">
+                  <Layout size={22} strokeWidth={1.5} />
+                </div>
+                <div className="module-content">
+                  <div className="module-head">
+                    <span className="module-title">INTERFACE</span>
+                  </div>
+                  <div className="module-tags">
+                    <span><Atom size={10} /> React</span>
+                    <span><Zap size={10} /> Next.js</span>
+                  </div>
+                </div>
+                <div className="module-specs">04 // VWS</div>
+              </div>
+
+              {/* Blade Footer / Logic Traces */}
+              <div className="blade-footer">
+                <div className="logic-spine"></div>
+                <div className="logic-values">
+                  <span>HEALTH: OPTIMAL</span>
+                  <span>MTTF: 99.9%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Architectural Shadow / Depth */}
+            <div className="blade-aura"></div>
           </div>
         </motion.div>
       </div>
 
       <style>{`
         .hero-section {
-          min-height: 100vh;
+          min-height: 100svh;
+          height: auto;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -201,42 +192,272 @@ const Hero = () => {
           color: var(--text-primary);
           position: relative;
           overflow: hidden;
-          padding: 8rem 2rem;
+          padding: 8rem 0;
         }
 
         .hero-container {
           display: grid;
           grid-template-columns: 1.2fr 1fr;
           gap: 4rem;
-          max-width: 1400px;
+          max-width: 1200px;
           width: 100%;
           align-items: center;
           z-index: 2;
         }
 
-        .card-inner-box {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 16px;
-          padding: 2rem;
-          height: 100%;
-          text-align: center;
+        .system-blade-container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            margin-left: auto;
+            perspective: 1200px;
         }
-        
-        .icon-box-hero {
-            margin-bottom: 4px;
-            margin-top: 0;
+
+        .system-blade {
+            background: rgba(var(--text-primary-rgb), 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.1);
+            transform: rotateY(-10deg) rotateX(2deg);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+        }
+
+        .system-blade:hover {
+            transform: rotateY(-2deg) rotateX(0deg);
+        }
+
+        .blade-header {
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(var(--text-primary-rgb), 0.03);
+        }
+
+        .blade-id {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            letter-spacing: 1px;
+        }
+
+        .blade-status {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--accent-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot.pulsing {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-secondary);
+            box-shadow: 0 0 10px var(--accent-secondary);
+            animation: pulse-simple 2s infinite;
+        }
+
+        @keyframes pulse-simple {
+            0% { opacity: 0.4; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        .blade-module {
+            display: flex;
+            align-items: flex-start;
+            padding: 1.5rem 20px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .blade-module:last-of-type {
+            border-bottom: none;
+        }
+
+        .blade-module:hover {
+            background: rgba(var(--text-primary-rgb), 0.01);
+        }
+
+        .module-indicator {
+            position: absolute;
+            left: 0;
+            top: 1.5rem;
+            width: 3px;
+            height: 32px;
+            background: var(--accent);
+            opacity: 0.6;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .module-icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(var(--text-primary-rgb), 0.03);
+            border-radius: 8px;
+            color: var(--accent);
+            opacity: 0.8;
             flex-shrink: 0;
         }
 
-        .stack-info {
+        .module-content {
+            flex-grow: 1;
+            padding-left: 1.25rem;
+        }
+
+        .module-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .module-icon {
+            opacity: 0.4;
+            color: var(--accent);
+        }
+
+        .module-title {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+        }
+
+        .module-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .module-tags span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            padding: 1px 6px;
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            opacity: 0.7;
+        }
+
+        .module-specs {
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            opacity: 0.4;
+            transform: rotate(-90deg);
+            transform-origin: right top;
+            position: absolute;
+            right: 15px;
+            top: 2.2rem;
+            white-space: nowrap;
+        }
+
+        .blade-footer {
+            padding: 15px 20px;
+            background: rgba(var(--text-primary-rgb), 0.04);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            width: 100%;
+            gap: 10px;
+        }
+
+        .logic-spine {
+            height: 1px;
+            background: linear-gradient(to right, var(--accent-primary), transparent);
+            opacity: 0.2;
+        }
+
+        .logic-values {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .blade-aura {
+            position: absolute;
+            inset: -40px;
+            background: radial-gradient(circle at center, rgba(var(--accent-primary-rgb), 0.05) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .system-blade-container {
+                max-width: 500px;
+                margin: 3rem auto 0;
+            }
+            .system-blade {
+                transform: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 6rem 0 4rem;
+            }
+            h1 {
+                font-size: 2.75rem;
+                letter-spacing: -2px;
+            }
+            .role-container {
+                font-size: 1.1rem;
+                gap: 10px;
+            }
+            .system-blade-container {
+                transform: scale(0.95);
+                margin-top: 2rem;
+            }
+            .blade-module {
+                padding: 1rem 12px;
+            }
+            .module-icon-container {
+                width: 36px;
+                height: 36px;
+            }
+            .module-icon-container svg {
+                width: 18px;
+                height: 18px;
+            }
+            .module-specs {
+                display: none;
+            }
+        }
+        
+        .icon-box-hero {
+            display: none; /* Replaced by dashboard */
+        }
+
+        .stack-info {
+            display: none;
         }
 
         .stack-info h3 {
@@ -279,7 +500,7 @@ const Hero = () => {
         .stack-assembler {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
+          gap: 1.25rem;
           width: 100%;
           max-width: 540px;
         }
@@ -287,11 +508,41 @@ const Hero = () => {
         .stack-card {
            padding: 0 !important;
            width: 100% !important;
-           min-height: 130px;
-           height: auto !important;
-           border-radius: 4px !important;
-           background: var(--card-bg) !important;
-           backdrop-filter: blur(var(--glass-blur)) !important;
+           min-height: 160px;
+           height: 100% !important;
+           display: flex !important;
+           background: rgba(var(--text-primary-rgb), 0.02) !important;
+           border: 1px solid var(--border-color) !important;
+           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+           position: relative;
+           overflow: hidden;
+        }
+
+        .stack-card:hover {
+          transform: translateY(-8px) !important;
+          background: rgba(var(--text-primary-rgb), 0.04) !important;
+          border-color: var(--accent-primary) !important;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .card-pattern {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          color: var(--accent-primary);
+          opacity: 0.5;
+        }
+
+        .card-inner-box {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+          padding: 1.75rem;
+          height: 100%;
+          width: 100%;
+          justify-content: space-between;
+          position: relative;
+          z-index: 2;
         }
 
         .stack-icon {
@@ -348,12 +599,13 @@ const Hero = () => {
            border-radius: 4px !important;
            background: var(--card-bg) !important;
            backdrop-filter: blur(var(--glass-blur)) !important;
-           transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease !important;
            border: 1px solid var(--border-color);
+           will-change: transform;
         }
 
         .stack-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) !important;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
             border-color: var(--accent-primary);
         }
@@ -367,7 +619,7 @@ const Hero = () => {
         }
 
         .highlight {
-          color: var(--accent-secondary);
+          transition: color 0.5s ease;
         }
 
         .role-container {
@@ -381,7 +633,7 @@ const Hero = () => {
         }
 
         .separator {
-          color: var(--accent-secondary);
+          color: var(--accent-primary);
           opacity: 0.5;
         }
 
@@ -466,31 +718,56 @@ const Hero = () => {
           .hero-container {
             grid-template-columns: 1fr;
             text-align: center;
-            gap: 3rem;
+            gap: 2.5rem; /* Reduced from 3rem */
           }
           .hero-content {
             display: flex;
             flex-direction: column;
             align-items: center;
           }
-          h1 { font-size: 4rem; }
-          .bio-text { margin: 0 auto 3rem; }
+          h1 { font-size: 3.5rem; } /* Slightly smaller for better fit */
+          .bio-text { margin: 0 auto 2rem; font-size: 1.1rem; }
           .hero-visual { width: 100%; display: flex; justify-content: center; }
-          .action-row { justify-content: center; }
-          .stack-assembler { max-width: 500px; }
-          .card-inner-box { align-items: center; text-align: center; }
+          .action-row { justify-content: center; width: 100%; max-width: 480px; }
+          .stack-assembler { max-width: 100%; } /* Use more space */
+          .card-inner-box { align-items: center; text-align: center; padding: 1.5rem; }
           .stack-tags { justify-content: center; }
         }
 
         @media (max-width: 500px) {
-          h1 { font-size: 3rem; letter-spacing: -2px; }
-          .role-container { font-size: 1.2rem; flex-direction: column; gap: 8px; }
+          .hero-section { 
+            padding: 7rem 0 4rem; 
+          }
+          h1 { 
+            font-size: 2.1rem; 
+            letter-spacing: -0.5px; 
+            line-height: 1.1; 
+            margin-bottom: 1.25rem; 
+          } 
+          .role-container { 
+            font-size: 0.9rem; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 6px; 
+            margin-bottom: 1.75rem; 
+          }
           .separator { display: none; }
-          /* Keep stack assembler as 2 cols if possible, swapping to 1 only if very narrow */
-          .stack-assembler { grid-template-columns: 1fr; width: 100%; max-width: 350px; }
-          .action-row { flex-direction: column; width: 100%; }
-          .primary-btn, .secondary-btn { width: 100%; justify-content: center; }
-          .hero-section { padding: 6rem 1rem; }
+          .bio-text { 
+            font-size: 0.95rem; 
+            margin-bottom: 2rem; 
+            padding: 0 1rem;
+          }
+          .action-row { 
+            flex-direction: column; 
+            width: 100%; 
+            gap: 1rem; 
+            padding: 0 1rem;
+          }
+          .primary-btn, .secondary-btn { 
+            width: 100%; 
+            justify-content: center; 
+            height: 52px; 
+          }
         }
       `}</style>
     </section>

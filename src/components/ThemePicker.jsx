@@ -7,44 +7,12 @@ const ThemePicker = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // Derived state
-  const isMono = theme.includes('mono');
-  // Consider 'rgb' legacy theme as dark if it exists, otherwise 'dusk' is dark.
-  const isDark = theme === 'dusk' || theme === 'mono-dark' || theme === 'rgb';
-
-  const toggleMono = () => {
-    if (isMono) {
-      // Switching OFF Monochrome -> Go to Color
-      setTheme(isDark ? 'dusk' : 'dawn');
-    } else {
-      // Switching ON Monochrome -> Go to Mono
-      setTheme(isDark ? 'mono-dark' : 'mono-light');
-    }
-  };
-
-  const setFormat = (dark) => {
-    if (isMono) {
-      setTheme(dark ? 'mono-dark' : 'mono-light');
-    } else {
-      setTheme(dark ? 'dusk' : 'dawn');
-    }
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
+  const themesList = [
+    { id: 'dawn', label: 'Dawn', icon: <Sun size={18} />, desc: 'Soft & Airy' },
+    { id: 'dusk', label: 'Dusk', icon: <Moon size={18} />, desc: 'Deep & Cosmic' },
+    { id: 'mono-light', label: 'Mono Light', icon: <FileText size={18} />, desc: 'Minimalist' },
+    { id: 'mono-dark', label: 'Mono Dark', icon: <Terminal size={18} />, desc: 'Industrial' },
+  ];
 
   return (
     <div className="theme-picker-container" ref={menuRef}>
@@ -59,43 +27,27 @@ const ThemePicker = () => {
       {isOpen && (
         <div className="theme-dropdown">
           <div className="dropdown-header">
-            <span>Appearance</span>
+            <span>Interface Mode</span>
           </div>
 
-          <div className="dropdown-section">
-            <div className="toggle-row">
-              <span className="label">Monochrome</span>
+          <div className="theme-options-grid">
+            {themesList.map((t) => (
               <button
-                className={`switch-toggle ${isMono ? 'active' : ''}`}
-                onClick={toggleMono}
-                role="switch"
-                aria-checked={isMono}
+                key={t.id}
+                className={`theme-option-card ${theme === t.id ? 'active' : ''}`}
+                onClick={() => {
+                  setTheme(t.id);
+                  setIsOpen(false);
+                }}
               >
-                <div className="switch-handle" />
+                <div className="option-icon">{t.icon}</div>
+                <div className="option-meta">
+                  <span className="option-label">{t.label}</span>
+                  <span className="option-desc">{t.desc}</span>
+                </div>
+                {theme === t.id && <Check size={14} className="check-icon" />}
               </button>
-            </div>
-          </div>
-
-          <div className="dropdown-divider" />
-
-          <div className="dropdown-section">
-            <span className="label-sm">Theme</span>
-            <div className="theme-grid">
-              <button
-                className={`theme-option ${!isDark ? 'selected' : ''}`}
-                onClick={() => setFormat(false)}
-              >
-                <Sun size={18} />
-                <span>Light</span>
-              </button>
-              <button
-                className={`theme-option ${isDark ? 'selected' : ''}`}
-                onClick={() => setFormat(true)}
-              >
-                <Moon size={18} />
-                <span>Dark</span>
-              </button>
-            </div>
+            ))}
           </div>
         </div>
       )}
@@ -119,7 +71,7 @@ const ThemePicker = () => {
         }
 
         .theme-toggle-btn:hover, .theme-toggle-btn.open {
-          color: var(--accent-secondary); /* Green as requested */
+          color: var(--accent-secondary);
           background: rgba(var(--accent-secondary-rgb), 0.1);
           border-color: rgba(var(--accent-secondary-rgb), 0.2);
           box-shadow: 0 0 15px rgba(var(--accent-secondary-rgb), 0.2);
@@ -129,146 +81,94 @@ const ThemePicker = () => {
           position: absolute;
           top: calc(100% + 16px);
           right: 0;
-          width: 260px;
-          /* Using RGB var for glass effect */
-          background: rgba(var(--bg-primary-rgb), 0.85); 
+          width: 280px;
+          background: var(--card-bg);
           border: 1px solid var(--border-color);
-          border-radius: 16px;
+          border-radius: 12px;
           box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.5);
           z-index: 1000;
-          padding: 12px;
+          padding: 1rem;
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          animation: slideDown 0.2s cubic-bezier(0.4, 0, 0.2, 1);
           transform-origin: top right;
         }
-        
-        /* Define RGB values for glass effect based on data-theme */
-        :root { --bg-primary-rgb: 255, 255, 255; }
-        [data-theme='dusk'] { --bg-primary-rgb: 13, 17, 23; }
-        [data-theme='dawn'] { --bg-primary-rgb: 244, 246, 248; }
-        [data-theme='mono-dark'] { --bg-primary-rgb: 0, 0, 0; }
-        [data-theme='mono-light'] { --bg-primary-rgb: 255, 255, 255; }
 
         .dropdown-header {
-          padding: 0 4px 12px 4px;
-          font-family: var(--font-sans);
-          font-size: 0.75rem;
-          font-weight: 600;
+          margin-bottom: 1rem;
+          font-family: var(--font-mono);
+          font-size: 0.7rem;
+          font-weight: 700;
           color: var(--text-secondary);
-          letter-spacing: 0.5px;
           text-transform: uppercase;
+          letter-spacing: 1px;
+          opacity: 0.6;
         }
 
-        .dropdown-section {
-          padding: 4px 0;
-        }
-
-        .toggle-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 8px 12px;
-          background: var(--bg-secondary);
-          border-radius: 8px;
-          transition: background 0.2s;
-        }
-        
-        .toggle-row:hover {
-            background: rgba(var(--accent-primary-rgb), 0.05);
-        }
-
-        .label {
-          font-size: 0.9rem;
-          color: var(--text-primary);
-          font-weight: 500;
-        }
-
-        .label-sm {
-          display: block;
-          font-size: 0.75rem;
-          color: var(--text-secondary);
-          margin-bottom: 8px;
-          padding-left: 4px;
-          font-weight: 600;
-        }
-
-        .switch-toggle {
-          width: 44px;
-          height: 24px;
-          background: var(--border-color);
-          border: none;
-          border-radius: 99px;
-          position: relative;
-          cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-          padding: 0;
-        }
-
-        .switch-toggle.active {
-          background: var(--accent-secondary); /* Switch active is Green too? Or Primary? keeping Primary for switch, button is Green */
-        }
-
-        .switch-handle {
-          width: 20px;
-          height: 20px;
-          background: white;
-          border-radius: 50%;
-          position: absolute;
-          top: 2px;
-          left: 2px;
-          transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-          box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        }
-
-        .switch-toggle.active .switch-handle {
-          transform: translateX(20px);
-        }
-
-        .dropdown-divider {
-          height: 1px;
-          background: var(--border-color);
-          margin: 12px 0;
-          opacity: 0.5;
-        }
-
-        .theme-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 12px;
-        }
-
-        .theme-option {
+        .theme-options-grid {
           display: flex;
           flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .theme-option-card {
+          display: flex;
           align-items: center;
-          gap: 10px;
-          padding: 16px;
-          background: var(--bg-secondary);
-          border: 2px solid transparent;
-          border-radius: 12px;
-          color: var(--text-secondary);
+          gap: 1rem;
+          padding: 0.75rem;
+          background: rgba(var(--text-primary-rgb), 0.03);
+          border: 1px solid transparent;
+          border-radius: 8px;
+          color: var(--text-primary);
           cursor: pointer;
           transition: all 0.2s ease;
+          text-align: left;
+          position: relative;
+          width: 100%;
         }
 
-        .theme-option:hover {
-          background: var(--bg-primary-color);
-          border-color: var(--text-primary);
-          color: var(--text-primary);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        .theme-option-card:hover {
+          background: rgba(var(--accent-secondary-rgb), 0.05);
+          border-color: rgba(var(--accent-secondary-rgb), 0.2);
+          transform: translateX(4px);
         }
 
-        .theme-option.selected {
-          /* Selected state Red or Green? Usually Primary. keeping Primary */
-          background: rgba(var(--accent-primary-rgb), 0.1);
-          border-color: var(--accent-primary);
-          color: var(--accent-primary);
+        .theme-option-card.active {
+          background: rgba(var(--accent-secondary-rgb), 0.1);
+          border-color: var(--accent-secondary);
+        }
+
+        .option-icon {
+          color: var(--accent-secondary);
+          opacity: 0.8;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .option-meta {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .option-label {
+          font-size: 0.9rem;
+          font-weight: 700;
+        }
+
+        .option-desc {
+          font-size: 0.7rem;
+          color: var(--text-secondary);
+          opacity: 0.7;
+        }
+
+        .check-icon {
+          margin-left: auto;
+          color: var(--accent-secondary);
         }
 
         @keyframes slideDown {
-          from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+          from { opacity: 0; transform: translateY(-10px) scale(0.95); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
       `}</style>
