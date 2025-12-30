@@ -10,6 +10,37 @@ import Skills from './components/sections/Skills';
 import GithubStats from './components/sections/GithubStats';
 import SectionDivider from './components/ui/SectionDivider';
 
+const HashScrollHandler = () => {
+  React.useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.substring(1);
+        const element = document.getElementById(id);
+        if (element) {
+          const headerOffset = 120;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+      }
+    };
+
+    // Handle initial load
+    setTimeout(scrollToHash, 100);
+
+    // Handle hash changes
+    window.addEventListener('hashchange', scrollToHash);
+    return () => window.removeEventListener('hashchange', scrollToHash);
+  }, []);
+
+  return null;
+};
+
 function App() {
   const highlightColor = React.useMemo(() => {
     const colors = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-tertiary)'];
@@ -18,6 +49,7 @@ function App() {
 
   return (
     <Layout highlightColor={highlightColor}>
+      <HashScrollHandler />
       <Hero highlightColor={highlightColor} />
 
       <SectionDivider

@@ -219,7 +219,7 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="experience-section">
+    <section className="experience-section">
 
 
       <div className="experience-timeline">

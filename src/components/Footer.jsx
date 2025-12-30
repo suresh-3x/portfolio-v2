@@ -18,7 +18,7 @@ const Footer = () => {
                 <span className="sb-name-v2">
                   {"SURESH".split("").map((c, i) => <span key={i}>{c}</span>)}
                 </span>
-                <div className="sb-sys-v2">
+                <div className="sb-name-v2">
                   {"BHANDARI".split("").map((c, i) => <span key={i}>{c}</span>)}
                 </div>
               </div>
@@ -110,20 +110,6 @@ const Footer = () => {
           display: flex;
           justify-content: space-between;
           width: 100%;
-        }
-
-        .sb-sys-v2 {
-          font-family: var(--font-mono);
-          font-size: 0.58rem;
-          font-weight: 700;
-          color: var(--text-secondary);
-          opacity: 0.6;
-          text-transform: uppercase;
-          line-height: 1;
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          margin-top: 2px;
         }
 
         .tagline-v2 {

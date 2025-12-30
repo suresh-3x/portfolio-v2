@@ -101,7 +101,7 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="skills-section">
+    <section className="skills-section">
 
 
       <div className="skills-compact-grid">

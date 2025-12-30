@@ -61,7 +61,7 @@ export const ThemeProvider = ({ children }) => {
             '--accent-tertiary': '#3b82f6',
             '--accent-tertiary-rgb': '59, 130, 246',
             '--border-color': 'rgba(255, 255, 255, 0.1)',
-            '--card-bg': '#111827',
+            '--card-bg': '#1b1818c5',
             '--card-border': 'rgba(255, 255, 255, 0.06)',
             '--glass-blur': '0px',
             '--shadow-soft': '0 12px 48px rgba(0,0,0,0.4)',
@@ -139,15 +139,15 @@ export const ThemeProvider = ({ children }) => {
         document.body.style.color = currentTheme['--text-primary'];
 
         // Update favicon based on theme
-        // Light themes (dawn, mono-light) use dark favicon
-        // Dark themes (dusk, mono-dark) use light favicon
+        // Light themes (dawn, mono-light) use dark-colored favicon (favicon-light.svg)
+        // Dark themes (dusk, mono-dark) use light-colored favicon (favicon-dark.svg)
         const isLightTheme = theme === 'dawn' || theme === 'mono-light';
-        const faviconPath = isLightTheme ? '/favicon-dark.svg' : '/favicon-light.svg';
-        
+        const faviconPath = isLightTheme ? '/favicon-light.svg' : '/favicon-dark.svg';
+
         // Remove existing favicon links
         const existingFavicons = document.querySelectorAll('link[rel="icon"]');
         existingFavicons.forEach(link => link.remove());
-        
+
         // Add new favicon
         const link = document.createElement('link');
         link.rel = 'icon';

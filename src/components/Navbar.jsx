@@ -22,6 +22,19 @@ const Navbar = ({ highlightColor }) => {
 
 
 
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    const element = document.querySelector(href);
+    if (element) {
+      // Use a small timeout to allow menu close animation to start/finish if needed, 
+      // but immediate scroll is usually better for responsiveness.
+      // However, we need to ensure the hash is updated without jumping.
+      history.pushState(null, null, href);
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const navItems = [
     { label: 'About', icon: <User size={18} />, href: '#about' },
     { label: 'Experience', icon: <Briefcase size={18} />, href: '#experience' },
@@ -40,7 +53,7 @@ const Navbar = ({ highlightColor }) => {
               <span className="sb-name">
                 {"SURESH".split("").map((c, i) => <span key={i}>{c}</span>)}
               </span>
-              <div className="sb-sys">
+              <div className="sb-name">
                 {"BHANDARI".split("").map((c, i) => <span key={i}>{c}</span>)}
               </div>
             </div>
@@ -49,25 +62,53 @@ const Navbar = ({ highlightColor }) => {
             <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
               {navItems.map((item, index) => (
                 <li key={item.label} style={{ transitionDelay: `${index * 100}ms` }}>
-                  <a href={item.href} className="nav-link" onClick={() => setMenuOpen(false)}>
+                  <a
+                    href={item.href}
+                    className="nav-link"
+                    onClick={(e) => handleNavClick(e, item.href)}
+                  >
                     <span className="nav-icon">{item.icon}</span>
                     <span className="nav-label">{item.label}</span>
                   </a>
                 </li>
               ))}
-              {menuOpen && (
-                <div className="mobile-theme-wrapper">
-                  <ThemePicker />
-                </div>
-              )}
             </ul>
             <div className="theme-desktop">
               <ThemePicker />
             </div>
-            <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            <button className="menu-toggle" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+              <Menu size={24} />
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* dedicated mobile menu overlay */}
+      <div className={`mobile-menu-overlay ${menuOpen ? 'open' : ''}`}>
+        <div className="mobile-menu-content">
+          <div className="mobile-menu-header">
+            <ThemePicker mobile={true} mode="modal" />
+            <button className="mobile-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+              <X size={28} />
+            </button>
+          </div>
+
+          <nav className="mobile-nav-links-container">
+            {navItems.map((item, index) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="mobile-nav-link"
+                onClick={(e) => handleNavClick(e, item.href)}
+                style={{
+                  animationDelay: `${100 + (index * 50)}ms`
+                }}
+              >
+                <span className="mobile-nav-icon">{item.icon}</span>
+                <span className="mobile-nav-label">{item.label}</span>
+              </a>
+            ))}
+          </nav>
         </div>
       </div>
 
@@ -75,8 +116,9 @@ const Navbar = ({ highlightColor }) => {
         .navbar {
           position: fixed;
           top: 1.5rem;
-          left: 50%;
-          transform: translateX(-50%);
+          left: 0;
+          right: 0;
+          margin: 0 auto;
           width: 95%;
           max-width: 1200px;
           z-index: 9999;
@@ -85,7 +127,7 @@ const Navbar = ({ highlightColor }) => {
           align-items: center;
           justify-content: center;
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          pointer-events: none; /* Allows scrolling background elements while letting island handle clicks */
+          pointer-events: none;
         }
 
         .nav-island {
@@ -96,7 +138,7 @@ const Navbar = ({ highlightColor }) => {
           box-shadow: none;
           border-radius: 100px;
           width: 100%;
-          max-width: 1200px; /* Align with main-content max-width */
+          max-width: 1200px;
           pointer-events: auto;
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -138,20 +180,6 @@ const Navbar = ({ highlightColor }) => {
           display: flex;
           justify-content: space-between;
           width: 100%;
-        }
-
-        .sb-sys {
-          font-family: var(--font-mono);
-          font-size: 0.52rem;
-          font-weight: 700;
-          color: var(--text-secondary);
-          opacity: 0.6;
-          text-transform: uppercase;
-          line-height: 1;
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          margin-top: 1px;
         }
 
         .nav-right {
@@ -210,6 +238,104 @@ const Navbar = ({ highlightColor }) => {
           color: var(--text-primary);
           cursor: pointer;
         }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: var(--bg-primary-color);
+          z-index: 99999;
+          display: flex;
+          flex-direction: column;
+          pointer-events: auto;
+          overflow-y: auto;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s ease, visibility 0.3s ease;
+          overscroll-behavior: contain;
+        }
+        
+        .mobile-menu-overlay.open {
+          opacity: 1;
+          visibility: visible;
+        }
+        
+        .mobile-menu-content {
+           min-height: 100vh; /* Ensure content stretches for layout */
+           display: flex;
+           flex-direction: column;
+           padding: 2rem;
+           background: radial-gradient(circle at 50% 10%, rgba(var(--accent-secondary-rgb), 0.05), transparent 70%);
+        }
+
+        .mobile-menu-header {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 1.5rem;
+          margin-bottom: 4rem;
+          padding-top: 1rem;
+        }
+        
+        .mobile-close-btn {
+           background: none;
+           border: none;
+           color: var(--text-primary);
+           cursor: pointer;
+           padding: 8px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           border-radius: 50%;
+           transition: background 0.2s;
+        }
+        
+        .mobile-close-btn:hover {
+           background: rgba(var(--text-primary-rgb), 0.1);
+        }
+
+        .mobile-nav-links-container {
+           display: flex;
+           flex-direction: column;
+           gap: 2rem;
+           align-items: center;
+           justify-content: center;
+           flex-grow: 1;
+           padding-bottom: 4rem;
+        }
+        
+        .mobile-nav-link {
+           font-size: 2rem;
+           font-weight: 800;
+           color: var(--text-primary);
+           text-decoration: none;
+           display: flex;
+           align-items: center;
+           gap: 1rem;
+           opacity: 0;
+           transform: translateY(20px);
+           transition: color 0.2s;
+        }
+        
+        .mobile-menu-overlay.open .mobile-nav-link {
+            animation: mobileItemSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .mobile-nav-icon {
+           opacity: 0.5;
+           font-size: 0.8em; /* scale relative to text */
+        }
+        
+        .mobile-nav-link:hover {
+            color: var(--accent-secondary);
+        }
+        
+        .mobile-nav-link:active {
+            transform: scale(0.98);
+        }
 
         @media (max-width: 1024px) {
            .nav-links {
@@ -225,60 +351,11 @@ const Navbar = ({ highlightColor }) => {
                width: 40px;
                height: 40px;
            }
-           
-           .nav-links.open {
-               display: flex;
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100vh;
-               background: var(--bg-primary-color);
-               flex-direction: column;
-               justify-content: center;
-               align-items: center;
-               z-index: 9999;
-               padding: 5rem 2rem 2rem;
-               gap: 1.5rem;
-               animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-               overflow-y: auto;
-           }
-           
-           .nav-links.open li {
-               width: 100%;
-               display: flex;
-               justify-content: center;
-               opacity: 0;
-               animation: fadeInMobile 0.4s forwards;
-           }
-
-           @keyframes fadeInMobile {
-               from { opacity: 0; transform: translateY(10px); }
-               to { opacity: 1; transform: translateY(0); }
-           }
-           
-           .nav-link {
-               font-size: 1.5rem;
-               padding: 1.25rem;
-               width: fit-content;
-               text-align: center;
-               color: var(--text-primary);
-               font-weight: 700;
-           }
-
-           .mobile-theme-wrapper {
-               margin-top: 2rem;
-               padding: 1.5rem;
-               border-top: 1px solid var(--border-color);
-               width: 80%;
-               display: flex;
-               justify-content: center;
-           }
-
-           .menu-toggle {
-               position: relative;
-               z-index: 10001;
-           }
+        }
+        
+        @keyframes mobileItemSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideDown {

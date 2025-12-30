@@ -41,7 +41,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="about-section">
+    <section className="about-section">
       <div className="about-container">
         <div className="about-grid">
           {/* Narrative Side */}

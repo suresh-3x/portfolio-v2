@@ -736,7 +736,9 @@ const Hero = ({ highlightColor }) => {
 
         @media (max-width: 500px) {
           .hero-section { 
-            padding: 7rem 0 4rem; 
+            padding: 8rem 0 4rem;
+            min-height: 100dvh;
+            align-items: flex-start;
           }
           h1 { 
             font-size: 2.1rem; 

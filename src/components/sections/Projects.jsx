@@ -79,7 +79,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="projects-section">
+    <section className="projects-section">
 
 
       <div className="projects-grid">
