@@ -9,6 +9,11 @@ import { initGoogleAnalytics } from './utils/analytics'
 // Initialize Google Analytics
 initGoogleAnalytics()
 
+// Fix for mobile "scroll crawling" on reload
+if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual';
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>

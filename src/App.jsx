@@ -12,30 +12,42 @@ import SectionDivider from './components/ui/SectionDivider';
 
 const HashScrollHandler = () => {
   React.useEffect(() => {
-    const scrollToHash = () => {
+    // Disable automatic scroll restoration to prevent "crawling" on reload
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    const scrollToHash = (immediate = false) => {
       const hash = window.location.hash;
-      if (hash) {
+      if (hash && hash !== '#') {
         const id = hash.substring(1);
         const element = document.getElementById(id);
         if (element) {
           const headerOffset = 120;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          const scrollTarget = Math.max(0, offsetPosition);
 
           window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
+            top: scrollTarget,
+            behavior: immediate ? "auto" : "smooth"
           });
         }
+      } else if (!hash || hash === '#') {
+        // Force scroll to top on reload if no hash to prevent drift
+        window.scrollTo(0, 0);
       }
     };
 
-    // Handle initial load
-    setTimeout(scrollToHash, 100);
+    // Handle initial load - run once immediately and once after a delay to catch late-renders
+    scrollToHash(true);
+    const timeoutId = setTimeout(() => scrollToHash(false), 300);
 
-    // Handle hash changes
-    window.addEventListener('hashchange', scrollToHash);
-    return () => window.removeEventListener('hashchange', scrollToHash);
+    window.addEventListener('hashchange', () => scrollToHash(false));
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('hashchange', () => scrollToHash(false));
+    };
   }, []);
 
   return null;
