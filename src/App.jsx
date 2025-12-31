@@ -19,6 +19,8 @@ const HashScrollHandler = () => {
 
     const scrollToHash = (immediate = false) => {
       const hash = window.location.hash;
+      const savedPosition = localStorage.getItem('lastScrollPosition');
+
       if (hash && hash !== '#') {
         const id = hash.substring(1);
         const element = document.getElementById(id);
@@ -33,20 +35,34 @@ const HashScrollHandler = () => {
             behavior: immediate ? "auto" : "smooth"
           });
         }
-      } else if (!hash || hash === '#') {
-        // Force scroll to top on reload if no hash to prevent drift
+      } else if (savedPosition && !hash) {
+        // Restore last known scroll position if no hash
+        window.scrollTo({
+          top: parseInt(savedPosition, 10),
+          behavior: immediate ? "auto" : "smooth"
+        });
+      } else {
+        // Force scroll to top on reload if no hash and no saved position
         window.scrollTo(0, 0);
       }
     };
 
-    // Handle initial load - run once immediately and once after a delay to catch late-renders
+    // Save scroll position
+    const handleScroll = () => {
+      localStorage.setItem('lastScrollPosition', window.scrollY.toString());
+    };
+
+    // Handle initial load
     scrollToHash(true);
     const timeoutId = setTimeout(() => scrollToHash(false), 300);
 
     window.addEventListener('hashchange', () => scrollToHash(false));
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
       clearTimeout(timeoutId);
       window.removeEventListener('hashchange', () => scrollToHash(false));
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
