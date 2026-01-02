@@ -33,6 +33,23 @@ test.describe('Portfolio QA Tests', () => {
         await expect(page.locator('html')).toHaveAttribute('data-theme', 'dusk');
     });
 
+    test('TC-03: Favicon Dynamic Switching', async ({ page }) => {
+        await page.goto(url);
+
+        // Check initial favicon (Dawn -> light/black)
+        const lightFavicon = page.locator('link[rel="icon"]');
+        await expect(lightFavicon).toHaveAttribute('href', '/favicon-light.svg');
+
+        // Switch to Dusk
+        const themeToggle = page.locator('button[aria-label="Theme settings"]');
+        await themeToggle.first().click();
+        await page.locator('button.theme-option-card:has-text("Dusk")').click();
+
+        // Check updated favicon (Dusk -> dark/white)
+        const darkFavicon = page.locator('link[rel="icon"]');
+        await expect(darkFavicon).toHaveAttribute('href', '/favicon-dark.svg');
+    });
+
     test('TC-05: Mobile Responsiveness', async ({ page }) => {
         await page.setViewportSize({ width: 375, height: 667 });
         await page.goto(url);
@@ -57,25 +74,23 @@ test.describe('Portfolio QA Tests', () => {
         // Wait for smooth scroll
         await page.waitForTimeout(1000);
 
-        // Check if #experience is in viewport
         const experienceSection = page.locator('#experience');
         const box = await experienceSection.boundingBox();
-
-        // Navbar height is roughly 60-80px + 1.5rem top. 
-        // We want to ensure the top of the section is not hidden behind the navbar.
-        // The navbar is at top: 1.5rem (~24px).
-        // Let's check if the section target is above or below the navbar bottom.
-
         const navbar = page.locator('.nav-island');
         const navBox = await navbar.boundingBox();
 
-        // The section top should ideally be below the navbar bottom or at the very least visible.
-        expect(box.y).toBeGreaterThanOrEqual(0);
-        // More accurately: if the navbar is fixed, and it overlaps, the box.y would be < navBox.height + navBox.y
-        // But since it's a "nav-island" with margin, we check if the content starts below the island or if it's fine.
-        // Actually, one way to test overlap is to check if the <h2> within the section is visible.
+        // The section should start below the navbar top boundary (or at least not be covered)
+        // With scroll-margin-top: 100px and navbar at ~104px, the title should be visible.
+        expect(box.y).toBeGreaterThanOrEqual(80); // Ensure it's not tucked too far top
+        expect(box.y).toBeLessThanOrEqual(120);   // Ensure it's roughly at the expected 100px offset
+
         const heading = experienceSection.locator('h2').first();
         await expect(heading).toBeInViewport();
+
+        // Ensure no overlap with the navbar floating island
+        // Nav island bottom is roughly y + height
+        const navBottom = navBox.y + navBox.height;
+        expect(box.y).toBeGreaterThanOrEqual(navBottom - 10); // Small buffer
     });
 
     test('TC-07: Scroll Position Persistence', async ({ page }) => {

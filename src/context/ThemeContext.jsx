@@ -138,17 +138,13 @@ export const ThemeProvider = ({ children }) => {
         document.body.style.backgroundColor = currentTheme['--bg-primary-color'];
         document.body.style.color = currentTheme['--text-primary'];
 
-        // Update favicon based on theme
-        // Light themes (dawn, mono-light) use dark-colored favicon (favicon-light.svg)
-        // Dark themes (dusk, mono-dark) use light-colored favicon (favicon-dark.svg)
+        // Update favicon (Dynamic based on theme)
         const isLightTheme = theme === 'dawn' || theme === 'mono-light';
         const faviconPath = isLightTheme ? '/favicon-light.svg' : '/favicon-dark.svg';
 
-        // Remove existing favicon links
         const existingFavicons = document.querySelectorAll('link[rel="icon"]');
         existingFavicons.forEach(link => link.remove());
 
-        // Add new favicon
         const link = document.createElement('link');
         link.rel = 'icon';
         link.type = 'image/svg+xml';

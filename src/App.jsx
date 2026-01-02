@@ -25,7 +25,7 @@ const HashScrollHandler = () => {
         const id = hash.substring(1);
         const element = document.getElementById(id);
         if (element) {
-          const headerOffset = 120;
+          const headerOffset = 100;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
           const scrollTarget = Math.max(0, offsetPosition);
