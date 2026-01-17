@@ -1,14 +1,14 @@
 import React from 'react';
-import Layout from './components/Layout';
-import Education from './components/sections/Education';
-import Experience from './components/sections/Experience';
-import Projects from './components/sections/Projects';
-import Contact from './components/sections/Contact';
-import Hero from './components/sections/Hero';
-import About from './components/sections/About';
-import Skills from './components/sections/Skills';
-import GithubStats from './components/sections/GithubStats';
-import SectionDivider from './components/ui/SectionDivider';
+import Layout from './Layout';
+import Education from './sections/Education';
+import Experience from './sections/Experience';
+import Projects from './sections/Projects';
+import Contact from './sections/Contact';
+import Hero from './sections/Hero';
+import About from './sections/About';
+import Skills from './sections/Skills';
+import GithubStats from './sections/GithubStats';
+import SectionDivider from './ui/SectionDivider';
 
 const HashScrollHandler = () => {
   React.useEffect(() => {

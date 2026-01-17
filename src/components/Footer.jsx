@@ -103,7 +103,7 @@ const Footer = () => {
 
         .sb-name-v2 {
           font-family: var(--font-mono);
-          font-weight: 800;
+          font-weight: 700;
           font-size: 1.2rem;
           color: var(--text-primary);
           line-height: 1;

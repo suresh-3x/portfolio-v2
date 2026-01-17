@@ -4,19 +4,26 @@ const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
     // Standard themes only: 'dawn', 'dusk', 'mono-light', 'mono-dark'
-    const [theme, setThemeState] = useState(() => {
+    const [theme, setThemeState] = useState('dusk');
+
+    useEffect(() => {
         // Initial detection: URL > LocalStorage > Default
-        const params = new URLSearchParams(window.location.search);
-        const urlTheme = params.get('theme')?.toLowerCase();
+        if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            const urlTheme = params.get('theme')?.toLowerCase();
 
-        const validThemes = ['dawn', 'dusk', 'mono-light', 'mono-dark'];
-        if (urlTheme && validThemes.includes(urlTheme)) return urlTheme;
+            const validThemes = ['dawn', 'dusk', 'mono-light', 'mono-dark'];
+            if (urlTheme && validThemes.includes(urlTheme)) {
+                setThemeState(urlTheme);
+                return;
+            }
 
-        const stored = localStorage.getItem('portfolio-theme');
-        if (stored && validThemes.includes(stored)) return stored;
-
-        return 'dawn';
-    });
+            const stored = localStorage.getItem('portfolio-theme');
+            if (stored && validThemes.includes(stored)) {
+                setThemeState(stored);
+            }
+        }
+    }, []);
 
     const setTheme = (newTheme) => {
         setThemeState(newTheme);

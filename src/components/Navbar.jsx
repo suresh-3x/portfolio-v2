@@ -173,7 +173,7 @@ const Navbar = ({ highlightColor }) => {
 
         .sb-name {
           font-family: var(--font-mono);
-          font-weight: 800;
+          font-weight: 700;
           font-size: 1.1rem;
           color: var(--text-primary);
           line-height: 1;
@@ -309,7 +309,7 @@ const Navbar = ({ highlightColor }) => {
         
         .mobile-nav-link {
            font-size: 2rem;
-           font-weight: 800;
+           font-weight: 700;
            color: var(--text-primary);
            text-decoration: none;
            display: flex;

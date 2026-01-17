@@ -16,7 +16,7 @@ const Logo = ({ className = '', size = 40 }) => {
           dominantBaseline="central"
           textAnchor="middle"
           fontFamily="var(--font-mono)"
-          fontWeight="900"
+          fontWeight="700"
           fontSize="18"
           fill="var(--text-primary)"
         >
