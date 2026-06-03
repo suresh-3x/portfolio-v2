@@ -54,7 +54,7 @@ const About = () => {
             </p>
 
             <p className="narrative-p">
-              Now building <strong>agentic AI systems on Google ADK</strong> at Deutsche Telekom (T-Systems) — promoted to Senior SDE in 10 months and Tech Lead within 4 years. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.
+              Now building <strong>agentic AI systems on Google ADK</strong> at T-Systems (Deutsche Telekom subsidiary). Promoted to Senior SDE in 10 months and Tech Lead within 4 years at Stride Ahead. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.
             </p>
 
             <div className="about-tags">
@@ -122,7 +122,7 @@ const About = () => {
         .about-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
         }
 
         .about-grid {
@@ -398,7 +398,7 @@ const About = () => {
 
         @media (max-width: 480px) {
             .about-container {
-                padding: 0 1.25rem;
+                padding: 0 1rem;
             }
             .resume-status {
                 font-size: 0.7rem;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../../context/ThemeContext';
 import {
   Server, Cpu, Cloud, Globe, Eye, Smartphone, Terminal, Layers,
-  Database, Code, Box, Network, AppWindow, Brain, Hash,
+  Database, Code, Box, Network, AppWindow, Brain,
   FileJson, Shield, Zap, Layout, Monitor, Workflow, Command,
-  GitBranch, Container, HardDrive, Share2
+  GitBranch, Container, HardDrive, Share2, Star
 } from 'lucide-react';
-import Card from '../ui/Card';
-import { skillCategories } from '../../data/skills';
+import { primarySkillsets, skillCategories } from '../../data/skills';
 
 // Map icon string names from data to lucide-react components
 const iconMap = {
@@ -22,6 +22,35 @@ const iconMap = {
 };
 
 const Skills = () => {
+  const { theme } = useTheme();
+  const isMonochrome = theme === 'mono-light' || theme === 'mono-dark';
+
+  const accentColors = React.useMemo(() => {
+    if (isMonochrome) {
+      return [
+        'var(--accent-primary)',
+        'var(--accent-secondary)',
+        'var(--accent-tertiary)',
+        'var(--accent-primary)',
+        'var(--accent-secondary)',
+        'var(--accent-tertiary)',
+        'var(--accent-primary)',
+        'var(--accent-secondary)',
+      ];
+    }
+    return [
+      'var(--accent-primary)',
+      'var(--accent-secondary)',
+      'var(--accent-tertiary)',
+      'var(--accent-primary)',
+      'var(--accent-secondary)',
+      'var(--accent-tertiary)',
+      'var(--accent-primary)',
+      'var(--accent-secondary)',
+    ];
+  }, [isMonochrome]);
+
+  const borderMultiplier = isMonochrome ? 3.7 : 1;
 
   // Helper to get icon for specific skills
   const getSkillIcon = (skill) => {
@@ -32,11 +61,11 @@ const Skills = () => {
     if (s.includes('django') || s.includes('fastapi') || s.includes('express')) return <Server size={12} />;
 
     // Databases
-    if (s.includes('sql') || s.includes('mongo') || s.includes('redis')) return <Database size={12} />;
+    if (s.includes('sql') || s.includes('mongo') || s.includes('neo4j') || s.includes('redis')) return <Database size={12} />;
 
     // AI / ML
     if (s.includes('torch') || s.includes('tensor') || s.includes('learn') || s.includes('pandas')) return <Brain size={12} />;
-    if (s.includes('llm') || s.includes('gpt') || s.includes('agent')) return <Zap size={12} />;
+    if (s.includes('llm') || s.includes('gpt') || s.includes('agent') || s.includes('rag') || s.includes('adk') || s.includes('openai') || s.includes('anthropic')) return <Zap size={12} />;
 
     // DevOps
     if (s.includes('docker') || s.includes('kubernetes') || s.includes('container')) return <Box size={12} />;
@@ -64,181 +93,350 @@ const Skills = () => {
     if (s.includes('security')) return <Shield size={12} />;
     if (s.includes('process')) return <Cpu size={12} />;
 
-    return <Hash size={12} />;
+    return <Star size={12} />;
   };
 
   // Resolve icon string from data to a React component
   const getCategoryIcon = (iconName) => {
-    const IconComponent = iconMap[iconName] || Hash;
+    const IconComponent = iconMap[iconName] || Star;
     return <IconComponent size={18} />;
   };
 
   return (
-    <section className="skills-section">
+    <section className="skills-section" style={{ '--border-multiplier': borderMultiplier }}>
+      <div className="skills-container">
+        {/* Primary Skills */}
+        <div className="primary-skills-section">
+          {primarySkillsets.map((category, idx) => {
+            const accentColor = accentColors[idx % accentColors.length];
 
-
-      <div className="skills-compact-grid">
-        {skillCategories.map((category, idx) => {
-          const accentColors = [
-            'var(--accent-primary)',
-            'var(--accent-secondary)',
-            'var(--accent-tertiary)'
-          ];
-          const accentColor = accentColors[idx % 3];
-
-          const cardStyle = {};
-          if (accentColor !== 'var(--accent-primary)') {
-            cardStyle['--accent-primary'] = accentColor;
-          }
-
-          return (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.05 }}
-            >
-              <Card
-                className="module-card"
-                showStrip={false}
-                noPadding={true}
-                style={cardStyle}
+            return (
+              <motion.div
+                key={category.title}
+                className="primary-skill-item"
+                style={{ borderColor: accentColor, boxShadow: `0 4px 16px ${accentColor}20`, borderWidth: `${borderMultiplier}px` }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08 }}
               >
-                <div className="module-inner">
-                  <div className="module-header" style={{ borderBottomColor: `${accentColor}20` }}>
-                    <div className="module-icon-box" style={{ color: accentColor }}>{getCategoryIcon(category.icon)}</div>
-                    <h3 className="module-title">{category.title}</h3>
+                <div className="skill-item-header">
+                  <div className="skill-icon" style={{ color: accentColor }}>
+                    {getCategoryIcon(category.icon)}
                   </div>
-                  <div className="module-tags">
-                    {category.skills.map((skill, sIdx) => (
-                      <span key={sIdx} className="module-tag" style={{ '--hover-color': accentColor }}>
-                        <span className="skill-icon-small" style={{ opacity: 0.7 }}>
-                          {getSkillIcon(skill)}
-                        </span>
-                        {skill}
-                      </span>
-                    ))}
+                  <div className="skill-item-title-block">
+                    <h3 className="skill-item-title" style={{ color: accentColor }}>{category.title}</h3>
+                    <p className="skill-item-summary">{category.summary}</p>
                   </div>
                 </div>
-              </Card>
-            </motion.div>
-          );
-        })}
+
+                <div className="skill-highlights-grid">
+                  {category.highlights.map((highlight) => (
+                    <div key={highlight} className="skill-highlight-item" style={{ borderLeftColor: accentColor }}>
+                      {highlight}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="skill-tags-list">
+                  {category.skills.map((skill) => (
+                    <span key={skill} className="skill-tag" style={{ '--tag-color': accentColor }}>
+                      <span className="skill-tag-icon">
+                        {getSkillIcon(skill)}
+                      </span>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
 
       <style>{`
-        .skills-compact-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.25rem;
-          max-width: 1200px;
-          margin: 0 auto;
+        .skills-section {
+          position: relative;
           padding: 0;
         }
 
-        .contact-container-v2 {
+        .skills-container {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0;
+          padding: 0 1.5rem;
         }
 
-        .module-card {
-          height: 100%;
+        /* Primary Skills Section */
+        .primary-skills-section {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
         }
 
-        .module-card:hover {
-            border-color: var(--accent-primary);
-            background: rgba(var(--accent-primary-rgb), 0.05);
-        }
-
-        .module-inner {
-          padding: 1.25rem;
+        .primary-skill-item {
           display: flex;
           flex-direction: column;
           gap: 1.25rem;
+          padding: 1.5rem;
+          border: 1px solid;
+          border-width: calc(1px * var(--border-multiplier, 1));
+          border-radius: 16px;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+          backdrop-filter: blur(10px);
         }
 
-        .module-header {
+        .skill-item-header {
           display: flex;
-          align-items: center;
-          gap: 12px;
-          border-bottom: 1px solid var(--border-color);
-          padding-bottom: 1rem;
-          transition: all 0.3s ease;
+          align-items: flex-start;
+          gap: 1.25rem;
         }
 
-        .module-icon-box {
+        .skill-icon {
+          flex-shrink: 0;
           display: flex;
           align-items: center;
           justify-content: center;
-          opacity: 1;
-          margin-right: 4px;
+          width: 52px;
+          height: 52px;
+          border-radius: 14px;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+          border: 1px solid rgba(var(--border-color-rgb, 255, 255, 255), 0.15);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .module-icon-box svg {
-          width: 20px;
-          height: 20px;
+        .skill-icon svg {
+          width: 22px;
+          height: 22px;
+          stroke-width: 1.5;
         }
 
-        .module-title {
-          font-size: 0.9rem;
-          font-weight: 800;
-          color: var(--text-primary);
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          font-family: var(--font-mono);
+        .skill-item-title-block {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .skill-item-title {
+          font-size: 1.35rem;
+          font-weight: 700;
           margin: 0;
+          letter-spacing: -0.02em;
+          line-height: 1.2;
         }
 
-        .module-tags {
+        .skill-item-summary {
+          font-size: 0.9rem;
+          color: var(--text-secondary);
+          margin: 0;
+          line-height: 1.6;
+          font-weight: 400;
+          padding-bottom: 1.25rem;
+          position: relative;
+        }
+
+        .skill-item-summary::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg,
+            transparent 0%,
+            var(--border-color) 20%,
+            var(--border-color) 80%,
+            transparent 100%
+          );
+        }
+
+        .skill-highlights-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.25rem;
+          width: 100%;
+        }
+
+        .skill-highlight-item {
+          border-left: 3px solid;
+          padding-left: 1.25rem;
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: var(--text-primary);
+          line-height: 1.5;
+          letter-spacing: -0.01em;
+        }
+
+        .skill-tags-list {
           display: flex;
           flex-wrap: wrap;
-          gap: 8px;
+          gap: 0.75rem;
+          justify-content: flex-start;
         }
 
-        .module-tag {
+        .skill-tag {
           font-size: 0.75rem;
-          color: var(--text-secondary);
-          background: rgba(255, 255, 255, 0.02);
-          padding: 4px 10px;
-          border: 1px solid var(--border-color);
-          border-radius: 4px;
           font-family: var(--font-mono);
+          padding: 0.55rem 1rem;
+          border-radius: 6px;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1.5px solid var(--tag-color, var(--accent-primary));
+          color: var(--text-secondary);
           transition: all 0.2s ease;
-          cursor: default;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          white-space: nowrap;
+          letter-spacing: 0.5px;
+          font-weight: 500;
+          line-height: 1.4;
+          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.1),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .skill-tag-icon {
           display: flex;
           align-items: center;
-          gap: 6px;
+          justify-content: center;
+          flex-shrink: 0;
         }
 
-        .skill-icon-small {
-            display: flex;
-            align-items: center;
+        .skill-tag-icon svg {
+          width: 11px;
+          height: 11px;
+          color: var(--tag-color, var(--accent-primary));
+          stroke-width: 2;
+          transition: color 0.2s ease, opacity 0.2s ease;
+          opacity: 0.7;
         }
 
-        .module-tag:hover {
-          border-color: var(--hover-color);
+        .skill-tag:hover {
+          background: rgba(255, 255, 255, 0.06);
+          border-color: var(--tag-color, var(--accent-primary));
           color: var(--text-primary);
-          background: rgba(255, 255, 255, 0.05);
-          transform: translateY(-1px);
+          transform: translateY(-2px);
+          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.2),
+                      0 4px 12px rgba(0, 0, 0, 0.15),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
-        
-        .module-tag:hover .skill-icon-small {
-            opacity: 1 !important;
-            color: var(--hover-color);
+
+        .skill-tag:hover .skill-tag-icon svg {
+          color: var(--tag-color, var(--accent-primary));
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+          .skills-container {
+            padding: 0 1.25rem;
+          }
+
+          .skill-highlights-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+          }
+
+          .skill-item-title {
+            font-size: 1.2rem;
+          }
         }
 
         @media (max-width: 768px) {
-          .skills-section {
-            padding: 4rem 0;
+          .primary-skills-section {
+            gap: 2.5rem;
           }
-          .skills-compact-grid {
+
+          .primary-skill-item {
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+          }
+
+          .skill-item-header {
+            gap: 1.25rem;
+          }
+
+          .skill-icon {
+            width: 44px;
+            height: 44px;
+          }
+
+          .skill-icon svg {
+            width: 20px;
+            height: 20px;
+          }
+
+          .skill-item-title {
+            font-size: 1.15rem;
+          }
+
+          .skill-item-summary {
+            font-size: 0.85rem;
+          }
+
+          .skill-highlights-grid {
             grid-template-columns: 1fr;
             gap: 1rem;
           }
-          .module-inner {
-            padding: 1.25rem;
+
+          .skill-tags-list {
+            gap: 0.6rem;
+          }
+
+          .skill-tag {
+            font-size: 0.73rem;
+            padding: 0.45rem 0.8rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .skills-container {
+            padding: 0 1rem;
+          }
+
+          .primary-skills-section {
+            gap: 1rem;
+          }
+
+          .primary-skill-item {
+            gap: 1rem;
+            padding: 1rem;
+          }
+
+          .skill-item-header {
+            flex-direction: column;
+            gap: 0.75rem;
+          }
+
+          .skill-icon {
+            width: 36px;
+            height: 36px;
+          }
+
+          .skill-icon svg {
+            width: 16px;
+            height: 16px;
+          }
+
+          .skill-item-title {
+            font-size: 0.95rem;
+          }
+
+          .skill-item-summary {
+            font-size: 0.8rem;
+          }
+
+          .skill-highlight-item {
+            padding-left: 0.75rem;
+            font-size: 0.8rem;
+          }
+
+          .skill-tags-list {
+            gap: 0.5rem;
+          }
+
+          .skill-tag {
+            font-size: 0.7rem;
+            padding: 0.4rem 0.7rem;
+            gap: 0.4rem;
           }
         }
       `}</style>

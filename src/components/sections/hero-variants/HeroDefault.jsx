@@ -71,7 +71,7 @@ const HeroDefault = () => {
                                 <span className="minimize"></span>
                                 <span className="maximize"></span>
                             </div>
-                            <div className="terminal-title">bash — 80x24</div>
+                            <div className="terminal-title">bash -80x24</div>
                         </div>
                         <div className="terminal-body">
                             <pre>

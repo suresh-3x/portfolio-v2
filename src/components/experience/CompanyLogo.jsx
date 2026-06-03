@@ -13,6 +13,7 @@ const CompanyLogo = ({
   className = '',
   src: customSrc,
   href,
+  wide = false,
 }) => {
   const [sourceIndex, setSourceIndex] = useState(0);
   const [failed, setFailed] = useState(false);
@@ -47,8 +48,8 @@ const CompanyLogo = ({
       <img
         src={sources[sourceIndex]}
         alt={`${company} logo`}
-        className={`company-logo ${className}`}
-        width={size}
+        className={`company-logo ${wide ? 'company-logo--wide' : ''} ${className}`.trim()}
+        width={wide ? undefined : size}
         height={size}
         loading="lazy"
         decoding="async"
@@ -110,6 +111,7 @@ export const CompanyLogoGroup = ({
                 size={size}
                 className="company-logo-item"
                 src={logo.src}
+                wide={logo.wide}
                 href={href}
               />
             </div>

@@ -30,7 +30,7 @@ h1, h2, h3, .resume-section-title {
   padding: 5.5rem 1.5rem 4rem;
 }
 
-/* —— Nav —— */
+/* —-Nav —-*/
 .navbar--resume {
   position: fixed;
   top: 0;
@@ -91,7 +91,7 @@ h1, h2, h3, .resume-section-title {
   filter: none;
 }
 
-/* —— Section headers —— */
+/* —-Section headers —-*/
 .resume-section-header {
   margin: var(--section-space) 0 1.5rem;
   scroll-margin-top: 88px;
@@ -122,7 +122,7 @@ h1, h2, h3, .resume-section-title {
   display: none;
 }
 
-/* —— Hero —— */
+/* —-Hero —-*/
 .hero-section--resume {
   padding: 0 0 2rem;
   min-height: auto;
@@ -222,7 +222,7 @@ h1, h2, h3, .resume-section-title {
   transform: none;
 }
 
-/* —— Summary —— */
+/* —-Summary —-*/
 .summary-block {
   max-width: 100%;
 }
@@ -247,7 +247,7 @@ h1, h2, h3, .resume-section-title {
   text-underline-offset: 2px;
 }
 
-/* —— Experience —— */
+/* —-Experience —-*/
 .experience-list {
   display: flex;
   flex-direction: column;
@@ -401,7 +401,7 @@ h1, h2, h3, .resume-section-title {
   color: var(--text-muted);
 }
 
-/* —— Skills —— */
+/* —-Skills —-*/
 .skills-table {
   width: 100%;
 }
@@ -433,7 +433,7 @@ h1, h2, h3, .resume-section-title {
   display: none;
 }
 
-/* —— Education —— */
+/* —-Education —-*/
 .edu-resume-block {
   padding: 0;
 }
@@ -460,7 +460,7 @@ h1, h2, h3, .resume-section-title {
   color: var(--text-primary);
 }
 
-/* —— Contact —— */
+/* —-Contact —-*/
 .contact-resume-list {
   list-style: none;
   margin: 0;
@@ -491,7 +491,7 @@ h1, h2, h3, .resume-section-title {
   min-width: 4.5rem;
 }
 
-/* —— Projects —— */
+/* —-Projects —-*/
 .projects-section .projects-grid {
   display: flex;
   flex-direction: column;
@@ -538,7 +538,7 @@ h1, h2, h3, .resume-section-title {
   border-radius: 3px !important;
 }
 
-/* —— Footer —— */
+/* —-Footer —-*/
 .footer--resume {
   margin-top: var(--section-space);
   padding: 2rem 0 2.5rem;

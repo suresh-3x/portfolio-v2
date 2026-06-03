@@ -1,67 +1,101 @@
 import React from 'react';
 import Layout from './components/Layout';
-import Education from './components/sections/Education';
 import Experience from './components/sections/Experience';
 import Projects from './components/sections/Projects';
-import Contact from './components/sections/Contact';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Skills from './components/sections/Skills';
-import GithubStats from './components/sections/GithubStats';
 import SectionDivider from './components/ui/SectionDivider';
+
+const HEADER_OFFSET = 120;
+const SCROLL_KEY = 'lastScrollPosition';
 
 const HashScrollHandler = () => {
   React.useEffect(() => {
-    // Disable automatic scroll restoration to prevent "crawling" on reload
+    // Disable native restoration; we restore manually to avoid "crawling" on reload.
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
 
-    const scrollToHash = (immediate = false) => {
-      const hash = window.location.hash;
-      const savedPosition = localStorage.getItem('lastScrollPosition');
+    // Capture the target ONCE, up front, so a clamped programmatic scroll
+    // (page not laid out yet) can't overwrite it before we reach it.
+    const initialHash = window.location.hash;
+    const savedPosition = parseInt(localStorage.getItem(SCROLL_KEY) || '0', 10) || 0;
 
-      if (hash && hash !== '#') {
-        const id = hash.substring(1);
-        const element = document.getElementById(id);
-        if (element) {
-          const headerOffset = 120;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          const scrollTarget = Math.max(0, offsetPosition);
+    // Force instant restore: the global `scroll-behavior: smooth` would
+    // otherwise animate the jump. Re-enabled once restoration settles so
+    // in-page nav links keep their smooth scroll.
+    const docEl = document.documentElement;
+    const prevScrollBehavior = docEl.style.scrollBehavior;
+    docEl.style.scrollBehavior = 'auto';
 
-          window.scrollTo({
-            top: scrollTarget,
-            behavior: immediate ? "auto" : "smooth"
-          });
+    let cancelled = false;
+    let isRestoring = true; // suppress saving while we drive the scroll
+    let saveRaf = 0;
+
+    const endRestore = () => {
+      isRestoring = false;
+      docEl.style.scrollBehavior = prevScrollBehavior;
+    };
+
+    const hashTarget = (hash) => {
+      if (!hash || hash === '#') return null;
+      const el = document.getElementById(hash.slice(1));
+      if (!el) return null;
+      return Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET);
+    };
+
+    // The page is tall and content mounts progressively, so the document may be
+    // too short to reach `target` on the first frame. Retry across frames until
+    // we land within tolerance (or give up), then re-enable saving.
+    const restore = (target, smooth = false) => {
+      let attempts = 0;
+      const step = () => {
+        if (cancelled) return;
+        window.scrollTo({ top: target, behavior: smooth ? 'smooth' : 'auto' });
+        attempts += 1;
+        const reached = Math.abs(window.scrollY - target) < 4;
+        if (!reached && attempts < 20) {
+          requestAnimationFrame(step);
+        } else {
+          // Let the final scroll settle before we resume persisting.
+          setTimeout(endRestore, 120);
         }
-      } else if (savedPosition && !hash) {
-        // Restore last known scroll position if no hash
-        window.scrollTo({
-          top: parseInt(savedPosition, 10),
-          behavior: immediate ? "auto" : "smooth"
-        });
-      } else {
-        // Force scroll to top on reload if no hash and no saved position
-        window.scrollTo(0, 0);
-      }
+      };
+      requestAnimationFrame(step);
     };
 
-    // Save scroll position
+    const target = hashTarget(initialHash);
+    if (target !== null) {
+      restore(target);
+    } else if (savedPosition > 0) {
+      restore(savedPosition);
+    } else {
+      window.scrollTo(0, 0);
+      endRestore();
+    }
+
     const handleScroll = () => {
-      localStorage.setItem('lastScrollPosition', window.scrollY.toString());
+      if (isRestoring) return; // don't persist the clamped values mid-restore
+      if (saveRaf) cancelAnimationFrame(saveRaf);
+      saveRaf = requestAnimationFrame(() => {
+        localStorage.setItem(SCROLL_KEY, Math.round(window.scrollY).toString());
+      });
     };
 
-    // Handle initial load
-    scrollToHash(true);
-    const timeoutId = setTimeout(() => scrollToHash(false), 300);
+    const handleHashChange = () => {
+      const t = hashTarget(window.location.hash);
+      if (t !== null) window.scrollTo({ top: t, behavior: 'smooth' });
+    };
 
-    window.addEventListener('hashchange', () => scrollToHash(false));
+    window.addEventListener('hashchange', handleHashChange);
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener('hashchange', () => scrollToHash(false));
+      cancelled = true;
+      docEl.style.scrollBehavior = prevScrollBehavior;
+      if (saveRaf) cancelAnimationFrame(saveRaf);
+      window.removeEventListener('hashchange', handleHashChange);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -108,30 +142,6 @@ function App() {
         colorVar="--accent-primary"
       />
       <Projects />
-
-      <SectionDivider
-        id="github"
-        title="Activity"
-        subtitle="Real-time pulse of code contributions and system growth."
-        colorVar="--accent-secondary"
-      />
-      <GithubStats />
-
-      <SectionDivider
-        id="education"
-        title="Formation"
-        subtitle="Academic foundations and professional certifications."
-        colorVar="--accent-tertiary"
-      />
-      <Education />
-
-      <SectionDivider
-        id="contact"
-        title="Contact"
-        subtitle="Reach out for backend, AI platform, or production systems roles."
-        colorVar="--accent-primary"
-      />
-      <Contact />
     </Layout>
   );
 }

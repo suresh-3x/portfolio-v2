@@ -1,4 +1,4 @@
-/* Editorial dossier — ATS-readable body, Syne display */
+/* Editorial dossier -ATS-readable body, Syne display */
 
 :root {
   --font-display: 'Syne', system-ui, sans-serif;
@@ -20,7 +20,7 @@ h4,
   font-family: var(--font-display);
 }
 
-/* Keyword rail — visible to humans + crawlers */
+/* Keyword rail -visible to humans + crawlers */
 .keyword-rail {
   display: flex;
   flex-wrap: wrap;
@@ -187,7 +187,7 @@ h4,
   filter: brightness(1.08);
 }
 
-/* Proof card — creative visual */
+/* Proof card -creative visual */
 .hero-proof-card {
   background: var(--card-bg);
   border: 1px solid var(--border-color);

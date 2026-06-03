@@ -1,12 +1,15 @@
-import React, { useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Building2, ExternalLink, Clock, LayoutList, GitBranch } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { motion } from 'framer-motion';
+import { Calendar, Building2, Clock } from 'lucide-react';
 import Card from '../ui/Card';
 import { experienceEntries } from '../../data/experience';
 import { CompanyLogoGroup } from '../experience/CompanyLogo';
+import { useTheme } from '../../context/ThemeContext';
 
 const Experience = () => {
-  const [viewMode, setViewMode] = useState('card'); // 'card' | 'timeline'
+  const { theme } = useTheme();
+  const isMonochrome = theme === 'mono-light' || theme === 'mono-dark';
+  const borderMultiplier = isMonochrome ? 3.7 : 1;
 
   // ── Date Parsing ──
   const monthMap = {
@@ -64,7 +67,7 @@ const Experience = () => {
     return `${totalMonths} mos`;
   };
 
-  // ── Card View: Group by company ──
+  // ── Group roles by company (Stride roles share a groupKey) ──
   const groupedExperiences = useMemo(() => {
     const groups = {};
     experienceEntries.forEach(entry => {
@@ -89,332 +92,128 @@ const Experience = () => {
     return arr;
   }, []);
 
-  // ── Timeline View: chronological, all roles flat, sorted by start date ──
-  const timelineEntries = useMemo(() => {
-    return [...experienceEntries]
-      .map(entry => {
-        const parts = entry.period.split(/\s*[–\-]\s*/);
-        const startDate = parts.length === 2 ? parseDate(parts[0]) : new Date();
-        const endDate = parts.length === 2 ? parseDate(parts[1]) : new Date();
-        return { ...entry, startDate, endDate };
-      })
-      .sort((a, b) => b.startDate - a.startDate); // most recent first
-  }, []);
-
-  // Find global range for the timeline
-  const timelineRange = useMemo(() => {
-    if (!timelineEntries.length) return { min: new Date(), max: new Date() };
-    const starts = timelineEntries.map(e => e.startDate.getTime());
-    const ends = timelineEntries.map(e => e.endDate.getTime());
-    return { min: new Date(Math.min(...starts)), max: new Date(Math.max(...ends)) };
-  }, [timelineEntries]);
-
-  const totalRangeMonths = useMemo(() => {
-    return (timelineRange.max.getFullYear() - timelineRange.min.getFullYear()) * 12 +
-      (timelineRange.max.getMonth() - timelineRange.min.getMonth()) + 1;
-  }, [timelineRange]);
-
-  const getBarPosition = (entry) => {
-    const startOffset = (entry.startDate.getFullYear() - timelineRange.min.getFullYear()) * 12 +
-      (entry.startDate.getMonth() - timelineRange.min.getMonth());
-    const duration = (entry.endDate.getFullYear() - entry.startDate.getFullYear()) * 12 +
-      (entry.endDate.getMonth() - entry.startDate.getMonth()) + 1;
-    return {
-      left: `${(startOffset / totalRangeMonths) * 100}%`,
-      width: `${Math.max((duration / totalRangeMonths) * 100, 2)}%`
-    };
-  };
-
-  const formatShortDate = (date) => {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    return `${months[date.getMonth()]} ${date.getFullYear()}`;
-  };
-
-  // Generate year markers for timeline
-  const yearMarkers = useMemo(() => {
-    const markers = [];
-    const startYear = timelineRange.min.getFullYear();
-    const endYear = timelineRange.max.getFullYear();
-    for (let y = startYear; y <= endYear; y++) {
-      const offset = (y - startYear) * 12 - timelineRange.min.getMonth();
-      markers.push({ year: y, left: `${(offset / totalRangeMonths) * 100}%` });
-    }
-    return markers;
-  }, [timelineRange, totalRangeMonths]);
-
   const getThemeVariable = (index) => {
     const vars = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-tertiary)'];
     return vars[index % 3];
   };
 
   return (
-    <section className="experience-section">
+    <section className="experience-section" style={{ '--border-multiplier': borderMultiplier }}>
+      <div
+        className="experience-timeline"
+        style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          position: 'relative',
+        }}
+      >
+        {groupedExperiences.map((group, groupIndex) => {
+          const accentColor = getThemeVariable(groupIndex);
+          const cardStyle = { borderRadius: '14px' };
+          if (accentColor !== 'var(--accent-primary)') {
+            cardStyle['--accent-primary'] = accentColor;
+          }
 
-      {/* View Toggle */}
-      <div className="exp-view-toggle">
-        <button
-          className={`toggle-btn ${viewMode === 'card' ? 'active' : ''}`}
-          onClick={() => setViewMode('card')}
-          aria-label="Card view"
-        >
-          <LayoutList size={14} />
-          <span>Cards</span>
-        </button>
-        <button
-          className={`toggle-btn ${viewMode === 'timeline' ? 'active' : ''}`}
-          onClick={() => setViewMode('timeline')}
-          aria-label="Timeline view"
-        >
-          <GitBranch size={14} />
-          <span>Timeline</span>
-        </button>
-      </div>
-
-      <AnimatePresence mode="wait">
-        {viewMode === 'card' ? (
-          /* ═══ CARD VIEW ═══ */
-          <motion.div
-            key="card-view"
-            className="experience-timeline"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-          >
-            {groupedExperiences.map((group, groupIndex) => {
-              const accentColor = getThemeVariable(groupIndex);
-              const cardStyle = { borderRadius: '4px' };
-              if (accentColor !== 'var(--accent-primary)') {
-                cardStyle['--accent-primary'] = accentColor;
-              }
-
-              return (
-                <motion.div
-                  key={group.key}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: groupIndex * 0.1 }}
-                  className="experience-group"
-                >
-                  {/* Timeline Connector */}
-                  <div className="timeline-connector">
-                    <div className="timeline-dot" style={{ backgroundColor: accentColor, boxShadow: `0 0 0 4px rgba(var(--bg-primary-rgb), 1)` }}>
-                      <Building2 size={14} color="var(--bg-primary-color)" />
-                    </div>
-                    <div className="timeline-line" style={{ background: `linear-gradient(to bottom, ${accentColor}, transparent)` }} />
-                  </div>
-
-                  <Card
-                    className="experience-card"
-                    showStrip={true}
-                    noPadding={false}
-                    style={cardStyle}
-                  >
-                    <div className="card-header-group">
-                      <div className="company-info-row">
-                        <CompanyLogoGroup logos={group.logos} size={44} />
-                        <div className="company-text-block">
-                          <h3 className="company-name" style={{ color: accentColor }}>
-                            {group.company}
-                          </h3>
-                          {group.companyLine && (
-                            <p className="company-subline">{group.companyLine}</p>
-                          )}
-                        </div>
-                        <a href={group.website} target="_blank" rel="noopener noreferrer" className="company-link" aria-label={`Visit ${group.company}`}>
-                          <ExternalLink size={14} />
-                        </a>
-
-                        <div className="badges-row">
-                          {group.totalDuration && (
-                            <div className="duration-badge">
-                              <Clock size={12} />
-                              {group.totalDuration}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="roles-list">
-                      {group.roles.map((role, rIndex) => (
-                        <div key={role.id} className={`role-item ${rIndex !== group.roles.length - 1 ? 'has-border' : ''}`}>
-                          <div className="role-header">
-                            <h4 className="role-title">{role.role}</h4>
-                            <div className="role-meta">
-                              <span className="period">
-                                <Calendar size={12} /> {role.period}
-                              </span>
-                              <span className="type-badge">{role.type}</span>
-                            </div>
-                          </div>
-                          <ul className="role-description">
-                            {role.description.map((desc, i) => (
-                              <li key={i}>{desc}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        ) : (
-          /* ═══ TIMELINE VIEW ═══ */
-          <motion.div
-            key="timeline-view"
-            className="tl-container"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Year axis */}
-            <div className="tl-axis">
-              <div className="tl-axis-track">
-                {yearMarkers.map(m => (
-                  <div key={m.year} className="tl-year-marker" style={{ left: m.left }}>
-                    <span className="tl-year-label">{m.year}</span>
-                    <div className="tl-year-tick" />
-                  </div>
-                ))}
+          return (
+            <motion.div
+              key={group.key}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: groupIndex * 0.1 }}
+              className="experience-group"
+            >
+              {/* Timeline rail (desktop only) */}
+              <div className="timeline-connector" aria-hidden>
+                <div className="timeline-dot" style={{ backgroundColor: accentColor }}>
+                  <Building2 size={13} color="var(--bg-primary-color)" />
+                </div>
+                <div className="timeline-line" style={{ background: `linear-gradient(to bottom, ${accentColor}, transparent)` }} />
               </div>
-            </div>
 
-            {/* Swimlanes */}
-            <div className="tl-lanes">
-              {timelineEntries.map((entry, idx) => {
-                const accentColor = getThemeVariable(idx);
-                const pos = getBarPosition(entry);
-                const isPresent = entry.period.toLowerCase().includes('present');
-
-                return (
-                  <motion.div
-                    key={entry.id}
-                    className="tl-lane"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.06 }}
-                  >
-                    <div className="tl-lane-label">
-                      <div className="tl-lane-logos">
-                        <CompanyLogoGroup logos={entry.logos} size={28} />
-                      </div>
-                      <div className="tl-lane-info">
-                        <span className="tl-lane-role">{entry.role}</span>
-                        <span className="tl-lane-company">{entry.company}</span>
-                      </div>
+              <Card
+                className="experience-card"
+                hover={false}
+                showStrip={true}
+                noPadding={false}
+                style={cardStyle}
+              >
+                <div className="card-header-group">
+                  <div className="company-info-row">
+                    <CompanyLogoGroup logos={group.logos} size={44} />
+                    <h3 className="company-name" style={{ color: accentColor }}>
+                      {group.company}
+                    </h3>
+                  </div>
+                  <div className="company-meta-row">
+                    {group.companyLine && (
+                      <p className="company-subline">{group.companyLine}</p>
+                    )}
+                    <div className="badges-row">
+                      {group.totalDuration && (
+                        <div className="duration-badge">
+                          <Clock size={12} />
+                          {group.totalDuration}
+                        </div>
+                      )}
                     </div>
-                    <div className="tl-lane-track">
-                      <div className="tl-grid-lines">
-                        {yearMarkers.map(m => (
-                          <div key={m.year} className="tl-grid-line" style={{ left: m.left }} />
+                  </div>
+                </div>
+
+                <div className="roles-list">
+                  {group.roles.map((role, rIndex) => (
+                    <div key={role.id} className={`role-item ${rIndex !== group.roles.length - 1 ? 'has-border' : ''}`}>
+                      <div className="role-header">
+                        <h4 className="role-title">{role.role}</h4>
+                        <div className="role-meta">
+                          <span className="period">
+                            <Calendar size={12} /> {role.period}
+                          </span>
+                          <span className="type-badge">{role.type}</span>
+                        </div>
+                      </div>
+                      <ul className="role-description">
+                        {role.description.map((desc, i) => (
+                          <li key={i}>{desc}</li>
                         ))}
-                      </div>
-                      <div
-                        className={`tl-bar ${isPresent ? 'tl-bar--present' : ''}`}
-                        style={{
-                          left: pos.left,
-                          width: pos.width,
-                          '--bar-accent': accentColor,
-                        }}
-                      >
-                        <span className="tl-bar-period">
-                          {formatShortDate(entry.startDate)} – {isPresent ? 'Now' : formatShortDate(entry.endDate)}
-                        </span>
-                      </div>
+                      </ul>
                     </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  ))}
+                </div>
+              </Card>
+            </motion.div>
+          );
+        })}
+      </div>
 
       <style>{`
         .experience-section {
           position: relative;
         }
 
-        /* ── Toggle ── */
-        .exp-view-toggle {
-          display: flex;
-          gap: 4px;
-          justify-content: flex-end;
-          max-width: 1200px;
-          margin: 0 auto 2rem;
-          padding: 3px;
-          background: rgba(var(--text-primary-rgb), 0.03);
-          border: 1px solid var(--border-color);
-          border-radius: 10px;
-          width: fit-content;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        @media (min-width: 769px) {
-          .exp-view-toggle {
-            margin-right: 0;
-            margin-left: auto;
-            max-width: 1200px;
-            width: fit-content;
-          }
-        }
-
-        .toggle-btn {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          padding: 7px 16px;
-          border: none;
-          border-radius: 8px;
-          background: transparent;
-          color: var(--text-secondary);
-          font-family: var(--font-mono);
-          font-size: 0.72rem;
-          font-weight: 700;
-          cursor: pointer;
-          transition: all 0.25s ease;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
-
-        .toggle-btn:hover {
-          color: var(--text-primary);
-          background: rgba(var(--text-primary-rgb), 0.04);
-        }
-
-        .toggle-btn.active {
-          background: var(--text-primary);
-          color: var(--bg-primary-color);
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        /* ── Card View ── */
         .experience-timeline {
           max-width: 1200px;
           margin: 0 auto;
           position: relative;
-          padding-left: 0;
-          padding-right: 0;
+          padding: 0 1.5rem;
         }
 
         .experience-group {
           position: relative;
-          margin-bottom: 3rem;
+          margin-bottom: 2.5rem;
           padding-left: 2.5rem;
         }
 
+        .experience-group:last-child {
+          margin-bottom: 0;
+        }
+
+        /* ── Timeline rail ── */
         .timeline-connector {
           position: absolute;
           left: 0;
-          top: 0;
-          bottom: -3rem;
+          top: 6px;
+          bottom: -2.5rem;
           width: 2px;
           display: flex;
           flex-direction: column;
@@ -422,58 +221,98 @@ const Experience = () => {
         }
 
         .experience-group:last-child .timeline-connector {
-           bottom: auto;
-           height: 100%;
+          bottom: auto;
+          height: 100%;
         }
-        
+
         .experience-group:last-child .timeline-line {
-            display: none;
+          display: none;
         }
 
         .timeline-dot {
-          width: 32px;
-          height: 32px;
+          width: 30px;
+          height: 30px;
           border-radius: 50%;
           z-index: 2;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          box-shadow: 0 0 0 4px var(--bg-primary-color);
         }
 
         .timeline-line {
           width: 2px;
           flex-grow: 1;
           margin-top: 4px;
-          opacity: 0.3;
+          opacity: 0.28;
         }
 
+        /* ── Card ── */
         .experience-card {
           width: 100%;
           position: relative;
+          /* Disable the shared Card hover/lift entirely */
+          transition: none !important;
+        }
+
+        .experience-card.custom-card {
+          border-width: calc(1px * var(--border-multiplier, 1));
+        }
+
+        .experience-card:hover {
+          border-color: var(--border-color);
+          box-shadow: var(--shadow-soft);
+          transform: none;
+        }
+
+        .experience-card:hover .card-strip {
+          width: 6px;
         }
 
         .card-header-group {
           margin-bottom: 1.5rem;
-          border-bottom: 1px solid var(--border-color);
-          padding-bottom: 1rem;
+          border-bottom: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
+          padding-bottom: 1.1rem;
         }
 
         .company-info-row {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
+          gap: 14px;
+          flex-wrap: wrap;
+          margin-bottom: 8px;
+        }
+
+        .company-meta-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           gap: 14px;
           flex-wrap: wrap;
         }
 
-        .company-text-block {
+        .company-subline {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          margin: 0;
+          line-height: 1.45;
+          font-style: italic;
           flex: 1;
-          min-width: 160px;
+          min-width: 0;
+        }
+
+        .badges-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
         }
 
         /* ── Company Logos ── */
         .company-logo-group {
           display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
           align-items: center;
           gap: 8px;
           flex-shrink: 0;
@@ -484,8 +323,9 @@ const Experience = () => {
         }
 
         .company-logo-wrap {
-          display: flex;
+          display: inline-flex;
           align-items: center;
+          flex-shrink: 0;
         }
 
         .company-logo-sep {
@@ -495,6 +335,7 @@ const Experience = () => {
           color: var(--text-secondary);
           opacity: 0.5;
           line-height: 1;
+          flex-shrink: 0;
         }
 
         .company-logo-link {
@@ -527,6 +368,18 @@ const Experience = () => {
           display: block;
         }
 
+        /* Horizontal wordmark logos: keep the 44px height, let width follow the
+           aspect ratio so the mark stays readable instead of being squished. */
+        .company-logo--wide {
+          width: auto;
+          max-width: 150px;
+          padding: 6px 10px;
+          object-fit: contain;
+          /* Wordmarks often use dark ink; keep a light chip so they stay
+             legible on dark/monochrome themes too. */
+          background: #ffffff;
+        }
+
         .company-logo-fallback {
           display: flex;
           align-items: center;
@@ -553,21 +406,10 @@ const Experience = () => {
           font-style: italic;
         }
 
-        .company-link {
-          color: var(--text-secondary);
-          transition: color 0.2s;
-          align-self: center;
-        }
-
-        .company-link:hover {
-          color: var(--text-primary);
-        }
-
         .badges-row {
           display: flex;
           align-items: center;
           gap: 8px;
-          margin-left: auto;
         }
 
         .location-badge, .duration-badge {
@@ -580,6 +422,7 @@ const Experience = () => {
           padding: 4px 10px;
           border-radius: 12px;
           border: 1px solid var(--border-color);
+          white-space: nowrap;
         }
 
         .roles-list {
@@ -591,10 +434,10 @@ const Experience = () => {
         .role-item {
           position: relative;
         }
-        
+
         .role-item.has-border {
-            padding-bottom: 1.5rem;
-            border-bottom: 1px dashed var(--border-color);
+          padding-bottom: 1.5rem;
+          border-bottom: 1px dashed var(--border-color);
         }
 
         .role-header {
@@ -663,233 +506,46 @@ const Experience = () => {
           opacity: 0.7;
         }
 
-        /* ── Timeline View ── */
-        .tl-container {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-
-        .tl-axis {
-          margin-bottom: 1.5rem;
-          padding-left: 220px;
-        }
-
-        .tl-axis-track {
-          position: relative;
-          height: 28px;
-          border-bottom: 1px solid var(--border-color);
-        }
-
-        .tl-year-marker {
-          position: absolute;
-          bottom: 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .tl-year-label {
-          font-family: var(--font-mono);
-          font-size: 0.65rem;
-          font-weight: 700;
-          color: var(--text-secondary);
-          opacity: 0.7;
-          letter-spacing: 1px;
-          margin-bottom: 4px;
-        }
-
-        .tl-year-tick {
-          width: 1px;
-          height: 8px;
-          background: var(--border-color);
-        }
-
-        .tl-lanes {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-        }
-
-        .tl-lane {
-          display: flex;
-          align-items: center;
-          gap: 0;
-          min-height: 48px;
-          border-radius: 6px;
-          transition: background 0.2s;
-          padding: 6px 0;
-        }
-
-        .tl-lane:hover {
-          background: rgba(var(--text-primary-rgb), 0.02);
-        }
-
-        .tl-lane-label {
-          width: 220px;
-          flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding-right: 16px;
-        }
-
-        .tl-lane-logos {
-          flex-shrink: 0;
-        }
-
-        .tl-lane-logos .company-logo-group {
-          gap: 3px;
-        }
-
-        .tl-lane-logos .company-logo,
-        .tl-lane-logos .company-logo-fallback {
-          width: 28px !important;
-          height: 28px !important;
-          border-radius: 6px;
-          padding: 3px;
-        }
-
-        .tl-lane-logos .company-logo-sep {
-          font-size: 0.6rem;
-        }
-
-        .tl-lane-info {
-          display: flex;
-          flex-direction: column;
-          min-width: 0;
-        }
-
-        .tl-lane-role {
-          font-size: 0.78rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          line-height: 1.2;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .tl-lane-company {
-          font-size: 0.68rem;
-          color: var(--text-secondary);
-          font-family: var(--font-mono);
-          opacity: 0.7;
-        }
-
-        .tl-lane-track {
-          flex: 1;
-          position: relative;
-          height: 36px;
-          border-radius: 4px;
-          min-width: 0;
-        }
-
-        .tl-grid-lines {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-        }
-
-        .tl-grid-line {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          width: 1px;
-          background: var(--border-color);
-          opacity: 0.4;
-        }
-
-        .tl-bar {
-          position: absolute;
-          top: 4px;
-          bottom: 4px;
-          border-radius: 4px;
-          background: var(--bar-accent);
-          opacity: 0.2;
-          transition: all 0.3s ease;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          cursor: default;
-        }
-
-        .tl-bar:hover {
-          opacity: 0.45;
-          transform: scaleY(1.15);
-        }
-
-        .tl-bar--present {
-          opacity: 0.35;
-          border-right: 2px dashed var(--bar-accent);
-          animation: tl-pulse 3s infinite ease-in-out;
-        }
-
-        @keyframes tl-pulse {
-          0%, 100% { opacity: 0.35; }
-          50% { opacity: 0.5; }
-        }
-
-        .tl-bar-period {
-          font-family: var(--font-mono);
-          font-size: 0.58rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          white-space: nowrap;
-          letter-spacing: 0.3px;
-          opacity: 0;
-          transition: opacity 0.3s;
-        }
-
-        .tl-bar:hover .tl-bar-period {
-          opacity: 1;
-        }
-
         /* ── Mobile ── */
         @media (max-width: 768px) {
           .experience-timeline {
-            padding-left: 0.25rem;
+            padding: 0 1rem;
             max-width: 100%;
           }
-          .experience-group {
-            padding-left: 1.25rem;
-            margin-left: 0.25rem;
-            margin-bottom: 3.5rem;
-          }
+          /* Drop the timeline rail on mobile: cards go full-width, the card's
+             own accent strip carries the colour. */
           .timeline-connector {
-            left: -0.75rem; 
-            top: 1.5rem;
-            bottom: -3.5rem;
+            display: none;
           }
-          .timeline-dot {
-            width: 20px;
-            height: 20px;
-            left: -10px;
-            top: -4px;
-          }
-          .timeline-line {
-            left: -1px;
-          }
-          .company-info-row {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            grid-template-rows: auto auto;
-            gap: 10px 12px;
-          }
-          .company-text-block {
-            grid-column: 2;
-            min-width: 0;
-          }
-          .company-link {
-            grid-column: 2;
-            justify-self: start;
-          }
-          .badges-row {
-            grid-column: 1 / -1;
+          .experience-group {
+            padding-left: 0;
             margin-left: 0;
+            margin-bottom: 1.5rem;
+          }
+          /* Stack logo(s) above full-width text so multi-logo cards
+             (e.g. T-Systems × Pixeldust) don't squeeze the company name. */
+          .company-info-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+          }
+          .company-meta-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+          }
+          .company-subline {
+            font-style: normal;
+            margin-bottom: 0;
           }
           .company-name {
             font-size: 1.1rem;
+          }
+          .card-header-group {
+            margin-bottom: 1.1rem;
+            padding-bottom: 0.9rem;
           }
           .role-header {
             flex-direction: column;
@@ -897,31 +553,18 @@ const Experience = () => {
             align-items: flex-start;
           }
           .badges-row {
-             display: none;
+            display: none;
+          }
+          .roles-list {
+            gap: 1.25rem;
           }
           .role-description {
-            padding-left: 1.25rem;
+            padding-left: 0;
           }
           .role-description li {
-            font-size: 0.85rem;
-            margin-bottom: 0.75rem;
+            font-size: 0.88rem;
+            line-height: 1.55;
           }
-
-          /* Timeline view mobile: stack labels above bars */
-          .tl-axis { padding-left: 0; }
-          .tl-lane {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 4px;
-            padding: 10px 0;
-          }
-          .tl-lane-label {
-            width: 100%;
-            padding-right: 0;
-            padding-bottom: 4px;
-          }
-          .tl-lane-track { height: 28px; }
-          .tl-bar-period { opacity: 1; font-size: 0.52rem; }
         }
       `}</style>
     </section>

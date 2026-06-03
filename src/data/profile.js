@@ -2,7 +2,7 @@ export const profile = {
   name: 'Suresh Bhandari',
   title: 'Senior Backend and AI Engineer',
   tagline:
-    'Backend and AI at scale — 5M+ MAU, Google ADK at T-Systems, solo tech lead on production products.',
+    'Backend and AI at scale -5M+ MAU, Google ADK at T-Systems, solo tech lead on production products.',
   location: 'Mumbai, India',
   relocation: 'Open to relocation',
   email: 'suresh.37x@gmail.com',
@@ -20,9 +20,9 @@ export const profile = {
   lastUpdated: 'May 2026',
 };
 
-export const summary = `Senior Backend and AI Engineer with 5 years building and scaling distributed systems. Owned core backend services for a real-money gaming platform at 5M+ MAU, and ran production end-to-end as the solo engineer and tech lead on multiple products. Now building agentic AI systems on Google ADK at Deutsche Telekom (T-Systems); promoted to Senior SDE in 10 months and Tech Lead within 4 years. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.`;
+export const summary = `Senior Backend and AI Engineer with 5 years building and scaling distributed systems. Owned core backend services for a real-money gaming platform at 5M+ MAU, and ran production end-to-end as the solo engineer and tech lead on multiple products. Now building agentic AI systems on Google ADK at T-Systems (Deutsche Telekom subsidiary); promoted to Senior SDE in 10 months and Tech Lead within 4 years. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.`;
 
-/** Visible + crawlable — mirrors resume keyword density for ATS */
+/** Visible + crawlable -mirrors resume keyword density for ATS */
 export const atsKeywords = [
   'Python',
   'FastAPI',
@@ -43,18 +43,18 @@ export const atsKeywords = [
   'MongoDB',
   'Tech Lead',
   'T-Systems',
-  'Deutsche Telekom',
+  'T-Systems (Deutsche Telekom)',
 ];
 
 export const impactMetrics = [
   { value: '5M+', label: 'MAU platform scaled', keyword: 'System scalability' },
   { value: '10+', label: 'Production AI agents', keyword: 'Google ADK' },
   { value: '5 yrs', label: 'Backend engineering', keyword: 'Senior Backend Engineer' },
-  { value: '10 mo', label: 'Promotion to Senior SDE', keyword: 'Technical leadership' },
+  { value: '0.8 yrs', label: 'Promotion to Senior SDE', keyword: 'Technical leadership' },
 ];
 
 export const education = {
-  period: '2018 – 2021',
+  period: '2018 - 2021',
   degree: 'Bachelor of Computer Applications (BCA)',
   gpa: 'GPA 8.20 / 10',
   university: 'YCMOU',
@@ -67,5 +67,5 @@ export const education = {
 export const seo = {
   title: 'Suresh Bhandari | Senior Backend & AI Engineer',
   description:
-    'Senior Backend and AI Engineer: Python, FastAPI, Google ADK, RabbitMQ, PostgreSQL, AWS. 5M+ MAU gaming platform, T-Systems / Deutsche Telekom, tech lead. Mumbai — open to relocation.',
+    'Senior Backend and AI Engineer: Python, FastAPI, Google ADK, RabbitMQ, PostgreSQL, AWS. 5M+ MAU gaming platform, T-Systems (Deutsche Telekom subsidiary), tech lead. Mumbai -open to relocation.',
 };

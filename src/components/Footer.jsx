@@ -2,16 +2,30 @@ import React from 'react';
 import { ArrowUp, FileText, Github, Linkedin, Mail, MapPin } from 'lucide-react';
 import { profile } from '../data/profile';
 import Logo from './Logo';
+import { useTheme } from '../context/ThemeContext';
 
 const stack = ['Python', 'FastAPI', 'Google ADK', 'RAG', 'Postgres', 'Redis', 'RabbitMQ', 'AWS'];
 
 const Footer = () => {
+  const { theme } = useTheme();
+  const isMonochrome = theme === 'mono-light' || theme === 'mono-dark';
+
+  const accentColors = React.useMemo(() => {
+    return [
+      'var(--accent-primary)',
+      'var(--accent-secondary)',
+      'var(--accent-tertiary)',
+      'var(--accent-primary)',
+    ];
+  }, []);
+
+  const borderMultiplier = isMonochrome ? 3.7 : 1;
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <footer className="footer">
+    <footer className="footer" style={{ '--border-multiplier': borderMultiplier }}>
       <div className="footer-shell">
         <div className="footer-meta-row">
           <span>Senior Backend and AI Engineer</span>
@@ -52,24 +66,24 @@ const Footer = () => {
 
           <div className="footer-actions-v2">
             <div className="footer-cta-group-v2">
-              <a href={`mailto:${profile.email}`} className="footer-cta-v2 primary">
+              <a href={`mailto:${profile.email}`} target="_blank" rel="noopener noreferrer" className="footer-cta-v2 primary" style={{ '--cta-accent': accentColors[0] }}>
                 <Mail size={18} />
                 Email Suresh
               </a>
-              <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="footer-cta-v2">
+              <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="footer-cta-v2" style={{ '--cta-accent': accentColors[1] }}>
                 <FileText size={18} />
                 Resume
               </a>
             </div>
 
             <div className="social-cluster-v2">
-              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="social-icon-v2" aria-label="GitHub">
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="social-icon-v2" style={{ '--social-accent': accentColors[2] }} aria-label="GitHub">
                 <Github size={18} />
               </a>
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="social-icon-v2" aria-label="LinkedIn">
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="social-icon-v2" style={{ '--social-accent': accentColors[3] }} aria-label="LinkedIn">
                 <Linkedin size={18} />
               </a>
-              <a href={`mailto:${profile.email}`} className="social-icon-v2" aria-label="Email">
+              <a href={`mailto:${profile.email}`} target="_blank" rel="noopener noreferrer" className="social-icon-v2" style={{ '--social-accent': accentColors[0] }} aria-label="Email">
                 <Mail size={18} />
               </a>
             </div>
@@ -84,7 +98,7 @@ const Footer = () => {
             <span className="sep-v2">/</span>
             <span>Last updated {profile.lastUpdated}</span>
           </div>
-          <button onClick={scrollToTop} className="scroll-btn-v2" aria-label="Scroll to top">
+          <button onClick={scrollToTop} className="scroll-btn-v2" style={{ '--scroll-accent': accentColors[0] }} aria-label="Scroll to top">
             <ArrowUp size={16} />
           </button>
         </div>
@@ -93,17 +107,18 @@ const Footer = () => {
       <style>{`
         .footer {
           width: 100%;
-          padding: 4.5rem 0 5.5rem;
-          background: rgba(var(--text-primary-rgb), 0.018);
-          border-top: 1px solid var(--border-color);
+          padding: 4rem 0 5rem;
+          background: transparent;
+          border-top: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
         }
 
         .footer-shell {
-          width: min(1200px, calc(100% - 2.5rem));
+          max-width: 1200px;
           margin: 0 auto;
+          padding: 0 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 2.25rem;
+          gap: 2rem;
         }
 
         .footer-meta-row {
@@ -112,7 +127,7 @@ const Footer = () => {
           align-items: center;
           gap: 1rem;
           padding-bottom: 1rem;
-          border-bottom: 1px solid var(--border-color);
+          border-bottom: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
           color: var(--text-secondary);
           font-family: var(--font-mono);
           font-size: 0.72rem;
@@ -130,20 +145,20 @@ const Footer = () => {
 
         .footer-content-v2 {
           display: grid;
-          grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
-          gap: clamp(2rem, 6vw, 5rem);
+          grid-template-columns: minmax(0, 1fr) minmax(280px, 320px);
+          gap: clamp(2rem, 5vw, 4rem);
           align-items: end;
         }
 
         .footer-brand-v2 {
-          max-width: 760px;
+          max-width: 700px;
         }
 
         .logo-group-v2 {
           display: flex;
           align-items: center;
           gap: 16px;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.25rem;
         }
 
         .sb-details-v2 {
@@ -156,7 +171,7 @@ const Footer = () => {
         .sb-name-v2 {
           font-family: var(--font-mono);
           font-weight: 800;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
           color: var(--text-primary);
           line-height: 1;
           display: flex;
@@ -165,39 +180,39 @@ const Footer = () => {
         }
 
         .footer-heading-v2 {
-          max-width: 760px;
-          margin: 0 0 1rem;
+          max-width: 700px;
+          margin: 0 0 0.75rem;
           font-family: var(--font-sans);
-          font-size: clamp(1.8rem, 4vw, 3.25rem);
-          line-height: 1.02;
+          font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+          line-height: 1.05;
           letter-spacing: 0;
           color: var(--text-primary);
         }
 
         .footer-copy-v2 {
-          max-width: 640px;
+          max-width: 600px;
           margin: 0;
           color: var(--text-secondary);
-          font-size: 1rem;
-          line-height: 1.7;
+          font-size: 0.95rem;
+          line-height: 1.6;
         }
 
         .footer-stack-v2 {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.55rem;
-          margin-top: 1.5rem;
+          gap: 0.5rem;
+          margin-top: 1.25rem;
         }
 
         .footer-stack-v2 span {
-          border: 1px solid var(--border-color);
-          border-radius: 8px;
-          padding: 0.35rem 0.65rem;
-          background: rgba(var(--text-primary-rgb), 0.025);
+          border: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
+          border-radius: 6px;
+          padding: 0.3rem 0.6rem;
+          background: transparent;
           color: var(--text-secondary);
           font-family: var(--font-mono);
-          font-size: 0.72rem;
-          font-weight: 700;
+          font-size: 0.7rem;
+          font-weight: 600;
         }
 
         .footer-actions-v2 {
@@ -215,29 +230,33 @@ const Footer = () => {
         }
 
         .footer-cta-v2 {
-          min-height: 52px;
+          min-height: 48px;
           padding: 0 1rem;
-          border: 1px solid var(--border-color);
+          border: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
           border-radius: 8px;
           display: inline-flex;
           align-items: center;
           justify-content: space-between;
           gap: 0.75rem;
           color: var(--text-primary);
-          font-weight: 800;
-          background: rgba(var(--text-primary-rgb), 0.025);
-          transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+          font-weight: 700;
+          background: transparent;
+          transition: all var(--transition-fast);
+          text-decoration: none;
+          cursor: pointer;
+          pointer-events: auto;
         }
 
         .footer-cta-v2.primary {
-          background: var(--text-primary);
+          background: var(--cta-accent);
           color: var(--bg-primary-color);
-          border-color: var(--text-primary);
+          border-color: var(--cta-accent);
         }
 
         .footer-cta-v2:hover {
           transform: translateY(-2px);
-          border-color: var(--text-primary);
+          border-color: var(--cta-accent);
+          box-shadow: 0 4px 12px var(--cta-accent)30;
         }
 
         .social-cluster-v2 {
@@ -249,24 +268,29 @@ const Footer = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 44px;
-          height: 44px;
+          width: 40px;
+          height: 40px;
           border-radius: 8px;
-          background: rgba(var(--text-primary-rgb), 0.03);
-          border: 1px solid var(--border-color);
+          background: transparent;
+          border: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
           color: var(--text-secondary);
-          transition: transform var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+          transition: all var(--transition-fast);
+          text-decoration: none;
+          cursor: pointer;
+          pointer-events: auto;
         }
 
         .social-icon-v2:hover {
-          background: var(--text-primary);
+          background: var(--social-accent);
           color: var(--bg-primary-color);
+          border-color: var(--social-accent);
           transform: translateY(-2px);
+          box-shadow: 0 4px 12px var(--social-accent)30;
         }
 
         .footer-bottom-v2 {
           padding-top: 1.5rem;
-          border-top: 1px solid var(--border-color);
+          border-top: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -290,7 +314,7 @@ const Footer = () => {
 
         .scroll-btn-v2 {
           background: transparent;
-          border: 1px solid var(--border-color);
+          border: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
           color: var(--text-secondary);
           width: 42px;
           height: 42px;
@@ -300,22 +324,24 @@ const Footer = () => {
           justify-content: center;
           cursor: pointer;
           flex-shrink: 0;
-          transition: transform var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+          transition: all var(--transition-fast);
         }
 
         .scroll-btn-v2:hover {
-          color: var(--text-primary);
-          border-color: var(--text-primary);
+          color: var(--scroll-accent);
+          border-color: var(--scroll-accent);
           transform: translateY(-2px);
+          box-shadow: 0 4px 12px var(--scroll-accent)30;
         }
 
         @media (max-width: 840px) {
           .footer {
-            padding: 3.5rem 0 4.5rem;
+            padding: 3rem 0 4rem;
           }
 
           .footer-shell {
-            width: min(100% - 2rem, 680px);
+            max-width: 100%;
+            padding: 0 1.5rem;
           }
 
           .footer-meta-row,
@@ -330,6 +356,7 @@ const Footer = () => {
 
           .footer-content-v2 {
             grid-template-columns: 1fr;
+            gap: 2rem;
           }
 
           .footer-actions-v2 {
@@ -343,16 +370,42 @@ const Footer = () => {
         }
 
         @media (max-width: 520px) {
+          .footer {
+            padding: 2.5rem 0 3.5rem;
+          }
+
+          .footer-shell {
+            padding: 0 1rem;
+          }
+
           .logo-group-v2 {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
           }
 
           .footer-heading-v2 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
           }
 
           .footer-copy-v2 {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+          }
+
+          .footer-cta-group-v2 {
+            gap: 0.6rem;
+          }
+
+          .footer-cta-v2 {
+            min-height: 44px;
+            font-size: 0.9rem;
+          }
+
+          .social-cluster-v2 {
+            gap: 0.6rem;
+          }
+
+          .social-icon-v2 {
+            width: 36px;
+            height: 36px;
           }
         }
       `}</style>

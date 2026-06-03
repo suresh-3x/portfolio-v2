@@ -1,9 +1,12 @@
 import { profile, summary, atsKeywords } from '../../data/profile';
 import { experienceEntries } from '../../data/experience';
-import { skillCategories } from '../../data/skills';
+import { primarySkillsets, skillCategories } from '../../data/skills';
 
 const flattenSkills = () =>
-  skillCategories.flatMap((c) => c.skills);
+  [...new Set([
+    ...primarySkillsets.flatMap((c) => [c.title, ...c.highlights, ...c.skills]),
+    ...skillCategories.flatMap((c) => c.skills),
+  ])];
 
 const ResumeStructuredData = () => {
   const jsonLd = {

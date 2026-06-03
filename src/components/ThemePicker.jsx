@@ -79,23 +79,27 @@ const ThemePicker = ({ mobile, mode = 'dropdown' }) => {
         }
 
         .theme-toggle-btn {
-          background: transparent;
-          border: 1px solid transparent;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1.5px solid rgba(var(--border-color-rgb, 255, 255, 255), 0.15);
           color: var(--text-secondary);
           cursor: pointer;
           padding: 8px;
-          border-radius: 50%;
-          transition: all 0.3s ease;
+          border-radius: 8px;
+          transition: all 0.2s ease;
           display: flex;
           align-items: center;
           justify-content: center;
+          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.05),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .theme-toggle-btn:hover, .theme-toggle-btn.open {
-          color: var(--accent-secondary);
-          background: rgba(var(--accent-secondary-rgb), 0.1);
-          border-color: rgba(var(--accent-secondary-rgb), 0.2);
-          box-shadow: 0 0 15px rgba(var(--accent-secondary-rgb), 0.2);
+          color: var(--accent-primary);
+          background: rgba(var(--accent-primary-rgb), 0.08);
+          border-color: var(--accent-primary);
+          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.15),
+                      0 4px 12px rgba(0, 0, 0, 0.1),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .theme-picker-container.mobile .theme-toggle-btn {
@@ -105,15 +109,17 @@ const ThemePicker = ({ mobile, mode = 'dropdown' }) => {
         /* Standard Dropdown */
         .theme-dropdown {
           position: absolute;
-          top: calc(100% + 16px);
+          top: calc(100% + 12px);
           right: 0;
-          width: 280px;
+          width: 260px;
           background: var(--card-bg);
-          border: 1px solid var(--border-color);
+          border: 1.5px solid rgba(var(--border-color-rgb, 255, 255, 255), 0.15);
           border-radius: 12px;
-          box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
+                      0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.05),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.05);
           z-index: 1000;
-          padding: 1rem;
+          padding: 0.75rem;
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           animation: slideDown 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -164,10 +170,10 @@ const ThemePicker = ({ mobile, mode = 'dropdown' }) => {
         .theme-option-card {
           display: flex;
           align-items: center;
-          gap: 1rem;
-          padding: 0.75rem;
-          background: rgba(var(--text-primary-rgb), 0.03);
-          border: 1px solid transparent;
+          gap: 0.75rem;
+          padding: 0.65rem;
+          background: transparent;
+          border: 1.5px solid rgba(var(--border-color-rgb, 255, 255, 255), 0.1);
           border-radius: 8px;
           color: var(--text-primary);
           cursor: pointer;
@@ -175,17 +181,25 @@ const ThemePicker = ({ mobile, mode = 'dropdown' }) => {
           text-align: left;
           position: relative;
           width: 100%;
+          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.02),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.03);
         }
 
         .theme-option-card:hover {
-          background: rgba(var(--accent-secondary-rgb), 0.05);
-          border-color: rgba(var(--accent-secondary-rgb), 0.2);
-          transform: translateX(4px);
+          background: rgba(255, 255, 255, 0.04);
+          border-color: rgba(var(--accent-primary-rgb), 0.3);
+          transform: translateX(2px);
+          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.1),
+                      0 4px 12px rgba(0, 0, 0, 0.08),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
         .theme-option-card.active {
-          background: rgba(var(--accent-secondary-rgb), 0.1);
-          border-color: var(--accent-secondary);
+          background: rgba(var(--accent-primary-rgb), 0.08);
+          border-color: var(--accent-primary);
+          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.15),
+                      0 4px 12px rgba(0, 0, 0, 0.1),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .option-icon {
