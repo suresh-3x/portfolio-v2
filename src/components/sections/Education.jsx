@@ -2,17 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, Award, Calendar } from 'lucide-react';
 import Card from '../ui/Card';
+import { education } from '../../data/profile';
 
 const Education = () => {
 
-  const education = {
-    title: "Bachelors of Computer Applications",
-    institution: "K. P. B. Hinduja College of Commerce",
-    location: "Mumbai, Maharashtra",
-    date: "10/2021",
-    grade: "CGPA: 8.20",
-    color: "#bd00ff" // Purple
-  };
+
 
   const certifications = [
     {
@@ -64,13 +58,17 @@ const Education = () => {
                     </div>
                     <div className="card-content-v2">
                       <div className="edu-item-v2">
-                        <h4>{education.title}</h4>
-                        <p className="institution-v2">{education.institution}</p>
+                        <h4>{education.degree}</h4>
+                        <p className="institution-v2">
+                          <a href={education.universityUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+                            {education.universityFull}
+                          </a>
+                        </p>
                         <div className="meta-v2">
                           <span className="location-v2">{education.location}</span>
-                          <span className="date-v2"><Calendar size={14} /> {education.date}</span>
+                          <span className="date-v2"><Calendar size={14} /> {education.period}</span>
                         </div>
-                        <p className="grade-v2" style={{ color: accentColors[0] }}>{education.grade}</p>
+                        <p className="grade-v2" style={{ color: accentColors[0] }}>{education.gpa}</p>
                       </div>
                     </div>
                   </div>

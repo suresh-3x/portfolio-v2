@@ -1,0 +1,387 @@
+.experience-section {
+  position: relative;
+}
+
+.experience-parallax-wrap {
+  width: 100%;
+}
+
+.experience-timeline {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.experience-group {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-left: 2.75rem;
+}
+
+.timeline-connector {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: -3rem;
+  width: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.experience-group:last-child .timeline-connector {
+  bottom: auto;
+  height: 100%;
+}
+
+.experience-group:last-child .timeline-line {
+  display: none;
+}
+
+.timeline-dot {
+  width: auto;
+  min-width: 44px;
+  height: auto;
+  min-height: 44px;
+  border-radius: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: visible;
+  padding: 6px 8px;
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 0 4px rgba(var(--bg-primary-rgb), 1) !important;
+}
+
+.timeline-dot--logos {
+  background: var(--bg-primary-color) !important;
+}
+
+.company-logo-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.company-logo-group--stacked {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.company-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.company-logo-sep {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  opacity: 0.6;
+  line-height: 1;
+}
+
+.company-logo-main-group .company-logo-label {
+  display: none;
+}
+
+.company-logo-main-group .company-logo,
+.company-logo-main-group .company-logo-fallback {
+  width: 52px;
+  height: 52px;
+}
+
+.role-title-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.role-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.company-logo-group--stacked .company-logo,
+.company-logo-group--stacked .company-logo-fallback {
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+}
+
+.company-logo-group--stacked .company-logo-label {
+  display: none;
+}
+
+.timeline-line {
+  width: 2px;
+  flex-grow: 1;
+  margin-top: 6px;
+  opacity: 0.35;
+}
+
+.experience-card {
+  width: 100%;
+}
+
+.card-header-group {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.company-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.company-logo-link {
+  display: inline-flex;
+  flex-shrink: 0;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.company-logo-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.15);
+}
+
+.company-logo-link:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.company-logo,
+.company-logo-fallback {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  object-fit: contain;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.company-logo-link .company-logo,
+.company-logo-link .company-logo-fallback {
+  display: block;
+}
+
+.company-logo-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  letter-spacing: -0.02em;
+}
+
+.company-text-block {
+  flex: 1;
+  min-width: 160px;
+}
+
+.company-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.company-subline {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.45;
+  font-style: italic;
+}
+
+.company-link {
+  color: var(--text-secondary);
+  transition: color 0.2s;
+  align-self: center;
+}
+
+.company-link:hover {
+  color: var(--text-primary);
+}
+
+.badges-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.location-badge,
+.duration-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.roles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.role-item.has-border {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.role-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.role-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.role-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.period {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.type-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  border: 1px solid var(--border-color);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--text-secondary);
+}
+
+.role-description {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.role-description li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.role-description li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-primary);
+  opacity: 0.75;
+}
+
+@media (max-width: 768px) {
+  .experience-section {
+    padding: 0 clamp(0.25rem, 2vw, 0.5rem);
+  }
+
+  .experience-group {
+    padding-left: 1.35rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .timeline-dot {
+    min-width: 36px;
+    min-height: 36px;
+    padding: 4px;
+  }
+
+  .company-info-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px 12px;
+  }
+
+  .company-logo-main-group {
+    grid-row: span 2;
+  }
+
+  .company-text-block {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .company-link {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .badges-row {
+    grid-column: 1 / -1;
+    margin-left: 0;
+  }
+
+  .company-name {
+    font-size: 1.05rem;
+  }
+
+  .company-subline {
+    font-size: 0.8rem;
+  }
+
+  .role-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .role-meta {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .role-description li {
+    font-size: 0.88rem;
+  }
+}

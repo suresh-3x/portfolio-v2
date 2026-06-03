@@ -1,0 +1,97 @@
+.parallax-scene {
+  position: relative;
+  width: 100%;
+}
+
+.parallax-layer {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.parallax-float {
+  animation: parallax-drift 14s ease-in-out infinite;
+}
+
+@keyframes parallax-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+/* Ambient 3D floaters — visible depth cues */
+.parallax-floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+.parallax-floaters .floater {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.parallax-floaters .f1 {
+  width: 320px;
+  height: 320px;
+  top: 8%;
+  left: 5%;
+  background: rgba(var(--accent-primary-rgb), 0.35);
+}
+
+.parallax-floaters .f2 {
+  width: 260px;
+  height: 260px;
+  bottom: 12%;
+  right: 8%;
+  background: rgba(var(--accent-tertiary-rgb), 0.28);
+}
+
+.parallax-floaters .f3 {
+  width: 180px;
+  height: 180px;
+  top: 40%;
+  right: 30%;
+  background: rgba(var(--accent-secondary-rgb), 0.22);
+}
+
+.layout-parallax-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  perspective: 800px;
+  overflow: hidden;
+}
+
+.layout-depth-plane {
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(
+    ellipse 70% 45% at 50% 20%,
+    rgba(var(--accent-primary-rgb), 0.12),
+    transparent 65%
+  );
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.08s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-float,
+  .parallax-floaters,
+  .layout-depth-plane,
+  .parallax-layer {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

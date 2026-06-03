@@ -7,7 +7,16 @@ import { useTheme } from '../context/ThemeContext';
 
 const Navbar = ({ highlightColor }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { theme } = useTheme();
+
+  // Toggle merged (full-width) state once scrolled past the hero edge
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Handle scroll lock accurately
   useEffect(() => {
@@ -44,7 +53,7 @@ const Navbar = ({ highlightColor }) => {
   ];
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-island">
         <div className="nav-container">
           <div className="logo-v4">
@@ -126,8 +135,17 @@ const Navbar = ({ highlightColor }) => {
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                      width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                      max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           pointer-events: none;
+        }
+
+        /* Merged / full-width state once scrolled */
+        .navbar.scrolled {
+          top: 0;
+          width: 100%;
+          max-width: none;
         }
 
         .nav-island {
@@ -140,7 +158,21 @@ const Navbar = ({ highlightColor }) => {
           width: 100%;
           max-width: 1200px;
           pointer-events: auto;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                      max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                      border-color 0.4s ease,
+                      background 0.4s ease;
+        }
+
+        .navbar.scrolled .nav-island {
+          max-width: none;
+          border-radius: 0;
+          border-color: transparent;
+          border-bottom-color: var(--border-color);
+          background: var(--card-bg);
+          backdrop-filter: blur(32px);
+          -webkit-backdrop-filter: blur(32px);
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
         }
 
         .nav-container {
@@ -149,6 +181,14 @@ const Navbar = ({ highlightColor }) => {
           justify-content: space-between;
           align-items: center;
           gap: 2rem;
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled .nav-container {
+          padding: 0.6rem 2rem;
         }
 
         .logo-v4 {

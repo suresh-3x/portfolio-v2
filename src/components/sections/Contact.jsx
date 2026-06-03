@@ -1,27 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import Card from '../ui/Card';
-const STEVE_JOBS_QUOTES = [
-  "Design is not just what it looks like and feels like. Design is how it works.",
-  "Be a yardstick of quality. Some people aren't used to an environment where excellence is expected.",
-  "The only way to do great work is to love what you do.",
-  "Innovation distinguishes between a leader and a follower.",
-  "Details matter, it's worth waiting to get it right.",
-  "Stay hungry, stay foolish.",
-  "Quality is more important than quantity. One home run is much better than two doubles.",
-  "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work.",
-  "Think different.",
-  "It's really hard to design products by focus groups. A lot of times, people don't know what they want until you show it to them.",
-  "Simple can be harder than complex: You have to work hard to get your thinking clean to make it simple.",
-  "I'm convinced that about half of what separates successful entrepreneurs from the non-successful ones is pure perseverance."
-];
 
 const Contact = () => {
-  const randomQuote = useMemo(() => {
-    const randomIndex = Math.floor(Math.random() * STEVE_JOBS_QUOTES.length);
-    return STEVE_JOBS_QUOTES[randomIndex];
-  }, []);
-
   const contactItems = [
     {
       label: "Email",
@@ -82,20 +63,6 @@ const Contact = () => {
             })}
           </div>
         </Card>
-
-        {/* Jobs Wisdom Module */}
-        <div className="jobs-wisdom-module">
-          <div className="wisdom-divider"></div>
-          <div className="quote-container">
-            <span className="quote-mark">"</span>
-            <p className="wisdom-quote">{randomQuote}</p>
-            <div className="wisdom-attribution">
-              <span className="attribution-line"></span>
-              <span className="attribution-name">STEVE JOBS</span>
-              <span className="attribution-label">// ARCHITECT_OF_EXPERIENCE</span>
-            </div>
-          </div>
-        </div>
       </div>
 
       <style>{`
@@ -262,90 +229,6 @@ const Contact = () => {
           }
         }
 
-        .jobs-wisdom-module {
-            margin-top: 8rem;
-            margin-bottom: 6rem;
-            text-align: center;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-        }
-
-        .wisdom-divider {
-            height: 1px;
-            width: 100px;
-            background: var(--border-color);
-            margin: 0 auto 4rem;
-            opacity: 0.3;
-        }
-
-        .quote-container {
-            position: relative;
-            padding: 0 2rem;
-        }
-
-        .quote-mark {
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 6rem;
-            font-family: serif;
-            color: var(--accent-primary);
-            opacity: 0.1;
-            line-height: 1;
-        }
-
-        .wisdom-quote {
-            font-size: 1.75rem;
-            font-weight: 500;
-            color: var(--text-primary);
-            line-height: 1.4;
-            margin-bottom: 2.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .wisdom-attribution {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .attribution-line {
-            width: 24px;
-            height: 1px;
-            background: var(--accent-primary);
-            margin-bottom: 0.5rem;
-            opacity: 0.5;
-        }
-
-        .attribution-name {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 4px;
-            color: var(--text-primary);
-        }
-
-        .attribution-label {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            opacity: 0.6;
-        }
-
-        @media (max-width: 768px) {
-            .wisdom-quote {
-                font-size: 1.25rem;
-            }
-            .jobs-wisdom-module {
-                margin-top: 5rem;
-                margin-bottom: 4rem;
-            }
-        }
       `}</style>
     </section>
   );

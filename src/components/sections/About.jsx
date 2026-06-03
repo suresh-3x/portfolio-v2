@@ -2,10 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, Zap, Shield, Cloud, Bot, Smartphone, ExternalLink } from 'lucide-react';
 import Card from '../ui/Card';
+import { summary, profile } from '../../data/profile';
 
 const About = () => {
 
-  const resumeLink = "https://gwl1cw03d070bspa.public.blob.vercel-storage.com/resume-sde-0.pdf";
+  const resumeLink = profile.resumeUrl;
 
   const features = [
     {
@@ -49,11 +50,11 @@ const About = () => {
 
 
             <p className="narrative-p main">
-              I don't just write code; I engineer <strong>resilient digital ecosystems</strong>. My approach is rooted in the belief that great software is a synthesis of rigorous performance standards and intuitive human-centered design.
+              Senior Backend and AI Engineer with <strong>5 years building and scaling distributed systems</strong>. I owned core backend services for a real-money gaming platform at 5M+ MAU, and ran production end-to-end as the solo engineer and tech lead on multiple products.
             </p>
 
             <p className="narrative-p">
-              With a decade of experience navigating the complexities of high-throughput systems, I've developed a philosophy centered on <strong>scalability by design</strong>. Whether I'm orchestrating distributed backends or crafting precise interfaces, my focus remains constant: delivering technical excellence that translates directly into business growth.
+              Now building <strong>agentic AI systems on Google ADK</strong> at Deutsche Telekom (T-Systems) — promoted to Senior SDE in 10 months and Tech Lead within 4 years. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.
             </p>
 
             <div className="about-tags">

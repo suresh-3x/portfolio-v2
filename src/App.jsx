@@ -25,7 +25,7 @@ const HashScrollHandler = () => {
         const id = hash.substring(1);
         const element = document.getElementById(id);
         if (element) {
-          const headerOffset = 100;
+          const headerOffset = 120;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
           const scrollTarget = Math.max(0, offsetPosition);
@@ -70,10 +70,7 @@ const HashScrollHandler = () => {
 };
 
 function App() {
-  const highlightColor = React.useMemo(() => {
-    const colors = ['var(--accent-primary)', 'var(--accent-secondary)', 'var(--accent-tertiary)'];
-    return colors[Math.floor(Math.random() * colors.length)];
-  }, []);
+  const highlightColor = 'var(--accent-primary)';
 
   return (
     <Layout highlightColor={highlightColor}>
@@ -131,7 +128,7 @@ function App() {
       <SectionDivider
         id="contact"
         title="Contact"
-        subtitle="Initiate communication for next-gen collaborations."
+        subtitle="Reach out for backend, AI platform, or production systems roles."
         colorVar="--accent-primary"
       />
       <Contact />

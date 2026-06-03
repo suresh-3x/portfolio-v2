@@ -7,6 +7,19 @@ import {
   GitBranch, Container, HardDrive, Share2
 } from 'lucide-react';
 import Card from '../ui/Card';
+import { skillCategories } from '../../data/skills';
+
+// Map icon string names from data to lucide-react components
+const iconMap = {
+  code: Code,
+  server: Server,
+  database: Database,
+  cloud: Cloud,
+  layers: Layers,
+  brain: Brain,
+  layout: Layout,
+  workflow: Workflow,
+};
 
 const Skills = () => {
 
@@ -54,51 +67,11 @@ const Skills = () => {
     return <Hash size={12} />;
   };
 
-  // Need to add Share2 to imports if used, but for now fallback to Hash if I missed one
-  // correcting the Share2 usage below to just use GitBranch or similar
-
-  const skillCategories = [
-    {
-      title: "Backend Engineering",
-      icon: <Server size={18} />,
-      skills: ["Python", "Golang", "Django", "FastAPI", "Express.js", "PostgreSQL", "MongoDB", "Redis", "RabbitMQ"]
-    },
-    {
-      title: "Fullstack Dev",
-      icon: <Layers size={18} />,
-      skills: ["React", "Next.js", "Node.js", "TypeScript", "Tailwind", "GraphQL", "Redux"]
-    },
-    {
-      title: "AI & ML",
-      icon: <Cpu size={18} />,
-      skills: ["PyTorch", "TensorFlow", "Scikit-learn", "Pandas", "LLMs", "LangChain", "AI Agents"]
-    },
-    {
-      title: "DevOps & Cloud",
-      icon: <Cloud size={18} />,
-      skills: ["AWS", "GCP", "Docker", "Kubernetes", "Terraform", "CI/CD", "Grafana"]
-    },
-    {
-      title: "System Networking",
-      icon: <Globe size={18} />,
-      skills: ["TCP/IP", "DNS", "WebSockets", "gRPC", "Nginx", "Load Balancing"]
-    },
-    {
-      title: "Computer Vision",
-      icon: <Eye size={18} />,
-      skills: ["OpenCV", "YOLO", "Image Processing", "Object Detection", "Video Analytics"]
-    },
-    {
-      title: "Mobile Dev",
-      icon: <Smartphone size={18} />,
-      skills: ["React Native", "SwiftUI", "Android", "Mobile Web", "Expo"]
-    },
-    {
-      title: "Systems & Linux",
-      icon: <Terminal size={18} />,
-      skills: ["Bash", "Shell", "Process Mgmt", "Cron Jobs", "Security Hardening"]
-    }
-  ];
+  // Resolve icon string from data to a React component
+  const getCategoryIcon = (iconName) => {
+    const IconComponent = iconMap[iconName] || Hash;
+    return <IconComponent size={18} />;
+  };
 
   return (
     <section className="skills-section">
@@ -134,7 +107,7 @@ const Skills = () => {
               >
                 <div className="module-inner">
                   <div className="module-header" style={{ borderBottomColor: `${accentColor}20` }}>
-                    <div className="module-icon-box" style={{ color: accentColor }}>{category.icon}</div>
+                    <div className="module-icon-box" style={{ color: accentColor }}>{getCategoryIcon(category.icon)}</div>
                     <h3 className="module-title">{category.title}</h3>
                   </div>
                   <div className="module-tags">

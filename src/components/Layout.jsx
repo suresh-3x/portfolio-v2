@@ -42,6 +42,7 @@ const Layout = ({ children, highlightColor }) => {
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 var(--spacing-md);
+          padding-bottom: 6rem;
         }
       `}</style>
     </div>
