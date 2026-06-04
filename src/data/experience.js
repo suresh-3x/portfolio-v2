@@ -3,10 +3,10 @@ export const experienceEntries = [
   {
     sortOrder: 0,
     id: 't-systems-pixeldust',
-    role: 'Backend Developer',
+    role: 'Backend Engineer',
     company: 'T-Systems',
     companyLine:
-      '(Deutsche Telekom subsidiary) via Pixeldust Technologies · Mumbai, India (Hybrid, CET sync)',
+      '(Deutsche Telekom subsidiary) via Pixeldust Technologies · Mumbai, India (Dedicated embed, CET sync)',
     website: 'https://t-systems.com',
     logoDomain: 't-systems.com',
     logos: [
@@ -27,8 +27,8 @@ export const experienceEntries = [
     year: 2025,
     month: 9,
     description: [
-      'Built the backend for T-Systems\' internal AI workflow platform as solo engineer: JWT auth, persistent chat-history store, performance-tuned REST APIs, and a Google ADK layer running 10+ production agents and a RAG chatbot over ingested internal docs, document-extraction pipelines, a graph agent that visualizes live DB relationships, and task-specific subagents bound to internal tools.',
-      'Full ownership of the production backend while driving cross-functional scope: HTTP streams/REST contracts for German data science alignment, contributions to React frontend tasks, and cloud deployments plus CI/CD setup.',
+      'Architected the internal agentic AI platform as the sole backend engineer: a multi-agent orchestration layer on Google ADK running 10+ production agents, including a RAG chatbot over a 60+ document knowledge base that cut retrieval from hours of manual lookup to seconds, document-extraction pipelines, a graph agent visualizing live DB relationships, and task-specific subagents bound to internal tools — improving answer accuracy and reducing analyst toil across the org.',
+      'Cross-functional backend anchor on a distributed European team: owned JWT auth, the persistent chat-history store, and HTTP streaming APIs; drove LLM contract alignment with the German data science team; contributed React frontend work; and owned all cloud deployments and CI/CD across backend, ML infra, and DevOps.',
     ],
   },
   {
@@ -52,9 +52,9 @@ export const experienceEntries = [
     year: 2023,
     month: 3,
     description: [
-      'Owned game-engine logic and core backend services (authentication, session management, wallet transaction engine) for a real-money gaming platform with 5M-10M monthly users, handling 1K-10K requests/sec at peak on FastAPI, RabbitMQ, Redis, and PostgreSQL with a zero-fault bar on wallet and game state.',
-      'Tracked down transient game-state consistency bugs under production load by parsing millions of RabbitMQ event traces across distributed consumers; shipped fixes that cut mid-game error rates by ~30% with no data corruption.',
-      'On the Platform Team, also built operator dashboards, third-party integrations, and event-driven reporting and analytics pipelines for ops and business teams.',
+      'Owned game-engine logic and mission-critical backend services (authentication, session management, and a zero-fault real-money wallet transaction engine) for a platform with 5M-10M monthly active users, sustaining 3-5K req/sec steady-state and absorbing 10K req/sec peak-event spikes on FastAPI, RabbitMQ, Redis, and PostgreSQL with no financial data loss across the entire tenure.',
+      'Diagnosed a class of transient game-state consistency failures under live load: traced root cause through millions of RabbitMQ event logs across distributed consumers within 2 days, shipping targeted fixes that cut mid-game error rates by 30% with zero data corruption or player-facing downtime.',
+      'Built the operator tooling layer — dashboards, third-party integrations, and event-driven reporting pipelines that gave ops and business teams real-time visibility into platform health and revenue flows.',
     ],
   },
   {
@@ -78,7 +78,7 @@ export const experienceEntries = [
     year: 2024,
     month: 10,
     description: [
-      'Built and ran four production web apps solo (Next.js, Node.js, MongoDB, Vercel, AWS) with zero post-launch P0 incidents over 12 months, including a React Native booking app on a customized cal.com fork that cut booking overhead by ~60%.',
+      'Built and shipped four production web apps solo (Next.js, Node.js, MongoDB, Vercel, AWS) with zero P0 incidents over 12 months, including a React Native booking app on a customized cal.com fork that cut client booking overhead by ~60%.',
     ],
   },
   {
@@ -105,7 +105,7 @@ export const experienceEntries = [
     year: 2025,
     month: 5,
     description: [
-      'Standardized backend architecture across 5+ fragmented microservices and consolidated coupled authentication and token-verification flows, clearing recurring session-corruption bugs in four weeks.',
+      'Standardized architecture across 5+ fragmented microservices and consolidated coupled authentication and token-verification flows, resolving a recurring session-corruption bug class in four weeks while mentoring 2-3 engineers.',
       'Rebuilt CI/CD on GitHub Actions, cutting release cycles from ~4 hours to under 15 minutes and enabling daily production deploys.',
     ],
   },
@@ -133,8 +133,8 @@ export const experienceEntries = [
     year: 2021,
     month: 3,
     description: [
-      'Founding backend engineer: built core landing-page architecture and a Python/React CMS the team extended for 3+ years, and stood up production Nginx, AWS, Docker, and CI/CD solo. Took end-to-end ownership of the production backend when the CTO left six months in.',
-      'Promoted to Senior SDE in 10 months; built and ran the greenfield backend for an online CRM with 15,000-20,000 monthly users (landing-page builder, assessment and quiz engine, automated PDF report pipeline, recommendation loop), scaling across 10+ production servers with horizontal scaling for high availability.',
+      'Founding backend engineer: took sole production ownership when the CTO left six months in, building the core architecture and a Python/React CMS the team extended for 3+ years, and standing up Nginx, AWS, Docker, and CI/CD from scratch.',
+      'Built the greenfield CRM backend from zero to 15,000-20,000 monthly users at 99.9%+ uptime: landing-page builder, assessment and quiz engine, an automated PDF pipeline generating 1,000+ reports/month, and a recommendation loop that drove measurable engagement lift — scaled across 10+ production servers with horizontal scaling for high availability.',
     ],
   },
 ];

@@ -1,4 +1,25 @@
 export const projects = [
+  // AI / RAG
+  {
+    title: 'Nomad Mind',
+    category: 'AI / RAG',
+    description: 'Python RAG pipeline that ingests YouTube travel vlogs via vector embeddings and answers travel questions with itineraries grounded in real video content.',
+    long_description: 'A retrieval-augmented generation pipeline that turns YouTube travel vlogs into a queryable knowledge base. Transcribes and chunks video content, embeds it into a vector store, and answers travel questions and generates itineraries grounded in what creators actually show and say on the ground — not generic model knowledge.',
+    tags: ['Python', 'RAG', 'Vector Embeddings', 'LLM', 'YouTube'],
+    tech_details: {
+      language: 'Python',
+      pipeline: 'RAG (retrieval-augmented generation)',
+      ingestion: 'YouTube travel vlogs',
+      retrieval: 'Vector embeddings',
+      output: 'Grounded Q&A and itinerary generation'
+    },
+    links: {
+      github: 'https://github.com/suresh-3x/nomad-mind'
+    },
+    featured: true,
+    year: 2025
+  },
+
   // Open Source Contributions
   {
     title: 'Cal.com (Calendso) Contribution',
@@ -99,6 +120,7 @@ export const projects = [
 
 export const projectCategories = [
   'All',
+  'AI / RAG',
   'Open Source',
   'Private - Trading Systems',
   'Private - Booking Platform',

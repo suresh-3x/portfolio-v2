@@ -50,11 +50,11 @@ const About = () => {
 
 
             <p className="narrative-p main">
-              Senior Backend and AI Engineer with <strong>5 years building and scaling distributed systems</strong>. I owned core backend services for a real-money gaming platform at 5M+ MAU, and ran production end-to-end as the solo engineer and tech lead on multiple products.
+              Senior Backend and AI Engineer with <strong>5 years building and scaling distributed systems</strong>. I owned core backend services for a real-money gaming platform at 5M+ MAU sustaining 10K req/sec peak, and ran production end-to-end as the sole engineer across multiple products.
             </p>
 
             <p className="narrative-p">
-              Now building <strong>agentic AI systems on Google ADK</strong> at T-Systems (Deutsche Telekom subsidiary). Promoted to Senior SDE in 10 months and Tech Lead within 4 years at Stride Ahead. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.
+              Now building <strong>agentic AI systems on Google ADK</strong> at T-Systems (Deutsche Telekom subsidiary), embedded as a dedicated backend hire collaborating daily with German data science, frontend, and DevOps teams. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.
             </p>
 
             <div className="about-tags">

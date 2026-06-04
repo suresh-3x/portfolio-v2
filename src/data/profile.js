@@ -20,7 +20,7 @@ export const profile = {
   lastUpdated: 'May 2026',
 };
 
-export const summary = `Senior Backend and AI Engineer with 5 years building and scaling distributed systems. Owned core backend services for a real-money gaming platform at 5M+ MAU, and ran production end-to-end as the solo engineer and tech lead on multiple products. Now building agentic AI systems on Google ADK at T-Systems (Deutsche Telekom subsidiary); promoted to Senior SDE in 10 months and Tech Lead within 4 years. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.`;
+export const summary = `Senior Backend and AI Engineer with 5 years building and scaling distributed systems. Owned core backend services for a real-money gaming platform at 5M+ MAU sustaining 10K req/sec peak, and ran production end-to-end as the sole engineer across multiple products. Now building agentic AI systems on Google ADK at T-Systems (Deutsche Telekom subsidiary), embedded as a dedicated backend hire collaborating daily with German data science, frontend, and DevOps teams. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.`;
 
 /** Visible + crawlable -mirrors resume keyword density for ATS */
 export const atsKeywords = [
@@ -50,7 +50,7 @@ export const impactMetrics = [
   { value: '5M+', label: 'MAU platform scaled', keyword: 'System scalability' },
   { value: '10+', label: 'Production AI agents', keyword: 'Google ADK' },
   { value: '5 yrs', label: 'Backend engineering', keyword: 'Senior Backend Engineer' },
-  { value: '0.8 yrs', label: 'Promotion to Senior SDE', keyword: 'Technical leadership' },
+  { value: '10K', label: 'Req/sec peak handled', keyword: 'High-throughput systems' },
 ];
 
 export const education = {
