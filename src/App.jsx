@@ -114,6 +114,7 @@ function App() {
       <SectionDivider
         id="about"
         title="About"
+        emoji="👋"
         subtitle="Engineering resilient digital ecosystems through precision and design."
         colorVar="--accent-primary"
       />
@@ -122,6 +123,7 @@ function App() {
       <SectionDivider
         id="experience"
         title="Experience"
+        emoji="💼"
         subtitle="Professional trajectory across industry-leading organizations."
         colorVar="--accent-secondary"
       />
@@ -130,6 +132,7 @@ function App() {
       <SectionDivider
         id="skills"
         title="Skills"
+        emoji="🧠"
         subtitle="Core technical components and deployment stack."
         colorVar="--accent-tertiary"
       />
@@ -138,6 +141,7 @@ function App() {
       <SectionDivider
         id="projects"
         title="Projects"
+        emoji="🚀"
         subtitle="Selected works in distributed systems and interface design."
         colorVar="--accent-primary"
       />

@@ -235,6 +235,15 @@ a {
   margin: 0;
 }
 
+.divider-emoji {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.section-emoji {
+  font-size: 0.9em;
+}
+
 .divider-subtitle {
   color: var(--text-secondary);
   font-size: 0.9rem;
