@@ -41,7 +41,9 @@ const Layout = ({ children, highlightColor }) => {
           width: 100%;
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0 var(--spacing-md);
+          /* No side padding here: each section provides its own 1.5rem gutter,
+             which keeps body sections aligned with the footer (single gutter). */
+          padding: 0;
           padding-bottom: 6rem;
         }
       `}</style>

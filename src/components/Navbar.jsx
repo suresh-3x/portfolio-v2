@@ -193,7 +193,7 @@ const Navbar = ({ highlightColor }) => {
         }
 
         .nav-container {
-          padding: 0.8rem 2rem;
+          padding: 0.85rem 1.5rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -206,7 +206,7 @@ const Navbar = ({ highlightColor }) => {
         }
 
         .navbar.scrolled .nav-container {
-          padding: 0.6rem 2rem;
+          padding: 0.65rem 1.5rem;
         }
 
         .logo-v4 {

@@ -27,7 +27,7 @@ export const experienceEntries = [
     year: 2025,
     month: 9,
     description: [
-      'Architected the internal agentic AI platform as the sole backend engineer: a multi-agent orchestration layer on Google ADK running 10+ production agents, including a RAG chatbot over a 60+ document knowledge base that cut retrieval from hours of manual lookup to seconds, document-extraction pipelines, a graph agent visualizing live DB relationships, and task-specific subagents bound to internal tools — improving answer accuracy and reducing analyst toil across the org.',
+      'Architected the internal agentic AI platform as the sole backend engineer: a multi-agent orchestration layer on Google ADK running 10+ production agents, including a RAG chatbot over a 60+ document knowledge base that cut retrieval from hours of manual lookup to seconds, document-extraction pipelines, a graph agent visualizing live DB relationships, and task-specific subagents bound to internal tools - improving answer accuracy and reducing analyst toil across the org.',
       'Cross-functional backend anchor on a distributed European team: owned JWT auth, the persistent chat-history store, and HTTP streaming APIs; drove LLM contract alignment with the German data science team; contributed React frontend work; and owned all cloud deployments and CI/CD across backend, ML infra, and DevOps.',
     ],
   },
@@ -54,7 +54,7 @@ export const experienceEntries = [
     description: [
       'Owned game-engine logic and mission-critical backend services (authentication, session management, and a zero-fault real-money wallet transaction engine) for a platform with 5M-10M monthly active users, sustaining 3-5K req/sec steady-state and absorbing 10K req/sec peak-event spikes on FastAPI, RabbitMQ, Redis, and PostgreSQL with no financial data loss across the entire tenure.',
       'Diagnosed a class of transient game-state consistency failures under live load: traced root cause through millions of RabbitMQ event logs across distributed consumers within 2 days, shipping targeted fixes that cut mid-game error rates by 30% with zero data corruption or player-facing downtime.',
-      'Built the operator tooling layer — dashboards, third-party integrations, and event-driven reporting pipelines that gave ops and business teams real-time visibility into platform health and revenue flows.',
+      'Built the operator tooling layer - dashboards, third-party integrations, and event-driven reporting pipelines that gave ops and business teams real-time visibility into platform health and revenue flows.',
     ],
   },
   {
@@ -134,7 +134,7 @@ export const experienceEntries = [
     month: 3,
     description: [
       'Founding backend engineer: took sole production ownership when the CTO left six months in, building the core architecture and a Python/React CMS the team extended for 3+ years, and standing up Nginx, AWS, Docker, and CI/CD from scratch.',
-      'Built the greenfield CRM backend from zero to 15,000-20,000 monthly users at 99.9%+ uptime: landing-page builder, assessment and quiz engine, an automated PDF pipeline generating 1,000+ reports/month, and a recommendation loop that drove measurable engagement lift — scaled across 10+ production servers with horizontal scaling for high availability.',
+      'Built the greenfield CRM backend from zero to 15,000-20,000 monthly users at 99.9%+ uptime: landing-page builder, assessment and quiz engine, an automated PDF pipeline generating 1,000+ reports/month, and a recommendation loop that drove measurable engagement lift - scaled across 10+ production servers with horizontal scaling for high availability.',
     ],
   },
 ];

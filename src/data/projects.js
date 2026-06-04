@@ -4,7 +4,7 @@ export const projects = [
     title: 'Nomad Mind',
     category: 'AI / RAG',
     description: 'Python RAG pipeline that ingests YouTube travel vlogs via vector embeddings and answers travel questions with itineraries grounded in real video content.',
-    long_description: 'A retrieval-augmented generation pipeline that turns YouTube travel vlogs into a queryable knowledge base. Transcribes and chunks video content, embeds it into a vector store, and answers travel questions and generates itineraries grounded in what creators actually show and say on the ground — not generic model knowledge.',
+    long_description: 'A retrieval-augmented generation pipeline that turns YouTube travel vlogs into a queryable knowledge base. Transcribes and chunks video content, embeds it into a vector store, and answers travel questions and generates itineraries grounded in what creators actually show and say on the ground - not generic model knowledge.',
     tags: ['Python', 'RAG', 'Vector Embeddings', 'LLM', 'YouTube'],
     tech_details: {
       language: 'Python',

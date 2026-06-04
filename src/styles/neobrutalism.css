@@ -1,4 +1,4 @@
-/* NeoBrutalist global layer — loaded last, consumes --nb-* tokens.
+/* NeoBrutalist global layer - loaded last, consumes --nb-* tokens.
    One language for all four themes; only border/shadow color varies. */
 
 /* 1. Square every primary surface. */
@@ -34,7 +34,7 @@
   -webkit-backdrop-filter: none !important;
 }
 
-/* 3. Buttons — hard border, offset shadow, tactile press on hover. */
+/* 3. Buttons - hard border, offset shadow, tactile press on hover. */
 .primary-btn,
 .secondary-btn {
   border: var(--nb-border-width) solid var(--nb-border) !important;
@@ -69,7 +69,7 @@
   border-color: var(--nb-border) !important;
 }
 
-/* 5. Badges / tags / status chips — bordered, square, small offset. */
+/* 5. Badges / tags / status chips - bordered, square, small offset. */
 .system-status,
 .stack-tag,
 .tag-module,

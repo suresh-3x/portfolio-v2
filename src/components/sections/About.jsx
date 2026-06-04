@@ -3,13 +3,6 @@ import { Cpu, Zap, Shield, Cloud, Bot, Database, ExternalLink } from 'lucide-rea
 import { profile } from '../../data/profile';
 
 const About = () => {
-  const facts = [
-    { label: 'NOW', value: 'Senior Backend & AI Engineer @ T-Systems' },
-    { label: 'BASED', value: `${profile.location} · ${profile.relocation}` },
-    { label: 'FOCUS', value: 'Distributed systems · Agentic AI · Production ownership' },
-    { label: 'STACK', value: 'Python · FastAPI · Node.js · Google ADK · PostgreSQL · AWS' },
-  ];
-
   const capabilities = [
     { icon: <Cpu size={20} />, title: 'Concurrent Systems', desc: 'Fault-tolerant microservices built for massive scale.' },
     { icon: <Zap size={20} />, title: 'Performance Tuning', desc: 'Deep optimization for mission-critical throughput.' },
@@ -22,12 +15,12 @@ const About = () => {
   return (
     <section className="about-section">
       <div className="about-container">
-        <div className="about-top">
+        <div className="about-intro">
           {/* Narrative */}
           <div className="about-narrative">
             <p className="narrative-lead">
               I build and own the <strong>backend systems</strong> that keep products
-              alive under real load — and the <strong>AI agents</strong> running on top of them.
+              alive under real load - and the <strong>AI agents</strong> running on top of them.
             </p>
             <p className="narrative-p">
               5 years building and scaling distributed systems. I owned core backend services for a
@@ -35,22 +28,14 @@ const About = () => {
               end-to-end as the sole engineer across multiple products. Now building agentic AI systems
               on Google ADK at T-Systems (Deutsche Telekom subsidiary).
             </p>
+          </div>
+
+          <div className="about-actions">
             <div className="about-tags">
               <span className="about-tag">ARCHITECT</span>
               <span className="about-tag">POLYMATH</span>
               <span className="about-tag">TECH_LEAD</span>
             </div>
-          </div>
-
-          {/* Profile facts panel */}
-          <aside className="about-facts">
-            <div className="about-facts-head">// PROFILE</div>
-            {facts.map((f) => (
-              <div className="fact-row" key={f.label}>
-                <span className="fact-label">{f.label}</span>
-                <span className="fact-value">{f.value}</span>
-              </div>
-            ))}
             <a
               href={profile.resumeUrl}
               target="_blank"
@@ -59,7 +44,7 @@ const About = () => {
             >
               VIEW RÉSUMÉ <ExternalLink size={15} />
             </a>
-          </aside>
+          </div>
         </div>
 
         {/* Capabilities */}
@@ -85,21 +70,18 @@ const About = () => {
           padding: 0 1.5rem;
         }
 
-        .about-top {
-          display: grid;
-          grid-template-columns: 1.05fr 0.95fr;
-          gap: 3.5rem;
-          align-items: start;
+        .about-intro {
           margin-bottom: 4rem;
         }
 
         .narrative-lead {
-          font-size: clamp(1.5rem, 2.6vw, 2.1rem);
-          line-height: 1.25;
+          max-width: 20ch;
+          font-size: clamp(2rem, 4.2vw, 3.2rem);
+          line-height: 1.12;
           font-weight: 800;
-          letter-spacing: -0.01em;
+          letter-spacing: -0.02em;
           color: var(--text-primary);
-          margin: 0 0 1.5rem;
+          margin: 0 0 1.75rem;
         }
 
         .narrative-lead strong {
@@ -108,17 +90,26 @@ const About = () => {
         }
 
         .narrative-p {
-          font-size: 1.05rem;
+          max-width: 62ch;
+          font-size: 1.1rem;
           line-height: 1.75;
           color: var(--text-secondary);
           margin: 0;
+        }
+
+        .about-actions {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 1.25rem;
+          margin-top: 2.25rem;
         }
 
         .about-tags {
           display: flex;
           flex-wrap: wrap;
           gap: 10px;
-          margin-top: 2rem;
         }
 
         .about-tag {
@@ -133,57 +124,17 @@ const About = () => {
           letter-spacing: 1px;
         }
 
-        /* Profile facts panel */
-        .about-facts {
-          border: 2px solid var(--nb-border);
-          box-shadow: var(--nb-shadow);
-          background: var(--card-bg);
-        }
-
-        .about-facts-head {
-          font-family: var(--font-mono);
-          font-size: 0.7rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          color: var(--on-accent);
-          background: var(--accent-primary);
-          border-bottom: 2px solid var(--nb-border);
-          padding: 0.7rem 1.1rem;
-        }
-
-        .fact-row {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-          padding: 1rem 1.1rem;
-          border-bottom: 2px solid var(--nb-border);
-        }
-
-        .fact-label {
-          font-family: var(--font-mono);
-          font-size: 0.62rem;
-          font-weight: 700;
-          letter-spacing: 0.14em;
-          color: var(--text-secondary);
-        }
-
-        .fact-value {
-          font-size: 0.95rem;
-          font-weight: 600;
-          color: var(--text-primary);
-          line-height: 1.4;
-        }
-
         .about-resume-btn {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          justify-content: center;
           gap: 8px;
-          padding: 0.95rem 1.1rem;
+          padding: 0.7rem 1.2rem;
+          border: 2px solid var(--nb-border);
+          box-shadow: var(--nb-shadow-sm);
           background: var(--text-primary);
           color: var(--bg-primary-color);
           font-family: var(--font-mono);
-          font-size: 0.8rem;
+          font-size: 0.78rem;
           font-weight: 800;
           letter-spacing: 0.08em;
           text-decoration: none;
@@ -193,6 +144,8 @@ const About = () => {
         .about-resume-btn:hover {
           background: var(--accent-primary);
           color: var(--on-accent);
+          transform: translate(3px, 3px);
+          box-shadow: 0 0 0 var(--nb-shadow-color);
         }
 
         /* Capabilities */

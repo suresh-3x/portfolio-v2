@@ -25,7 +25,7 @@ export const ThemeProvider = ({ children }) => {
 
     // Theme Data Definitions
     const themes = {
-        // Concrete Jungle — LIGHT (Group 1: orange / blue / green + concrete grays)
+        // Concrete Jungle - LIGHT (Group 1: orange / blue / green + concrete grays)
         dawn: {
             '--bg-primary-color': '#f4f4f4',
             '--bg-primary-gradient': 'none',
@@ -56,7 +56,7 @@ export const ThemeProvider = ({ children }) => {
             '--nb-shadow-sm': '3px 3px 0 #212121',
             '--nb-border-width': '2px'
         },
-        // Concrete Jungle — DARK (Group 2: #212121 base, amber accent, grays)
+        // Concrete Jungle - DARK (Group 2: #212121 base, amber accent, grays)
         dusk: {
             '--bg-primary-color': '#212121',
             '--bg-primary-gradient': 'none',

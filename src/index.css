@@ -162,8 +162,8 @@ a {
   }
 
   .main-content {
-    padding: 0 1rem;
-    /* Standard mobile gutter */
+    padding: 0;
+    /* Section containers provide the mobile gutter; keeps alignment with footer */
   }
 
   section[id],

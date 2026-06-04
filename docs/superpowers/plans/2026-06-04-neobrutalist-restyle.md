@@ -56,7 +56,7 @@ Add these keys to each theme. Border/shadow color is the only per-theme variatio
 
 - [ ] **Step 2: Verify the dev server compiles**
 
-Run: `yarn dev` (already running is fine) — confirm no syntax error, tokens present via DevTools `getComputedStyle(document.documentElement).getPropertyValue('--nb-shadow')`.
+Run: `yarn dev` (already running is fine) - confirm no syntax error, tokens present via DevTools `getComputedStyle(document.documentElement).getPropertyValue('--nb-shadow')`.
 
 - [ ] **Step 3: Commit**
 
@@ -76,7 +76,7 @@ git commit -m "feat(theme): add neobrutalist border/shadow tokens to all themes"
 - [ ] **Step 1: Create `src/styles/neobrutalism.css`**
 
 ```css
-/* NeoBrutalist global layer — loaded last, consumes --nb-* tokens.
+/* NeoBrutalist global layer - loaded last, consumes --nb-* tokens.
    One language for all four themes; only border/shadow color varies. */
 
 /* 1. Square every primary surface. */
@@ -111,7 +111,7 @@ git commit -m "feat(theme): add neobrutalist border/shadow tokens to all themes"
   -webkit-backdrop-filter: none !important;
 }
 
-/* 3. Buttons — hard border, offset shadow, tactile press on hover. */
+/* 3. Buttons - hard border, offset shadow, tactile press on hover. */
 .primary-btn,
 .secondary-btn {
   border: var(--nb-border-width) solid var(--nb-border) !important;
@@ -134,7 +134,7 @@ git commit -m "feat(theme): add neobrutalist border/shadow tokens to all themes"
   border-color: var(--nb-border) !important;
 }
 
-/* 5. Badges / tags / status chips — bordered, square, small offset. */
+/* 5. Badges / tags / status chips - bordered, square, small offset. */
 .system-status,
 .stack-tag,
 .tag-module,
@@ -263,13 +263,13 @@ git commit -m "feat(headers): underscore + emoji section headers"
 ### Task 4: Hero brutalist pass
 
 **Files:**
-- Modify: `src/index.css` (hero blade, buttons, proof cards, status — only where Task 2 overrides don't reach)
+- Modify: `src/index.css` (hero blade, buttons, proof cards, status - only where Task 2 overrides don't reach)
 
 - [ ] **Step 1: Square the hero blade rotation surfaces**
 
 In `src/index.css`, change every `border-radius` inside `.system-blade`, `.blade-*`, `.module-*`, `.proof-card`, `.hero-section .primary-btn/.secondary-btn`, `.stack-card`, `.stack-tag` to `0`. (Task 2 already forces the main ones via `!important`; this cleans the source so there are no stale rounded values.)
 
-- [ ] **Step 2: Verify hero in all 4 themes** — blade has hard border + offset shadow, buttons press, proof cards are square with offset shadows.
+- [ ] **Step 2: Verify hero in all 4 themes** - blade has hard border + offset shadow, buttons press, proof cards are square with offset shadows.
 
 - [ ] **Step 3: Commit**
 
@@ -291,7 +291,7 @@ git commit -m "feat(hero): square corners + offset shadows on hero surfaces"
 For each style file, change `border-radius: <n>` to `border-radius: 0` for cards/chips/tags/pills/buttons (leave avatars/circles that are intentionally round, e.g. `border-radius: 50%`, untouched).
 Run to find candidates: `grep -rIn "border-radius" src/styles src/components/sections`
 
-- [ ] **Step 2: Add inline emoji markers to content blocks where the spec calls for them** (e.g. a leading emoji on Experience role rows, Project titles) — keep minimal and consistent.
+- [ ] **Step 2: Add inline emoji markers to content blocks where the spec calls for them** (e.g. a leading emoji on Experience role rows, Project titles) - keep minimal and consistent.
 
 - [ ] **Step 3: Visually scan every section in all 4 themes for stray rounded corners / soft shadows.** Fix any missed surface by adding its class to the appropriate selector list in `neobrutalism.css`.
 
@@ -318,7 +318,7 @@ Expected: completes with no errors.
 Run: `yarn dev` in one shell, then `npx playwright test`
 Expected: existing TC-01..TC-08 pass (theme switching, persistence, favicon, mobile, scroll). These are structural and should be unaffected by the restyle.
 
-- [ ] **Step 3: Manual cross-theme check** — load the site, cycle all 4 themes, scroll every section. Confirm: square corners everywhere, hard borders, solid offset shadows (rose on dusk, white on mono-dark), underscore headers with emoji, button press hover, no soft blurred shadows or rounded cards remaining.
+- [ ] **Step 3: Manual cross-theme check** - load the site, cycle all 4 themes, scroll every section. Confirm: square corners everywhere, hard borders, solid offset shadows (rose on dusk, white on mono-dark), underscore headers with emoji, button press hover, no soft blurred shadows or rounded cards remaining.
 
 - [ ] **Step 4: Final commit if any fixes**
 
@@ -333,4 +333,4 @@ git commit -m "fix: neobrutalist QA cleanup"
 
 - **Spec coverage:** sharp corners (T2/T4/T5), hard borders (T2), offset shadows + per-theme color table (T1/T2), press hover + reduced-motion (T2), underscore headers + emoji (T3/T5), brand-accent palette kept (no lime/yellow introduced), backgrounds unchanged (no bg edits), all 4 themes via tokens (T1). Covered.
 - **No restructuring:** plan only restyles; no section/layout/content changes. Matches scope.
-- **Risk:** the `!important` override layer is intentional — existing CSS is highly specific and scattered; centralizing in `neobrutalism.css` keeps the four themes consistent and the change reviewable in one file.
+- **Risk:** the `!important` override layer is intentional - existing CSS is highly specific and scattered; centralizing in `neobrutalism.css` keeps the four themes consistent and the change reviewable in one file.
