@@ -10,7 +10,7 @@ test.describe('Portfolio QA Tests', () => {
         const themeToggle = page.locator('button[aria-label="Theme settings"]');
         await themeToggle.first().click();
 
-        const themes = ['dawn', 'dusk', 'mono-light', 'mono-dark'];
+        const themes = ['dawn', 'dusk'];
 
         for (const theme of themes) {
             await page.locator(`button.theme-option-card:has-text("${theme.replace('-', ' ')}")`).click();

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Palette, Check, Sun, Moon, Terminal, Sunset, FileText } from 'lucide-react';
+import { Palette, Check, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const ThemePicker = ({ mobile, mode = 'dropdown' }) => {
@@ -21,8 +21,6 @@ const ThemePicker = ({ mobile, mode = 'dropdown' }) => {
   const themesList = [
     { id: 'dawn', label: 'Dawn', icon: <Sun size={18} />, desc: 'Soft & Airy' },
     { id: 'dusk', label: 'Dusk', icon: <Moon size={18} />, desc: 'Deep & Cosmic' },
-    { id: 'mono-light', label: 'Mono Light', icon: <FileText size={18} />, desc: 'Minimalist' },
-    { id: 'mono-dark', label: 'Mono Dark', icon: <Terminal size={18} />, desc: 'Industrial' },
   ];
 
   return (

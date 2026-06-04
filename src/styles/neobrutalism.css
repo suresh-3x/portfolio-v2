@@ -48,6 +48,17 @@
   box-shadow: 0 0 0 var(--nb-shadow-color) !important;
 }
 
+/* Keep base button colors on hover (just the press) so bright accents
+   never collide with light text. */
+.primary-btn:hover {
+  background: var(--text-primary) !important;
+  color: var(--bg-primary-color) !important;
+}
+.secondary-btn:hover {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+}
+
 /* 4. Hoverable cards press the same way (override framer float visually). */
 .custom-card:hover,
 .stack-card:hover,

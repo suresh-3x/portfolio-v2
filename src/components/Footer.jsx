@@ -109,7 +109,7 @@ const Footer = () => {
           width: 100%;
           padding: 4rem 0 5rem;
           background: transparent;
-          border-top: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
+          border-top: 2px solid var(--nb-border);
         }
 
         .footer-shell {
@@ -127,7 +127,7 @@ const Footer = () => {
           align-items: center;
           gap: 1rem;
           padding-bottom: 1rem;
-          border-bottom: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
+          border-bottom: 2px solid var(--nb-border);
           color: var(--text-secondary);
           font-family: var(--font-mono);
           font-size: 0.72rem;
@@ -205,14 +205,15 @@ const Footer = () => {
         }
 
         .footer-stack-v2 span {
-          border: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
-          border-radius: 6px;
+          border: 2px solid var(--nb-border);
+          border-radius: 0;
+          box-shadow: var(--nb-shadow-sm);
           padding: 0.3rem 0.6rem;
-          background: transparent;
+          background: var(--card-bg);
           color: var(--text-secondary);
           font-family: var(--font-mono);
           font-size: 0.7rem;
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .footer-actions-v2 {
@@ -232,16 +233,17 @@ const Footer = () => {
         .footer-cta-v2 {
           min-height: 48px;
           padding: 0 1rem;
-          border: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
-          border-radius: 8px;
+          border: 2px solid var(--nb-border);
+          border-radius: 0;
+          box-shadow: var(--nb-shadow-sm);
           display: inline-flex;
           align-items: center;
           justify-content: space-between;
           gap: 0.75rem;
           color: var(--text-primary);
           font-weight: 700;
-          background: transparent;
-          transition: all var(--transition-fast);
+          background: var(--card-bg);
+          transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.3s ease, color 0.3s ease;
           text-decoration: none;
           cursor: pointer;
           pointer-events: auto;
@@ -250,13 +252,11 @@ const Footer = () => {
         .footer-cta-v2.primary {
           background: var(--cta-accent);
           color: var(--bg-primary-color);
-          border-color: var(--cta-accent);
         }
 
         .footer-cta-v2:hover {
-          transform: translateY(-2px);
-          border-color: var(--cta-accent);
-          box-shadow: 0 4px 12px var(--cta-accent)30;
+          transform: translate(3px, 3px);
+          box-shadow: 0 0 0 var(--nb-shadow-color);
         }
 
         .social-cluster-v2 {
@@ -268,13 +268,14 @@ const Footer = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 40px;
-          height: 40px;
-          border-radius: 8px;
-          background: transparent;
-          border: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
+          width: 44px;
+          height: 44px;
+          border-radius: 0;
+          background: var(--card-bg);
+          border: 2px solid var(--nb-border);
+          box-shadow: var(--nb-shadow-sm);
           color: var(--text-secondary);
-          transition: all var(--transition-fast);
+          transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.3s ease, color 0.3s ease;
           text-decoration: none;
           cursor: pointer;
           pointer-events: auto;
@@ -283,14 +284,13 @@ const Footer = () => {
         .social-icon-v2:hover {
           background: var(--social-accent);
           color: var(--bg-primary-color);
-          border-color: var(--social-accent);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px var(--social-accent)30;
+          transform: translate(3px, 3px);
+          box-shadow: 0 0 0 var(--nb-shadow-color);
         }
 
         .footer-bottom-v2 {
           padding-top: 1.5rem;
-          border-top: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
+          border-top: 2px solid var(--nb-border);
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -313,25 +313,26 @@ const Footer = () => {
         }
 
         .scroll-btn-v2 {
-          background: transparent;
-          border: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
+          background: var(--card-bg);
+          border: 2px solid var(--nb-border);
+          box-shadow: var(--nb-shadow-sm);
           color: var(--text-secondary);
-          width: 42px;
-          height: 42px;
-          border-radius: 50%;
+          width: 44px;
+          height: 44px;
+          border-radius: 0;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
           flex-shrink: 0;
-          transition: all var(--transition-fast);
+          transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.3s ease, color 0.3s ease;
         }
 
         .scroll-btn-v2:hover {
-          color: var(--scroll-accent);
-          border-color: var(--scroll-accent);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px var(--scroll-accent)30;
+          color: var(--bg-primary-color);
+          background: var(--scroll-accent);
+          transform: translate(3px, 3px);
+          box-shadow: 0 0 0 var(--nb-shadow-color);
         }
 
         @media (max-width: 840px) {

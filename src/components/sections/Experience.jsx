@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Building2, Clock } from 'lucide-react';
+import { Calendar, Clock } from 'lucide-react';
 import Card from '../ui/Card';
 import { experienceEntries } from '../../data/experience';
 import { CompanyLogoGroup } from '../experience/CompanyLogo';
@@ -123,14 +123,6 @@ const Experience = () => {
               transition={{ delay: groupIndex * 0.1 }}
               className="experience-group"
             >
-              {/* Timeline rail (desktop only) */}
-              <div className="timeline-connector" aria-hidden>
-                <div className="timeline-dot" style={{ backgroundColor: accentColor }}>
-                  <Building2 size={13} color="var(--bg-primary-color)" />
-                </div>
-                <div className="timeline-line" style={{ background: `linear-gradient(to bottom, ${accentColor}, transparent)` }} />
-              </div>
-
               <Card
                 className="experience-card"
                 hover={false}
@@ -201,51 +193,10 @@ const Experience = () => {
         .experience-group {
           position: relative;
           margin-bottom: 2.5rem;
-          padding-left: 2.5rem;
         }
 
         .experience-group:last-child {
           margin-bottom: 0;
-        }
-
-        /* ── Timeline rail ── */
-        .timeline-connector {
-          position: absolute;
-          left: 0;
-          top: 6px;
-          bottom: -2.5rem;
-          width: 2px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .experience-group:last-child .timeline-connector {
-          bottom: auto;
-          height: 100%;
-        }
-
-        .experience-group:last-child .timeline-line {
-          display: none;
-        }
-
-        .timeline-dot {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          z-index: 2;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          box-shadow: 0 0 0 4px var(--bg-primary-color);
-        }
-
-        .timeline-line {
-          width: 2px;
-          flex-grow: 1;
-          margin-top: 4px;
-          opacity: 0.28;
         }
 
         /* ── Card ── */
@@ -261,18 +212,23 @@ const Experience = () => {
         }
 
         .experience-card:hover {
-          border-color: var(--border-color);
-          box-shadow: var(--shadow-soft);
+          border-color: var(--nb-border);
+          box-shadow: var(--nb-shadow) !important;
           transform: none;
         }
 
+        .experience-card .card-strip {
+          width: 8px;
+          border-right: 2px solid var(--nb-border);
+        }
+
         .experience-card:hover .card-strip {
-          width: 6px;
+          width: 8px;
         }
 
         .card-header-group {
           margin-bottom: 1.5rem;
-          border-bottom: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
+          border-bottom: 2px solid var(--nb-border);
           padding-bottom: 1.1rem;
         }
 
@@ -341,13 +297,13 @@ const Experience = () => {
         .company-logo-link {
           display: inline-flex;
           flex-shrink: 0;
-          border-radius: 10px;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          border-radius: 0;
+          transition: transform 0.08s ease, box-shadow 0.08s ease;
         }
 
         .company-logo-link:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.15);
+          transform: translate(2px, 2px);
+          box-shadow: none;
         }
 
         .company-logo-link:focus-visible {
@@ -359,10 +315,11 @@ const Experience = () => {
         .company-logo-fallback {
           width: 44px;
           height: 44px;
-          border-radius: 10px;
+          border-radius: 0;
           object-fit: contain;
           background: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          border: 2px solid var(--nb-border);
+          box-shadow: var(--nb-shadow-sm);
           padding: 6px;
           flex-shrink: 0;
           display: block;
@@ -415,13 +372,17 @@ const Experience = () => {
         .location-badge, .duration-badge {
           display: flex;
           align-items: center;
-          gap: 4px;
-          font-size: 0.8rem;
-          color: var(--text-secondary);
-          background: var(--bg-secondary);
+          gap: 5px;
+          font-family: var(--font-mono);
+          font-size: 0.75rem;
+          font-weight: 700;
+          color: var(--bg-primary-color);
+          background: var(--accent-primary);
           padding: 4px 10px;
-          border-radius: 12px;
-          border: 1px solid var(--border-color);
+          border-radius: 0;
+          border: 2px solid var(--nb-border);
+          box-shadow: var(--nb-shadow-sm);
+          letter-spacing: 0.02em;
           white-space: nowrap;
         }
 
@@ -437,7 +398,7 @@ const Experience = () => {
 
         .role-item.has-border {
           padding-bottom: 1.5rem;
-          border-bottom: 1px dashed var(--border-color);
+          border-bottom: 2px solid var(--nb-border);
         }
 
         .role-header {
@@ -471,12 +432,16 @@ const Experience = () => {
         }
 
         .type-badge {
-          font-size: 0.7rem;
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
           text-transform: uppercase;
-          border: 1px solid var(--border-color);
-          padding: 2px 6px;
-          border-radius: 4px;
-          color: var(--text-secondary);
+          border: 2px solid var(--nb-border);
+          box-shadow: var(--nb-shadow-sm);
+          padding: 2px 7px;
+          border-radius: 0;
+          color: var(--text-primary);
         }
 
         .role-description {
@@ -512,14 +477,7 @@ const Experience = () => {
             padding: 0 1rem;
             max-width: 100%;
           }
-          /* Drop the timeline rail on mobile: cards go full-width, the card's
-             own accent strip carries the colour. */
-          .timeline-connector {
-            display: none;
-          }
           .experience-group {
-            padding-left: 0;
-            margin-left: 0;
             margin-bottom: 1.5rem;
           }
           /* Stack logo(s) above full-width text so multi-logo cards

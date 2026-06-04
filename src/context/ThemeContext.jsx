@@ -3,13 +3,13 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-    // Standard themes only: 'dawn', 'dusk', 'mono-light', 'mono-dark'
+    // Standard themes only: 'dawn' (default), 'dusk'
     const [theme, setThemeState] = useState(() => {
         // Initial detection: URL > LocalStorage > Default
         const params = new URLSearchParams(window.location.search);
         const urlTheme = params.get('theme')?.toLowerCase();
 
-        const validThemes = ['dawn', 'dusk', 'mono-light', 'mono-dark'];
+        const validThemes = ['dawn', 'dusk'];
         if (urlTheme && validThemes.includes(urlTheme)) return urlTheme;
 
         const stored = localStorage.getItem('portfolio-theme');
@@ -31,12 +31,12 @@ export const ThemeProvider = ({ children }) => {
             '--bg-secondary': '#e2e8f0',
             '--text-primary': '#0f172a',
             '--text-secondary': '#475569',
-            '--accent-primary': '#e11d48',
-            '--accent-primary-rgb': '225, 29, 72',
-            '--accent-secondary': '#059669',
-            '--accent-secondary-rgb': '5, 150, 105',
-            '--accent-tertiary': '#2563eb',
-            '--accent-tertiary-rgb': '37, 99, 235',
+            '--accent-primary': '#ea580c',
+            '--accent-primary-rgb': '234, 88, 12',
+            '--accent-secondary': '#c2410c',
+            '--accent-secondary-rgb': '194, 65, 12',
+            '--accent-tertiary': '#b45309',
+            '--accent-tertiary-rgb': '180, 83, 9',
             '--border-color': 'rgba(15, 23, 42, 0.12)',
             '--card-bg': '#ffffff',
             '--card-bg-rgb': '255, 255, 255',
@@ -60,12 +60,12 @@ export const ThemeProvider = ({ children }) => {
             '--bg-secondary': '#12151c',
             '--text-primary': '#f8fafc',
             '--text-secondary': '#94a3b8',
-            '--accent-primary': '#f43f5e',
-            '--accent-primary-rgb': '244, 63, 94',
-            '--accent-secondary': '#10b981',
-            '--accent-secondary-rgb': '16, 185, 129',
-            '--accent-tertiary': '#3b82f6',
-            '--accent-tertiary-rgb': '59, 130, 246',
+            '--accent-primary': '#fb923c',
+            '--accent-primary-rgb': '251, 146, 60',
+            '--accent-secondary': '#fbbf24',
+            '--accent-secondary-rgb': '251, 191, 36',
+            '--accent-tertiary': '#fdba74',
+            '--accent-tertiary-rgb': '253, 186, 116',
             '--border-color': 'rgba(255, 255, 255, 0.1)',
             '--card-bg': '#1b1818c5',
             '--card-bg-rgb': '27, 24, 24',
@@ -78,63 +78,9 @@ export const ThemeProvider = ({ children }) => {
             '--grid-color': 'rgba(255, 255, 255, 0.03)',
             '--is-monochrome': '0',
             '--nb-border': '#f5f5f5',
-            '--nb-shadow-color': '#f43f5e',
-            '--nb-shadow': '5px 5px 0 #f43f5e',
-            '--nb-shadow-sm': '3px 3px 0 #f43f5e',
-            '--nb-border-width': '2px'
-        },
-        'mono-light': {
-            '--bg-primary-color': '#f5f5f5',
-            '--bg-primary-gradient': 'none',
-            '--bg-secondary': '#eeeeee',
-            '--text-primary': '#000000',
-            '--text-secondary': '#444444',
-            '--accent-primary': '#555555',
-            '--accent-primary-rgb': '85, 85, 85',
-            '--accent-secondary': '#555555',
-            '--accent-tertiary': '#555555',
-            '--border-color': 'rgba(0, 0, 0, 0.12)',
-            '--card-bg': '#ffffff',
-            '--card-bg-rgb': '255, 255, 255',
-            '--card-border': 'rgba(0, 0, 0, 0.08)',
-            '--glass-blur': '0px',
-            '--shadow-soft': '0 8px 30px rgba(0, 0, 0, 0.06)',
-            '--terminal-bg': '#ffffff',
-            '--terminal-header': '#f0f0f0',
-            '--bg-pattern': 'none',
-            '--grid-color': 'rgba(0, 0, 0, 0.02)',
-            '--is-monochrome': '1',
-            '--nb-border': '#000000',
-            '--nb-shadow-color': '#000000',
-            '--nb-shadow': '5px 5px 0 #000000',
-            '--nb-shadow-sm': '3px 3px 0 #000000',
-            '--nb-border-width': '2px'
-        },
-        'mono-dark': {
-            '--bg-primary-color': '#000000',
-            '--bg-primary-gradient': '#000000',
-            '--bg-secondary': '#080808',
-            '--text-primary': '#ffffff',
-            '--text-secondary': '#999999',
-            '--accent-primary': '#aaaaaa',
-            '--accent-primary-rgb': '170, 170, 170',
-            '--accent-secondary': '#aaaaaa',
-            '--accent-tertiary': '#aaaaaa',
-            '--border-color': '#222222',
-            '--card-bg': '#000000',
-            '--card-bg-rgb': '0, 0, 0',
-            '--card-border': '#222222',
-            '--glass-blur': '0px',
-            '--shadow-soft': 'none',
-            '--terminal-bg': '#000000',
-            '--terminal-header': '#0a0a0a',
-            '--bg-pattern': 'none',
-            '--grid-color': 'rgba(255, 255, 255, 0.05)',
-            '--is-monochrome': '1',
-            '--nb-border': '#ffffff',
-            '--nb-shadow-color': '#ffffff',
-            '--nb-shadow': '5px 5px 0 #ffffff',
-            '--nb-shadow-sm': '3px 3px 0 #ffffff',
+            '--nb-shadow-color': '#fb923c',
+            '--nb-shadow': '5px 5px 0 #fb923c',
+            '--nb-shadow-sm': '3px 3px 0 #fb923c',
             '--nb-border-width': '2px'
         }
     };
@@ -153,7 +99,7 @@ export const ThemeProvider = ({ children }) => {
         });
 
         // Set text-primary-rgb helper
-        if (theme === 'dawn' || theme === 'mono-light') {
+        if (theme === 'dawn') {
             root.style.setProperty('--text-primary-rgb', '0, 0, 0');
         } else {
             root.style.setProperty('--text-primary-rgb', '255, 255, 255');
@@ -163,9 +109,9 @@ export const ThemeProvider = ({ children }) => {
         document.body.style.color = currentTheme['--text-primary'];
 
         // Update favicon based on theme
-        // Light themes (dawn, mono-light) use dark-colored favicon (favicon-light.svg)
-        // Dark themes (dusk, mono-dark) use light-colored favicon (favicon-dark.svg)
-        const isLightTheme = theme === 'dawn' || theme === 'mono-light';
+        // Light theme (dawn) uses dark-colored favicon (favicon-light.svg)
+        // Dark theme (dusk) uses light-colored favicon (favicon-dark.svg)
+        const isLightTheme = theme === 'dawn';
         const faviconPath = isLightTheme ? '/favicon-light.svg' : '/favicon-dark.svg';
 
         // Remove existing favicon links

@@ -49,7 +49,7 @@ export const atsKeywords = [
 export const impactMetrics = [
   { value: '5M+', label: 'MAU platform scaled', keyword: 'System scalability' },
   { value: '10+', label: 'Production AI agents', keyword: 'Google ADK' },
-  { value: '5 yrs', label: 'Backend engineering', keyword: 'Senior Backend Engineer' },
+  { value: '5+ yrs', label: 'Backend engineering', keyword: 'Senior Backend Engineer' },
   { value: '10K', label: 'Req/sec peak handled', keyword: 'High-throughput systems' },
 ];
 

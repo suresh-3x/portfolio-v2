@@ -160,10 +160,12 @@ const About = () => {
             font-family: var(--font-mono);
             font-size: 0.65rem;
             font-weight: 800;
-            padding: 4px 10px;
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            border-radius: 4px;
+            padding: 5px 12px;
+            border: 2px solid var(--nb-border);
+            box-shadow: var(--nb-shadow-sm);
+            color: var(--text-primary);
+            background: var(--card-bg);
+            border-radius: 0;
             letter-spacing: 1px;
         }
 
@@ -175,8 +177,9 @@ const About = () => {
         }
 
         .resume-blade-card {
-            background: rgba(var(--text-primary-rgb), 0.02) !important;
-            border: 1px solid var(--border-color) !important;
+            background: var(--card-bg) !important;
+            border: 2px solid var(--nb-border) !important;
+            box-shadow: var(--nb-shadow) !important;
         }
 
         .resume-card-inner {
@@ -190,8 +193,8 @@ const About = () => {
             width: 60px;
             height: 70px;
             background: rgba(var(--text-primary-rgb), 0.03);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border: 2px solid var(--nb-border);
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -203,8 +206,8 @@ const About = () => {
         .mini-spec-doc {
             width: 30px;
             height: 40px;
-            border: 1px solid var(--border-color);
-            border-radius: 2px;
+            border: 2px solid var(--nb-border);
+            border-radius: 0;
             position: relative;
             background: var(--bg-primary);
             display: flex;
@@ -234,11 +237,10 @@ const About = () => {
             position: absolute;
             top: 6px;
             right: 6px;
-            width: 4px;
-            height: 4px;
+            width: 5px;
+            height: 5px;
             background: var(--accent-primary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-primary);
+            border-radius: 0;
             animation: node-pulse-mini 2s infinite;
         }
 
@@ -283,21 +285,24 @@ const About = () => {
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 16px;
+            padding: 9px 16px;
             background: var(--text-primary);
             color: var(--bg-primary-color);
             text-decoration: none;
             font-family: var(--font-mono);
             font-size: 0.75rem;
             font-weight: 800;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            border: 2px solid var(--nb-border);
+            box-shadow: var(--nb-shadow-sm);
+            border-radius: 0;
+            transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.3s ease, color 0.3s ease;
         }
 
         .resume-action-btn:hover {
             background: var(--accent-primary);
-            color: white;
-            transform: translateY(-2px);
+            color: var(--bg-primary-color);
+            transform: translate(3px, 3px);
+            box-shadow: 0 0 0 var(--nb-shadow-color);
         }
 
         .resume-card-footer {
@@ -312,11 +317,7 @@ const About = () => {
         }
 
         .resume-blade-aura {
-            position: absolute;
-            inset: -40px;
-            background: radial-gradient(circle, rgba(var(--accent-primary-rgb), 0.04) 0%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
+            display: none;
         }
 
         .system-logic-illustration {
@@ -336,11 +337,10 @@ const About = () => {
 
         .logic-node {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 5px;
+            height: 5px;
             background: var(--accent-primary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-primary);
+            border-radius: 0;
             animation: float-node 8s infinite ease-in-out;
         }
 
