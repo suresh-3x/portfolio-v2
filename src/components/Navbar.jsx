@@ -1,14 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { User, Code, Folder, Mail, Briefcase, Menu, X } from 'lucide-react';
+import { useLenis } from 'lenis/react';
 import ThemePicker from './ThemePicker';
 import Logo from './Logo';
 
 import { useTheme } from '../context/ThemeContext';
 
+// Sections already carry `scroll-margin-top` for the fixed navbar, which Lenis
+// honors — so no extra offset is needed here.
+const NAV_SCROLL_OFFSET = 0;
+
 const Navbar = ({ highlightColor }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const scrollTimeoutRef = useRef(null);
+  const lenis = useLenis();
   const { theme } = useTheme();
   const isMonochrome = theme === 'mono-light' || theme === 'mono-dark';
 
@@ -70,8 +76,11 @@ const Navbar = ({ highlightColor }) => {
     e.preventDefault();
     setMenuOpen(false);
     const element = document.querySelector(href);
-    if (element) {
-      history.pushState(null, null, href);
+    if (!element) return;
+    history.pushState(null, null, href);
+    if (lenis) {
+      lenis.scrollTo(href, { offset: NAV_SCROLL_OFFSET, duration: 0.6 });
+    } else {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };

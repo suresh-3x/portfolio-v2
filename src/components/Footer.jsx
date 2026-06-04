@@ -1,11 +1,16 @@
 import React from 'react';
 import { ArrowUp, FileText, Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { useLenis } from 'lenis/react';
 import { profile } from '../data/profile';
 import Logo from './Logo';
 
 const Footer = () => {
   const year = new Date().getFullYear();
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const lenis = useLenis();
+  const scrollToTop = () => {
+    if (lenis) lenis.scrollTo(0, { duration: 0.9 });
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <footer className="footer" id="contact">

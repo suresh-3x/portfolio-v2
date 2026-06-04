@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLenis } from 'lenis/react';
 import Layout from './components/Layout';
 import Experience from './components/sections/Experience';
 import Projects from './components/sections/Projects';
@@ -11,6 +12,10 @@ const HEADER_OFFSET = 120;
 const SCROLL_KEY = 'lastScrollPosition';
 
 const HashScrollHandler = () => {
+  const lenis = useLenis();
+  const lenisRef = React.useRef(lenis);
+  lenisRef.current = lenis;
+
   React.useEffect(() => {
     // Disable native restoration; we restore manually to avoid "crawling" on reload.
     if ('scrollRestoration' in window.history) {
@@ -52,7 +57,12 @@ const HashScrollHandler = () => {
       let attempts = 0;
       const step = () => {
         if (cancelled) return;
-        window.scrollTo({ top: target, behavior: smooth ? 'smooth' : 'auto' });
+        const l = lenisRef.current;
+        if (l) {
+          l.scrollTo(target, smooth ? { duration: 0.9 } : { immediate: true, force: true });
+        } else {
+          window.scrollTo({ top: target, behavior: smooth ? 'smooth' : 'auto' });
+        }
         attempts += 1;
         const reached = Math.abs(window.scrollY - target) < 4;
         if (!reached && attempts < 20) {
@@ -85,7 +95,10 @@ const HashScrollHandler = () => {
 
     const handleHashChange = () => {
       const t = hashTarget(window.location.hash);
-      if (t !== null) window.scrollTo({ top: t, behavior: 'smooth' });
+      if (t === null) return;
+      const l = lenisRef.current;
+      if (l) l.scrollTo(t, { duration: 0.9 });
+      else window.scrollTo({ top: t, behavior: 'smooth' });
     };
 
     window.addEventListener('hashchange', handleHashChange);

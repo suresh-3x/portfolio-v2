@@ -43,7 +43,7 @@ body,
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Smooth scrolling is handled by Lenis; native smooth-behavior conflicts with it. */
   overflow-anchor: none;
   /* Prevents "scroll crawling" when content loads/shifts */
 }
