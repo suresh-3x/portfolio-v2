@@ -114,7 +114,7 @@ const Skills = () => {
               <motion.div
                 key={category.title}
                 className="primary-skill-item"
-                style={{ borderColor: accentColor, boxShadow: `0 4px 16px ${accentColor}20`, borderWidth: `${borderMultiplier}px` }}
+                style={{ '--skill-accent': accentColor }}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -178,11 +178,10 @@ const Skills = () => {
           flex-direction: column;
           gap: 1.25rem;
           padding: 1.5rem;
-          border: 1px solid;
-          border-width: calc(1px * var(--border-multiplier, 1));
-          border-radius: 16px;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-          backdrop-filter: blur(10px);
+          border: 2px solid var(--nb-border);
+          border-radius: 0;
+          box-shadow: var(--nb-shadow);
+          background: var(--card-bg);
         }
 
         .skill-item-header {
@@ -198,10 +197,11 @@ const Skills = () => {
           justify-content: center;
           width: 52px;
           height: 52px;
-          border-radius: 14px;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-          border: 1px solid rgba(var(--border-color-rgb, 255, 255, 255), 0.15);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          border-radius: 0;
+          background: var(--skill-accent, var(--accent-primary));
+          color: var(--on-accent) !important;
+          border: 2px solid var(--nb-border);
+          box-shadow: var(--nb-shadow-sm);
         }
 
         .skill-icon svg {
@@ -258,8 +258,8 @@ const Skills = () => {
         }
 
         .skill-highlight-item {
-          border-left: 3px solid;
-          padding-left: 1.25rem;
+          border-left: 4px solid;
+          padding-left: 1rem;
           font-size: 0.9rem;
           font-weight: 600;
           color: var(--text-primary);
@@ -277,21 +277,20 @@ const Skills = () => {
         .skill-tag {
           font-size: 0.75rem;
           font-family: var(--font-mono);
-          padding: 0.55rem 1rem;
-          border-radius: 6px;
-          background: rgba(255, 255, 255, 0.02);
-          border: 1.5px solid var(--tag-color, var(--accent-primary));
+          padding: 0.5rem 0.9rem;
+          border-radius: 0;
+          background: var(--card-bg);
+          border: 2px solid var(--nb-border);
           color: var(--text-secondary);
-          transition: all 0.2s ease;
+          transition: transform 0.08s ease, box-shadow 0.08s ease, color 0.2s ease;
           display: inline-flex;
           align-items: center;
-          gap: 0.6rem;
+          gap: 0.5rem;
           white-space: nowrap;
           letter-spacing: 0.5px;
-          font-weight: 500;
+          font-weight: 600;
           line-height: 1.4;
-          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.1),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+          box-shadow: var(--nb-shadow-sm);
         }
 
         .skill-tag-icon {
@@ -311,13 +310,16 @@ const Skills = () => {
         }
 
         .skill-tag:hover {
-          background: rgba(255, 255, 255, 0.06);
-          border-color: var(--tag-color, var(--accent-primary));
-          color: var(--text-primary);
-          transform: translateY(-2px);
-          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.2),
-                      0 4px 12px rgba(0, 0, 0, 0.15),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          background: var(--tag-color, var(--accent-primary));
+          border-color: var(--nb-border);
+          color: var(--on-accent);
+          transform: translate(3px, 3px);
+          box-shadow: 0 0 0 var(--nb-shadow-color);
+        }
+
+        .skill-tag:hover .skill-tag-icon svg {
+          color: var(--on-accent);
+          opacity: 1;
         }
 
         .skill-tag:hover .skill-tag-icon svg {

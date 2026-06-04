@@ -171,17 +171,11 @@ const ProjectCard = ({ project, index, getTechIcon }) => {
           flex-direction: column;
           gap: 1.25rem;
           padding: 1.5rem;
-          border: 1px solid;
-          border-radius: 16px;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-          backdrop-filter: blur(10px);
+          border: 2px solid var(--nb-border);
+          border-radius: 0;
+          background: var(--card-bg);
           height: 100%;
-          transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 8px 24px var(--border-color)30;
+          transition: transform 0.08s ease, box-shadow 0.08s ease;
         }
 
         .project-card-inner {
@@ -211,22 +205,22 @@ const ProjectCard = ({ project, index, getTechIcon }) => {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 36px;
-          height: 36px;
-          border-radius: 8px;
-          background: rgba(255, 255, 255, 0.03);
-          border: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
+          width: 38px;
+          height: 38px;
+          border-radius: 0;
+          background: var(--card-bg);
+          border: 2px solid var(--nb-border);
+          box-shadow: var(--nb-shadow-sm);
           color: var(--text-secondary);
-          transition: all 0.2s ease;
+          transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.2s ease, color 0.2s ease;
           flex-shrink: 0;
         }
 
         .icon-link:hover {
           background: var(--link-accent);
-          color: var(--bg-primary-color);
-          border-color: var(--link-accent);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px var(--link-accent)30;
+          color: var(--on-accent);
+          transform: translate(3px, 3px);
+          box-shadow: 0 0 0 var(--nb-shadow-color);
         }
 
         .project-info {

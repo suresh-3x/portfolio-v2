@@ -82,12 +82,21 @@ const Hero = ({ highlightColor }) => {
       </div>
 
       <style>{`
+        /* Fit the hero within the viewport: size scales with viewport height
+           so everything (incl. the stack band) stays above the fold. */
+        .hero-section {
+          min-height: 100svh;
+          padding-top: clamp(5rem, 11vh, 7rem);
+          padding-bottom: clamp(1.25rem, 4vh, 3rem);
+          align-items: center;
+        }
+
         .hero-v2 {
-          grid-template-columns: minmax(0, 1.1fr) minmax(330px, 0.9fr);
-          gap: clamp(2.5rem, 5vw, 4.5rem);
+          grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+          gap: clamp(2rem, 4.5vw, 4.5rem);
           align-items: center;
           max-width: 1180px;
-          row-gap: 3rem;
+          row-gap: clamp(1.25rem, 3.2vh, 2.5rem);
         }
 
         .hero-v2 .hero-content {
@@ -95,18 +104,18 @@ const Hero = ({ highlightColor }) => {
           align-items: flex-start;
         }
 
-        /* Typography refinement */
-        .hero-v2 .system-status { margin-bottom: 1.5rem; }
+        /* Typography refinement (viewport-height aware) */
+        .hero-v2 .system-status { margin-bottom: clamp(0.6rem, 1.8vh, 1.4rem); }
 
         .hero-v2 .hero-role {
-          margin: 0 0 1.1rem;
+          margin: 0 0 clamp(0.4rem, 1.2vh, 1rem);
           font-size: clamp(0.72rem, 1.1vw, 0.84rem);
           letter-spacing: 0.22em;
         }
 
         .hero-v2 .hero-title {
-          margin: 0 0 1.5rem;
-          font-size: clamp(3.4rem, 6.2vw, 5.4rem);
+          margin: 0 0 clamp(0.75rem, 2vh, 1.4rem);
+          font-size: clamp(2.7rem, 7.4vh, 5rem);
           line-height: 0.88;
           letter-spacing: -0.035em;
         }
@@ -115,17 +124,17 @@ const Hero = ({ highlightColor }) => {
 
         .hero-v2 .hero-positioning {
           max-width: 30ch;
-          margin: 0 0 1.25rem;
-          font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+          margin: 0 0 clamp(0.5rem, 1.6vh, 1.1rem);
+          font-size: clamp(1.2rem, 2.7vh, 1.8rem);
           line-height: 1.12;
           font-weight: 800;
         }
 
         .hero-v2 .hero-copy {
           max-width: 46ch;
-          margin: 0 0 2rem;
-          font-size: clamp(1rem, 1.4vw, 1.08rem);
-          line-height: 1.7;
+          margin: 0 0 clamp(1rem, 2.4vh, 1.75rem);
+          font-size: clamp(0.92rem, 1.7vh, 1.06rem);
+          line-height: 1.6;
         }
 
         .hero-v2 .action-row { gap: 1rem; }
@@ -173,13 +182,13 @@ const Hero = ({ highlightColor }) => {
           align-items: baseline;
           justify-content: space-between;
           gap: 1rem;
-          padding: 1.05rem 1.1rem;
+          padding: clamp(0.65rem, 1.8vh, 1.05rem) 1.1rem;
           border-bottom: 2px solid var(--nb-border);
         }
 
         .hero-stat-value {
           font-family: var(--font-mono);
-          font-size: clamp(1.8rem, 3vw, 2.4rem);
+          font-size: clamp(1.5rem, 3.6vh, 2.3rem);
           font-weight: 800;
           line-height: 1;
           color: var(--text-primary);
@@ -210,7 +219,7 @@ const Hero = ({ highlightColor }) => {
           grid-column: 1 / -1;
           width: 100%;
           border-top: 2px solid var(--nb-border);
-          padding-top: 1.5rem;
+          padding-top: clamp(0.9rem, 2vh, 1.5rem);
         }
 
         .hero-stack-label {
