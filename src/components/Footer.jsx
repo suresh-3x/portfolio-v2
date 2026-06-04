@@ -251,7 +251,7 @@ const Footer = () => {
 
         .footer-cta-v2.primary {
           background: var(--cta-accent);
-          color: var(--bg-primary-color);
+          color: var(--on-accent);
         }
 
         .footer-cta-v2:hover {
@@ -283,7 +283,7 @@ const Footer = () => {
 
         .social-icon-v2:hover {
           background: var(--social-accent);
-          color: var(--bg-primary-color);
+          color: var(--on-accent);
           transform: translate(3px, 3px);
           box-shadow: 0 0 0 var(--nb-shadow-color);
         }
@@ -329,7 +329,7 @@ const Footer = () => {
         }
 
         .scroll-btn-v2:hover {
-          color: var(--bg-primary-color);
+          color: var(--on-accent);
           background: var(--scroll-accent);
           transform: translate(3px, 3px);
           box-shadow: 0 0 0 var(--nb-shadow-color);

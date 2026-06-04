@@ -843,7 +843,7 @@ a {
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 0.8rem;
-  color: var(--bg-primary-color);
+  color: var(--on-accent);
   margin-bottom: 2rem;
   background: var(--accent-secondary);
   padding: 8px 16px;
@@ -883,13 +883,13 @@ a {
   padding: 0.55rem 0.85rem;
   border-radius: 0;
   background: var(--accent-secondary);
-  color: var(--bg-primary-color);
+  color: var(--on-accent);
   font-size: clamp(0.66rem, 1vw, 0.76rem);
   letter-spacing: 0.08em;
 }
 
 .system-status .status-dot {
-  background: var(--bg-primary-color);
+  background: var(--on-accent);
   box-shadow: none;
 }
 

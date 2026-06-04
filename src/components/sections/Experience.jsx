@@ -376,7 +376,7 @@ const Experience = () => {
           font-family: var(--font-mono);
           font-size: 0.75rem;
           font-weight: 700;
-          color: var(--bg-primary-color);
+          color: var(--on-accent);
           background: var(--accent-primary);
           padding: 4px 10px;
           border-radius: 0;
