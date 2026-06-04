@@ -89,7 +89,7 @@ const Hero = ({ highlightColor }) => {
           </h1>
 
           <h2 className="hero-positioning">
-            I build production backends and AI agents for high-scale products.
+            I build and scale production backends and AI agents for products with millions of users.
           </h2>
 
           <p className="hero-copy">

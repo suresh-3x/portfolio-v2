@@ -2,7 +2,7 @@ export const profile = {
   name: 'Suresh Bhandari',
   title: 'Senior Backend and AI Engineer',
   tagline:
-    'Backend and AI at scale -5M+ MAU, Google ADK at T-Systems, solo tech lead on production products.',
+    'Five years scaling distributed systems: a 5M+ MAU gaming platform at 10K req/sec peak, agentic AI on Google ADK at T-Systems, and full production ownership across multiple products.',
   location: 'Mumbai, India',
   relocation: 'Open to relocation',
   email: 'suresh.37x@gmail.com',
@@ -22,7 +22,7 @@ export const profile = {
 
 export const summary = `Senior Backend and AI Engineer with 5 years building and scaling distributed systems. Owned core backend services for a real-money gaming platform at 5M+ MAU sustaining 10K req/sec peak, and ran production end-to-end as the sole engineer across multiple products. Now building agentic AI systems on Google ADK at T-Systems (Deutsche Telekom subsidiary), embedded as a dedicated backend hire collaborating daily with German data science, frontend, and DevOps teams. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.`;
 
-/** Visible + crawlable -mirrors resume keyword density for ATS */
+/** Visible + crawlable: mirrors resume keyword density for ATS */
 export const atsKeywords = [
   'Python',
   'FastAPI',
@@ -67,5 +67,5 @@ export const education = {
 export const seo = {
   title: 'Suresh Bhandari | Senior Backend & AI Engineer',
   description:
-    'Senior Backend and AI Engineer: Python, FastAPI, Google ADK, RabbitMQ, PostgreSQL, AWS. 5M+ MAU gaming platform, T-Systems (Deutsche Telekom subsidiary), tech lead. Mumbai -open to relocation.',
+    'Senior Backend and AI Engineer: Python, FastAPI, Google ADK, RabbitMQ, PostgreSQL, AWS. 5M+ MAU gaming platform, T-Systems (Deutsche Telekom subsidiary), tech lead. Mumbai, open to relocation.',
 };
