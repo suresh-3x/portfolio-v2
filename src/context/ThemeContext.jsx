@@ -47,7 +47,12 @@ export const ThemeProvider = ({ children }) => {
             '--terminal-header': '#f8fafc',
             '--bg-pattern': 'none',
             '--grid-color': 'rgba(0, 0, 0, 0.02)',
-            '--is-monochrome': '0'
+            '--is-monochrome': '0',
+            '--nb-border': '#111111',
+            '--nb-shadow-color': '#111111',
+            '--nb-shadow': '5px 5px 0 #111111',
+            '--nb-shadow-sm': '3px 3px 0 #111111',
+            '--nb-border-width': '2px'
         },
         dusk: {
             '--bg-primary-color': '#0a0c10',
@@ -71,7 +76,12 @@ export const ThemeProvider = ({ children }) => {
             '--terminal-header': '#111827',
             '--bg-pattern': 'none',
             '--grid-color': 'rgba(255, 255, 255, 0.03)',
-            '--is-monochrome': '0'
+            '--is-monochrome': '0',
+            '--nb-border': '#f5f5f5',
+            '--nb-shadow-color': '#f43f5e',
+            '--nb-shadow': '5px 5px 0 #f43f5e',
+            '--nb-shadow-sm': '3px 3px 0 #f43f5e',
+            '--nb-border-width': '2px'
         },
         'mono-light': {
             '--bg-primary-color': '#f5f5f5',
@@ -93,7 +103,12 @@ export const ThemeProvider = ({ children }) => {
             '--terminal-header': '#f0f0f0',
             '--bg-pattern': 'none',
             '--grid-color': 'rgba(0, 0, 0, 0.02)',
-            '--is-monochrome': '1'
+            '--is-monochrome': '1',
+            '--nb-border': '#000000',
+            '--nb-shadow-color': '#000000',
+            '--nb-shadow': '5px 5px 0 #000000',
+            '--nb-shadow-sm': '3px 3px 0 #000000',
+            '--nb-border-width': '2px'
         },
         'mono-dark': {
             '--bg-primary-color': '#000000',
@@ -115,7 +130,12 @@ export const ThemeProvider = ({ children }) => {
             '--terminal-header': '#0a0a0a',
             '--bg-pattern': 'none',
             '--grid-color': 'rgba(255, 255, 255, 0.05)',
-            '--is-monochrome': '1'
+            '--is-monochrome': '1',
+            '--nb-border': '#ffffff',
+            '--nb-shadow-color': '#ffffff',
+            '--nb-shadow': '5px 5px 0 #ffffff',
+            '--nb-shadow-sm': '3px 3px 0 #ffffff',
+            '--nb-border-width': '2px'
         }
     };
 
