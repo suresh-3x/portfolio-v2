@@ -34,3 +34,8 @@ output/
 .playwright*
 # Brainstorming companion scratch dir
 .superpowers/
+
+# Playwright artifacts
+.playwright-mcp/
+test-results/
+playwright-report/
