@@ -10,10 +10,10 @@ test.describe('Portfolio QA Tests', () => {
         const themeToggle = page.locator('button[aria-label="Theme settings"]');
         await themeToggle.first().click();
 
-        const themes = ['dawn', 'dusk'];
+        const themes = ['dawn', 'mono'];
 
         for (const theme of themes) {
-            await page.locator(`button.theme-option-card:has-text("${theme.replace('-', ' ')}")`).click();
+            await page.locator(`button.theme-option-card:has-text("${theme === 'mono' ? 'Mono' : 'Dawn'}")`).click();
             await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
             // Re-open if closed (it closes on selection)
             if (theme !== themes[themes.length - 1]) {
@@ -25,12 +25,12 @@ test.describe('Portfolio QA Tests', () => {
     test('TC-02: Theme Persistence', async ({ page }) => {
         await page.goto(url);
 
-        // Set to dusk
+        // Set to mono
         await page.locator('button[aria-label="Theme settings"]').first().click();
-        await page.locator('button.theme-option-card:has-text("Dusk")').click();
+        await page.locator('button.theme-option-card:has-text("Mono")').click();
 
         await page.reload();
-        await expect(page.locator('html')).toHaveAttribute('data-theme', 'dusk');
+        await expect(page.locator('html')).toHaveAttribute('data-theme', 'mono');
     });
 
     test('TC-03: Favicon Dynamic Switching', async ({ page }) => {
@@ -40,12 +40,12 @@ test.describe('Portfolio QA Tests', () => {
         const lightFavicon = page.locator('link[rel="icon"]');
         await expect(lightFavicon).toHaveAttribute('href', '/favicon-light.svg');
 
-        // Switch to Dusk
+        // Switch to Mono
         const themeToggle = page.locator('button[aria-label="Theme settings"]');
         await themeToggle.first().click();
-        await page.locator('button.theme-option-card:has-text("Dusk")').click();
+        await page.locator('button.theme-option-card:has-text("Mono")').click();
 
-        // Check updated favicon (Dusk -> dark/white)
+        // Check updated favicon (Mono -> dark/white)
         const darkFavicon = page.locator('link[rel="icon"]');
         await expect(darkFavicon).toHaveAttribute('href', '/favicon-dark.svg');
     });

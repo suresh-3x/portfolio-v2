@@ -71,7 +71,7 @@ const Contact = () => {
         }
 
         .contact-container-v3 {
-          max-width: 1200px;
+          max-width: 1100px;
           margin: 0 auto;
           perspective: 1000px;
         }

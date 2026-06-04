@@ -54,8 +54,7 @@ h1, h2, h3, .resume-section-title {
   width: 100%;
 }
 
-[data-theme='dusk'] .navbar--resume .nav-island,
-[data-theme='mono-dark'] .navbar--resume .nav-island {
+[data-theme='mono'] .navbar--resume .nav-island {
   background: rgba(10, 10, 10, 0.88);
 }
 

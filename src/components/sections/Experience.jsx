@@ -184,7 +184,7 @@ const Experience = () => {
         }
 
         .experience-timeline {
-          max-width: 1200px;
+          max-width: 1100px;
           margin: 0 auto;
           position: relative;
           padding: 0 1.5rem;

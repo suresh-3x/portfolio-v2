@@ -1,344 +1,280 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import {
-  Github, ExternalLink, Folder, Zap, Wind, Server, Database, Triangle,
-  Smartphone, Layers, Code, Palette, Terminal, Cpu, Globe, Box, Layout,
-  Zap as Lightning, TrendingUp
-} from 'lucide-react';
-import Card from '../ui/Card';
+import { ExternalLink, Github } from 'lucide-react';
 import { projects } from '../../data/projects';
 import { useTheme } from '../../context/ThemeContext';
 
 const Projects = () => {
   const { theme } = useTheme();
-  const isMonochrome = theme === 'mono-light' || theme === 'mono-dark';
-  const borderMultiplier = isMonochrome ? 3.7 : 1;
-  const getTechIcon = (tag) => {
-    const size = 12;
-    switch (tag.toLowerCase()) {
-      case 'next.js': return <Zap size={size} />;
-      case 'react': return <Zap size={size} />;
-      case 'tailwind': return <Wind size={size} />;
-      case 'node.js': return <Server size={size} />;
-      case 'mongodb': return <Database size={size} />;
-      case 'vercel': return <Triangle size={size} />;
-      case 'swift': return <Smartphone size={size} />;
-      case 'swiftui': return <Smartphone size={size} />;
-      case 'coredata': return <Database size={size} />;
-      case 'ios': return <Smartphone size={size} />;
-      case 'flutter': return <Layers size={size} />;
-      case 'dart': return <Code size={size} />;
-      case 'material design': return <Palette size={size} />;
-      case 'go': return <Terminal size={size} />;
-      case 'concurrency': return <Cpu size={size} />;
-      case 'http': return <Globe size={size} />;
-      case 'cli': return <Terminal size={size} />;
-      case 'sqlite': return <Database size={size} />;
-      case 'mobile': return <Smartphone size={size} />;
-      case 'python': return <Code size={size} />;
-      case 'fastapi': return <Lightning size={size} />;
-      case 'wordpress': return <Code size={size} />;
-      case 'docker': return <Box size={size} />;
-      case 'mariadb': return <Database size={size} />;
-      case 'trading': return <TrendingUp size={size} />;
-      case 'real-time': return <Lightning size={size} />;
-      case 'open source': return <Code size={size} />;
-      case 'scheduling': return <Zap size={size} />;
-      case 'e-commerce': return <Box size={size} />;
-      default: return <Folder size={size} />;
-    }
-  };
+
+  // Calculate grid slots
+  // Featured project takes 2 slots, others take 1.
+  const totalSlotsUsed = 2 + (projects.length - 1);
+  const remainder = totalSlotsUsed % 3;
+  const emptySlotsNeeded = remainder === 0 ? 0 : 3 - remainder;
+
+  const emptySlots = Array.from({ length: emptySlotsNeeded }).map((_, i) => i);
 
   return (
-    <section className="projects-section" style={{ '--border-multiplier': borderMultiplier }}>
+    <section className="projects-section">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
       >
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-            >
-              <ProjectCard project={project} index={index} getTechIcon={getTechIcon} />
-            </motion.div>
-          ))}
+        <div className="proj-mag">
+          {projects.map((project, index) => {
+            const isFeatured = index === 0;
+            return (
+              <motion.div
+                key={project.title}
+                className={`proj-mag-item ${isFeatured ? 'featured' : ''}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+              >
+                <div className="proj-mag-index">
+                  {String(index + 1).padStart(2, '0')} {isFeatured ? '— Featured' : ''}
+                </div>
+                <div className="proj-mag-title">{project.title}</div>
+                <div className="proj-mag-desc">{project.description}</div>
+                <div className="proj-mag-chips">
+                  {project.tags.slice(0, 4).map((tag, tIdx) => (
+                    <span key={tIdx} className="proj-mag-chip">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="proj-links-m">
+                  {project.links?.github && (
+                    <a href={project.links.github} className="proj-link-m" target="_blank" rel="noopener noreferrer">
+                      GitHub ↗
+                    </a>
+                  )}
+                  {project.links?.demo && project.links.demo !== '#' && (
+                    <a href={project.links.demo} className="proj-link-m" target="_blank" rel="noopener noreferrer">
+                      Live ↗
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
+          
+          {/* Render empty slots as "Launching Soon" */}
+          {emptySlots.map((slotIndex) => {
+            const displayIndex = projects.length + slotIndex + 1;
+            return (
+             <div key={`empty-${slotIndex}`} className="proj-mag-item empty-slot">
+                <div className="proj-mag-index empty-index">
+                  {String(displayIndex).padStart(2, '0')}
+                </div>
+                <div className="empty-slot-content">
+                  <div className="empty-slot-icon">⚡</div>
+                  <div className="empty-slot-text">Launching Soon</div>
+                  <div className="empty-slot-sub">Project in development</div>
+                </div>
+             </div>
+            );
+          })}
         </div>
       </motion.div>
 
       <style>{`
         .projects-section {
-          display: flex;
-          flex-direction: column;
-          gap: 3rem;
           width: 100%;
-        }
-
-        .projects-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.5rem;
-          max-width: 1200px;
+          max-width: 1100px;
           margin: 0 auto;
           padding: 0 1.5rem;
         }
 
-        @media (max-width: 1024px) {
-          .projects-grid {
+        .proj-mag {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2px; /* For the thin grid lines effect */
+          background: var(--border-color);
+          border: 1px solid var(--border-color);
+        }
+
+        .proj-mag-item {
+          background: var(--card-bg);
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          min-height: 280px;
+          transition: background 0.2s;
+        }
+
+        .proj-mag-item:not(.featured):not(.empty-slot):hover {
+          background: var(--bg-secondary);
+        }
+
+        .proj-mag-item.featured {
+          grid-column: span 2;
+          background: var(--text-primary);
+        }
+
+        [data-theme='mono'] .proj-mag-item.featured {
+          background: #000000;
+        }
+
+        /* Empty Slots */
+        .empty-slot {
+          justify-content: flex-start; /* Align to top instead of center */
+          align-items: flex-start;
+          background: rgba(var(--text-primary-rgb), 0.02);
+          border: 1px dashed var(--border-color);
+          position: relative;
+        }
+
+        .empty-index {
+          opacity: 0.5;
+        }
+
+        .empty-slot-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          opacity: 0.5;
+          flex: 1; /* Take remaining space */
+          width: 100%;
+        }
+
+        .empty-slot-icon {
+          font-size: 24px;
+        }
+
+        .empty-slot-text {
+          font-family: var(--font-mono);
+          font-weight: 700;
+          font-size: 14px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: var(--text-primary);
+        }
+
+        .empty-slot-sub {
+          font-size: 12px;
+          color: var(--text-secondary);
+        }
+
+        .proj-mag-item.featured .proj-mag-title { color: var(--bg-primary-color); }
+        [data-theme='mono'] .proj-mag-item.featured .proj-mag-title { color: var(--text-primary); }
+
+        .proj-mag-item.featured .proj-mag-desc { color: rgba(255, 255, 255, 0.7); }
+        [data-theme='mono'] .proj-mag-item.featured .proj-mag-desc { color: var(--text-secondary); }
+
+        .proj-mag-item.featured .proj-mag-chip { 
+          background: rgba(255, 255, 255, 0.05); 
+          color: rgba(255, 255, 255, 0.6); 
+          border-color: rgba(255, 255, 255, 0.1); 
+        }
+
+        [data-theme='mono'] .proj-mag-item.featured .proj-mag-chip { 
+          background: var(--bg-secondary); 
+          color: var(--text-secondary); 
+          border-color: var(--border-color); 
+        }
+        
+        [data-theme='dawn'] .proj-mag-item.featured .proj-mag-index { color: var(--accent-secondary); }
+        [data-theme='dawn'] .proj-mag-item.featured .proj-link-m { color: var(--accent-secondary); }
+
+        .proj-mag-index {
+          font-family: var(--font-mono);
+          font-size: 11px;
+          color: var(--accent-primary);
+          margin-bottom: 1rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+        }
+
+        .proj-mag-title {
+          font-size: 24px;
+          font-weight: 700;
+          color: var(--text-primary);
+          margin-bottom: 0.75rem;
+          letter-spacing: -0.02em;
+          line-height: 1.1;
+        }
+
+        .proj-mag-desc {
+          font-size: 14px;
+          color: var(--text-secondary);
+          line-height: 1.6;
+          flex: 1;
+          margin-bottom: 1.5rem;
+        }
+
+        .proj-mag-chips {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-bottom: 1.5rem;
+        }
+
+        .proj-mag-chip {
+          background: var(--bg-secondary);
+          border: 1px solid var(--border-color);
+          color: var(--text-secondary);
+          font-family: var(--font-mono);
+          font-size: 10px;
+          padding: 4px 10px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+
+        .proj-links-m {
+          display: flex;
+          gap: 1.5rem;
+          margin-top: auto;
+        }
+
+        .proj-link-m {
+          color: var(--text-primary);
+          font-size: 12px;
+          text-decoration: none;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          transition: color 0.2s;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .proj-link-m:hover {
+          color: var(--accent-primary);
+        }
+
+        [data-theme='dawn'] .proj-mag-item.featured .proj-link-m:hover {
+          color: #fff;
+        }
+
+        @media (max-width: 900px) {
+          .proj-mag {
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
+          }
+          .proj-mag-item.featured {
+            grid-column: span 2;
           }
         }
 
-        @media (max-width: 768px) {
-          .projects-grid {
+        @media (max-width: 600px) {
+          .proj-mag {
             grid-template-columns: 1fr;
-            gap: 1.25rem;
+          }
+          .proj-mag-item.featured {
+            grid-column: span 1;
+          }
+          .proj-mag-item {
+            padding: 1.5rem;
           }
         }
       `}</style>
     </section>
-  );
-};
-
-// Project Card Component
-const ProjectCard = ({ project, index, getTechIcon }) => {
-  const accentColors = [
-    'var(--accent-primary)',
-    'var(--accent-secondary)',
-    'var(--accent-tertiary)',
-    'var(--accent-primary)',
-    'var(--accent-secondary)',
-    'var(--accent-tertiary)'
-  ];
-  const accentColor = accentColors[index % accentColors.length];
-
-  const githubLink = project.links?.github || project.links?.code;
-  const demoLink = project.links?.demo || project.links?.external;
-
-  return (
-    <>
-      <motion.div
-        className="project-card"
-        style={{ borderColor: accentColor, boxShadow: `0 4px 16px ${accentColor}20`, borderWidth: 'calc(1px * var(--border-multiplier, 1))' }}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: index * 0.05 }}
-      >
-        <div className="project-card-inner">
-          <div className="project-top">
-            <div className="project-icon-box" style={{ color: accentColor }}>
-              <Folder size={28} />
-            </div>
-            <div className="project-links">
-              {githubLink && (
-                <a href={githubLink} className="icon-link" style={{ '--link-accent': accentColor }} aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-                  <Github size={18} />
-                </a>
-              )}
-              {demoLink && demoLink !== '#' && (
-                <a href={demoLink} className="icon-link" style={{ '--link-accent': accentColor }} aria-label="Live Demo" target="_blank" rel="noopener noreferrer">
-                  <ExternalLink size={18} />
-                </a>
-              )}
-            </div>
-          </div>
-
-          <div className="project-info">
-            <h3 className="project-title" style={{ color: accentColor }}>{project.title}</h3>
-            <p className="project-desc">{project.description}</p>
-          </div>
-
-          <div className="project-tags">
-            {project.tags.map((tag, tIdx) => (
-              <span key={tIdx} className="tag-module">
-                {getTechIcon(tag)}
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-      <style>{`
-        .project-card {
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
-          padding: 1.5rem;
-          border: 2px solid var(--nb-border);
-          border-radius: 0;
-          background: var(--card-bg);
-          height: 100%;
-          transition: transform 0.08s ease, box-shadow 0.08s ease;
-        }
-
-        .project-card-inner {
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
-          height: 100%;
-        }
-
-        .project-top {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-        }
-
-        .project-icon-box {
-          opacity: 0.8;
-          flex-shrink: 0;
-        }
-
-        .project-links {
-          display: flex;
-          gap: 0.75rem;
-        }
-
-        .icon-link {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 38px;
-          height: 38px;
-          border-radius: 0;
-          background: var(--card-bg);
-          border: 2px solid var(--nb-border);
-          box-shadow: var(--nb-shadow-sm);
-          color: var(--text-secondary);
-          transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.2s ease, color 0.2s ease;
-          flex-shrink: 0;
-        }
-
-        .icon-link:hover {
-          background: var(--link-accent);
-          color: var(--on-accent);
-          transform: translate(3px, 3px);
-          box-shadow: 0 0 0 var(--nb-shadow-color);
-        }
-
-        .project-info {
-          flex-grow: 1;
-        }
-
-        .project-title {
-          font-size: 1.1rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          margin: 0 0 0.5rem 0;
-          letter-spacing: -0.02em;
-        }
-
-        .project-desc {
-          font-size: 0.9rem;
-          color: var(--text-secondary);
-          line-height: 1.6;
-          margin: 0;
-        }
-
-        .project-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-          padding-top: 1rem;
-          border-top: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
-        }
-
-        .tag-module {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          font-family: var(--font-mono);
-          font-size: 0.7rem;
-          color: var(--text-secondary);
-          background: transparent;
-          padding: 0.35rem 0.7rem;
-          border-radius: 6px;
-          border: calc(1px * var(--border-multiplier, 1)) solid var(--border-color);
-          line-height: 1;
-          transition: all 0.2s ease;
-          white-space: nowrap;
-          letter-spacing: 0.1px;
-        }
-
-        .tag-module:hover {
-          background: rgba(255, 255, 255, 0.05);
-          border-color: var(--accent-primary);
-          color: var(--accent-primary);
-        }
-
-        .tag-module svg {
-          opacity: 0.6;
-          transition: opacity 0.2s ease;
-        }
-
-        .tag-module:hover svg {
-          opacity: 1;
-        }
-
-        @media (max-width: 1024px) {
-          .project-card {
-            padding: 1.25rem;
-          }
-
-          .project-title {
-            font-size: 1rem;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .project-card {
-            padding: 1.25rem;
-          }
-
-          .project-title {
-            font-size: 0.95rem;
-          }
-
-          .project-desc {
-            font-size: 0.85rem;
-          }
-
-          .project-tags {
-            gap: 0.45rem;
-          }
-
-          .tag-module {
-            font-size: 0.68rem;
-            padding: 0.3rem 0.65rem;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .project-card {
-            padding: 1rem;
-          }
-
-          .project-title {
-            font-size: 0.9rem;
-          }
-
-          .project-desc {
-            font-size: 0.8rem;
-          }
-
-          .project-tags {
-            gap: 0.4rem;
-          }
-
-          .tag-module {
-            font-size: 0.65rem;
-            padding: 0.3rem 0.6rem;
-          }
-        }
-      `}</style>
-    </>
   );
 };
 

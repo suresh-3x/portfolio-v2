@@ -20,10 +20,10 @@ const About = () => {
           <div className="about-narrative">
             <p className="narrative-lead">
               I build and own the <strong>backend systems</strong> that keep products
-              alive under real load - and the <strong>AI agents</strong> running on top of them.
+              alive under real load and the <strong>AI agents</strong> running on top of them.
             </p>
             <p className="narrative-p">
-              5 years building and scaling distributed systems. I owned core backend services for a
+              5+ years building and scaling distributed systems. I owned core backend services for a
               real-money gaming platform at 5M+ MAU sustaining 10K req/sec peak, and ran production
               end-to-end as the sole engineer across multiple products. Now building agentic AI systems
               on Google ADK at T-Systems (Deutsche Telekom subsidiary).
@@ -65,7 +65,7 @@ const About = () => {
 
       <style>{`
         .about-container {
-          max-width: 1200px;
+          max-width: 1100px;
           margin: 0 auto;
           padding: 0 1.5rem;
         }

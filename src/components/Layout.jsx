@@ -39,7 +39,7 @@ const Layout = ({ children, highlightColor }) => {
         .main-content {
           flex: 1;
           width: 100%;
-          max-width: 1200px;
+          max-width: 1100px;
           margin: 0 auto;
           /* No side padding here: each section provides its own 1.5rem gutter,
              which keeps body sections aligned with the footer (single gutter). */

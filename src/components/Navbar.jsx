@@ -188,9 +188,9 @@ const Navbar = ({ highlightColor }) => {
         }
 
         .nav-island {
-          background: var(--card-bg);
+          background: #000000; /* Pure Black */
           border: none;
-          border-bottom: 2px solid var(--nb-border);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 0;
           width: 100%;
           pointer-events: auto;
@@ -198,7 +198,7 @@ const Navbar = ({ highlightColor }) => {
         }
 
         .navbar.scrolled .nav-island {
-          box-shadow: 0 4px 0 var(--nb-shadow-color);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
         .nav-container {
@@ -208,7 +208,7 @@ const Navbar = ({ highlightColor }) => {
           align-items: center;
           gap: 2rem;
           width: 100%;
-          max-width: 1200px;
+          max-width: 1100px;
           margin: 0 auto;
           will-change: padding;
           transition: padding 0.2s ease;
@@ -224,6 +224,10 @@ const Navbar = ({ highlightColor }) => {
           gap: 12px;
           cursor: pointer;
           flex-shrink: 0;
+        }
+
+        .logo-v4 rect, .logo-v4 path {
+          stroke: #ffffff !important;
         }
 
         .logo-v4 > div:first-child {
@@ -243,7 +247,7 @@ const Navbar = ({ highlightColor }) => {
           font-family: var(--font-mono);
           font-weight: 800;
           font-size: 0.95rem;
-          color: var(--text-primary);
+          color: #ffffff; /* White text for black navbar */
           line-height: 1.1;
           display: flex;
           justify-content: space-between;
@@ -271,7 +275,7 @@ const Navbar = ({ highlightColor }) => {
           display: flex;
           align-items: center;
           gap: 6px;
-          color: var(--text-secondary);
+          color: #888888;
           font-family: var(--font-mono);
           font-size: 0.72rem;
           font-weight: 700;
@@ -297,19 +301,19 @@ const Navbar = ({ highlightColor }) => {
         }
 
         .nav-link:hover {
-          color: var(--text-primary);
+          color: #ffffff;
           border-bottom-color: var(--nav-accent);
         }
 
         .menu-toggle {
           display: none;
-          background: var(--card-bg);
-          border: 2px solid var(--nb-border);
-          color: var(--text-primary);
+          background: #000;
+          border: 1px solid #333;
+          color: #fff;
           cursor: pointer;
           padding: 7px;
           border-radius: 0;
-          box-shadow: var(--nb-shadow-sm);
+          box-shadow: none;
           transition: transform 0.08s ease, box-shadow 0.08s ease;
           flex-shrink: 0;
         }
@@ -326,7 +330,7 @@ const Navbar = ({ highlightColor }) => {
           left: 0;
           width: 100vw;
           height: 100vh;
-          background: var(--bg-primary-color);
+          background: #000000;
           z-index: 99999;
           display: flex;
           flex-direction: column;
@@ -365,7 +369,7 @@ const Navbar = ({ highlightColor }) => {
         .mobile-close-btn {
           background: none;
           border: none;
-          color: var(--text-primary);
+          color: #ffffff;
           cursor: pointer;
           padding: 8px;
           display: flex;
@@ -397,7 +401,7 @@ const Navbar = ({ highlightColor }) => {
         .mobile-nav-link {
           font-size: 1.5rem;
           font-weight: 700;
-          color: var(--text-primary);
+          color: #ffffff;
           text-decoration: none;
           display: flex;
           align-items: center;

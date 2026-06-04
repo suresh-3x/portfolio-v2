@@ -130,6 +130,7 @@ function App() {
         emoji="👋"
         subtitle="Engineering resilient digital ecosystems through precision and design."
         colorVar="--accent-primary"
+        index="01"
       />
       <About />
 
@@ -139,6 +140,7 @@ function App() {
         emoji="💼"
         subtitle="Professional trajectory across industry-leading organizations."
         colorVar="--accent-secondary"
+        index="02"
       />
       <Experience />
 
@@ -148,6 +150,7 @@ function App() {
         emoji="🧠"
         subtitle="Core technical components and deployment stack."
         colorVar="--accent-tertiary"
+        index="03"
       />
       <Skills />
 
@@ -157,6 +160,7 @@ function App() {
         emoji="🚀"
         subtitle="Selected works in distributed systems and interface design."
         colorVar="--accent-primary"
+        index="04"
       />
       <Projects />
     </Layout>

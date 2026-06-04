@@ -109,7 +109,7 @@ const GithubStats = () => {
 
       <style>{`
         .github-single-block {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0;
             display: flex;

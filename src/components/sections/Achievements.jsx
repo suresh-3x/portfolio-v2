@@ -59,7 +59,7 @@ const Achievements = () => (
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1.25rem;
-        max-width: 1200px;
+        max-width: 1100px;
         margin: 0 auto;
       }
       .achievement-inner {

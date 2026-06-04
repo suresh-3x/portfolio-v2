@@ -50,8 +50,7 @@ html {
 
 body {
   background-color: var(--bg-primary-color);
-  background-image: var(--bg-pattern), var(--bg-primary-gradient);
-  background-size: 32px 32px, 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter name='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
   background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-sans);
@@ -179,7 +178,7 @@ a {
 /* Unified Section Joint (SectionDivider v4) */
 .section-divider-v4 {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 6rem auto 2.5rem;
   padding: 0 1.5rem;
   text-align: center;

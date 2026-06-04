@@ -20,7 +20,7 @@ const ThemePicker = ({ mobile, mode = 'dropdown' }) => {
 
   const themesList = [
     { id: 'dawn', label: 'Dawn', icon: <Sun size={18} />, desc: 'Soft & Airy' },
-    { id: 'dusk', label: 'Dusk', icon: <Moon size={18} />, desc: 'Deep & Cosmic' },
+    { id: 'mono', label: 'Mono', icon: <Moon size={18} />, desc: 'Uber Black & White' },
   ];
 
   return (
@@ -77,27 +77,22 @@ const ThemePicker = ({ mobile, mode = 'dropdown' }) => {
         }
 
         .theme-toggle-btn {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1.5px solid rgba(var(--border-color-rgb, 255, 255, 255), 0.15);
-          color: var(--text-secondary);
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: #ffffff;
           cursor: pointer;
           padding: 8px;
-          border-radius: 8px;
+          border-radius: 0;
           transition: all 0.2s ease;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.05),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .theme-toggle-btn:hover, .theme-toggle-btn.open {
           color: var(--accent-primary);
-          background: rgba(var(--accent-primary-rgb), 0.08);
+          background: rgba(var(--accent-primary-rgb), 0.1);
           border-color: var(--accent-primary);
-          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.15),
-                      0 4px 12px rgba(0, 0, 0, 0.1),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .theme-picker-container.mobile .theme-toggle-btn {
