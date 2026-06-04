@@ -168,51 +168,28 @@ const Navbar = ({ highlightColor }) => {
 
         .navbar {
           position: fixed;
-          top: 1.5rem;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 95%;
-          max-width: 1200px;
+          top: 0;
+          left: 0;
+          width: 100%;
           z-index: 9999;
           display: flex;
           align-items: center;
           justify-content: center;
           pointer-events: none;
-          will-change: top, width, max-width;
-          transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .navbar.scrolled {
-          top: 0;
-          width: 100%;
-          max-width: 100%;
         }
 
         .nav-island {
-          background: rgba(var(--card-bg-rgb, 255, 255, 255), 0.95);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: calc(1.5px * var(--border-multiplier, 1)) solid rgba(var(--border-color-rgb, 255, 255, 255), 0.12);
-          border-radius: 100px;
+          background: var(--card-bg);
+          border: none;
+          border-bottom: 2px solid var(--nb-border);
+          border-radius: 0;
           width: 100%;
           pointer-events: auto;
-          will-change: border-radius, background-filter;
-          transition: border-radius 0.3s ease, background 0.2s ease, border-color 0.3s ease;
-          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.05),
-                      0 4px 20px rgba(0, 0, 0, 0.08),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+          transition: box-shadow 0.2s ease;
         }
 
         .navbar.scrolled .nav-island {
-          border-radius: 0;
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border-color: transparent;
-          border-bottom-width: calc(1px * var(--border-multiplier, 1));
-          border-bottom-color: rgba(var(--border-color-rgb, 255, 255, 255), 0.1);
-          background: rgba(var(--card-bg-rgb, 255, 255, 255), 0.92);
-          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08),
-                      0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.03);
+          box-shadow: 0 4px 0 var(--nb-shadow-color);
         }
 
         .nav-container {
@@ -286,23 +263,22 @@ const Navbar = ({ highlightColor }) => {
           align-items: center;
           gap: 6px;
           color: var(--text-secondary);
-          font-size: 0.8rem;
-          font-weight: 600;
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
           text-decoration: none;
-          transition: all 0.2s ease;
+          transition: color 0.15s ease, border-color 0.15s ease;
           white-space: nowrap;
-          padding: 6px 10px;
-          border-radius: 6px;
-          border: 1px solid transparent;
+          padding: 6px 2px;
+          border-radius: 0;
+          border: none;
+          border-bottom: 2px solid transparent;
         }
 
         .nav-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          line-height: 1;
-          transition: color 0.2s ease;
+          display: none;
         }
 
         .nav-label {
@@ -312,38 +288,26 @@ const Navbar = ({ highlightColor }) => {
         }
 
         .nav-link:hover {
-          color: var(--nav-accent);
-          transform: translateY(-1px);
-          background: rgba(255, 255, 255, 0.04);
-          border-color: var(--nav-accent);
-          box-shadow: 0 0 0 1px var(--nav-accent)20,
-                      inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        }
-
-        .nav-link:hover .nav-icon {
-          color: var(--nav-accent);
+          color: var(--text-primary);
+          border-bottom-color: var(--nav-accent);
         }
 
         .menu-toggle {
           display: none;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1.5px solid rgba(var(--border-color-rgb, 255, 255, 255), 0.15);
+          background: var(--card-bg);
+          border: 2px solid var(--nb-border);
           color: var(--text-primary);
           cursor: pointer;
-          padding: 8px;
-          border-radius: 8px;
-          transition: all 0.2s ease;
+          padding: 7px;
+          border-radius: 0;
+          box-shadow: var(--nb-shadow-sm);
+          transition: transform 0.08s ease, box-shadow 0.08s ease;
           flex-shrink: 0;
-          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.05),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .menu-toggle:hover {
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(var(--accent-primary-rgb, 99, 102, 241), 0.2);
-          box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb, 99, 102, 241), 0.1),
-                      0 4px 12px rgba(0, 0, 0, 0.08),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+          transform: translate(3px, 3px);
+          box-shadow: 0 0 0 var(--nb-shadow-color);
         }
         
         /* Mobile Menu Styles */
