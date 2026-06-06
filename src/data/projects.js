@@ -1,14 +1,36 @@
 export const projects = [
+  // AI / Agentic Systems (flagship)
+  {
+    title: 'Revamp Engine',
+    category: 'AI / Agentic Systems',
+    description:
+      'A 24/7 agentic AI worker system that finds real estate builders, auto-revamps their pages, and ships previews a human has approved. Designed so the queue, not the LLM, is the spine.',
+    long_description:
+      'A durable, queue driven pipeline where SQLite is the source of truth and Redis is a rebuildable hot cache (queues, state, circuit breaker), rehydrated from SQLite on boot. Work is split across per-queue workers: q:scrape, q:import, and q:deploy drain regardless of LLM health, while q:ai stalls only when the LLM circuit breaker is OPEN, so a model outage degrades one capability instead of the whole system. A FastAPI control plane never 500s if Redis is down. A Node build service renders Astro templates and deploys previews to Vercel or Netlify. A human stays in the loop by design: a revamp stops at built and waits for a person to preview and approve it. Nothing goes outward automatically. Runs 24/7 on a Raspberry Pi 4B.',
+    tags: ['Python', 'FastAPI', 'Redis', 'SQLite', 'Agentic AI', 'LLM', 'Astro', 'Node.js', 'Raspberry Pi'],
+    tech_details: {
+      architecture: 'Durable queue (SQLite truth + Redis hot cache)',
+      resilience: 'LLM circuit breaker; non-AI queues drain during an LLM outage',
+      control_plane: 'FastAPI dashboard, never 500s if Redis is down',
+      build_service: 'Node + Astro templates, deploys to Vercel or Netlify',
+      safety: 'Human in the loop; nothing deploys outward automatically',
+      host: 'Raspberry Pi 4B',
+    },
+    links: {},
+    featured: true,
+    year: 2026,
+  },
+
   // AI / RAG
   {
     title: 'Nomad Mind',
     category: 'AI / RAG',
     description: 'Python RAG pipeline that ingests YouTube travel vlogs via vector embeddings and answers travel questions with itineraries grounded in real video content.',
-    long_description: 'A retrieval-augmented generation pipeline that turns YouTube travel vlogs into a queryable knowledge base. Transcribes and chunks video content, embeds it into a vector store, and answers travel questions and generates itineraries grounded in what creators actually show and say on the ground - not generic model knowledge.',
+    long_description: 'A retrieval augmented generation pipeline that turns YouTube travel vlogs into a queryable knowledge base. Transcribes and chunks video content, embeds it into a vector store, and answers travel questions and generates itineraries grounded in what creators actually show and say on the ground, not generic model knowledge.',
     tags: ['Python', 'RAG', 'Vector Embeddings', 'LLM', 'YouTube'],
     tech_details: {
       language: 'Python',
-      pipeline: 'RAG (retrieval-augmented generation)',
+      pipeline: 'RAG (retrieval augmented generation)',
       ingestion: 'YouTube travel vlogs',
       retrieval: 'Vector embeddings',
       output: 'Grounded Q&A and itinerary generation'
@@ -39,8 +61,8 @@ export const projects = [
   {
     title: 'APEX OHOL v8',
     category: 'Private - Trading Systems',
-    description: 'Intraday options-scanning system for NSE F&O market detecting OHOL patterns with live tracking and paper trading.',
-    long_description: 'Advanced algorithmic trading system that scans NSE F&O market for Open=High / Open=Low patterns on the first one-minute candle (09:15–09:16), generates trade signals, tracks them live, sends Telegram alerts, and runs a paper-trading engine for P&L simulation.',
+    description: 'Intraday options scanning system for NSE F&O market detecting OHOL patterns with live tracking and paper trading.',
+    long_description: 'An algorithmic trading system that scans the NSE F&O market for Open=High and Open=Low patterns on the first one-minute candle (09:15 to 09:16), generates trade signals, tracks them live, sends Telegram alerts, and runs a paper-trading engine for P&L simulation.',
     tags: ['Python', 'FastAPI', 'SQLite', 'Real-time', 'Trading', 'Telegram Bot'],
     tech_details: {
       frontend: 'Vanilla JS Single-Page App',
@@ -60,7 +82,7 @@ export const projects = [
     title: 'BizAssist Hotel Booking System',
     category: 'Private - Booking Platform',
     description: 'High-performance hotel booking and vacation rental platform built on WordPress with custom plugin architecture.',
-    long_description: 'Production-ready hotel booking system built on WordPress with a custom "BizAssist Booking System" plugin. Features property listings, checkout logic, STAAH integrations for bookings, and Cashfree payment gateway integration with mock/real mode switching.',
+    long_description: 'A production-ready hotel booking system built on WordPress with a custom "BizAssist Booking System" plugin. Features property listings, checkout logic, STAAH integrations for bookings, and Cashfree payment gateway integration with mock and real mode switching.',
     tags: ['WordPress', 'PHP', 'Docker', 'MariaDB', 'Payments', 'Booking Engine'],
     tech_details: {
       cms: 'WordPress (Headless-ready)',
@@ -80,8 +102,8 @@ export const projects = [
   {
     title: 'BizAssist Platform',
     category: 'Full-Stack Web',
-    description: 'Full-stack agency website delivering scalable client solutions with modern tech stack.',
-    long_description: 'Production-grade business platform demonstrating full-stack development capabilities with Next.js frontend, Node.js backend, MongoDB database, and deployed on Vercel.',
+    description: 'Full-stack agency website delivering scalable client solutions with a modern tech stack.',
+    long_description: 'A production-grade business platform demonstrating full-stack development with a Next.js frontend, Node.js backend, MongoDB database, deployed on Vercel.',
     tags: ['Next.js', 'React', 'Tailwind', 'Node.js', 'MongoDB', 'Vercel'],
     links: {
       demo: 'https://www.bizassist.online/',
@@ -94,8 +116,8 @@ export const projects = [
   {
     title: 'Smax Bookings App',
     category: 'Mobile - iOS',
-    description: 'Native iOS app for Cal.com scheduling with self-hosted Docker backend.',
-    long_description: 'Native iOS application built with Swift and SwiftUI providing seamless Cal.com integration with a self-hosted backend. Demonstrates native iOS development and API integration.',
+    description: 'Native iOS app for Cal.com scheduling with a self-hosted Docker backend.',
+    long_description: 'A native iOS application built with Swift and SwiftUI providing seamless Cal.com integration with a self-hosted backend. Demonstrates native iOS development and API integration.',
     tags: ['Swift', 'SwiftUI', 'iOS', 'Calendar API', 'Docker'],
     links: {
       github: 'https://github.com/suresh-3x/smax-bookings-app'
@@ -107,8 +129,8 @@ export const projects = [
   {
     title: 'Vision Clothing',
     category: 'Mobile - E-Commerce',
-    description: 'Cross-platform e-commerce mobile app showcasing Material Design and seamless checkout flow.',
-    long_description: 'Production-ready e-commerce application built with Flutter and Dart, featuring product browsing, shopping cart, Material Design UI, and smooth checkout experience.',
+    description: 'Cross-platform e-commerce mobile app showcasing Material Design and a seamless checkout flow.',
+    long_description: 'A production-ready e-commerce application built with Flutter and Dart, featuring product browsing, shopping cart, Material Design UI, and a smooth checkout experience.',
     tags: ['Flutter', 'Dart', 'Material Design', 'E-Commerce', 'Mobile'],
     links: {
       github: 'https://github.com/suresh-3x/vision-clothing'
@@ -120,6 +142,7 @@ export const projects = [
 
 export const projectCategories = [
   'All',
+  'AI / Agentic Systems',
   'AI / RAG',
   'Open Source',
   'Private - Trading Systems',
