@@ -1,0 +1,26 @@
+/* ============================================================
+   PAPER VIEW  —  light research / docs
+   All rules scoped under [data-view="paper"].
+   ============================================================ */
+
+[data-view="paper"] {
+  --p-bg: #ffffff;
+  --p-panel: #fbfbfa;
+  --p-text: #16161a;
+  --p-muted: #5b5b66;
+  --p-faint: #8a8a93;
+  --p-rule: #e7e7e3;
+  --p-accent: #1a56db;
+  --p-accent-soft: #eef2ff;
+  --p-chip: #f3f4f6;
+}
+
+[data-view="paper"] body {
+  background-color: var(--p-bg);
+  color: var(--p-text);
+}
+
+[data-view="paper"] ::selection {
+  background: var(--p-accent);
+  color: #ffffff;
+}

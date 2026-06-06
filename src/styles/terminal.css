@@ -1,0 +1,31 @@
+/* ============================================================
+   TERMINAL VIEW  —  warm dark console
+   All rules scoped under [data-view="terminal"].
+   ============================================================ */
+
+[data-view="terminal"] {
+  --t-bg: #0e0e10;
+  --t-panel: #141417;
+  --t-panel-2: #17171b;
+  --t-text: #e8e6e1;
+  --t-muted: #8b8b86;
+  --t-faint: #3a3a3e;
+  --t-border: rgba(255, 255, 255, 0.08);
+  --t-accent: #f5a623;
+  --t-accent-dim: rgba(245, 166, 35, 0.14);
+  --t-ok: #5bd672;
+}
+
+[data-view="terminal"] body {
+  background-color: var(--t-bg);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 64px 64px;
+  color: var(--t-text);
+}
+
+[data-view="terminal"] ::selection {
+  background: var(--t-accent);
+  color: #0e0e10;
+}
