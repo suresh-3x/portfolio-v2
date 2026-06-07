@@ -54,7 +54,7 @@ export const impactMetrics = [
 ];
 
 export const education = {
-  period: '2018 - 2021',
+  period: '2018 to 2021',
   degree: 'Bachelor of Computer Applications (BCA)',
   gpa: 'GPA 8.20 / 10',
   university: 'YCMOU',

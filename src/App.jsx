@@ -1,20 +1,21 @@
 import React from 'react';
 import { useLenis } from 'lenis/react';
 import Layout from './components/Layout';
-import Experience from './components/sections/Experience';
-import Projects from './components/sections/Projects';
-import Hero from './components/sections/Hero';
-import About from './components/sections/About';
-import Skills from './components/sections/Skills';
-import SectionDivider from './components/ui/SectionDivider';
+import CommandPalette from './components/CommandPalette';
+import { useView } from './context/ViewContext';
+import TerminalView from './views/terminal/TerminalView';
+import PaperView from './views/paper/PaperView';
 
 const HEADER_OFFSET = 120;
 const SCROLL_KEY = 'lastScrollPosition';
 
 const HashScrollHandler = () => {
   const lenis = useLenis();
-  const lenisRef = React.useRef(lenis);
-  lenisRef.current = lenis;
+  const lenisRef = React.useRef(null);
+
+  React.useEffect(() => {
+    lenisRef.current = lenis;
+  }, [lenis]);
 
   React.useEffect(() => {
     // Disable native restoration; we restore manually to avoid "crawling" on reload.
@@ -117,52 +118,15 @@ const HashScrollHandler = () => {
 };
 
 function App() {
-  const highlightColor = 'var(--accent-primary)';
+  const { view } = useView();
 
   return (
-    <Layout highlightColor={highlightColor}>
+    <Layout>
       <HashScrollHandler />
-      <Hero highlightColor={highlightColor} />
-
-      <SectionDivider
-        id="about"
-        title="About"
-        emoji="👋"
-        subtitle="Engineering resilient digital ecosystems through precision and design."
-        colorVar="--accent-primary"
-        index="01"
-      />
-      <About />
-
-      <SectionDivider
-        id="experience"
-        title="Experience"
-        emoji="💼"
-        subtitle="Professional trajectory across industry-leading organizations."
-        colorVar="--accent-secondary"
-        index="02"
-      />
-      <Experience />
-
-      <SectionDivider
-        id="skills"
-        title="Skills"
-        emoji="🧠"
-        subtitle="Core technical components and deployment stack."
-        colorVar="--accent-tertiary"
-        index="03"
-      />
-      <Skills />
-
-      <SectionDivider
-        id="projects"
-        title="Projects"
-        emoji="🚀"
-        subtitle="Selected works in distributed systems and interface design."
-        colorVar="--accent-primary"
-        index="04"
-      />
-      <Projects />
+      <CommandPalette />
+      <div key={view} className="view-fade">
+        {view === 'terminal' ? <TerminalView /> : <PaperView />}
+      </div>
     </Layout>
   );
 }
