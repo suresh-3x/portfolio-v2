@@ -36,7 +36,11 @@ export default function Experience() {
         {rows.map((e) => {
           return (
             <div className="p-row" key={e.id}>
-              <CompanyLogo logo={e.logos[0]} />
+              <div className="p-rowlogos">
+                {e.logos.map((l) => (
+                  <CompanyLogo key={l.domain} logo={l} />
+                ))}
+              </div>
               <div className="p-rmid">
                 <div className="p-co">
                   <CompanyName entry={e} />

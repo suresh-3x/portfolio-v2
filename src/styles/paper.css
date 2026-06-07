@@ -905,3 +905,10 @@
 [data-view="paper"] .p-expitem-co a { color: inherit; }
 [data-view="paper"] .p-co a:hover,
 [data-view="paper"] .p-expitem-co a:hover { color: var(--p-accent); text-decoration: underline; }
+
+[data-view="paper"] .p-rowlogos {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
