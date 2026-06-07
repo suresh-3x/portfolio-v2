@@ -1064,3 +1064,37 @@
     width: 100%;
   }
 }
+
+
+/* ===== terminal: company logos + linked company names ===== */
+[data-view="terminal"] .t-exp-role__logos {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  align-self: center;
+}
+[data-view="terminal"] .company-logo-link { display: inline-flex; }
+[data-view="terminal"] .company-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--t-border);
+  padding: 3px;
+  display: block;
+}
+[data-view="terminal"] .company-logo--wide { width: auto; max-width: 74px; }
+[data-view="terminal"] .company-logo--mono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: var(--t-panel);
+  color: var(--t-text);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.58rem;
+}
+[data-view="terminal"] .t-table__co a:hover,
+[data-view="terminal"] .t-exp-role__co a:hover { color: var(--t-accent); }

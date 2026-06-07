@@ -869,3 +869,33 @@
     flex-basis: 100%;
   }
 }
+
+
+/* ===== paper: company logos + linked company names ===== */
+[data-view="paper"] .p-row .company-logo-link,
+[data-view="paper"] .p-row .company-logo { display: block; }
+[data-view="paper"] .company-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--p-rule);
+  padding: 4px;
+}
+[data-view="paper"] .company-logo--mono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: var(--p-text);
+  color: #fff;
+  border: 0;
+  font-family: var(--font-tag);
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+[data-view="paper"] .p-co a,
+[data-view="paper"] .p-expitem-co a { color: inherit; }
+[data-view="paper"] .p-co a:hover,
+[data-view="paper"] .p-expitem-co a:hover { color: var(--p-accent); text-decoration: underline; }

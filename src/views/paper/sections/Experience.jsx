@@ -1,51 +1,25 @@
 import { experienceEntries } from '../../../data/experience';
 import { education } from '../../../data/profile';
+import CompanyLogo from '../../../components/CompanyLogo';
 
-// Company monogram colors keyed by first letter / company.
-const CHIP_CLASS = {
-  'T-Systems': 'p-chip--ts',
-  Gridlogic: 'p-chip--gl',
-  'Stride Ahead': 'p-chip--sa',
-  BizAssist: 'p-chip--bz',
-};
-
-// Concise one-line outcomes derived from the first description bullet.
+// One-line outcome per role (keyed by entry id, so the two Stride stints differ).
 const OUTCOMES = {
-  'T-Systems': 'Architected the internal agentic AI platform solo; 10+ production agents on Google ADK.',
-  Gridlogic: 'Owned the wallet and game engine backend at 5M+ MAU, 10K req/sec peak, zero financial data loss.',
-  BizAssist: 'Shipped four production apps solo with zero P0 incidents over 12 months.',
-  'Stride Ahead': 'Founding backend engineer; standardized 5+ microservices and cut release cycles 4h to under 15m.',
+  't-systems-pixeldust': 'Architected the internal agentic AI platform solo; 10+ production agents on Google ADK.',
+  gridlogic: 'Owned the wallet and game engine backend at 5M+ MAU, 10K req/sec peak, zero financial data loss.',
+  bizassist: 'Shipped four production apps solo with zero P0 incidents over 12 months.',
+  'stride-ahead-lead': 'Returned as Tech Lead to stabilize a fragmented platform; cut release cycles 4h to under 15m.',
+  'stride-ahead-sde-senior': 'Founding backend engineer; built the core architecture the team ran for 3+ years.',
 };
 
-// Merge the two Stride Ahead rows into a single timeline row.
-function buildRows(entries) {
-  const rows = [];
-  const seenGroups = new Set();
-  for (const e of entries) {
-    if (e.groupKey === 'strideahead') {
-      if (seenGroups.has('strideahead')) continue;
-      seenGroups.add('strideahead');
-      rows.push({
-        key: 'strideahead',
-        company: 'Stride Ahead',
-        roleSub: 'Tech Lead / Senior SDE',
-        period: 'Mar 2021 to Aug 2025',
-        outcome: OUTCOMES['Stride Ahead'],
-      });
-      continue;
-    }
-    rows.push({
-      key: e.id,
-      company: e.company,
-      roleSub: e.role,
-      period: e.period,
-      outcome: OUTCOMES[e.company] || e.description[0],
-    });
-  }
-  return rows;
-}
+const rows = [...experienceEntries].sort((a, b) => a.sortOrder - b.sortOrder);
 
-const rows = buildRows(experienceEntries);
+function CompanyName({ entry }) {
+  return entry.website ? (
+    <a href={entry.website} target="_blank" rel="noopener noreferrer">{entry.company}</a>
+  ) : (
+    entry.company
+  );
+}
 
 export default function Experience() {
   return (
@@ -56,31 +30,32 @@ export default function Experience() {
       </div>
 
       <div className="p-exp">
-        {rows.map((r) => (
-          <div className="p-row" key={r.key}>
-            <div className={`p-mono ${CHIP_CLASS[r.company] || ''}`}>
-              {r.company.charAt(0)}
-            </div>
-            <div className="p-rmid">
-              <div className="p-co">
-                {r.company}
-                <span className="p-co-sub">
-                  {' '}
-                  {'·'} {r.roleSub}
-                </span>
+        {rows.map((e) => {
+          const primary = e.logos[0];
+          // The timeline chip is a small square: skip wide custom logos, use the
+          // domain icon so it fits.
+          const squareLogo = { ...primary, src: primary.wide ? undefined : primary.src };
+          return (
+            <div className="p-row" key={e.id}>
+              <CompanyLogo logo={squareLogo} />
+              <div className="p-rmid">
+                <div className="p-co">
+                  <CompanyName entry={e} />
+                  <span className="p-co-sub"> {'·'} {e.role}</span>
+                </div>
+                <div className="p-out">{OUTCOMES[e.id] || e.description[0]}</div>
               </div>
-              <div className="p-out">{r.outcome}</div>
+              <div className="p-date">{e.period}</div>
             </div>
-            <div className="p-date">{r.period}</div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="p-exp-full">
-        {experienceEntries.map((e) => (
+        {rows.map((e) => (
           <div className="p-expitem" key={e.id}>
             <div className="p-expitem-head">
-              <span className="p-expitem-co">{e.company}</span>
+              <span className="p-expitem-co"><CompanyName entry={e} /></span>
               <span className="p-expitem-role">{e.role}</span>
               <span className="p-expitem-period">{e.period}</span>
             </div>
