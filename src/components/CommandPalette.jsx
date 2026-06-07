@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useView } from '../context/ViewContext';
 import { profile } from '../data/profile';
 
@@ -10,6 +10,13 @@ export default function CommandPalette() {
   const [q, setQ] = useState('');
   const [i, setI] = useState(0);
   const inputRef = useRef(null);
+  const openRef = useRef(false);
+
+  const openPalette = useCallback(() => {
+    setQ('');
+    setI(0);
+    setOpen(true);
+  }, []);
 
   const actions = useMemo(() => [
     ...SECTIONS.map((s) => ({
@@ -31,29 +38,30 @@ export default function CommandPalette() {
   }, [q, actions]);
 
   useEffect(() => {
+    openRef.current = open;
+  }, [open]);
+
+  useEffect(() => {
     const onKey = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        setOpen((o) => !o);
+        if (openRef.current) setOpen(false);
+        else openPalette();
       }
       if (e.key === 'Escape') setOpen(false);
     };
-    const onOpen = () => setOpen(true);
     window.addEventListener('keydown', onKey);
-    window.addEventListener('open-command-palette', onOpen);
+    window.addEventListener('open-command-palette', openPalette);
     return () => {
       window.removeEventListener('keydown', onKey);
-      window.removeEventListener('open-command-palette', onOpen);
+      window.removeEventListener('open-command-palette', openPalette);
     };
-  }, []);
+  }, [openPalette]);
 
   useEffect(() => {
-    if (open) {
-      setQ('');
-      setI(0);
-      const t = setTimeout(() => inputRef.current?.focus(), 0);
-      return () => clearTimeout(t);
-    }
+    if (!open) return undefined;
+    const t = setTimeout(() => inputRef.current?.focus(), 0);
+    return () => clearTimeout(t);
   }, [open]);
 
   if (!open) return null;

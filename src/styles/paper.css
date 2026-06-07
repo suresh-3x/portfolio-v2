@@ -1,5 +1,5 @@
 /* ============================================================
-   PAPER VIEW  —  light research / docs
+   PAPER VIEW  -  light research / docs
    All rules scoped under [data-view="paper"].
    ============================================================ */
 
@@ -324,5 +324,532 @@
 @media (min-width: 861px) {
   [data-view="paper"] .site-nav__overlay {
     display: none;
+  }
+}
+
+
+/* ===== paper view: section styles (generated) ===== */
+/* ============================================================
+   PAPER VIEW SECTIONS  -  all selectors scoped to [data-view="paper"]
+   Ported from the research/docs mockup; prefix p-, global vars.
+   ============================================================ */
+
+[data-view="paper"] .p-view {
+  max-width: 720px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  color: var(--p-text);
+  letter-spacing: -0.005em;
+}
+
+/* ---------- shared section rhythm ---------- */
+[data-view="paper"] .p-section {
+  margin-top: 3.5rem;
+}
+
+/* ---------- section heading ---------- */
+[data-view="paper"] .p-h {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0 0 0.95rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--p-rule);
+}
+[data-view="paper"] .p-h h2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--p-text);
+  margin: 0;
+}
+[data-view="paper"] .p-h-note {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--p-faint);
+}
+[data-view="paper"] .p-h-note::before {
+  content: "/ ";
+}
+
+/* ============================================================
+   Identity (#home)
+   ============================================================ */
+[data-view="paper"] .p-identity {
+  padding-top: 7rem;
+}
+[data-view="paper"] .p-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0 0 0.2rem;
+  color: var(--p-text);
+}
+[data-view="paper"] .p-role {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--p-text);
+  margin: 0 0 0.15rem;
+}
+[data-view="paper"] .p-role .p-loc {
+  font-weight: 450;
+  color: var(--p-muted);
+}
+[data-view="paper"] .p-lede {
+  font-size: 0.95rem;
+  color: var(--p-text);
+  margin: 0.8rem 0 0;
+  max-width: 600px;
+  line-height: 1.58;
+}
+[data-view="paper"] .p-current {
+  font-size: 0.83rem;
+  color: var(--p-muted);
+  margin: 0.7rem 0 0;
+  line-height: 1.55;
+  max-width: 620px;
+}
+[data-view="paper"] .p-current .p-now {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--p-accent);
+  background: var(--p-accent-soft);
+  border: 1px solid #d8e1fb;
+  border-radius: 4px;
+  padding: 0.05rem 0.4rem;
+  margin-right: 0.45rem;
+  vertical-align: 1px;
+}
+
+/* metrics row */
+[data-view="paper"] .p-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 1.4rem;
+  border: 1px solid var(--p-rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+[data-view="paper"] .p-metric {
+  padding: 0.8rem 1rem;
+  border-right: 1px solid var(--p-rule);
+}
+[data-view="paper"] .p-metric:last-child {
+  border-right: none;
+}
+[data-view="paper"] .p-metric-num {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--p-text);
+  line-height: 1;
+}
+[data-view="paper"] .p-metric-lab {
+  font-size: 0.72rem;
+  color: var(--p-muted);
+  margin-top: 0.35rem;
+  line-height: 1.3;
+}
+
+/* stack line */
+[data-view="paper"] .p-stack {
+  margin-top: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #5a5a62;
+  line-height: 1.7;
+}
+[data-view="paper"] .p-stack-key {
+  color: var(--p-faint);
+  margin-right: 0.65rem;
+}
+[data-view="paper"] .p-stack-sep {
+  color: var(--p-faint);
+  margin: 0 0.35rem;
+}
+
+/* ============================================================
+   About (#about)
+   ============================================================ */
+[data-view="paper"] .p-about-prose {
+  max-width: 660px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--p-text);
+  margin: 0;
+}
+
+/* ============================================================
+   Work (#work) - selected systems ledger
+   ============================================================ */
+[data-view="paper"] .p-sys {
+  display: flex;
+  flex-direction: column;
+}
+[data-view="paper"] .p-sysitem {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #f1f1ef;
+}
+[data-view="paper"] .p-sysitem:last-child {
+  border-bottom: none;
+}
+[data-view="paper"] .p-systop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.9rem;
+}
+[data-view="paper"] .p-systitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--p-text);
+}
+[data-view="paper"] .p-systitle a {
+  color: var(--p-accent);
+  text-decoration: none;
+}
+[data-view="paper"] .p-systitle a:hover {
+  text-decoration: underline;
+}
+[data-view="paper"] .p-metricpill {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--p-text);
+  background: var(--p-chip);
+  border: 1px solid var(--p-rule);
+  border-radius: 5px;
+  padding: 0.12rem 0.5rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+[data-view="paper"] .p-metricpill--hot {
+  color: var(--p-accent);
+  background: var(--p-accent-soft);
+  border-color: #d8e1fb;
+}
+[data-view="paper"] .p-sysdesc {
+  font-size: 0.82rem;
+  color: var(--p-muted);
+  margin: 0.3rem 0 0;
+  line-height: 1.5;
+  max-width: 560px;
+}
+[data-view="paper"] .p-systags {
+  margin-top: 0.5rem;
+  font-family: var(--font-tag);
+  font-size: 0.66rem;
+}
+[data-view="paper"] .p-systags span {
+  display: inline-block;
+  border: 1px solid var(--p-rule);
+  border-radius: 4px;
+  padding: 0.05rem 0.4rem;
+  margin: 0 0.35rem 0.3rem 0;
+  color: var(--p-muted);
+}
+
+/* ============================================================
+   Experience (#experience) - timeline + full bullets
+   ============================================================ */
+[data-view="paper"] .p-exp {
+  display: flex;
+  flex-direction: column;
+}
+[data-view="paper"] .p-row {
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  gap: 0.8rem;
+  align-items: start;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #f1f1ef;
+}
+[data-view="paper"] .p-row:last-child {
+  border-bottom: none;
+}
+[data-view="paper"] .p-mono {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #fff;
+  background: var(--p-text);
+}
+[data-view="paper"] .p-chip--ts { background: #16161a; }
+[data-view="paper"] .p-chip--gl { background: var(--p-accent); }
+[data-view="paper"] .p-chip--sa { background: #2f7d56; }
+[data-view="paper"] .p-chip--bz { background: #9a4d12; }
+[data-view="paper"] .p-co {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--p-text);
+}
+[data-view="paper"] .p-co-sub {
+  font-weight: 450;
+  color: var(--p-muted);
+  font-size: 0.78rem;
+}
+[data-view="paper"] .p-out {
+  font-size: 0.78rem;
+  color: var(--p-muted);
+  margin-top: 0.1rem;
+  line-height: 1.45;
+}
+[data-view="paper"] .p-date {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--p-faint);
+  white-space: nowrap;
+  text-align: right;
+  padding-top: 0.15rem;
+}
+
+/* full description list below the timeline */
+[data-view="paper"] .p-exp-full {
+  margin-top: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+[data-view="paper"] .p-expitem-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+[data-view="paper"] .p-expitem-co {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--p-text);
+}
+[data-view="paper"] .p-expitem-role {
+  font-size: 0.78rem;
+  color: var(--p-muted);
+}
+[data-view="paper"] .p-expitem-period {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--p-faint);
+}
+[data-view="paper"] .p-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+[data-view="paper"] .p-bullets li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--p-muted);
+  max-width: 640px;
+}
+[data-view="paper"] .p-bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--p-accent);
+}
+
+/* education line */
+[data-view="paper"] .p-edu {
+  margin-top: 1.6rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--p-rule);
+  font-size: 0.78rem;
+  color: var(--p-muted);
+  line-height: 1.55;
+}
+[data-view="paper"] .p-edu-key {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--p-faint);
+  margin-right: 0.6rem;
+}
+
+/* ============================================================
+   Stack (#stack) - grouped skill lists
+   ============================================================ */
+[data-view="paper"] .p-groups {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem 2rem;
+}
+[data-view="paper"] .p-group-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--p-text);
+  margin-bottom: 0.3rem;
+}
+[data-view="paper"] .p-group-skills {
+  font-family: var(--font-tag);
+  font-size: 0.72rem;
+  color: var(--p-muted);
+  line-height: 1.75;
+}
+[data-view="paper"] .p-group-sep {
+  color: var(--p-faint);
+  margin: 0 0.3rem;
+}
+
+/* ============================================================
+   Notes (#notes) - titled writing list + focus tags
+   ============================================================ */
+[data-view="paper"] .p-notes {
+  display: flex;
+  flex-direction: column;
+}
+[data-view="paper"] .p-note {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f1f1ef;
+}
+[data-view="paper"] .p-note:last-child {
+  border-bottom: none;
+}
+[data-view="paper"] .p-note-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.9rem;
+}
+[data-view="paper"] .p-note-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--p-text);
+  margin: 0;
+  line-height: 1.4;
+}
+[data-view="paper"] .p-note-date {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--p-faint);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+[data-view="paper"] .p-note-abstract {
+  font-size: 0.8rem;
+  color: var(--p-muted);
+  margin: 0.3rem 0 0;
+  line-height: 1.55;
+  max-width: 600px;
+}
+[data-view="paper"] .p-focus {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+[data-view="paper"] .p-tag {
+  font-family: var(--font-tag);
+  font-size: 0.7rem;
+  color: var(--p-text);
+  background: #fff;
+  border: 1px solid var(--p-rule);
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+}
+[data-view="paper"] .p-tag-x {
+  color: var(--p-accent);
+  font-weight: 600;
+}
+
+/* ============================================================
+   Contact (#contact)
+   ============================================================ */
+[data-view="paper"] .p-contact-lede {
+  font-size: 0.9rem;
+  color: var(--p-text);
+  margin: 0;
+  line-height: 1.6;
+  max-width: 560px;
+}
+[data-view="paper"] .p-links {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+}
+[data-view="paper"] .p-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--p-text);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+[data-view="paper"] .p-link svg {
+  color: var(--p-muted);
+  transition: color 0.15s;
+}
+[data-view="paper"] .p-link:hover {
+  color: var(--p-accent);
+  border-bottom-color: var(--p-accent);
+}
+[data-view="paper"] .p-link:hover svg {
+  color: var(--p-accent);
+}
+[data-view="paper"] .p-contact-edu {
+  margin-top: 1.2rem;
+  font-size: 0.74rem;
+  color: var(--p-faint);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 680px) {
+  [data-view="paper"] .p-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  [data-view="paper"] .p-metric:nth-child(2) {
+    border-right: none;
+  }
+  [data-view="paper"] .p-metric:nth-child(1),
+  [data-view="paper"] .p-metric:nth-child(2) {
+    border-bottom: 1px solid var(--p-rule);
+  }
+  [data-view="paper"] .p-groups {
+    grid-template-columns: 1fr;
+  }
+  [data-view="paper"] .p-row {
+    grid-template-columns: 28px 1fr;
+  }
+  [data-view="paper"] .p-date {
+    grid-column: 2;
+    text-align: left;
+    padding-top: 0.2rem;
+  }
+  [data-view="paper"] .p-expitem-period {
+    margin-left: 0;
+    flex-basis: 100%;
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
 const ViewContext = createContext(null);
@@ -22,7 +23,7 @@ export function ViewProvider({ children }) {
     document.documentElement.setAttribute('data-view', view);
     try {
       localStorage.setItem(STORAGE_KEY, view);
-    } catch (e) {
+    } catch {
       /* storage unavailable; ignore */
     }
   }, [view]);
