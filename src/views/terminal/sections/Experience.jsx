@@ -60,6 +60,9 @@ export default function Experience() {
               </span>
               <span className="t-exp-role__co mono"><CompanyName entry={e} /></span>
               <span className="t-exp-role__role mono">{e.role}</span>
+              {e.employer && (
+                <span className="t-exp-role__via mono">via {e.employer}</span>
+              )}
               <span className="t-exp-role__dt mono">{e.period}</span>
             </div>
             <ul className="t-exp-role__list">

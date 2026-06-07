@@ -1098,3 +1098,9 @@
 }
 [data-view="terminal"] .t-table__co a:hover,
 [data-view="terminal"] .t-exp-role__co a:hover { color: var(--t-accent); }
+
+[data-view="terminal"] .t-exp-role__via {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--t-faint);
+}

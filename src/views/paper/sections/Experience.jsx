@@ -46,6 +46,9 @@ export default function Experience() {
                   <CompanyName entry={e} />
                   <span className="p-co-sub"> {'·'} {e.role}</span>
                 </div>
+                {e.employer && (
+                  <div className="p-engage">{e.employer} (employer), deployed on contract</div>
+                )}
                 <div className="p-out">{OUTCOMES[e.id] || e.description[0]}</div>
               </div>
               <div className="p-date">{e.period}</div>
@@ -59,7 +62,10 @@ export default function Experience() {
           <div className="p-expitem" key={e.id}>
             <div className="p-expitem-head">
               <span className="p-expitem-co"><CompanyName entry={e} /></span>
-              <span className="p-expitem-role">{e.role}</span>
+              <span className="p-expitem-role">
+                {e.role}
+                {e.employer ? ` · via ${e.employer}` : ''}
+              </span>
               <span className="p-expitem-period">{e.period}</span>
             </div>
             <ul className="p-bullets">

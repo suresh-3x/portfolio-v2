@@ -5,8 +5,9 @@ export const experienceEntries = [
     id: 't-systems-pixeldust',
     role: 'Backend Engineer',
     company: 'T-Systems',
+    employer: 'Pixeldust Technologies',
     companyLine:
-      '(Deutsche Telekom subsidiary) via Pixeldust Technologies · Mumbai, India (Dedicated embed, CET sync)',
+      'Employed by Pixeldust Technologies, deployed to T-Systems (Deutsche Telekom subsidiary) on contract · Mumbai, India (CET sync)',
     website: 'https://t-systems.com',
     logoDomain: 't-systems.com',
     logos: [

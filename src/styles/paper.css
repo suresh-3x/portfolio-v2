@@ -912,3 +912,9 @@
   gap: 5px;
   flex-wrap: wrap;
 }
+
+[data-view="paper"] .p-engage {
+  font-size: 0.72rem;
+  color: var(--p-faint);
+  margin-top: 0.12rem;
+}
