@@ -2,6 +2,7 @@ import React from 'react';
 import { useLenis } from 'lenis/react';
 import Layout from './components/Layout';
 import CommandPalette from './components/CommandPalette';
+import ResumeStructuredData from './components/seo/ResumeStructuredData';
 import { useView } from './context/ViewContext';
 import TerminalView from './views/terminal/TerminalView';
 import PaperView from './views/paper/PaperView';
@@ -123,6 +124,7 @@ function App() {
   return (
     <Layout>
       <HashScrollHandler />
+      <ResumeStructuredData />
       <CommandPalette />
       <div key={view} className="view-fade">
         {view === 'terminal' ? <TerminalView /> : <PaperView />}
