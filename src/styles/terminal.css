@@ -1075,16 +1075,22 @@
 }
 [data-view="terminal"] .company-logo-link { display: inline-flex; }
 [data-view="terminal"] .company-logo {
-  width: 22px;
-  height: 22px;
-  border-radius: 5px;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
   object-fit: contain;
   background: #fff;
   border: 1px solid var(--t-border);
-  padding: 3px;
+  padding: 4px;
   display: block;
 }
-[data-view="terminal"] .company-logo--wide { width: auto; max-width: 74px; }
+[data-view="terminal"] .company-logo--wide {
+  width: 26px;
+  max-width: 26px;
+  object-fit: cover;
+  object-position: left center;
+  padding: 2px;
+}
 [data-view="terminal"] .company-logo--mono {
   display: flex;
   align-items: center;

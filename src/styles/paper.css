@@ -583,12 +583,18 @@
   flex-direction: column;
 }
 [data-view="paper"] .p-row {
-  display: grid;
-  grid-template-columns: 76px 1fr auto;
-  gap: 0.8rem;
-  align-items: start;
-  padding: 0.6rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem 0;
   border-bottom: 1px solid #f1f1ef;
+}
+[data-view="paper"] .p-rmid {
+  flex: 1;
+  min-width: 0;
+}
+[data-view="paper"] .p-date {
+  flex-shrink: 0;
 }
 [data-view="paper"] .p-row:last-child {
   border-bottom: none;
@@ -857,12 +863,13 @@
     grid-template-columns: 1fr;
   }
   [data-view="paper"] .p-row {
-    grid-template-columns: 56px 1fr;
+    flex-wrap: wrap;
   }
   [data-view="paper"] .p-date {
-    grid-column: 2;
+    width: 100%;
     text-align: left;
     padding-top: 0.2rem;
+    padding-left: 48px;
   }
   [data-view="paper"] .p-expitem-period {
     margin-left: 0;
@@ -879,17 +886,24 @@
   align-items: center;
 }
 [data-view="paper"] .company-logo {
-  height: 24px;
-  width: auto;
-  max-width: 68px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
-  border-radius: 4px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--p-rule);
+  padding: 5px;
   display: block;
 }
+[data-view="paper"] .company-logo--wide {
+  object-fit: cover;
+  object-position: left center;
+  padding: 2px;
+}
 [data-view="paper"] .company-logo--mono {
-  height: 26px;
-  width: 26px;
-  border-radius: 6px;
+  height: 36px;
+  width: 36px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -909,8 +923,8 @@
 [data-view="paper"] .p-rowlogos {
   display: flex;
   align-items: center;
-  gap: 5px;
-  flex-wrap: wrap;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
 [data-view="paper"] .p-engage {
