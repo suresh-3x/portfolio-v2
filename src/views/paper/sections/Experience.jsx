@@ -11,7 +11,10 @@ const OUTCOMES = {
   'stride-ahead-sde-senior': 'Founding backend engineer; built the core architecture the team ran for 3+ years.',
 };
 
-const rows = [...experienceEntries].sort((a, b) => a.sortOrder - b.sortOrder);
+// Reverse chronological by start date (year + month).
+const rows = [...experienceEntries].sort(
+  (a, b) => b.year * 12 + b.month - (a.year * 12 + a.month)
+);
 
 function CompanyName({ entry }) {
   return entry.website ? (
@@ -31,13 +34,9 @@ export default function Experience() {
 
       <div className="p-exp">
         {rows.map((e) => {
-          const primary = e.logos[0];
-          // The timeline chip is a small square: skip wide custom logos, use the
-          // domain icon so it fits.
-          const squareLogo = { ...primary, src: primary.wide ? undefined : primary.src };
           return (
             <div className="p-row" key={e.id}>
-              <CompanyLogo logo={squareLogo} />
+              <CompanyLogo logo={e.logos[0]} />
               <div className="p-rmid">
                 <div className="p-co">
                   <CompanyName entry={e} />

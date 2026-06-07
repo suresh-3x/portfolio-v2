@@ -1,11 +1,10 @@
 import { useState } from 'react';
 
-// Source chain: custom src (if any) -> icon.horse -> Google favicon -> monogram fallback.
+// Source chain: custom src (if any) -> Google favicon (reliable) -> monogram fallback.
 function sourcesFor(logo) {
   const list = [];
   if (logo.src) list.push(logo.src);
   if (logo.domain) {
-    list.push(`https://icon.horse/icon/${logo.domain}`);
     list.push(`https://www.google.com/s2/favicons?domain=${logo.domain}&sz=128`);
   }
   return list;

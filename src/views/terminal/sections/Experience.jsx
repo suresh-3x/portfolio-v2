@@ -10,7 +10,10 @@ const OUTCOMES = {
   'stride-ahead-sde-senior': 'founding engineer, core architecture for 3+ years',
 };
 
-const rows = [...experienceEntries].sort((a, b) => a.sortOrder - b.sortOrder);
+// Reverse chronological by start date (year + month).
+const rows = [...experienceEntries].sort(
+  (a, b) => b.year * 12 + b.month - (a.year * 12 + a.month)
+);
 
 function CompanyName({ entry }) {
   return entry.website ? (
