@@ -15,10 +15,8 @@ export default function Stack() {
             <div className="p-group-skills">
               {g.skills.map((s, i) => (
                 <span key={s} className="p-group-skill">
+                  {i > 0 ? <span className="p-group-sep"> · </span> : null}
                   {s}
-                  {i < g.skills.length - 1 ? (
-                    <span className="p-group-sep">{'·'}</span>
-                  ) : null}
                 </span>
               ))}
             </div>

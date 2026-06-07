@@ -1,5 +1,5 @@
 import { Mail, Github, Linkedin, FileText } from 'lucide-react';
-import { profile, education } from '../../../data/profile';
+import { profile } from '../../../data/profile';
 
 export default function Contact() {
   return (
@@ -32,10 +32,6 @@ export default function Contact() {
           <span>Resume</span>
         </a>
       </div>
-
-      <p className="p-contact-edu">
-        {education.degree}, {education.university}, {education.period}.
-      </p>
     </section>
   );
 }

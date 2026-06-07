@@ -563,6 +563,7 @@
 }
 [data-view="terminal"] .t-readme {
   margin-top: 0.5rem;
+  max-width: 720px;
   border: 1px solid var(--t-border);
   border-radius: 10px;
   overflow: hidden;
@@ -606,7 +607,6 @@
   font-size: 0.96rem;
   line-height: 1.72;
   color: #cdccc6;
-  max-width: 75ch;
 }
 
 /* ---------- Work ---------- */
@@ -818,6 +818,18 @@
   color: var(--t-accent);
   flex-shrink: 0;
   font-family: var(--font-mono);
+}
+[data-view="terminal"] .t-edu {
+  margin: 1.6rem 0 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--t-border);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--t-muted);
+}
+[data-view="terminal"] .t-edu__k {
+  color: var(--t-accent);
+  margin-right: 0.6rem;
 }
 
 /* ---------- Stack ---------- */
