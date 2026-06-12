@@ -22,6 +22,9 @@ export const profile = {
 
 export const summary = `Senior Backend & AI Engineer with 5 years building and scaling distributed systems. I owned core backend services for a real money gaming platform at 5M+ MAU sustaining 10K req/sec peaks, and I have repeatedly run production end to end as the sole engineer across multiple products. Today I build agentic AI systems on Google ADK at T-Systems (Deutsche Telekom subsidiary), embedded as the dedicated backend hire collaborating daily with German data science, frontend, and DevOps teams. I care about the unglamorous parts that keep products alive: durable queues, idempotency, failure modes, and clean ownership. Core stack: Python, FastAPI, Node.js, RabbitMQ, Redis, gRPC, PostgreSQL, AWS.`;
 
+/** Terminal view about card: deduped against the hero (no role title, metrics, stack list, or NOW details) */
+export const summaryTerminal = `I owned core backend services for a real money gaming platform and have repeatedly run production end to end as the sole engineer across multiple products. At T-Systems I work as the dedicated backend hire, embedded with German data science, frontend, and DevOps teams. I care about the unglamorous parts that keep products alive: durable queues, idempotency, failure modes, and clean ownership.`;
+
 /** Visible + crawlable: mirrors resume keyword density for ATS */
 export const atsKeywords = [
   'Python',

@@ -31,26 +31,30 @@ export default function Identity() {
         <span className="t-crumb__here">building distributed + agentic systems</span>
       </p>
 
-      <h1 className="t-name mono">{profile.name}</h1>
+      <div className="t-identity__grid">
+        <div className="t-identity__main">
+          <h1 className="t-name mono">{profile.name}</h1>
 
-      <div className="t-role mono">
-        <span className="t-role__pr">$</span>
-        <span>{profile.title}</span>
-        <span className="t-role__cur" aria-hidden="true" />
-        <span className="t-role__loc">
-          {profile.location} &middot; open to relocation
-        </span>
-      </div>
+          <div className="t-role mono">
+            <span className="t-role__pr">$</span>
+            <span>{profile.title}</span>
+            <span className="t-role__cur" aria-hidden="true" />
+            <span className="t-role__loc">
+              {profile.location} &middot; open to relocation
+            </span>
+          </div>
 
-      <p className="t-lede">{profile.tagline}</p>
+          <p className="t-lede">{profile.tagline}</p>
+        </div>
 
-      <div className="t-now">
-        <span className="t-now__k mono">Now</span>
-        <p>
-          <b>Backend Engineer @ T-Systems</b> (Deutsche Telekom subsidiary):
-          {' '}sole backend engineer building an internal agentic AI platform with
-          {' '}10+ production agents on Google ADK.
-        </p>
+        <div className="t-now">
+          <span className="t-now__k mono">Now</span>
+          <p>
+            <b>Backend Engineer @ T-Systems</b> (Deutsche Telekom subsidiary):
+            {' '}sole backend engineer building an internal agentic AI platform with
+            {' '}10+ production agents on Google ADK.
+          </p>
+        </div>
       </div>
 
       <div className="t-metrics">

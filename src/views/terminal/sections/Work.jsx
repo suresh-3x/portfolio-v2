@@ -36,7 +36,9 @@ export default function Work() {
   return (
     <section id="work" className="t-work">
       <div className="t-sec-h">
-        <span className="t-sec-h__label mono">selected_work</span>
+        <span className="t-sec-h__label mono">
+          <span className="t-sec-h__num">02</span>selected_work
+        </span>
         <span className="t-sec-h__count mono">
           {String(featured.length).padStart(2, '0')} systems
         </span>

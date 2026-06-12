@@ -1,5 +1,4 @@
 import { experienceEntries } from '../../../data/experience';
-import { education } from '../../../data/profile';
 import CompanyLogo from '../../../components/CompanyLogo';
 
 // Reverse chronological by start date (year + month).
@@ -19,7 +18,9 @@ export default function Experience() {
   return (
     <section id="experience" className="t-exp">
       <div className="t-sec-h">
-        <span className="t-sec-h__label mono">experience</span>
+        <span className="t-sec-h__label mono">
+          <span className="t-sec-h__num">03</span>experience
+        </span>
         <span className="t-sec-h__count mono">{String(rows.length).padStart(2, '0')} roles</span>
       </div>
 
@@ -50,12 +51,6 @@ export default function Experience() {
           </div>
         ))}
       </div>
-
-      <p className="t-edu mono">
-        <span className="t-edu__k">education</span>
-        {education.degree}, {education.universityFull} ({education.university}),{' '}
-        {education.period}. {education.gpa}.
-      </p>
     </section>
   );
 }

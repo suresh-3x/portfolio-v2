@@ -4,7 +4,9 @@ export default function Contact() {
   return (
     <section id="contact" className="t-contact">
       <div className="t-sec-h">
-        <span className="t-sec-h__label mono">contact</span>
+        <span className="t-sec-h__label mono">
+          <span className="t-sec-h__num">06</span>contact
+        </span>
         <span className="t-sec-h__count mono">~/contact</span>
       </div>
 

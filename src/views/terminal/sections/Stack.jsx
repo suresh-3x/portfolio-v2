@@ -4,7 +4,9 @@ export default function Stack() {
   return (
     <section id="stack" className="t-stack">
       <div className="t-sec-h">
-        <span className="t-sec-h__label mono">stack</span>
+        <span className="t-sec-h__label mono">
+          <span className="t-sec-h__num">04</span>stack
+        </span>
         <span className="t-sec-h__count mono">
           {String(primarySkillsets.length).padStart(2, '0')} groups
         </span>

@@ -4,7 +4,9 @@ export default function Notes() {
   return (
     <section id="notes" className="t-notes">
       <div className="t-sec-h">
-        <span className="t-sec-h__label mono">notes</span>
+        <span className="t-sec-h__label mono">
+          <span className="t-sec-h__num">05</span>notes
+        </span>
         <span className="t-sec-h__count mono">~/notes</span>
       </div>
 
