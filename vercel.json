@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/resume",
+      "has": [{ "type": "query", "key": "download", "value": "0" }],
+      "destination": "https://gwl1cw03d070bspa.public.blob.vercel-storage.com/resume-sde-0.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/resume",
+      "destination": "https://gwl1cw03d070bspa.public.blob.vercel-storage.com/resume-sde-0.pdf?download=1",
+      "permanent": false
+    }
+  ]
+}
