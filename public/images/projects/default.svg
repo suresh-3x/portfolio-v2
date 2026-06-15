@@ -1,0 +1,9 @@
+<svg width="400" height="240" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="240" fill="#0a0a0a"/>
+  <g opacity="0.1">
+    <circle cx="100" cy="60" r="40" stroke="#888" stroke-width="2" fill="none"/>
+    <circle cx="300" cy="180" r="50" stroke="#888" stroke-width="2" fill="none"/>
+    <path d="M50 120 L150 100 L200 140 L350 90" stroke="#888" stroke-width="2" fill="none"/>
+  </g>
+  <text x="200" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="bold" fill="#666" text-anchor="middle">Project</text>
+</svg>

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs -I {} sh -c 'curl -s \"{}\" 2>/dev/null | grep -o \"src=\\\\\"[^\\\\\"]*\\\\\" \" | head -3')",
+      "Bash(cat)",
+      "Bash(chmod +x /tmp/create_project_images.sh)",
+      "Bash(/tmp/create_project_images.sh)",
+      "Bash(awk '{print $9, \"\\(\" $5 \"\\)\"}')",
+      "Bash(awk '{print $9, \"→\", $5}')",
+      "Bash(sed -i '' \"s|'/images/projects/cal-self-hosted.png'|'/images/projects/cal-self-hosted.svg'|g\" /Users/suresh-3x/portfolio-v2/src/data/projects.js)",
+      "Bash(sed -i '' \"s|'/images/projects/taiga.png'|'/images/projects/taiga.svg'|g\" /Users/suresh-3x/portfolio-v2/src/data/projects.js)"
+    ]
+  }
+}

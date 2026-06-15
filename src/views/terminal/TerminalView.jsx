@@ -14,7 +14,7 @@ export default function TerminalView() {
       <Work />
       <Experience />
       <Stack />
-      <Notes />
+      {/* <Notes /> */}
       <Contact />
     </div>
   );

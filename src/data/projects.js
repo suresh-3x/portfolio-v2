@@ -19,6 +19,7 @@ export const projects = [
     links: {},
     featured: true,
     year: 2026,
+    image: '/images/projects/revamp-engine.svg'
   },
 
   // AI / RAG
@@ -39,22 +40,47 @@ export const projects = [
       github: 'https://github.com/suresh-3x/nomad-mind'
     },
     featured: true,
-    year: 2025
+    year: 2025,
+    image: '/images/projects/nomad-mind.svg'
   },
 
-  // Open Source Contributions
+  // Open Source Deployments
   {
-    title: 'Cal.com (Calendso) Contribution',
+    title: 'Self-Hosted Cal.com (Premium)',
     category: 'Open Source',
-    description: 'Contributed to calendso, an open-source scheduling infrastructure powering calendar and meeting automation. Part of the wider Cal.com ecosystem for scheduling absolutely everyone.',
-    long_description: 'Active contributor to the Cal.com project (formerly Calendso), working on scheduling infrastructure and calendar integrations that power millions of scheduling workflows.',
-    tags: ['TypeScript', 'Next.js', 'Node.js', 'Open Source', 'Scheduling'],
+    description: 'Deployed and customized a self-hosted Cal.com instance with premium features, custom modifications, and additional functionality for calendar scheduling and meeting automation.',
+    long_description: 'A fully self-hosted Cal.com deployment with premium features enabled, custom modifications, and extended functionality. Demonstrates deep understanding of open-source scheduling infrastructure and ability to extend and scale it for production use.',
+    tags: ['Cal.com', 'TypeScript', 'Open Source', 'Self-Hosted', 'Scheduling', 'Custom Development'],
+    tech_details: {
+      platform: 'Cal.com (Open Source)',
+      deployment: 'Self-Hosted',
+      features: 'Premium features + custom modifications',
+      customization: 'Extended functionality and integrations'
+    },
+    links: {},
+    featured: true,
+    year: 2025,
+    image: '/images/projects/cal-self-hosted.svg'
+  },
+
+  {
+    title: 'Taiga - Stride Ahead Management',
+    category: 'Open Source',
+    description: 'Deployed self-hosted Taiga instance for Stride Ahead, an open-source agile project management platform for task tracking, sprint planning, and team collaboration.',
+    long_description: 'A fully self-hosted Taiga deployment powering Stride Ahead\'s project management. Taiga is a powerful open-source agile project management platform with support for Scrum and Kanban workflows, comprehensive task tracking, and real-time team collaboration.',
+    tags: ['Taiga', 'Open Source', 'Self-Hosted', 'Project Management', 'Agile'],
+    tech_details: {
+      platform: 'Taiga (Open Source)',
+      deployment: 'Self-Hosted',
+      url: 'https://taiga.io/',
+      use_case: 'Agile project and task management'
+    },
     links: {
-      github: 'https://github.com/suresh-3x/calendso',
-      external: 'https://cal.com'
+      external: 'https://taiga.io/'
     },
     featured: true,
-    year: 2024
+    year: 2025,
+    image: '/images/projects/taiga.svg'
   },
 
   // Private Projects
@@ -75,27 +101,27 @@ export const projects = [
       demo: '#'
     },
     featured: true,
-    year: 2024
+    year: 2024,
+    image: '/images/projects/apex-ohol.svg'
   },
 
   {
-    title: 'BizAssist Hotel Booking System',
-    category: 'Private - Booking Platform',
-    description: 'High-performance hotel booking and vacation rental platform built on WordPress with custom plugin architecture.',
-    long_description: 'A production-ready hotel booking system built on WordPress with a custom "BizAssist Booking System" plugin. Features property listings, checkout logic, STAAH integrations for bookings, and Cashfree payment gateway integration with mock and real mode switching.',
-    tags: ['WordPress', 'PHP', 'Docker', 'MariaDB', 'Payments', 'Booking Engine'],
+    title: 'Homeground Hotel Booking',
+    category: 'WordPress - Booking Platform',
+    description: 'WordPress-powered hotel and vacation rental booking platform with STAAH booking engine integration for seamless property management and reservations.',
+    long_description: 'A production hotel booking system built on WordPress with STAAH booking engine integration. Handles property listings, checkout flows, and guest reservations at scale.',
+    tags: ['WordPress', 'PHP', 'STAAH', 'Payments', 'Booking Engine'],
     tech_details: {
-      cms: 'WordPress (Headless-ready)',
-      database: 'MariaDB',
-      custom_plugin: 'BizAssist Booking System',
-      integrations: 'STAAH, Cashfree',
-      deployment: 'Docker & Docker Compose'
+      cms: 'WordPress',
+      integrations: 'STAAH Booking Engine',
+      deployment: 'Self-hosted'
     },
     links: {
-      demo: '#'
+      external: 'https://homeground.in'
     },
     featured: true,
-    year: 2024
+    year: 2024,
+    image: '/images/projects/homeground.svg'
   },
 
   // Public Projects
@@ -110,7 +136,8 @@ export const projects = [
       github: 'https://github.com/suresh-3x/bizAssist'
     },
     featured: true,
-    year: 2024
+    year: 2024,
+    image: '/images/projects/bizassist.svg'
   },
 
   {
@@ -123,7 +150,8 @@ export const projects = [
       github: 'https://github.com/suresh-3x/smax-bookings-app'
     },
     featured: true,
-    year: 2024
+    year: 2024,
+    image: '/images/projects/smax-bookings.png'
   },
 
   {

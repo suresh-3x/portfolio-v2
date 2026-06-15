@@ -14,7 +14,7 @@ export default function PaperView() {
       <Work />
       <Experience />
       <Stack />
-      <Notes />
+      {/* <Notes /> */}
       <Contact />
     </div>
   );

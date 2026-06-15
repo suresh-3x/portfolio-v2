@@ -51,8 +51,18 @@ export default function Work() {
           const isDead = href === '#';
           const showLink = href && !isDead;
           const id = 'work/' + String(i + 1).padStart(2, '0');
+          const imageSrc = p.image || '/images/projects/default.svg';
           return (
-            <article className="t-card" key={p.title}>
+            <article className="t-card stagger-fade" key={p.title}>
+              {p.image && (
+                <div className="t-card__img">
+                  <img
+                    src={imageSrc}
+                    alt={p.title}
+                    onError={(e) => { e.target.src = '/images/projects/default.svg'; }}
+                  />
+                </div>
+              )}
               <div className="t-card__top">
                 <span className="t-card__id mono">{id}</span>
                 <span

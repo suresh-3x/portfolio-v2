@@ -31,8 +31,18 @@ export default function Work() {
           const link = primaryLink(p.links);
           const isDead = link === '#';
           const useLink = link && !isDead;
+          const imageSrc = p.image || '/images/projects/default.svg';
           return (
-            <article className="p-sysitem" key={p.title}>
+            <article className="p-sysitem stagger-fade" key={p.title}>
+              {p.image && (
+                <div className="p-sysimg">
+                  <img
+                    src={imageSrc}
+                    alt={p.title}
+                    onError={(e) => { e.target.src = '/images/projects/default.svg'; }}
+                  />
+                </div>
+              )}
               <div className="p-systop">
                 <h3 className="p-systitle">
                   {useLink ? (

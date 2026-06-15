@@ -9,8 +9,8 @@
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
   --font-tag: 'IBM Plex Mono', 'JetBrains Mono', monospace;
 
-  --maxw: 1080px;
-  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --maxw: 1400px;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
 }
 
 * {
@@ -123,6 +123,140 @@ section[id] {
   flex: 1;
   width: 100%;
 }
+
+/* Scroll reveal animations */
+.scroll-reveal-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.scroll-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+/* Scroll progress indicator bar */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #1a56db, #5b21b6);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Terminal theme: yellowish/amber gradient */
+[data-view="terminal"] .scroll-progress-bar {
+  background: linear-gradient(90deg, #f5a623, #ff8c42);
+}
+
+/* Paper theme: blue gradient */
+[data-view="paper"] .scroll-progress-bar {
+  background: linear-gradient(90deg, #1a56db, #7c3aed);
+}
+
+/* Parallax container base */
+.parallax-container {
+  transform: translateZ(0);
+}
+
+/* Section accent lines that appear on scroll */
+[data-view="paper"] section[id]::before,
+[data-view="terminal"] section[id]::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 2px;
+  opacity: 0;
+  transition: width 0.5s ease, opacity 0.5s ease;
+}
+
+[data-view="paper"] section[id]:target::before {
+  width: 40px;
+  opacity: 1;
+  background: var(--p-accent, #1a56db);
+}
+
+[data-view="terminal"] section[id]:target::before {
+  width: 40px;
+  opacity: 1;
+  background: var(--t-accent, #f5a623);
+}
+
+/* Stagger animation for list items */
+.stagger-fade {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: staggerFade 0.5s ease-out forwards;
+  will-change: opacity;
+}
+
+/* Page load: optimized falling into place animation */
+[data-view="paper"] .p-section,
+[data-view="terminal"] .t-sec-h {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fallIntoPlace 0.6s ease-out forwards;
+  will-change: opacity, transform;
+}
+
+[data-view="paper"] .p-section:nth-of-type(1) { animation-delay: 0.05s; }
+[data-view="paper"] .p-section:nth-of-type(2) { animation-delay: 0.1s; }
+[data-view="paper"] .p-section:nth-of-type(3) { animation-delay: 0.15s; }
+[data-view="paper"] .p-section:nth-of-type(4) { animation-delay: 0.2s; }
+[data-view="paper"] .p-section:nth-of-type(5) { animation-delay: 0.25s; }
+[data-view="paper"] .p-section:nth-of-type(6) { animation-delay: 0.3s; }
+
+[data-view="terminal"] .t-sec-h:nth-of-type(1) { animation-delay: 0.05s; }
+[data-view="terminal"] .t-sec-h:nth-of-type(2) { animation-delay: 0.1s; }
+[data-view="terminal"] .t-sec-h:nth-of-type(3) { animation-delay: 0.15s; }
+[data-view="terminal"] .t-sec-h:nth-of-type(4) { animation-delay: 0.2s; }
+[data-view="terminal"] .t-sec-h:nth-of-type(5) { animation-delay: 0.25s; }
+
+@keyframes fallIntoPlace {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes staggerFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-reveal-visible {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.stagger-fade:nth-child(1) { animation-delay: 0.05s; }
+.stagger-fade:nth-child(2) { animation-delay: 0.1s; }
+.stagger-fade:nth-child(3) { animation-delay: 0.15s; }
+.stagger-fade:nth-child(4) { animation-delay: 0.2s; }
+.stagger-fade:nth-child(5) { animation-delay: 0.25s; }
+.stagger-fade:nth-child(6) { animation-delay: 0.3s; }
+.stagger-fade:nth-child(7) { animation-delay: 0.35s; }
+.stagger-fade:nth-child(8) { animation-delay: 0.4s; }
+.stagger-fade:nth-child(9) { animation-delay: 0.45s; }
 
 /* Respect reduced motion everywhere */
 @media (prefers-reduced-motion: reduce) {

@@ -26,7 +26,7 @@ export default function Experience() {
 
       <div className="t-exp-detail">
         {rows.map((e) => (
-          <div className="t-exp-role" key={e.id}>
+          <div className="t-exp-role stagger-fade" key={e.id}>
             <div className="t-exp-role__head">
               <span className="t-exp-role__logos">
                 {e.logos.map((l) => (

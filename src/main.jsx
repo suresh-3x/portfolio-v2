@@ -10,12 +10,16 @@ import App from './App.jsx'
 import { ViewProvider } from './context/ViewContext'
 import { initGoogleAnalytics } from './utils/analytics'
 
-// Lenis smooth-scroll options: momentum wheel + gentle touch sync.
+// Lenis smooth-scroll options: optimized for performance
 const lenisOptions = {
-  lerp: 0.1,
+  lerp: 0.08, // Balanced smooth (faster response, better performance)
   smoothWheel: true,
-  wheelMultiplier: 1,
+  wheelMultiplier: 1.0,
+  touchMultiplier: 1.0,
   syncTouch: false,
+  duration: 1.0,
+  easing: (t) => t, // Linear for consistent performance
+  preventDefault: (node) => node.classList.contains('no-scroll'),
 };
 
 // Initialize Google Analytics

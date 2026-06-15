@@ -25,7 +25,7 @@ export default function Experience() {
 
       <div className="p-exp-full">
         {rows.map((e) => (
-          <div className="p-expitem" key={e.id}>
+          <div className="p-expitem stagger-fade" key={e.id}>
             <div className="p-rowlogos">
               {e.logos.map((l) => (
                 <CompanyLogo key={l.domain} logo={l} />

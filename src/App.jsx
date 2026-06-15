@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLenis } from 'lenis/react';
 import Layout from './components/Layout';
+import ScrollProgress from './components/ScrollProgress';
 import CommandPalette from './components/CommandPalette';
 import ResumeStructuredData from './components/seo/ResumeStructuredData';
 import { useView } from './context/ViewContext';
@@ -123,6 +124,7 @@ function App() {
 
   return (
     <Layout>
+      <ScrollProgress />
       <HashScrollHandler />
       <ResumeStructuredData />
       <CommandPalette />
