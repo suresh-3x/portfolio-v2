@@ -17,8 +17,6 @@ const lenisOptions = {
   wheelMultiplier: 1.0,
   touchMultiplier: 1.0,
   syncTouch: false,
-  duration: 1.0,
-  easing: (t) => t, // Linear for consistent performance
   preventDefault: (node) => node.classList.contains('no-scroll'),
 };
 

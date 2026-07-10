@@ -8,9 +8,9 @@
   --t-panel: #141417;
   --t-panel-2: #17171b;
   --t-text: #e8e6e1;
-  --t-muted: #8b8b86;
-  --t-faint: #3a3a3e;
-  --t-border: rgba(255, 255, 255, 0.08);
+  --t-muted: #a4a49c;
+  --t-faint: #56565e;
+  --t-border: rgba(255, 255, 255, 0.12);
   --t-accent: #f5a623;
   --t-accent-dim: rgba(245, 166, 35, 0.14);
   --t-ok: #5bd672;
@@ -857,10 +857,10 @@
 }
 
 [data-view="terminal"] .t-exp-detail {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 3rem;
 }
 [data-view="terminal"] .t-exp-role__head {
   display: flex;

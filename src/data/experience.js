@@ -28,8 +28,9 @@ export const experienceEntries = [
     year: 2025,
     month: 9,
     description: [
-      'Architected the internal agentic AI platform as the sole backend engineer: a multi-agent orchestration layer on Google ADK running 10+ production agents, including a RAG chatbot over a 60+ document knowledge base that cut retrieval from hours of manual lookup to seconds, document extraction pipelines, a graph agent visualizing live DB relationships, and task-specific subagents bound to internal tools. This improved answer accuracy and reduced analyst toil across the org.',
-      'Cross-functional backend anchor on a distributed European team: owned JWT auth, the persistent chat history store, and HTTP streaming APIs; drove LLM contract alignment with the German data science team; contributed React frontend work; and owned all cloud deployments and CI/CD across backend, ML infra, and DevOps.',
+      'Architected backend infrastructure and Google ADK orchestration layer for internal AI platform, designing and shipping 10+ production agents including enterprise knowledge graph RAG system that extracts structured insights from fragmented documentation (wikis, PDFs, spreadsheets, architecture diagrams), reducing knowledge base search and retrieval time from 40+ minutes to under 2 minutes.',
+      'Served as sole backend engineer for distributed European team, owning API design contracts with data science teams, persistent chat history infrastructure, JWT authentication, HTTP streaming for real-time agent responses, and end-to-end cloud deployment and CI/CD orchestration spanning ML infrastructure, backend services, and DevOps workflows.',
+      'Built knowledge extraction platform pipeline converting unstructured enterprise documentation into queryable knowledge graphs, integrating vector search and graph database technology to automatically surface relevant information.'
     ],
   },
   {
@@ -53,9 +54,10 @@ export const experienceEntries = [
     year: 2023,
     month: 3,
     description: [
-      'Owned game engine logic and mission critical backend services (authentication, session management, and a zero fault real money wallet transaction engine) for a platform with 5M to 10M monthly active users, sustaining 3 to 5K req/sec steady state and absorbing 10K req/sec peak event spikes on FastAPI, RabbitMQ, Redis, and PostgreSQL with no financial data loss across the entire tenure.',
-      'Diagnosed a class of transient game state consistency failures under live load: traced root cause through millions of RabbitMQ event logs across distributed consumers within 2 days, shipping targeted fixes that cut mid game error rates by 30% with zero data corruption or player facing downtime.',
-      'Built the operator tooling layer: dashboards, third party integrations, and event driven reporting pipelines that gave ops and business teams real time visibility into platform health and revenue flows.',
+      'Owned wallet, payment processing, and third-party payment integration modules within 6-7 engineer backend platform team serving real-money gaming platform at 5M-10M monthly active users, sustaining 1K-10K requests per second steady-state load with 30-40K peak transactions per day during tournaments and events.',
+      'Maintained wallet balance integrity and transaction finality across distributed systems through idempotent transaction design, dual-verification for high-value operations, comprehensive audit logging, and event-driven consistency guarantees using RabbitMQ, ensuring zero financial data loss across entire tenure.',
+      'Debugged class of transient game engine errors affecting player experience by analyzing distributed event traces across millions of RabbitMQ messages using systematic log analysis and pattern matching; shipped targeted fixes that reduced mid-game error rates by approximately 30%.',
+      'Designed and deployed operator and business analytics dashboards tracking real-time revenue metrics, player cohort analysis, churn patterns, and transaction health, enabling operations to adjust incentive strategies.'
     ],
   },
   {
@@ -134,8 +136,11 @@ export const experienceEntries = [
     year: 2021,
     month: 3,
     description: [
-      'Founding backend engineer: took sole production ownership when the CTO left six months in, building the core architecture and a Python/React CMS the team extended for 3+ years, and standing up Nginx, AWS, Docker, and CI/CD from scratch.',
-      'Built the greenfield CRM backend from zero to 15,000 to 20,000 monthly users at 99.9%+ uptime: a landing page builder, assessment and quiz engine, an automated PDF pipeline generating 1,000+ reports per month, and a recommendation loop that drove measurable engagement lift, scaled across 10+ production servers with horizontal scaling for high availability.',
+      'Founding Engineer: took sole production ownership when CTO departed 6 months in; designed and stood up production architecture and infrastructure from scratch (Nginx, AWS, Docker, GitHub Actions CI/CD), managing full engineering stack with 1-2 junior engineers.',
+      'Architected complex learning platform from monolithic foundations into production-grade microservices suite, featuring assessment engine, quiz platform, automated PDF report generation (1000+ reports monthly), personalized recommendation loops, and SSO integration scaling from zero to 50K monthly active users (40K B2B, 10K B2C).',
+      'Promoted to Senior Software Engineer after first 10 months; led requirement gathering and scope negotiation for 8 B2B clients, owned end-to-end delivery of custom features and white-label solutions, scaling revenue 2-3X.',
+      'Built engineering team from zero, conducting technical interviews for 10+ candidates and making final hiring decisions, resulting in team of 5 engineers; mentored junior engineers in system design.',
+      'Achieved 99.9%+ uptime during peak load through automated horizontal scaling across 10+ production servers, zero downtime deployment strategies using blue-green deployments, and auto-remediation systems.'
     ],
   },
 ];

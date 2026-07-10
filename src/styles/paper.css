@@ -511,53 +511,61 @@
 }
 
 /* ============================================================
+/* ============================================================
    Work (#work) - selected systems ledger
    ============================================================ */
 [data-view="paper"] .p-sys {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 1.5rem;
 }
 [data-view="paper"] .p-sysitem {
-  padding: 2rem 0;
-  border-bottom: 1px solid #f1f1ef;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--p-rule);
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+[data-view="paper"] .p-sysitem:hover {
+  border-color: var(--p-muted);
 }
 [data-view="paper"] .p-sysimg {
-  margin-bottom: 1.2rem;
-  border-radius: 10px;
-  overflow: hidden;
+  width: 100%;
+  border-bottom: 1px solid var(--p-rule);
   background: var(--p-panel);
-  max-width: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 [data-view="paper"] .p-sysimg img {
   width: 100%;
-  height: auto;
-  display: block;
-  max-height: 280px;
+  height: 220px;
   object-fit: cover;
-}
-[data-view="paper"] .p-sysitem:last-child {
-  border-bottom: none;
+  display: block;
 }
 [data-view="paper"] .p-systop {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 0.9rem;
+  gap: 1rem;
+  padding: 1.5rem 1.5rem 0.5rem;
 }
 [data-view="paper"] .p-systitle {
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   margin: 0;
   color: var(--p-text);
+  line-height: 1.2;
 }
 [data-view="paper"] .p-systitle a {
-  color: var(--p-accent);
+  color: var(--p-text);
   text-decoration: none;
 }
 [data-view="paper"] .p-systitle a:hover {
-  text-decoration: underline;
+  color: var(--p-accent);
 }
 [data-view="paper"] .p-metricpill {
   font-family: var(--font-mono);
@@ -566,8 +574,8 @@
   color: var(--p-text);
   background: var(--p-chip);
   border: 1px solid var(--p-rule);
-  border-radius: 5px;
-  padding: 0.12rem 0.5rem;
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -577,24 +585,32 @@
   border-color: #d8e1fb;
 }
 [data-view="paper"] .p-sysdesc {
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   color: var(--p-muted);
-  margin: 0.3rem 0 0;
-  line-height: 1.5;
-  max-width: 100%;
+  margin: 0;
+  padding: 0 1.5rem;
+  line-height: 1.6;
 }
 [data-view="paper"] .p-systags {
-  margin-top: 0.5rem;
+  margin-top: auto;
+  padding: 1.5rem;
   font-family: var(--font-tag);
-  font-size: 0.66rem;
+  font-size: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 [data-view="paper"] .p-systags span {
-  display: inline-block;
+  display: inline-flex;
   border: 1px solid var(--p-rule);
-  border-radius: 4px;
-  padding: 0.05rem 0.4rem;
-  margin: 0 0.35rem 0.3rem 0;
+  background: var(--p-bg);
+  padding: 0.2rem 0.5rem;
   color: var(--p-muted);
+}
+@media (max-width: 768px) {
+  [data-view="paper"] .p-sys {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ============================================================
@@ -667,7 +683,7 @@
 [data-view="paper"] .p-exp-full {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 2.5rem;
 }
 [data-view="paper"] .p-expitem {
   display: flex;
@@ -847,29 +863,33 @@
   max-width: 100%;
 }
 [data-view="paper"] .p-links {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.4rem;
+  flex-direction: column;
+  border: 1px solid var(--p-rule);
+  background: #fff;
+  border-radius: 4px;
 }
 [data-view="paper"] .p-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.82rem;
+  gap: 0.75rem;
+  font-size: 0.9rem;
   color: var(--p-text);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 1px;
-  transition: color 0.15s, border-color 0.15s;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--p-rule);
+  transition: background-color 0.2s;
+}
+[data-view="paper"] .p-link:last-child {
+  border-bottom: none;
 }
 [data-view="paper"] .p-link svg {
   color: var(--p-muted);
   transition: color 0.15s;
 }
 [data-view="paper"] .p-link:hover {
-  color: var(--p-accent);
-  border-bottom-color: var(--p-accent);
+  background-color: var(--p-panel);
 }
 [data-view="paper"] .p-link:hover svg {
   color: var(--p-accent);

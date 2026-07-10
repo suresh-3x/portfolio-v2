@@ -44,7 +44,82 @@ export const projects = [
     image: '/images/projects/nomad-mind.svg'
   },
 
-  // Open Source Deployments
+  // Open Source Contributions & Projects
+  {
+    title: 'Cal.com Contributions',
+    category: 'Open Source',
+    description: 'Open source contributions to Cal.com, the scheduling infrastructure for everyone.',
+    long_description: 'Contributed to the core Cal.com open source repository, helping improve the scheduling infrastructure, fixing bugs, and enhancing the self-hosted deployment experience. Cal.com is built with TypeScript, Next.js, and Prisma.',
+    tags: ['TypeScript', 'Next.js', 'Open Source', 'Scheduling'],
+    tech_details: {
+      platform: 'Cal.com',
+      url: 'https://cal.com/',
+      role: 'Open Source Contributor'
+    },
+    links: {
+      github: 'https://github.com/calcom/cal.com'
+    },
+    featured: true,
+    year: 2025,
+    image: '/images/projects/cal-contributions.svg'
+  },
+
+  {
+    title: 'Smax AI Blog',
+    category: 'Open Source',
+    description: 'An open-source AI-powered blogging platform utilizing modern generative models for automated content curation.',
+    long_description: 'Smax AI Blog is an open-source platform that integrates LLMs directly into the authoring workflow. It features automatic content generation, SEO optimization, and smart tagging using advanced AI models.',
+    tags: ['AI', 'Open Source', 'LLM', 'Blogging Platform'],
+    tech_details: {
+      use_case: 'AI Content Generation',
+      repository: 'github.com/suresh-3x/smax-ai-blog'
+    },
+    links: {
+      github: 'https://github.com/suresh-3x/smax-ai-blog'
+    },
+    featured: true,
+    year: 2024,
+    image: '/images/projects/smax-ai-blog.svg'
+  },
+
+  {
+    title: 'Turf App',
+    category: 'Open Source',
+    description: 'An open-source Flutter application for booking sports turfs and managing athletic facility reservations.',
+    long_description: 'Turf App provides a seamless mobile experience for sports enthusiasts to discover, book, and manage turf reservations. Built with Dart and Flutter, it offers a robust open-source template for facility booking systems.',
+    tags: ['Flutter', 'Dart', 'Mobile', 'Open Source'],
+    tech_details: {
+      framework: 'Flutter',
+      language: 'Dart',
+      repository: 'github.com/suresh-3x/turf-app'
+    },
+    links: {
+      github: 'https://github.com/suresh-3x/turf-app'
+    },
+    featured: true,
+    year: 2024,
+    image: '/images/projects/turf-app.svg'
+  },
+
+  {
+    title: 'tm (tmux NLP interface)',
+    category: 'Open Source',
+    description: 'A fast, offline, deterministic natural-language interface for tmux. Type what you mean, get the tmux command.',
+    long_description: 'tm translates plain English into tmux commands using regular expressions, a tokenizer, a synonym map, and fuzzy matching. It parses in under a millisecond, runs entirely offline with zero dependencies, and asks for clarification instead of guessing. A safer, deterministic alternative to LLMs for terminal multiplexing.',
+    tags: ['Python', 'CLI', 'tmux', 'NLP', 'Open Source'],
+    tech_details: {
+      language: 'Python 3.12+',
+      interface: 'Command Line',
+      repository: 'github.com/suresh-3x/tm'
+    },
+    links: {
+      github: 'https://github.com/suresh-3x/tm'
+    },
+    featured: true,
+    year: 2024,
+    image: '/images/projects/tm.svg'
+  },
+
   {
     title: 'Self-Hosted Cal.com (Premium)',
     category: 'Open Source',
@@ -97,9 +172,7 @@ export const projects = [
       broker: 'Kotak Neo API',
       notifications: 'Telegram Bot API'
     },
-    links: {
-      demo: '#'
-    },
+    links: {},
     featured: true,
     year: 2024,
     image: '/images/projects/apex-ohol.svg'
@@ -107,7 +180,7 @@ export const projects = [
 
   {
     title: 'Homeground Hotel Booking',
-    category: 'WordPress - Booking Platform',
+    category: 'Private - Booking Platform',
     description: 'WordPress-powered hotel and vacation rental booking platform with STAAH booking engine integration for seamless property management and reservations.',
     long_description: 'A production hotel booking system built on WordPress with STAAH booking engine integration. Handles property listings, checkout flows, and guest reservations at scale.',
     tags: ['WordPress', 'PHP', 'STAAH', 'Payments', 'Booking Engine'],
@@ -177,7 +250,5 @@ export const projectCategories = [
   'Private - Booking Platform',
   'Full-Stack Web',
   'Mobile - iOS',
-  'Mobile - E-Commerce',
-  'Mobile - Productivity',
-  'Monitoring - CLI Tool'
+  'Mobile - E-Commerce'
 ];
