@@ -280,7 +280,8 @@
     display: inline-flex;
   }
 
-  [data-view="paper"] .site-nav__cmdk {
+  [data-view="paper"] .site-nav__cmdk,
+  [data-view="paper"] .site-nav__actions .view-switch {
     display: none;
   }
 

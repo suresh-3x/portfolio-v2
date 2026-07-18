@@ -300,7 +300,8 @@
     display: inline-flex;
   }
 
-  [data-view="terminal"] .site-nav__cmdk {
+  [data-view="terminal"] .site-nav__cmdk,
+  [data-view="terminal"] .site-nav__actions .view-switch {
     display: none;
   }
 
@@ -418,6 +419,8 @@
   color: var(--t-faint);
   margin: 0 0 1.25rem;
   letter-spacing: 0.3px;
+  line-height: 1.5;
+  word-wrap: break-word;
 }
 [data-view="terminal"] .t-crumb__sep {
   color: #33333a;
@@ -1124,6 +1127,9 @@
 @media (max-width: 760px) {
   [data-view="terminal"] .t-metrics {
     grid-template-columns: repeat(2, 1fr);
+  }
+  [data-view="terminal"] .t-metric:nth-child(2) {
+    border-left: 1px solid var(--t-border);
   }
   [data-view="terminal"] .t-metric:nth-child(3) {
     border-left: none;
