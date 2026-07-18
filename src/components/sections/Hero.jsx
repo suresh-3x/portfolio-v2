@@ -146,10 +146,8 @@ const Hero = () => {
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          min-width: 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          flex-wrap: wrap;
+          line-height: 1.5;
         }
 
         .breadcrumb .current {
