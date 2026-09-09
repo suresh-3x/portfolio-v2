@@ -38,7 +38,9 @@ export default function Work() {
                 <div className="p-sysimg">
                   <img
                     src={imageSrc}
-                    alt={p.title}
+                    alt={`${p.title} - ${p.category || 'Architecture preview'}`}
+                    loading="lazy"
+                    decoding="async"
                     onError={(e) => { e.target.src = '/images/projects/default.svg'; }}
                   />
                 </div>

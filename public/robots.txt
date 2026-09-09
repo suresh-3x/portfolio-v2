@@ -1,0 +1,9 @@
+# Robots.txt for sureshbhandari.com
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sureshbhandari.com
+
+# Sitemaps
+Sitemap: https://sureshbhandari.com/sitemap.xml

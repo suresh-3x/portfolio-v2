@@ -70,5 +70,5 @@ export const education = {
 export const seo = {
   title: 'Suresh Bhandari | Senior Backend & AI Engineer',
   description:
-    'Senior Backend and AI Engineer: Python, FastAPI, Google ADK, RabbitMQ, PostgreSQL, AWS. 5M+ MAU gaming platform, T-Systems (Deutsche Telekom subsidiary), tech lead. Mumbai, open to relocation.',
+    'Senior Backend and AI Engineer specializing in distributed systems, FastAPI, and agentic AI (Google ADK). Scaled platforms to 5M+ MAU and 10K req/sec peak.',
 };

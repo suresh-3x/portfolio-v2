@@ -1,0 +1,21 @@
+{
+  "name": "Suresh Bhandari | Senior Backend & AI Engineer",
+  "short_name": "Suresh Bhandari",
+  "description": "Senior Backend and AI Engineer with 5 years building and scaling distributed systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-light.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

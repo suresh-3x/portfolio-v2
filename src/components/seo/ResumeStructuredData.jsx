@@ -12,8 +12,10 @@ const ResumeStructuredData = () => {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': 'https://sureshbhandari.com/#person',
     name: profile.name,
     jobTitle: profile.title,
+    image: 'https://sureshbhandari.com/og-image.png',
     email: profile.email,
     telephone: profile.phone,
     address: {
