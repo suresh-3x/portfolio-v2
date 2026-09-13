@@ -7,6 +7,16 @@ import ResumeStructuredData from './components/seo/ResumeStructuredData';
 import { useView } from './context/ViewContext';
 import TerminalView from './views/terminal/TerminalView';
 import PaperView from './views/paper/PaperView';
+import { useRouter } from './router';
+import SeoHead from './components/seo/SeoHead';
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
+import ExperiencePage from './pages/ExperiencePage';
+import AboutPage from './pages/AboutPage';
+import StackPage from './pages/StackPage';
+import NotesPage from './pages/NotesPage';
+import NoteDetailPage from './pages/NoteDetailPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 const HEADER_OFFSET = 120;
 const SCROLL_KEY = 'lastScrollPosition';
@@ -121,16 +131,46 @@ const HashScrollHandler = () => {
 
 function App() {
   const { view } = useView();
+  const { route } = useRouter();
+
+  const renderContent = () => {
+    switch (route.id) {
+      case 'projects':
+        return <ProjectsPage />;
+      case 'project-detail':
+        return <ProjectDetailPage />;
+      case 'experience':
+        return <ExperiencePage />;
+      case 'about':
+        return <AboutPage />;
+      case 'stack':
+        return <StackPage />;
+      case 'notes':
+        return <NotesPage />;
+      case 'note-detail':
+        return <NoteDetailPage />;
+      case 'not-found':
+        return <NotFoundPage />;
+      case 'home':
+      default:
+        return (
+          <>
+            <HashScrollHandler />
+            <ResumeStructuredData />
+            <div key={view} className="view-fade">
+              {view === 'terminal' ? <TerminalView /> : <PaperView />}
+            </div>
+          </>
+        );
+    }
+  };
 
   return (
     <Layout>
+      <SeoHead />
       <ScrollProgress />
-      <HashScrollHandler />
-      <ResumeStructuredData />
       <CommandPalette />
-      <div key={view} className="view-fade">
-        {view === 'terminal' ? <TerminalView /> : <PaperView />}
-      </div>
+      {renderContent()}
     </Layout>
   );
 }

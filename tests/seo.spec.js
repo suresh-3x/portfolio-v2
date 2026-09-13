@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const publicDir = path.resolve(__dirname, '../public');
+const distDir = path.resolve(__dirname, '../dist');
 
 test.describe('SEO and Meta Verification', () => {
   test('has accurate title and meta description within recommended length', async ({ page }) => {
@@ -123,4 +124,296 @@ test.describe('SEO and Meta Verification', () => {
       expect(fs.existsSync(filePath), `Expected ${file} to exist in public/`).toBe(true);
     }
   });
+
+  test('projects catalog page (/projects) has valid SEO and single h1', async ({ page }) => {
+    await page.goto('/projects');
+
+    await expect(page).toHaveTitle(/Projects & Distributed Systems/);
+
+    const desc = await page.locator('meta[name="description"]').getAttribute('content');
+    expect(desc).toBeTruthy();
+    expect(desc?.length).toBeLessThanOrEqual(160);
+
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toBe('https://sureshbhandari.com/projects');
+
+    const h1Count = await page.locator('h1').count();
+    expect(h1Count).toBe(1);
+
+    // Verify project cards are listed
+    await expect(page.getByText('Revamp Engine').first()).toBeVisible();
+    await expect(page.getByText('Nomad Mind').first()).toBeVisible();
+  });
+
+  test('project detail page (/projects/revamp-engine) has valid SEO, structured data, and single h1', async ({ page }) => {
+    await page.goto('/projects/revamp-engine');
+
+    await expect(page).toHaveTitle(/Revamp Engine/);
+
+    const desc = await page.locator('meta[name="description"]').getAttribute('content');
+    expect(desc).toBeTruthy();
+    expect(desc?.length).toBeLessThanOrEqual(160);
+    expect(desc).toContain('Revamp Engine');
+
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toBe('https://sureshbhandari.com/projects/revamp-engine');
+
+    const ogType = await page.locator('meta[property="og:type"]').getAttribute('content');
+    expect(ogType).toBe('article');
+
+    const h1Count = await page.locator('h1').count();
+    expect(h1Count).toBe(1);
+    await expect(page.locator('h1')).toHaveText('Revamp Engine');
+
+    // Verify detail sections exist
+    await expect(page.getByText('System Architecture & Data Flow').first()).toBeVisible();
+    await expect(page.getByText('The Challenge & Problem').first()).toBeVisible();
+
+    // Verify all images on page have alt
+    const images = await page.locator('img').all();
+    for (const img of images) {
+      const alt = await img.getAttribute('alt');
+      expect(alt).toBeTruthy();
+      expect(alt?.trim().length).toBeGreaterThan(0);
+    }
+  });
+
+  test('project detail page (/projects/nomad-mind) renders properly with single h1', async ({ page }) => {
+    await page.goto('/projects/nomad-mind');
+
+    await expect(page).toHaveTitle(/Nomad Mind/);
+
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toBe('https://sureshbhandari.com/projects/nomad-mind');
+
+    const h1Count = await page.locator('h1').count();
+    expect(h1Count).toBe(1);
+    await expect(page.locator('h1')).toHaveText('Nomad Mind');
+  });
+
+  test('dedicated subpages (/experience, /about, /stack, /notes) have valid SEO and single h1', async ({ page }) => {
+    const subpages = [
+      { path: '/experience', titleMatch: /Experience/ },
+      { path: '/about', titleMatch: /About/ },
+      { path: '/stack', titleMatch: /Technical Stack/ },
+      { path: '/notes', titleMatch: /Engineering Notes/ },
+    ];
+
+    for (const sp of subpages) {
+      await page.goto(sp.path);
+      await expect(page).toHaveTitle(sp.titleMatch);
+
+      const desc = await page.locator('meta[name="description"]').getAttribute('content');
+      expect(desc).toBeTruthy();
+      expect(desc?.length).toBeLessThanOrEqual(160);
+
+      const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+      expect(canonical).toBe(`https://sureshbhandari.com${sp.path}`);
+
+      const h1Count = await page.locator('h1').count();
+      expect(h1Count).toBe(1);
+    }
+  });
+
+  test('engineering note detail page (/notes/queue-is-the-spine) has valid SEO and content', async ({ page }) => {
+    await page.goto('/notes/queue-is-the-spine');
+
+    await expect(page).toHaveTitle(/The queue is the spine/);
+
+    const desc = await page.locator('meta[name="description"]').getAttribute('content');
+    expect(desc).toBeTruthy();
+    expect(desc?.length).toBeLessThanOrEqual(160);
+
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toBe('https://sureshbhandari.com/notes/queue-is-the-spine');
+
+    const h1Count = await page.locator('h1').count();
+    expect(h1Count).toBe(1);
+
+    await expect(page.getByText('Decoupling AI from the Execution Spine').first()).toBeVisible();
+  });
+
+  test('sitemap.xml contains all newly added pages and projects', () => {
+    const sitemapPath = path.join(publicDir, 'sitemap.xml');
+    const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
+
+    const expectedUrls = [
+      'https://sureshbhandari.com/',
+      'https://sureshbhandari.com/projects',
+      'https://sureshbhandari.com/projects/revamp-engine',
+      'https://sureshbhandari.com/projects/nomad-mind',
+      'https://sureshbhandari.com/projects/calcom-contributions',
+      'https://sureshbhandari.com/projects/apex-ohol-v8',
+      'https://sureshbhandari.com/projects/mcwm-straddle-edge',
+      'https://sureshbhandari.com/experience',
+      'https://sureshbhandari.com/about',
+      'https://sureshbhandari.com/stack',
+      'https://sureshbhandari.com/notes',
+      'https://sureshbhandari.com/notes/queue-is-the-spine',
+    ];
+
+    for (const url of expectedUrls) {
+      expect(sitemapContent).toContain(`<loc>${url}</loc>`);
+    }
+  });
+
+  test('prerendered static HTML files exist in dist', () => {
+    const expectedPrerenderedFiles = [
+      'projects/index.html',
+      'projects/revamp-engine/index.html',
+      'projects/nomad-mind/index.html',
+      'projects/mcwm-straddle-edge/index.html',
+      'experience/index.html',
+      'about/index.html',
+      'stack/index.html',
+      'notes/index.html',
+      'notes/queue-is-the-spine/index.html',
+    ];
+
+    for (const file of expectedPrerenderedFiles) {
+      const filePath = path.join(distDir, file);
+      expect(fs.existsSync(filePath), `Expected prerendered ${file} to exist in dist/`).toBe(true);
+    }
+  });
+
+  test('vision-clothing project renders interactive screen gallery and thumbnails', async ({ page }) => {
+    await page.goto('/projects/vision-clothing');
+
+    await expect(page).toHaveTitle(/Vision Clothing/);
+    const h1Count = await page.locator('h1').count();
+    expect(h1Count).toBe(1);
+
+    // Verify gallery section is displayed
+    await expect(page.getByText('Application Screens & User Flow').first()).toBeVisible();
+
+    // Verify thumbnail buttons are rendered
+    const thumbButtons = await page.locator('.gallery-thumb-btn').all();
+    expect(thumbButtons.length).toBe(7);
+
+    // All images must have non-empty alt text
+    const images = await page.locator('img').all();
+    for (const img of images) {
+      const alt = await img.getAttribute('alt');
+      expect(alt).toBeTruthy();
+      expect(alt?.trim().length).toBeGreaterThan(0);
+    }
+
+    // Click on thumbnail 2 and check active screen label update
+    await thumbButtons[1].click();
+    await expect(page.getByText('Screen 2 of 7').first()).toBeVisible();
+  });
+
+  test('mcwm-straddle-edge project renders interactive gallery and verified SEO', async ({ page }) => {
+    await page.goto('/projects/mcwm-straddle-edge');
+
+    await expect(page).toHaveTitle(/StraddleEDGE/);
+
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toBe('https://sureshbhandari.com/projects/mcwm-straddle-edge');
+
+    const h1Count = await page.locator('h1').count();
+    expect(h1Count).toBe(1);
+    await expect(page.locator('h1')).toHaveText(/StraddleEDGE/);
+
+    // Verify gallery section is displayed
+    await expect(page.getByText('Application Screens & User Flow').first()).toBeVisible();
+
+    // Verify 3 thumbnail buttons are rendered
+    const thumbButtons = await page.locator('.gallery-thumb-btn').all();
+    expect(thumbButtons.length).toBe(3);
+
+    // All images must have non-empty alt text
+    const images = await page.locator('img').all();
+    for (const img of images) {
+      const alt = await img.getAttribute('alt');
+      expect(alt).toBeTruthy();
+      expect(alt?.trim().length).toBeGreaterThan(0);
+    }
+
+    // Switch between gallery screens
+    await thumbButtons[1].click();
+    await expect(page.getByText('Screen 2 of 3').first()).toBeVisible();
+    await thumbButtons[2].click();
+    await expect(page.getByText('Screen 3 of 3').first()).toBeVisible();
+  });
+
+  test('apex-ohol-v8 project renders interactive gallery with loaded signals and paper trading', async ({ page }) => {
+    await page.goto('/projects/apex-ohol-v8');
+
+    await expect(page).toHaveTitle(/APEX OHOL v8/);
+
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+    expect(canonical).toBe('https://sureshbhandari.com/projects/apex-ohol-v8');
+
+    const h1Count = await page.locator('h1').count();
+    expect(h1Count).toBe(1);
+    await expect(page.locator('h1')).toHaveText(/APEX OHOL v8/);
+
+    // Verify gallery section is displayed
+    await expect(page.getByText('Application Screens & User Flow').first()).toBeVisible();
+
+    // Verify 3 thumbnail buttons are rendered
+    const thumbButtons = await page.locator('.gallery-thumb-btn').all();
+    expect(thumbButtons.length).toBe(3);
+
+    // All images must have non-empty alt text
+    const images = await page.locator('img').all();
+    for (const img of images) {
+      const alt = await img.getAttribute('alt');
+      expect(alt).toBeTruthy();
+      expect(alt?.trim().length).toBeGreaterThan(0);
+    }
+
+    // Switch between gallery screens
+    await thumbButtons[1].click();
+    await expect(page.getByText('Screen 2 of 3').first()).toBeVisible();
+    await thumbButtons[2].click();
+    await expect(page.getByText('Screen 3 of 3').first()).toBeVisible();
+  });
+
+  test('navbar includes projects menu item and navigates to /projects', async ({ page }) => {
+    await page.goto('/');
+
+    // Projects menu link is visible in navbar
+    const projectsLink = page.locator('.site-nav__links a', { hasText: 'projects' });
+    await expect(projectsLink).toBeVisible();
+
+    // Clicking projects menu item navigates to /projects
+    await projectsLink.click();
+    await expect(page).toHaveURL(/.*\/projects/);
+    await expect(page.locator('h1')).toHaveText(/Engineering Projects & Distributed Systems/);
+  });
+
+  test('all 14 projects render detail pages with valid single h1 and screenshots', async ({ page }) => {
+    const slugs = [
+      'revamp-engine',
+      'nomad-mind',
+      'calcom-contributions',
+      'smax-ai-blog',
+      'turf-app',
+      'tm-nlp-interface',
+      'self-hosted-calcom',
+      'taiga-stride-ahead',
+      'apex-ohol-v8',
+      'mcwm-straddle-edge',
+      'homeground-hotel-booking',
+      'bizassist-platform',
+      'smax-bookings-app',
+      'vision-clothing',
+    ];
+
+    for (const slug of slugs) {
+      await page.goto(`/projects/${slug}`);
+      const h1Count = await page.locator('h1').count();
+      expect(h1Count).toBe(1);
+
+      // Verify screenshot preview window is present
+      const previewImg = page.locator('.preview-window__canvas img');
+      await expect(previewImg).toBeVisible();
+      const alt = await previewImg.getAttribute('alt');
+      expect(alt).toBeTruthy();
+      expect(alt?.trim().length).toBeGreaterThan(0);
+    }
+  });
 });
+

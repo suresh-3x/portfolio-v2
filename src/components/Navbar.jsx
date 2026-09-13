@@ -1,21 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useLenis } from 'lenis/react';
 import { Command, Menu, X } from 'lucide-react';
+import { useRouter } from '../router';
 import ViewSwitch from './ViewSwitch';
 
 const NAV_ITEMS = [
-  { label: 'about', href: '#about' },
-  { label: 'work', href: '#work' },
-  { label: 'experience', href: '#experience' },
-  { label: 'stack', href: '#stack' },
-  { label: 'notes', href: '#notes' },
-  { label: 'contact', href: '#contact' },
+  { label: 'projects', href: '/projects', path: '/projects' },
+  { label: 'work', href: '#work', path: '/#work' },
+  { label: 'about', href: '#about', path: '/about' },
+  { label: 'experience', href: '#experience', path: '/experience' },
+  { label: 'stack', href: '#stack', path: '/stack' },
+  { label: 'notes', href: '#notes', path: '/notes' },
+  { label: 'contact', href: '#contact', path: '/#contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const lenis = useLenis();
+  const { pathname, navigate } = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -29,14 +32,42 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  const go = (e, href) => {
+  const go = (e, item) => {
     e.preventDefault();
     setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (!el) return;
-    history.pushState(null, '', href);
-    if (lenis) lenis.scrollTo(href, { duration: 0.7 });
-    else el.scrollIntoView({ behavior: 'smooth' });
+
+    if (item.href === '#home' || item === '#home') {
+      if (pathname === '/') {
+        history.pushState(null, '', '/');
+        if (lenis) lenis.scrollTo(0, { duration: 0.7 });
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/');
+      }
+      return;
+    }
+
+    const href = typeof item === 'string' ? item : item.href;
+
+    if (href.startsWith('/')) {
+      navigate(href);
+      return;
+    }
+
+    if (pathname === '/') {
+      const el = document.querySelector(href);
+      if (!el) return;
+      history.pushState(null, '', href);
+      if (lenis) lenis.scrollTo(href, { duration: 0.7 });
+      else el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If on subpage, navigate to dedicated page or home anchor
+      if (item.path && !item.path.startsWith('/#')) {
+        navigate(item.path);
+      } else {
+        navigate('/' + href);
+      }
+    }
   };
 
   const openPalette = () => window.dispatchEvent(new Event('open-command-palette'));
@@ -49,11 +80,21 @@ export default function Navbar() {
         </a>
 
         <nav className="site-nav__links" aria-label="Sections">
-          {NAV_ITEMS.map((item) => (
-            <a key={item.href} href={item.href} onClick={(e) => go(e, item.href)}>
-              {item.label}
-            </a>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const isActive =
+              (item.path === '/projects' && pathname.startsWith('/projects')) ||
+              (item.path === pathname && pathname !== '/');
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                className={isActive ? 'is-active' : ''}
+                onClick={(e) => go(e, item)}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
         <div className="site-nav__actions">
@@ -91,11 +132,21 @@ export default function Navbar() {
           </button>
         </div>
         <nav className="site-nav__overlay-links" aria-label="Sections">
-          {NAV_ITEMS.map((item) => (
-            <a key={item.href} href={item.href} onClick={(e) => go(e, item.href)}>
-              {item.label}
-            </a>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const isActive =
+              (item.path === '/projects' && pathname.startsWith('/projects')) ||
+              (item.path === pathname && pathname !== '/');
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                className={isActive ? 'is-active' : ''}
+                onClick={(e) => go(e, item)}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
       </div>
     </header>

@@ -1,4 +1,5 @@
 import { projects } from '../../../data/projects';
+import { Link } from '../../../router/Router';
 
 const featured = projects.filter((p) => p.featured);
 
@@ -36,24 +37,22 @@ export default function Work() {
             <article className="p-sysitem stagger-fade" key={p.title}>
               {p.image && (
                 <div className="p-sysimg">
-                  <img
-                    src={imageSrc}
-                    alt={`${p.title} - ${p.category || 'Architecture preview'}`}
-                    loading="lazy"
-                    decoding="async"
-                    onError={(e) => { e.target.src = '/images/projects/default.svg'; }}
-                  />
+                  <Link to={`/projects/${p.slug}`}>
+                    <img
+                      src={imageSrc}
+                      alt={`${p.title} - ${p.category || 'Architecture preview'}`}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => { e.target.src = '/images/projects/default.svg'; }}
+                    />
+                  </Link>
                 </div>
               )}
               <div className="p-systop">
                 <h3 className="p-systitle">
-                  {useLink ? (
-                    <a href={link} target="_blank" rel="noopener noreferrer">
-                      {p.title}
-                    </a>
-                  ) : (
-                    p.title
-                  )}
+                  <Link to={`/projects/${p.slug}`}>
+                    {p.title}
+                  </Link>
                 </h3>
                 <span className={badge.hot ? 'p-metricpill p-metricpill--hot' : 'p-metricpill'}>
                   {badge.label}
@@ -65,9 +64,25 @@ export default function Work() {
                   <span key={t}>{t}</span>
                 ))}
               </div>
+              <div style={{ marginTop: '0.85rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.82rem' }}>
+                <Link to={`/projects/${p.slug}`} style={{ color: 'var(--p-accent)', fontWeight: 600 }}>
+                  Case study &amp; architecture &rarr;
+                </Link>
+                {useLink && (
+                  <a href={link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--p-muted)' }}>
+                    external &nearr;
+                  </a>
+                )}
+              </div>
             </article>
           );
         })}
+      </div>
+
+      <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+        <Link to="/projects" className="btn-action btn-action--primary">
+          View All 13 Production Systems &rarr;
+        </Link>
       </div>
     </section>
   );

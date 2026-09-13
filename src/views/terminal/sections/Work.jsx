@@ -1,4 +1,5 @@
 import { projects } from '../../../data/projects';
+import { Link } from '../../../router/Router';
 
 const featured = projects.filter((p) => p.featured);
 
@@ -56,13 +57,15 @@ export default function Work() {
             <article className="t-card stagger-fade" key={p.title}>
               {p.image && (
                 <div className="t-card__img">
-                  <img
-                    src={imageSrc}
-                    alt={`${p.title} - ${p.category || 'Architecture preview'}`}
-                    loading="lazy"
-                    decoding="async"
-                    onError={(e) => { e.target.src = '/images/projects/default.svg'; }}
-                  />
+                  <Link to={`/projects/${p.slug}`}>
+                    <img
+                      src={imageSrc}
+                      alt={`${p.title} - ${p.category || 'Architecture preview'}`}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => { e.target.src = '/images/projects/default.svg'; }}
+                    />
+                  </Link>
                 </div>
               )}
               <div className="t-card__top">
@@ -78,13 +81,9 @@ export default function Work() {
               </div>
 
               <h3 className="t-card__title mono">
-                {showLink ? (
-                  <a href={href} target="_blank" rel="noopener noreferrer">
-                    {p.title}
-                  </a>
-                ) : (
-                  p.title
-                )}
+                <Link to={`/projects/${p.slug}`}>
+                  {p.title}
+                </Link>
               </h3>
 
               <p className="t-card__desc">{p.description}</p>
@@ -101,9 +100,26 @@ export default function Work() {
                   </span>
                 ))}
               </div>
+
+              <div style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Link to={`/projects/${p.slug}`} className="mono" style={{ fontSize: '0.75rem', color: 'var(--t-accent)' }}>
+                  architecture specs &rarr;
+                </Link>
+                {showLink && (
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="mono" style={{ fontSize: '0.72rem', opacity: 0.7 }}>
+                    {p.links?.github ? 'github' : 'external'} &nearr;
+                  </a>
+                )}
+              </div>
             </article>
           );
         })}
+      </div>
+
+      <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+        <Link to="/projects" className="btn-action btn-action--primary">
+          Explore All 13 Systems &amp; Case Studies &rarr;
+        </Link>
       </div>
     </section>
   );

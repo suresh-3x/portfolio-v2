@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useView } from '../context/ViewContext';
+import { useRouter } from '../router';
 import { profile } from '../data/profile';
+import { projects } from '../data/projects';
+import { notes } from '../data/notes';
 
 const SECTIONS = ['about', 'work', 'experience', 'stack', 'notes', 'contact'];
 
 export default function CommandPalette() {
   const { setView } = useView();
+  const { navigate } = useRouter();
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
   const [i, setI] = useState(0);
@@ -22,15 +26,31 @@ export default function CommandPalette() {
     ...SECTIONS.map((s) => ({
       id: `go-${s}`,
       label: `Go to ${s}`,
-      run: () => { window.location.hash = `#${s}`; },
+      run: () => navigate(`#${s}`),
     })),
+    { id: 'go-projects', label: 'Go to projects', run: () => navigate('/projects') },
     { id: 'view-terminal', label: 'Switch view: terminal', run: () => setView('terminal') },
     { id: 'view-paper', label: 'Switch view: paper', run: () => setView('paper') },
+    { id: 'page-projects', label: 'Page: All Projects Catalog', run: () => navigate('/projects') },
+    { id: 'page-experience', label: 'Page: Experience & Career History', run: () => navigate('/experience') },
+    { id: 'page-about', label: 'Page: About Suresh Bhandari', run: () => navigate('/about') },
+    { id: 'page-stack', label: 'Page: Technical Stack', run: () => navigate('/stack') },
+    { id: 'page-notes', label: 'Page: Engineering Notes', run: () => navigate('/notes') },
+    ...projects.map((p) => ({
+      id: `project-${p.slug}`,
+      label: `Project: ${p.title}`,
+      run: () => navigate(`/projects/${p.slug}`),
+    })),
+    ...notes.map((n) => ({
+      id: `note-${n.slug}`,
+      label: `Note: ${n.title}`,
+      run: () => navigate(`/notes/${n.slug}`),
+    })),
     { id: 'github', label: 'Open GitHub', run: () => window.open(profile.github, '_blank', 'noopener') },
     { id: 'linkedin', label: 'Open LinkedIn', run: () => window.open(profile.linkedin, '_blank', 'noopener') },
     { id: 'resume', label: 'Open resume', run: () => window.open(profile.resumeUrl, '_blank', 'noopener') },
     { id: 'email', label: 'Copy email', run: () => navigator.clipboard?.writeText(profile.email) },
-  ], [setView]);
+  ], [setView, navigate]);
 
   const filtered = useMemo(() => {
     const t = q.trim().toLowerCase();

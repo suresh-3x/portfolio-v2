@@ -6,8 +6,10 @@ import 'lenis/dist/lenis.css'
 import './index.css'
 import './styles/terminal.css'
 import './styles/paper.css'
+import './styles/subpages.css'
 import App from './App.jsx'
 import { ViewProvider } from './context/ViewContext'
+import { RouterProvider } from './router/Router'
 import { initGoogleAnalytics } from './utils/analytics'
 
 // Lenis smooth-scroll options: optimized for performance
@@ -32,8 +34,10 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ViewProvider>
       <ReactLenis root options={lenisOptions}>
-        <App />
-        <Analytics mode='production' />
+        <RouterProvider>
+          <App />
+          <Analytics mode='production' />
+        </RouterProvider>
       </ReactLenis>
     </ViewProvider>
   </StrictMode>,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUp } from 'lucide-react';
 import { useLenis } from 'lenis/react';
+import { Link } from '../router/Router';
 
 export default function Footer() {
   const lenis = useLenis();
@@ -15,8 +16,12 @@ export default function Footer() {
         <div className="site-footer__brand">
           &copy; {new Date().getFullYear()} Suresh Bhandari.
         </div>
-        <div className="site-footer__meta">
-          All systems operational.
+        <div className="site-footer__meta" style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap' }}>
+          <Link to="/projects">projects</Link>
+          <Link to="/experience">experience</Link>
+          <Link to="/stack">stack</Link>
+          <Link to="/notes">notes</Link>
+          <Link to="/about">about</Link>
         </div>
         <div className="site-footer__right">
           <a href="https://github.com/suresh-3x" target="_blank" rel="noopener noreferrer">github</a>
