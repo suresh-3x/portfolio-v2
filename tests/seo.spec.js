@@ -233,6 +233,33 @@ test.describe('SEO and Meta Verification', () => {
     await expect(page.getByText('Decoupling AI from the Execution Spine').first()).toBeVisible();
   });
 
+  test('all 6 engineering notes render detail pages with valid SEO, single h1, and takeaways', async ({ page }) => {
+    const slugs = [
+      'zero-blocking-trading-terminal',
+      'queue-is-the-spine',
+      'sub-millisecond-deterministic-nlp',
+      'zero-fault-wallet',
+      'rag-over-60-docs',
+      'temporal-video-rag',
+    ];
+
+    for (const slug of slugs) {
+      await page.goto(`/notes/${slug}`);
+
+      const h1Count = await page.locator('h1').count();
+      expect(h1Count).toBe(1);
+
+      const desc = await page.locator('meta[name="description"]').getAttribute('content');
+      expect(desc).toBeTruthy();
+      expect(desc?.length).toBeLessThanOrEqual(160);
+
+      const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+      expect(canonical).toBe(`https://sureshbhandari.com/notes/${slug}`);
+
+      await expect(page.getByText('Key Architecture Takeaways').first()).toBeVisible();
+    }
+  });
+
   test('sitemap.xml contains all newly added pages and projects', () => {
     const sitemapPath = path.join(publicDir, 'sitemap.xml');
     const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');

@@ -94,7 +94,7 @@ const Hero = () => {
           display: flex;
           align-items: stretch;
           padding: clamp(3rem, 6vw, 6rem) 0;
-          border-bottom: 1px solid var(--border-color);
+          border-bottom: none;
         }
 
         .hero-shell {

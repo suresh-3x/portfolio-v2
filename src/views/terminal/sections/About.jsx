@@ -1,4 +1,5 @@
 import { profile, education, summaryTerminal } from '../../../data/profile';
+import { Link } from '../../../router/Router';
 
 export default function About() {
   return (
@@ -20,6 +21,11 @@ export default function About() {
         <div className="t-readme__split">
           <div className="t-readme__body">
             <p>{summaryTerminal}</p>
+            <div style={{ marginTop: '1.25rem' }}>
+              <Link to="/about" className="btn-action mono" style={{ fontSize: '0.8rem' }}>
+                View Full Bio &amp; Principles &rarr;
+              </Link>
+            </div>
           </div>
           <aside className="t-readme__meta mono" aria-label="Education and resume">
             <p className="t-readme__cmd">

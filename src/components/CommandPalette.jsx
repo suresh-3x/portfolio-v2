@@ -5,8 +5,6 @@ import { profile } from '../data/profile';
 import { projects } from '../data/projects';
 import { notes } from '../data/notes';
 
-const SECTIONS = ['about', 'work', 'experience', 'stack', 'notes', 'contact'];
-
 export default function CommandPalette() {
   const { setView } = useView();
   const { navigate } = useRouter();
@@ -23,19 +21,14 @@ export default function CommandPalette() {
   }, []);
 
   const actions = useMemo(() => [
-    ...SECTIONS.map((s) => ({
-      id: `go-${s}`,
-      label: `Go to ${s}`,
-      run: () => navigate(`#${s}`),
-    })),
-    { id: 'go-projects', label: 'Go to projects', run: () => navigate('/projects') },
+    { id: 'page-about', label: 'About Suresh Bhandari', run: () => navigate('/about') },
+    { id: 'page-projects', label: 'Projects & Systems Catalog', run: () => navigate('/projects') },
+    { id: 'page-experience', label: 'Experience & Career History', run: () => navigate('/experience') },
+    { id: 'page-stack', label: 'Technical Stack & Architecture', run: () => navigate('/stack') },
+    { id: 'page-notes', label: 'Engineering Notes & Writing', run: () => navigate('/notes') },
+    { id: 'go-contact', label: 'Contact Suresh', run: () => navigate('/#contact') },
     { id: 'view-terminal', label: 'Switch view: terminal', run: () => setView('terminal') },
     { id: 'view-paper', label: 'Switch view: paper', run: () => setView('paper') },
-    { id: 'page-projects', label: 'Page: All Projects Catalog', run: () => navigate('/projects') },
-    { id: 'page-experience', label: 'Page: Experience & Career History', run: () => navigate('/experience') },
-    { id: 'page-about', label: 'Page: About Suresh Bhandari', run: () => navigate('/about') },
-    { id: 'page-stack', label: 'Page: Technical Stack', run: () => navigate('/stack') },
-    { id: 'page-notes', label: 'Page: Engineering Notes', run: () => navigate('/notes') },
     ...projects.map((p) => ({
       id: `project-${p.slug}`,
       label: `Project: ${p.title}`,

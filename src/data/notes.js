@@ -1,5 +1,59 @@
 export const notes = [
   {
+    slug: 'zero-blocking-trading-terminal',
+    title: 'Zero-blocking client architecture for live market feeds',
+    date: '2026-08',
+    readingTime: '6 min read',
+    abstract:
+      'Cutting critical-path JavaScript from 12 bundles to 5, pre-binding click stubs for unparsed scripts, and ditching web fonts so live option chains render without layout reflow or blank screens during opening bell volatility.',
+    tags: ['trading-systems', 'frontend-architecture', 'performance', 'resilience'],
+    href: '/notes/zero-blocking-trading-terminal',
+    seo_description: 'Designing a zero-blocking client architecture for high-frequency index options terminals: bundle decoupling, click stub queues, and system font performance.',
+    sections: [
+      {
+        heading: 'The Volatility Window: Where Client Performance Fails',
+        paragraphs: [
+          'When index options markets open at 09:15, spot prices, Greeks, and ATM straddle premiums surge simultaneously across six major indices (NIFTY 50, BANKNIFTY, FINNIFTY, SENSEX, and others). High-frequency market data streams generate tens of tick updates per second.',
+          'Under this load, traditional web dashboards fail predictably: heavy JavaScript bundles tie up the main thread during hydration, remote web fonts trigger layout jitter, and early user clicks on critical strike rows or order triggers get silently dropped.'
+        ]
+      },
+      {
+        heading: 'Decoupling Critical Path Bundles with Idle Scheduling',
+        paragraphs: [
+          'When engineering the client delivery architecture for StraddleEDGE, our priority was zero-blocking initial paint. We decoupled analytical modules (volatility risk premium charts and full option chains) from the core market skeleton.',
+          'By splitting the bundle structure, initial critical-path scripts dropped from 12 bundles to 5. Analytical charts and historical matrices are loaded asynchronously using requestIdleCallback with strict fallback deadlines, keeping interaction latency under 16 milliseconds even while processing high-throughput WebSocket streams.'
+        ]
+      },
+      {
+        heading: 'Pre-Bound Action Stubs: Never Drop Early Clicks',
+        paragraphs: [
+          'During rapid market breakouts, a dropped or delayed click on an options strike can cost thousands. When users click an element while main execution scripts are still evaluating, the browser normally fails to register the handler.',
+          'We installed an ultra-lightweight, 2KB early-action capture shim directly in the document head. The shim listens for early click and keyboard events on interactive action buttons and buffers them in a FIFO queue of up to 70 events. When the primary application controller finishes mounting, it immediately replays and drains the queued actions.'
+        ]
+      },
+      {
+        heading: 'Deterministic System Typography: Eliminating Layout Reflow',
+        paragraphs: [
+          'Options chains display hundreds of numerical values that update 10 to 50 times every second. Relying on remote CDN web fonts introduces font-swapping layout shifts and network overhead during market opening spikes.',
+          'We discarded third-party CDN typography entirely in favor of deterministic system monospace font stacks with tabular numerals (font-variant-numeric: tabular-nums). This achieved zero cumulative layout shift (CLS: 0.00) and guaranteed that numerical columns never jitter as numbers fluctuate.'
+        ]
+      },
+      {
+        heading: 'Inline Bundle Failure Guards for Continuous Deployments',
+        paragraphs: [
+          'During active trading sessions, background production deployments update asset hashes on the server. If an open client session attempts to lazy-load a route chunk that has been superseded, the browser throws a dynamic import failure resulting in a white screen.',
+          'We built an inline bundle-failure recovery guard that catches route chunk 404 errors, captures transient session state, and initiates a graceful, background cache revalidation. The client restores view continuity seamlessly without manual reloads.'
+        ]
+      }
+    ],
+    takeaways: [
+      'Reduce critical-path JavaScript to the minimal render skeleton, deferring analytics via requestIdleCallback.',
+      'Capture early user interactions with an inline head shim so no clicks are lost during bundle evaluation.',
+      'Use deterministic system font stacks with tabular numerals to eliminate font network round trips and layout shifts.',
+      'Implement inline chunk-failure handlers to prevent white-screen crashes after rolling production deployments.'
+    ]
+  },
+  {
     slug: 'queue-is-the-spine',
     title: 'The queue is the spine, not the AI',
     date: '2026-05',
@@ -44,6 +98,53 @@ export const notes = [
       'Use durable disk persistence (like SQLite WAL) as source of truth and memory brokers (like Redis) as ephemeral hot caches.',
       'Implement circuit breakers to prevent retry cascades during third-party LLM outages.',
       'Keep humans in the loop at critical side-effect boundaries.'
+    ]
+  },
+  {
+    slug: 'sub-millisecond-deterministic-nlp',
+    title: 'Why your CLI does not need an LLM: 7 microsecond NLP',
+    date: '2026-04',
+    readingTime: '5 min read',
+    abstract:
+      'Parsing natural language into verified tmux commands in 7.6 microseconds with zero external dependencies. Why deterministic tokenizers and synonym normalization maps beat 500ms LLM round trips for terminal tooling.',
+    tags: ['python', 'cli', 'nlp', 'performance'],
+    href: '/notes/sub-millisecond-deterministic-nlp',
+    seo_description: 'Building deterministic, dependency-free natural language CLI parsers: why finite grammar tokenizers beat LLMs with 7.6 microsecond warm execution.',
+    sections: [
+      {
+        heading: 'The Probabilistic Trap in Developer Tooling',
+        paragraphs: [
+          'A pervasive trend in modern developer tools is to wedge an LLM into every command-line utility. For everyday terminal operations, this introduces 300 to 1200 millisecond network latency, requires internet access or huge local weights, and invites unpredictable hallucinations into the shell.',
+          'For utilities like tmux, the command space is finite and well-defined: split panes, kill windows, attach sessions, swap layouts. The developer problem is not a lack of artificial intelligence; it is remembering arcane flag combinations and syntax when switching contexts.'
+        ]
+      },
+      {
+        heading: 'The Anatomy of a 7.6 Microsecond Parser',
+        paragraphs: [
+          'When building tm, our design goal was sub-millisecond execution using only the Python standard library with zero third-party dependencies. No PyTorch, no Hugging Face, no pip installs.',
+          'The parser runs through a three-stage deterministic pipeline: token normalization with punctuation stripping, intent recognition using exact and Levenshtein distance synonym tables, and structured parameter extraction for pane IDs and percentages. In benchmarks, warm parse and command build executes in 7.6 microseconds: more than 50,000 times faster than a cloud model API call.'
+        ]
+      },
+      {
+        heading: 'Explicit Clarification Over Probabilistic Guessing',
+        paragraphs: [
+          'LLMs are trained to guess an answer even when user input is dangerously ambiguous. In a terminal environment, guessing whether "kill 2" means window 2, pane 2, or session 2 can terminate a production service.',
+          'Instead of guessing, tm incorporates an explicit ambiguity detector. If an instruction matches multiple structural targets, the CLI halts execution and prompts the user with verified, safe alternatives. Predictability is the ultimate ergonomic feature in developer tooling.'
+        ]
+      },
+      {
+        heading: 'Unbreakable Portability Across Scrappy Hardware',
+        paragraphs: [
+          'When managing remote jump hosts, air-gapped production servers, or a low-power Raspberry Pi node, installing large Python packages is often restricted or impossible.',
+          'By restricting the codebase to pure standard library constructs, the tool runs identically across macOS, Linux, and FreeBSD on any Python 3 installation. It cold-boots instantly and keeps keyboard flow uninterrupted.'
+        ]
+      }
+    ],
+    takeaways: [
+      'Avoid probabilistic models for closed-domain utilities where syntax grammars are finite.',
+      'Deterministic synonym maps and fuzzy tokenizers achieve microsecond execution without GPU dependencies.',
+      'Terminal safety requires explicit confirmation on ambiguous inputs rather than probabilistic guessing.',
+      'Standard library architectures provide instant cold starts and zero-installation portability across remote servers.'
     ]
   },
   {
@@ -138,6 +239,53 @@ export const notes = [
       'Pass structured source metadata with confidence scores rather than unstructured text blobs.',
       'Use Server-Sent Events (SSE) to deliver sub-second time-to-first-token experiences.',
       'Enforce strict fallback guardrails when retrieved context is insufficient.'
+    ]
+  },
+  {
+    slug: 'temporal-video-rag',
+    title: 'Grounded video RAG: solving temporal drift in audio transcripts',
+    date: '2025-11',
+    readingTime: '5 min read',
+    abstract:
+      'Turning hours of conversational vlog audio into verified travel plans: time-indexed caption chunking, ChromaDB vector indexing, and grounding prompts with clickable timestamp citations.',
+    tags: ['agentic-ai', 'rag', 'vector-embeddings', 'python'],
+    href: '/notes/temporal-video-rag',
+    seo_description: 'Architecting video RAG pipelines: time-indexed caption chunking, vector embeddings in ChromaDB, and timestamped citations to prevent LLM hallucinations.',
+    sections: [
+      {
+        heading: 'Why Document RAG Breaks Down on Video Transcripts',
+        paragraphs: [
+          'Standard Retrieval Augmented Generation (RAG) pipelines are designed for structured text: documentation, markdown files, and articles with distinct headings. Spoken audio transcripts from creator vlogs are fundamentally different: unstructured, conversational, and filled with conversational tangents.',
+          'Naive fixed-token chunking (such as cutting every 500 tokens) frequently splits sentences across chunk boundaries and severs the connection between what the creator says and what is shown on screen at that specific minute.'
+        ]
+      },
+      {
+        heading: 'Time-Indexed Semantic Chunking',
+        paragraphs: [
+          'In Nomad Mind, we designed an ingestion pipeline that parses Whisper audio transcripts and SRT caption files with millisecond temporal markers. Chunks are demarcated by natural conversational pauses and topic shifts rather than arbitrary token boundaries.',
+          'Each vector payload indexed into ChromaDB includes strict metadata: video identifier, creator channel, start timestamp, end timestamp, and extracted geographical landmarks. This ensures that every semantic vector retains its exact temporal coordinates.'
+        ]
+      },
+      {
+        heading: 'Temporal Proximity Re-Ranking',
+        paragraphs: [
+          'When querying for local recommendations, standard cosine similarity often retrieves isolated fragments filmed months apart across different districts of a city. An LLM synthesizing these fragments will invent nonsensical transit connections.',
+          'To solve this, our retrieval pipeline applies temporal proximity re-ranking. Candidate chunks that share close timestamps within the same video are grouped together and scored with higher relevance. This preserves the sequential itinerary context that the creator experienced on the ground.'
+        ]
+      },
+      {
+        heading: 'Strict Grounding and Clickable Video Proof',
+        paragraphs: [
+          'To eliminate travel hallucinations, the system prompt strictly forbids the model from recommending any venue or transit route not explicitly cited in the retrieved transcript context.',
+          'Furthermore, every synthesized bullet point renders an embedded, clickable timestamp link directly to the YouTube player. Users can tap the link and immediately hear the creator discuss the location, turning AI suggestions into verifiable reality in seconds.'
+        ]
+      }
+    ],
+    takeaways: [
+      'Demarcate audio transcripts using natural speech pauses and timestamp boundaries instead of arbitrary token counts.',
+      'Attach temporal coordinates and video metadata to every vector payload in the embedding store.',
+      'Use temporal proximity re-ranking to keep sequential recommendations contextually coherent.',
+      'Enforce strict factual guardrails and provide clickable timestamp citations for immediate verification.'
     ]
   }
 ];

@@ -1,4 +1,5 @@
 import { primarySkillsets } from '../../../data/skills';
+import { Link } from '../../../router/Router';
 
 export default function Stack() {
   return (
@@ -22,6 +23,12 @@ export default function Stack() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+        <Link to="/stack" className="btn-action">
+          Explore Complete Tech Stack &amp; Architecture &rarr;
+        </Link>
       </div>
     </section>
   );

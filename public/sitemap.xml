@@ -136,8 +136,20 @@
 
   <!-- Engineering Notes -->
   <url>
+    <loc>https://sureshbhandari.com/notes/zero-blocking-trading-terminal</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sureshbhandari.com/notes/queue-is-the-spine</loc>
     <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sureshbhandari.com/notes/sub-millisecond-deterministic-nlp</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -150,6 +162,12 @@
   <url>
     <loc>https://sureshbhandari.com/notes/rag-over-60-docs</loc>
     <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sureshbhandari.com/notes/temporal-video-rag</loc>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

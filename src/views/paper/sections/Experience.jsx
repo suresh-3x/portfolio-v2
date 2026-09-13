@@ -1,6 +1,7 @@
 import { experienceEntries } from '../../../data/experience';
 import { education } from '../../../data/profile';
 import CompanyLogo from '../../../components/CompanyLogo';
+import { Link } from '../../../router/Router';
 
 // Reverse chronological by start date (year + month).
 const rows = [...experienceEntries].sort(
@@ -55,6 +56,12 @@ export default function Experience() {
         {education.degree}, {education.universityFull} ({education.university}),{' '}
         {education.period}. {education.gpa}.
       </p>
+
+      <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+        <Link to="/experience" className="btn-action">
+          View Detailed Career History &amp; Impact Metrics &rarr;
+        </Link>
+      </div>
     </section>
   );
 }

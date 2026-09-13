@@ -1,7 +1,16 @@
 import { projects } from '../../../data/projects';
 import { Link } from '../../../router/Router';
 
-const featured = projects.filter((p) => p.featured);
+const featuredSlugs = [
+  'revamp-engine',
+  'mcwm-straddle-edge',
+  'nomad-mind',
+  'calcom-contributions',
+];
+
+const featured = featuredSlugs
+  .map((slug) => projects.find((p) => p.slug === slug))
+  .filter(Boolean);
 
 // Derive a small status / metric badge per project from available data.
 function badgeFor(p) {
@@ -118,7 +127,7 @@ export default function Work() {
 
       <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
         <Link to="/projects" className="btn-action btn-action--primary">
-          Explore All 13 Systems &amp; Case Studies &rarr;
+          Explore All 14 Systems &amp; Case Studies &rarr;
         </Link>
       </div>
     </section>

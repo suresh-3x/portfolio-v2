@@ -363,12 +363,7 @@
 [data-view="paper"] .p-section {
   margin-top: 5rem;
   padding-top: 2rem;
-  border-top: 1px solid #f5f5f3;
-}
-[data-view="paper"] .p-section:first-of-type {
-  margin-top: 0;
-  padding-top: 0;
-  border-top: none;
+  border-top: 1px solid var(--p-rule);
 }
 
 /* ---------- section heading ---------- */
@@ -899,6 +894,9 @@
    Responsive
    ============================================================ */
 @media (max-width: 680px) {
+  [data-view="paper"] .p-sys {
+    grid-template-columns: 1fr;
+  }
   [data-view="paper"] .p-metrics {
     grid-template-columns: repeat(2, 1fr);
   }

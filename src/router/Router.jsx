@@ -54,11 +54,22 @@ export function RouterProvider({ children }) {
     const newPath = to.split('?')[0].split('#')[0];
     setCurrentUrl(newPath || '/');
 
-    // Scroll to top on page change
-    if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
+    // Scroll to top on page change, or scroll to hash target if provided
+    const hashPart = to.split('#')[1];
+    if (hashPart) {
+      setTimeout(() => {
+        const el = document.getElementById(hashPart);
+        if (el) {
+          if (lenis) lenis.scrollTo(el, { duration: 0.7 });
+          else el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 80);
     } else {
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
     }
   }, [lenis]);
 

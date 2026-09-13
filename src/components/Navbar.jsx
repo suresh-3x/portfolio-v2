@@ -5,13 +5,12 @@ import { useRouter } from '../router';
 import ViewSwitch from './ViewSwitch';
 
 const NAV_ITEMS = [
-  { label: 'projects', href: '/projects', path: '/projects' },
-  { label: 'work', href: '#work', path: '/#work' },
-  { label: 'about', href: '#about', path: '/about' },
-  { label: 'experience', href: '#experience', path: '/experience' },
-  { label: 'stack', href: '#stack', path: '/stack' },
-  { label: 'notes', href: '#notes', path: '/notes' },
-  { label: 'contact', href: '#contact', path: '/#contact' },
+  { label: 'about', href: '/about' },
+  { label: 'projects', href: '/projects' },
+  { label: 'experience', href: '/experience' },
+  { label: 'stack', href: '/stack' },
+  { label: 'notes', href: '/notes' },
+  { label: 'contact', href: '/#contact' },
 ];
 
 export default function Navbar() {
@@ -36,7 +35,9 @@ export default function Navbar() {
     e.preventDefault();
     setMenuOpen(false);
 
-    if (item.href === '#home' || item === '#home') {
+    const href = typeof item === 'string' ? item : item.href;
+
+    if (href === '#home' || href === '/') {
       if (pathname === '/') {
         history.pushState(null, '', '/');
         if (lenis) lenis.scrollTo(0, { duration: 0.7 });
@@ -47,27 +48,21 @@ export default function Navbar() {
       return;
     }
 
-    const href = typeof item === 'string' ? item : item.href;
-
-    if (href.startsWith('/')) {
-      navigate(href);
+    if (href === '/#contact' || href === '#contact') {
+      if (pathname === '/') {
+        const el = document.querySelector('#contact');
+        if (el) {
+          history.pushState(null, '', '#contact');
+          if (lenis) lenis.scrollTo('#contact', { duration: 0.7 });
+          else el.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        navigate('/#contact');
+      }
       return;
     }
 
-    if (pathname === '/') {
-      const el = document.querySelector(href);
-      if (!el) return;
-      history.pushState(null, '', href);
-      if (lenis) lenis.scrollTo(href, { duration: 0.7 });
-      else el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      // If on subpage, navigate to dedicated page or home anchor
-      if (item.path && !item.path.startsWith('/#')) {
-        navigate(item.path);
-      } else {
-        navigate('/' + href);
-      }
-    }
+    navigate(href);
   };
 
   const openPalette = () => window.dispatchEvent(new Event('open-command-palette'));
@@ -82,8 +77,9 @@ export default function Navbar() {
         <nav className="site-nav__links" aria-label="Sections">
           {NAV_ITEMS.map((item) => {
             const isActive =
-              (item.path === '/projects' && pathname.startsWith('/projects')) ||
-              (item.path === pathname && pathname !== '/');
+              (item.href === '/projects' && pathname.startsWith('/projects')) ||
+              (item.href === '/notes' && pathname.startsWith('/notes')) ||
+              (item.href === pathname);
             return (
               <a
                 key={item.label}
@@ -134,8 +130,9 @@ export default function Navbar() {
         <nav className="site-nav__overlay-links" aria-label="Sections">
           {NAV_ITEMS.map((item) => {
             const isActive =
-              (item.path === '/projects' && pathname.startsWith('/projects')) ||
-              (item.path === pathname && pathname !== '/');
+              (item.href === '/projects' && pathname.startsWith('/projects')) ||
+              (item.href === '/notes' && pathname.startsWith('/notes')) ||
+              (item.href === pathname);
             return (
               <a
                 key={item.label}
