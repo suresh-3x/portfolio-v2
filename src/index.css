@@ -7,7 +7,7 @@
 :root {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
-  --font-tag: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+  --font-tag: var(--font-mono);
 
   --maxw: 1400px;
   --gutter: clamp(1.25rem, 5vw, 3rem);
@@ -269,4 +269,28 @@ section[id] {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ---------- Typographic polish (shared) ---------- */
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+
+/* Keep long bullets readable: ~75 characters per line, not full container width */
+html[data-view] :is(
+  .t-exp-role__list li, .p-bullets li, .highlights-list li,
+  .t-readme__body p, .p-about-prose, .p-note-abstract, .t-note__abstract,
+  .p-edu, .p-contact-lede, .sidebar-box p, .t-card__desc,
+  .page-header__sub, .detail-section p
+) { max-width: 60ch; }
+
+/* Numbers that sit in a row should line up */
+.metric strong, .massive-number { font-variant-numeric: tabular-nums; }
+
+/* Paper card images: the wrapping link was shrink-wrapping the image */
+[data-view="paper"] .p-sysimg > a { display: block; width: 100%; }
+
+/* Phones: give small nav/footer links a comfortable tap area without changing their look */
+@media (max-width: 760px) {
+  .site-nav__menu, .site-nav__close { padding: 12px; margin: -12px; }
+  .site-footer a { display: inline-block; padding-block: 12px; }
 }

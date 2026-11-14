@@ -116,7 +116,7 @@ export default function Work() {
                 </Link>
                 {showLink && (
                   <a href={href} target="_blank" rel="noopener noreferrer" className="mono" style={{ fontSize: '0.72rem', opacity: 0.7 }}>
-                    {p.links?.github ? 'github' : 'external'} &nearr;
+                    {p.links?.github ? 'github' : 'external'} ↗
                   </a>
                 )}
               </div>

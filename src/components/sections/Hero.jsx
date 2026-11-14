@@ -189,7 +189,9 @@ const Hero = () => {
           border: 1px solid var(--border-color);
           background: var(--bg-panel);
           color: var(--text-main);
-          border-radius: 4px; 
+          border-radius: 4px;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
 
         .status-dot {
@@ -215,8 +217,8 @@ const Hero = () => {
         .hero-left h1 {
           font-size: clamp(3rem, 6vw, 5rem);
           line-height: 1;
-          font-weight: 800; /* Increased weight for H1 supremacy */
-          letter-spacing: -0.03em;
+          font-weight: 800;
+          letter-spacing: -0.04em;
           color: var(--text-main);
           margin-bottom: 1.5rem;
           margin-top: 0;
@@ -440,8 +442,15 @@ const Hero = () => {
             flex-direction: column;
             align-items: flex-start;
           }
-          .hero-metrics {
-            grid-template-columns: 1fr;
+          .breadcrumb {
+            max-width: 100%;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+          }
+          .breadcrumb > span:last-child {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
       `}</style>

@@ -73,13 +73,13 @@ export default function Work() {
                   <span key={t}>{t}</span>
                 ))}
               </div>
-              <div style={{ marginTop: '0.85rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.82rem' }}>
+              <div style={{ marginTop: 'auto', padding: '0 1.5rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.82rem' }}>
                 <Link to={`/projects/${p.slug}`} style={{ color: 'var(--p-accent)', fontWeight: 600 }}>
                   Case study &amp; architecture &rarr;
                 </Link>
                 {useLink && (
                   <a href={link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--p-muted)' }}>
-                    external &nearr;
+                    external ↗
                   </a>
                 )}
               </div>
