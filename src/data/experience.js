@@ -12,7 +12,7 @@ export const experienceEntries = [
     logoDomain: 't-systems.com',
     logos: [
       {
-        domain: 't-systems.com',
+        domain: 'www.t-systems.com',
         company: 'T-Systems',
         href: 'https://www.t-systems.com',
       },
