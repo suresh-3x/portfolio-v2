@@ -1,192 +1,136 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { CalendarDays } from 'lucide-react';
 import { profile } from '../../data/profile';
 
-const facts = [
-  { value: '99.99%', label: 'uptime' },
-  { value: '10K', label: 'req/sec peak' },
-  { value: '15+', label: 'production AI agents' },
-  { value: '5+ yrs', label: 'in production' },
-];
+// Local time in Mumbai, refreshed every 30s.
+function useMumbaiTime() {
+  const fmt = () =>
+    new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' });
+  const [time, setTime] = useState(fmt);
+  useEffect(() => {
+    const id = setInterval(() => setTime(fmt()), 30_000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
 
 const Hero = () => {
-  const [count, setCount] = useState(4999900);
-
-  useEffect(() => {
-    const target = 5000000;
-    const duration = 400; 
-    const steps = 20;
-    const stepTime = duration / steps;
-    const increment = (target - 4999900) / steps;
-    
-    let current = 4999900;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, stepTime);
-    
-    return () => clearInterval(timer);
-  }, []);
+  const time = useMumbaiTime();
 
   return (
     <section className="hero" id="home">
-      <div className="hero-split">
-        <div className="hero-left">
-          <h1 className="sans">Suresh Bhandari</h1>
-          <p className="hero-role mono">Senior Backend &amp; AI Engineer</p>
-          <p className="hero-statement sans">
-            I build distributed systems and agentic AI that stay boringly alive under real production load.
-          </p>
-          <div className="hero-cta">
-            <a
-              className="hero-cta__btn hero-cta__btn--primary mono"
-              href={profile.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <CalendarDays size={15} aria-hidden="true" />
-              Book a call
-            </a>
-            <a className="hero-cta__btn mono" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
-              Resume
-            </a>
-          </div>
-        </div>
-
-        <div className="hero-right">
-          <div className="massive-number sans">{count.toLocaleString()}+</div>
-          <p className="caption sans">active users supported by systems I've architected and scaled.</p>
+      <div className="hero-main">
+        <h1 className="hero-name">Suresh Bhandari</h1>
+        <p className="hero-intro">
+          I&apos;m a backend and AI engineer in Mumbai. For five years I&apos;ve kept systems up for real
+          people: a gaming platform with 5M+ monthly players peaking at 10K requests a second, and now
+          15+ AI agents in production at T-Systems.
+        </p>
+        <div className="hero-cta">
+          <a
+            className="hero-cta__btn hero-cta__btn--primary mono"
+            href={profile.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <CalendarDays size={15} aria-hidden="true" />
+            Book a call
+          </a>
+          <a className="hero-cta__btn mono" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
+            Resume
+          </a>
         </div>
       </div>
 
-      <ul className="hero-facts mono" aria-label="Career metrics">
-        {facts.map((f) => (
-          <li key={f.label}>
-            <b>{f.value}</b> {f.label}
-          </li>
-        ))}
-      </ul>
+      <div className="hero-foot mono">
+        <span>
+          <span className="hero-foot__dot" aria-hidden="true" />
+          Backend engineer at T-Systems. Open to senior roles.
+        </span>
+        <span>Mumbai, {time} IST</span>
+      </div>
 
       <style>{`
         [data-view="terminal"] .hero {
-          --text-main: var(--t-text);
-          --text-muted: var(--t-muted);
-          --text-faint: var(--t-faint);
-          --accent: var(--t-accent);
-          --border-color: var(--t-border);
-          --bg-panel: var(--t-panel);
-        }
-
-        .hero {
-          padding: clamp(6rem, 14vh, 10rem) 0 1rem;
+          min-height: 100svh;
+          display: flex;
+          flex-direction: column;
+          padding-top: 72px;
         }
 
         .mono { font-family: var(--font-mono); }
-        .sans { font-family: var(--font-sans); }
 
-        .hero-split {
-          display: grid;
-          grid-template-columns: 1.2fr 1fr;
-          gap: 4rem;
-          align-items: end;
+        .hero-main {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 3rem 0;
         }
 
-        .hero-left h1 {
-          font-size: clamp(3rem, 6vw, 5rem);
-          line-height: 1;
+        .hero-name {
+          font-family: var(--font-sans);
+          font-size: clamp(3.2rem, 8.5vw, 7.5rem);
+          line-height: 0.95;
           font-weight: 800;
-          letter-spacing: -0.04em;
-          color: var(--text-main);
-          margin-bottom: 1.25rem;
+          letter-spacing: -0.045em;
+          color: var(--t-text);
         }
 
-        .hero-role {
-          color: var(--text-muted);
-          font-size: clamp(0.85rem, 1.2vw, 0.95rem);
-          margin-bottom: 1.75rem;
-        }
-
-        .hero-statement {
-          color: var(--text-main);
-          font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+        .hero-intro {
+          margin-top: clamp(1.75rem, 4vh, 2.5rem);
+          max-width: 34ch;
+          font-family: var(--font-sans);
+          font-size: clamp(1.2rem, 2.1vw, 1.65rem);
           line-height: 1.5;
-          max-width: 32ch;
+          color: var(--t-muted);
         }
 
         .hero-cta {
           display: flex;
           flex-wrap: wrap;
           gap: 0.75rem;
-          margin-top: 2.25rem;
+          margin-top: clamp(2rem, 5vh, 3rem);
         }
         .hero-cta__btn {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          padding: 0.65rem 1.1rem;
-          border: 1px solid var(--border-color);
+          padding: 0.7rem 1.15rem;
+          border: 1px solid var(--t-border);
           border-radius: 6px;
-          background: var(--bg-panel);
-          color: var(--text-main);
+          background: var(--t-panel);
+          color: var(--t-text);
           font-size: 0.85rem;
           font-weight: 600;
           transition: opacity 0.15s ease, border-color 0.15s ease;
         }
-        .hero-cta__btn:hover { border-color: var(--text-muted); }
+        .hero-cta__btn:hover { border-color: var(--t-muted); }
         .hero-cta__btn--primary {
-          background: var(--accent);
-          border-color: var(--accent);
+          background: var(--t-accent);
+          border-color: var(--t-accent);
           color: var(--t-on-accent);
         }
-        .hero-cta__btn--primary:hover { opacity: 0.88; border-color: var(--accent); }
+        .hero-cta__btn--primary:hover { opacity: 0.88; border-color: var(--t-accent); }
 
-        .hero-right {
-          padding-left: 4rem;
-          border-left: 1px solid var(--border-color);
-        }
-
-        .massive-number {
-          color: var(--accent);
-          font-size: clamp(3.25rem, 6vw, 5.25rem);
-          line-height: 1;
-          font-weight: 300;
-          letter-spacing: -0.05em;
-          margin-bottom: 1rem;
-        }
-
-        .caption {
-          color: var(--text-muted);
-          font-size: clamp(1rem, 1.4vw, 1.15rem);
-          max-width: 28ch;
-        }
-
-        .hero-facts {
-          list-style: none;
+        .hero-foot {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.5rem 2.5rem;
-          margin-top: clamp(3rem, 7vh, 4.5rem);
-          color: var(--text-muted);
-          font-size: 0.8rem;
+          justify-content: space-between;
+          gap: 0.5rem 2rem;
+          padding: 1.25rem 0 1.5rem;
+          border-top: 1px solid var(--t-border);
+          font-size: 0.75rem;
+          color: var(--t-faint);
         }
-        .hero-facts b {
-          color: var(--text-main);
-          font-weight: 600;
-        }
-
-        @media (max-width: 1024px) {
-          .hero-split { grid-template-columns: 1fr; gap: 3rem; }
-          .hero-right {
-            padding-left: 0;
-            border-left: none;
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--border-color);
-          }
+        .hero-foot__dot {
+          display: inline-block;
+          width: 6px;
+          height: 6px;
+          margin-right: 0.6rem;
+          border-radius: 50%;
+          background: var(--t-ok);
+          vertical-align: middle;
         }
       `}</style>
     </section>

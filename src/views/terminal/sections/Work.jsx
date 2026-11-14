@@ -18,7 +18,7 @@ export default function Work() {
       <SectionHead title="work" to="/projects" more={`all ${projects.length} projects`} />
 
       <div className="t-showcase">
-        {featured.map((p, i) => (
+        {featured.map((p) => (
           <article className="t-show" key={p.slug}>
             <Link to={`/projects/${p.slug}`} className="t-show__frame" aria-label={`${p.title} case study`}>
               <img
@@ -31,21 +31,14 @@ export default function Work() {
             </Link>
 
             <div className="t-show__info">
-              <div className="t-show__meta mono">
-                <span>{String(i + 1).padStart(2, '0')}</span>
-                <span className="t-show__rule" aria-hidden="true" />
-                <span>{p.category.replace(/^Private - /, '')}</span>
-                <span>{p.year}</span>
-              </div>
+              <p className="t-show__meta mono">
+                {p.category.replace(/^Private - /, '')}, {p.year}
+              </p>
               <h3 className="t-show__title">
                 <Link to={`/projects/${p.slug}`}>{p.title}</Link>
               </h3>
               <p className="t-show__desc">{p.description}</p>
-              <ul className="t-show__tags mono">
-                {p.tags.slice(0, 3).map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
+              <p className="t-show__tags mono">{p.tags.slice(0, 4).join(', ')}</p>
               <Link to={`/projects/${p.slug}`} className="t-show__link mono">
                 View case study &rarr;
               </Link>
