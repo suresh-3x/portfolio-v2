@@ -63,7 +63,7 @@ export const experienceEntries = [
   {
     sortOrder: 2,
     id: 'bizassist',
-    role: 'Freelance Tech Lead',
+    role: 'Solo Engineer, End-to-End Tech Owner (Freelance)',
     company: 'BizAssist',
     companyLine: 'Remote',
     website: 'https://bizassist.co',
@@ -88,7 +88,7 @@ export const experienceEntries = [
     sortOrder: 3,
     groupKey: 'strideahead',
     id: 'stride-ahead-lead',
-    role: 'Tech Lead (returned)',
+    role: 'Platform Engineering Owner (returned)',
     company: 'Stride Ahead',
     companyLine: 'Delhi, India (Remote)',
     website: 'https://strideahead.io',
@@ -108,7 +108,7 @@ export const experienceEntries = [
     year: 2025,
     month: 5,
     description: [
-      'Returned to Stride Ahead as Tech Lead to stabilize a fragmented platform before moving to T-Systems via Pixeldust: standardized architecture across 5+ microservices and consolidated coupled authentication and token verification flows, resolving a recurring session corruption bug class in four weeks while mentoring 2 to 3 engineers.',
+      'Returned to Stride Ahead to own platform engineering and stabilize a fragmented platform before moving to T-Systems via Pixeldust: standardized architecture across 5+ microservices and consolidated coupled authentication and token verification flows, resolving a recurring session corruption bug class in four weeks while mentoring 2 to 3 engineers.',
       'Rebuilt CI/CD on GitHub Actions, cutting release cycles from about 4 hours to under 15 minutes and enabling daily production deploys.',
     ],
   },

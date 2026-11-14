@@ -108,6 +108,7 @@ function generateFallbackHtml(route) {
           <h2>Education</h2>
           <p>${education.degree} - ${education.universityFull} (${education.period}, ${education.gpa})</p>
           <h2>Contact</h2>
+          <p>Book a call: <a href="${profile.bookingUrl}">${profile.bookingLabel}</a></p>
           <p>Email: <a href="mailto:${profile.email}">${profile.email}</a></p>
           <p>GitHub: <a href="${profile.github}">${profile.github}</a></p>
           <p>LinkedIn: <a href="${profile.linkedin}">${profile.linkedin}</a></p>

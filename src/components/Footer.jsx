@@ -24,6 +24,7 @@ export default function Footer() {
           <Link to="/about">about</Link>
         </div>
         <div className="site-footer__right">
+          <a href="https://cal.com/suresh-3x" target="_blank" rel="noopener noreferrer">book a call</a>
           <a href="https://github.com/suresh-3x" target="_blank" rel="noopener noreferrer">github</a>
           <a href="https://linkedin.com/in/suresh-3x" target="_blank" rel="noopener noreferrer">linkedin</a>
           <a href="mailto:suresh.37x@gmail.com">email</a>

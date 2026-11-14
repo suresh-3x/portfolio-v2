@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { CalendarDays } from 'lucide-react';
+import { profile } from '../../data/profile';
 
 const metrics = [
   { value: '99.99%', label: 'UPTIME MAINTAINED' },
@@ -60,6 +62,26 @@ const Hero = () => {
             <p className="hero-range mono">
               range: bare-metal Linux to distributed infrastructure to agentic AI
             </p>
+            <div className="hero-cta">
+              <a
+                className="hero-cta__btn hero-cta__btn--primary mono"
+                href={profile.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <CalendarDays size={15} aria-hidden="true" />
+                Book a call
+              </a>
+              <a
+                className="hero-cta__btn mono"
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Resume
+              </a>
+              <span className="hero-cta__note mono">30 min · roles, consulting, or a system you're stuck on</span>
+            </div>
           </div>
 
           <div className="hero-right">
@@ -230,6 +252,40 @@ const Hero = () => {
         }
 
         .hero-range .arrow { color: var(--accent); }
+
+        .hero-cta {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 0.75rem;
+          margin-top: 2rem;
+        }
+        .hero-cta__btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.65rem 1.1rem;
+          border: 1px solid var(--border-color);
+          border-radius: 6px;
+          background: var(--bg-panel);
+          color: var(--text-main);
+          font-size: 0.85rem;
+          font-weight: 600;
+          text-decoration: none;
+          transition: opacity 0.15s ease, border-color 0.15s ease;
+        }
+        .hero-cta__btn:hover { border-color: var(--text-muted); }
+        .hero-cta__btn--primary {
+          background: var(--accent);
+          border-color: var(--accent);
+          color: #fff;
+        }
+        [data-view="terminal"] .hero-cta__btn--primary { color: #0e0e10; }
+        .hero-cta__btn--primary:hover { opacity: 0.88; border-color: var(--accent); }
+        .hero-cta__note {
+          color: var(--text-faint);
+          font-size: 0.72rem;
+        }
 
         .hero-right {
           display: flex;

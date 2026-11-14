@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '../router/Router';
 import { profile, summary, education, atsKeywords } from '../data/profile';
-import { Mail, Github, Linkedin, FileText, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Mail, Github, Linkedin, FileText, CheckCircle2, ArrowRight, CalendarDays } from 'lucide-react';
 
 export default function AboutPage() {
   return (
@@ -100,7 +100,10 @@ export default function AboutPage() {
           <div className="sidebar-box">
             <h3>Get In Touch</h3>
             <div className="action-links">
-              <a href={`mailto:${profile.email}`} className="btn-action btn-action--primary">
+              <a href={profile.bookingUrl} target="_blank" rel="noopener noreferrer" className="btn-action btn-action--primary">
+                <CalendarDays size={15} /> Book a call
+              </a>
+              <a href={`mailto:${profile.email}`} className="btn-action">
                 <Mail size={15} /> {profile.email}
               </a>
               <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="btn-action">

@@ -15,6 +15,8 @@ export const profile = {
   portfolio: 'https://sureshbhandari.com',
   portfolioLabel: 'Portfolio',
   projectsHref: '#projects',
+  bookingUrl: 'https://cal.com/suresh-3x',
+  bookingLabel: 'cal.com/suresh-3x',
   resumeUrl:
     'https://gwl1cw03d070bspa.public.blob.vercel-storage.com/resume-sde-0.pdf',
   lastUpdated: 'May 2026',
@@ -44,7 +46,9 @@ export const atsKeywords = [
   'React',
   'Next.js',
   'MongoDB',
-  'Tech Lead',
+  'Solo Engineer',
+  'Founding Engineer',
+  'End-to-End Tech Ownership',
   'T-Systems',
   'T-Systems (Deutsche Telekom)',
 ];

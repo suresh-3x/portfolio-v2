@@ -1204,3 +1204,28 @@
   font-size: 0.68rem;
   color: var(--t-faint);
 }
+
+/* ---------- Booking CTA (cal.com) ---------- */
+[data-view="terminal"] .site-nav__book {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 1px solid var(--t-accent);
+  border-radius: 6px;
+  background: var(--t-accent-dim);
+  color: var(--t-accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+[data-view="terminal"] .site-nav__book:hover { background: var(--t-accent); color: #0e0e10; }
+
+[data-view="terminal"] .t-prompt__line--primary { background: var(--t-accent-dim); }
+[data-view="terminal"] .t-prompt__line--primary .t-prompt__cmd { color: var(--t-accent); }
+
+@media (max-width: 860px) {
+  [data-view="terminal"] .site-nav__book span { display: none; }
+  [data-view="terminal"] .site-nav__book { padding: 6px 8px; }
+}

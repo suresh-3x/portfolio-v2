@@ -12,6 +12,16 @@ export default function Contact() {
 
       <div className="t-prompt">
         <a
+          className="t-prompt__line t-prompt__line--primary mono"
+          href={profile.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="t-prompt__pr">$</span>
+          <span className="t-prompt__cmd">book --call</span>
+          <span className="t-prompt__val">{profile.bookingLabel}</span>
+        </a>
+        <a
           className="t-prompt__line mono"
           href={profile.github}
           target="_blank"
@@ -50,7 +60,7 @@ export default function Contact() {
 
       <p className="t-contact__open mono">
         <span className="t-contact__ok">&rsaquo;</span> open to senior backend
-        {' '}/ AI roles
+        {' '}/ AI roles and consulting
       </p>
 
       <p className="t-contact__hint mono">

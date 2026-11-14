@@ -26,6 +26,7 @@ export default function CommandPalette() {
     { id: 'page-experience', label: 'Experience & Career History', run: () => navigate('/experience') },
     { id: 'page-stack', label: 'Technical Stack & Architecture', run: () => navigate('/stack') },
     { id: 'page-notes', label: 'Engineering Notes & Writing', run: () => navigate('/notes') },
+    { id: 'book-call', label: 'Book a call (discussion / consultation)', run: () => window.open(profile.bookingUrl, '_blank', 'noopener') },
     { id: 'go-contact', label: 'Contact Suresh', run: () => navigate('/#contact') },
     { id: 'view-terminal', label: 'Switch view: terminal', run: () => setView('terminal') },
     { id: 'view-paper', label: 'Switch view: paper', run: () => setView('paper') },

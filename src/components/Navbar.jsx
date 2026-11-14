@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLenis } from 'lenis/react';
-import { Command, Menu, X } from 'lucide-react';
+import { CalendarDays, Command, Menu, X } from 'lucide-react';
+import { profile } from '../data/profile';
 import { useRouter } from '../router';
 import ViewSwitch from './ViewSwitch';
 
@@ -94,6 +95,15 @@ export default function Navbar() {
         </nav>
 
         <div className="site-nav__actions">
+          <a
+            className="site-nav__book"
+            href={profile.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <CalendarDays size={13} aria-hidden="true" />
+            <span>book a call</span>
+          </a>
           <button
             type="button"
             className="site-nav__cmdk"
@@ -144,6 +154,9 @@ export default function Navbar() {
               </a>
             );
           })}
+          <a href={profile.bookingUrl} target="_blank" rel="noopener noreferrer">
+            book a call &#8599;
+          </a>
         </nav>
       </div>
     </header>
