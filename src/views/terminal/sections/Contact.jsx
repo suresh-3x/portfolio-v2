@@ -1,14 +1,10 @@
 import { profile } from '../../../data/profile';
+import SectionHead from '../SectionHead';
 
 export default function Contact() {
   return (
     <section id="contact" className="t-contact">
-      <div className="t-sec-h">
-        <span className="t-sec-h__label mono">
-          <span className="t-sec-h__num">05</span>contact
-        </span>
-        <span className="t-sec-h__count mono">~/contact</span>
-      </div>
+      <SectionHead title="contact" />
 
       <div className="t-prompt">
         <a
@@ -61,10 +57,6 @@ export default function Contact() {
       <p className="t-contact__open mono">
         <span className="t-contact__ok">&rsaquo;</span> open to senior backend
         {' '}/ AI roles and consulting
-      </p>
-
-      <p className="t-contact__hint mono">
-        press <kbd>&#8984;</kbd><kbd>K</kbd> to jump anywhere
       </p>
     </section>
   );

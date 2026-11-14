@@ -256,13 +256,13 @@ p, li { text-wrap: pretty; }
 /* Keep long paragraphs readable: ~75 characters per line.
    ponytail: experience bullets are left full-width on purpose so they span the row with the dates. */
 html[data-view] :is(
-  .t-readme__body p, .p-about-prose, .p-note-abstract, .t-note__abstract,
-  .p-edu, .p-contact-lede, .sidebar-box p, .t-card__desc,
+  .t-about__text,
+  .sidebar-box p, .t-card__desc,
   .page-header__sub, .detail-section p
 ) { max-width: 60ch; }
 
 /* Numbers that sit in a row should line up */
-.metric strong, .massive-number { font-variant-numeric: tabular-nums; }
+.hero-facts b, .massive-number { font-variant-numeric: tabular-nums; }
 
 /* Phones: give small nav/footer links a comfortable tap area without changing their look */
 @media (max-width: 760px) {

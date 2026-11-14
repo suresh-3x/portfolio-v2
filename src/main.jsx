@@ -13,7 +13,7 @@ import { initGoogleAnalytics } from './utils/analytics'
 
 // Lenis smooth-scroll options: optimized for performance
 const lenisOptions = {
-  lerp: 0.08, // Balanced smooth (faster response, better performance)
+  lerp: 0.14, // soft easing that still tracks the wheel; 0.08 felt like lag
   smoothWheel: true,
   wheelMultiplier: 1.0,
   touchMultiplier: 1.0,

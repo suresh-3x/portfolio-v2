@@ -1,6 +1,6 @@
 import { experienceEntries } from '../../../data/experience';
 import CompanyLogo from '../../../components/CompanyLogo';
-import { Link } from '../../../router/Router';
+import SectionHead from '../SectionHead';
 
 // Reverse chronological by start date (year + month).
 const rows = [...experienceEntries].sort(
@@ -18,16 +18,11 @@ function CompanyName({ entry }) {
 export default function Experience() {
   return (
     <section id="experience" className="t-exp">
-      <div className="t-sec-h">
-        <span className="t-sec-h__label mono">
-          <span className="t-sec-h__num">03</span>experience
-        </span>
-        <span className="t-sec-h__count mono">{String(rows.length).padStart(2, '0')} roles</span>
-      </div>
+      <SectionHead title="experience" to="/experience" more="full history" />
 
       <div className="t-exp-detail">
         {rows.map((e) => (
-          <div className="t-exp-role stagger-fade" key={e.id}>
+          <div className="t-exp-role" key={e.id}>
             <div className="t-exp-role__head">
               <span className="t-exp-role__logos">
                 {e.logos.map((l) => (
@@ -36,13 +31,12 @@ export default function Experience() {
               </span>
               <span className="t-exp-role__co mono"><CompanyName entry={e} /></span>
               <span className="t-exp-role__role mono">{e.role}</span>
-              {e.employer && (
-                <span className="t-exp-role__via mono">via {e.employer}</span>
-              )}
+              {e.employer && <span className="t-exp-role__via mono">via {e.employer}</span>}
               <span className="t-exp-role__dt mono">{e.period}</span>
             </div>
+            {/* ponytail: homepage shows the first two bullets; /experience has the rest */}
             <ul className="t-exp-role__list">
-              {e.description.map((d, i) => (
+              {e.description.slice(0, 2).map((d, i) => (
                 <li key={i}>
                   <span className="t-exp-role__bullet mono" aria-hidden="true">&rsaquo;</span>
                   <span>{d}</span>
@@ -51,12 +45,6 @@ export default function Experience() {
             </ul>
           </div>
         ))}
-      </div>
-
-      <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-        <Link to="/experience" className="btn-action mono" style={{ fontSize: '0.8rem' }}>
-          View Full Experience &amp; Impact Metrics &rarr;
-        </Link>
       </div>
     </section>
   );

@@ -127,7 +127,7 @@ test('homepage renders exactly 2 rows (4 projects) in both themes', async ({ pag
   for (const t of ['dark', 'light']) {
     await page.emulateMedia({ colorScheme: t });
     await page.goto('/');
-    const cards = page.locator('#work .t-card');
+    const cards = page.locator('#work .t-show');
     await expect(cards).toHaveCount(4);
   }
 });
