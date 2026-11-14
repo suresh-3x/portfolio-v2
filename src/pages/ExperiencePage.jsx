@@ -74,7 +74,7 @@ export default function ExperiencePage() {
               </ul>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--t-hairline)' }}>
               <div style={{ fontSize: '0.8rem', opacity: 0.7 }}>
                 {exp.companyLine}
               </div>
@@ -94,7 +94,7 @@ export default function ExperiencePage() {
         ))}
       </div>
 
-      <div style={{ marginTop: '4rem', textAlign: 'center', padding: '2.5rem', borderRadius: '8px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)' }}>
+      <div style={{ marginTop: '4rem', textAlign: 'center', padding: '2.5rem', borderRadius: '8px', background: 'var(--t-wash-1)', border: '1px solid var(--t-hairline)' }}>
         <h2 style={{ fontSize: '1.3rem', marginBottom: '0.75rem' }}>Looking for detailed architecture resumes or references?</h2>
         <p style={{ opacity: 0.8, maxWidth: '600px', margin: '0 auto 1.5rem', fontSize: '0.95rem' }}>
           Download the latest Senior Backend &amp; AI Engineer resume PDF or reach out directly to discuss technical fit.

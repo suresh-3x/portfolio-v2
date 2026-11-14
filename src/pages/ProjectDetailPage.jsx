@@ -321,8 +321,8 @@ export default function ProjectDetailPage() {
                     fontSize: '0.78rem',
                     padding: '3px 8px',
                     borderRadius: '4px',
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.1)'
+                    background: 'var(--t-wash-2)',
+                    border: '1px solid var(--t-hairline)'
                   }}
                 >
                   {t}
@@ -349,7 +349,7 @@ export default function ProjectDetailPage() {
       </div>
 
       {/* Prev / Next Project Navigation */}
-      <footer style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+      <footer style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--t-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         {prevProject ? (
           <Link to={`/projects/${prevProject.slug}`} className="btn-action">
             <ArrowLeft size={14} /> Previous: {prevProject.title}

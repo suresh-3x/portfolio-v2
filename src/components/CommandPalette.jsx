@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useView } from '../context/ViewContext';
+import { useTheme } from '../context/ThemeContext';
 import { useRouter } from '../router';
 import { profile } from '../data/profile';
 import { projects } from '../data/projects';
 import { notes } from '../data/notes';
 
 export default function CommandPalette() {
-  const { setView } = useView();
+  const { setTheme } = useTheme();
   const { navigate } = useRouter();
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
@@ -28,8 +28,8 @@ export default function CommandPalette() {
     { id: 'page-notes', label: 'Engineering Notes & Writing', run: () => navigate('/notes') },
     { id: 'book-call', label: 'Book a call (discussion / consultation)', run: () => window.open(profile.bookingUrl, '_blank', 'noopener') },
     { id: 'go-contact', label: 'Contact Suresh', run: () => navigate('/#contact') },
-    { id: 'view-terminal', label: 'Switch view: terminal', run: () => setView('terminal') },
-    { id: 'view-paper', label: 'Switch view: paper', run: () => setView('paper') },
+    { id: 'theme-dark', label: 'Switch theme: dark', run: () => setTheme('dark') },
+    { id: 'theme-light', label: 'Switch theme: light', run: () => setTheme('light') },
     ...projects.map((p) => ({
       id: `project-${p.slug}`,
       label: `Project: ${p.title}`,
@@ -44,7 +44,7 @@ export default function CommandPalette() {
     { id: 'linkedin', label: 'Open LinkedIn', run: () => window.open(profile.linkedin, '_blank', 'noopener') },
     { id: 'resume', label: 'Open resume', run: () => window.open(profile.resumeUrl, '_blank', 'noopener') },
     { id: 'email', label: 'Copy email', run: () => navigator.clipboard?.writeText(profile.email) },
-  ], [setView, navigate]);
+  ], [setTheme, navigate]);
 
   const filtered = useMemo(() => {
     const t = q.trim().toLowerCase();

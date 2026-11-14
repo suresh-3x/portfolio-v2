@@ -110,7 +110,7 @@ export default function Work() {
                 ))}
               </div>
 
-              <div style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid var(--t-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Link to={`/projects/${p.slug}`} className="mono" style={{ fontSize: '0.75rem', color: 'var(--t-accent)' }}>
                   architecture specs &rarr;
                 </Link>

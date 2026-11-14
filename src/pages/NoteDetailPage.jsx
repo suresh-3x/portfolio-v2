@@ -72,7 +72,7 @@ export default function NoteDetailPage() {
           margin: '2rem 0',
           fontStyle: 'italic',
           lineHeight: '1.7',
-          borderLeft: '3px solid var(--t-accent, #1a56db)'
+          borderLeft: '3px solid var(--t-accent)'
         }}
       >
         &ldquo;{note.abstract}&rdquo;
@@ -107,7 +107,7 @@ export default function NoteDetailPage() {
         style={{
           marginTop: '4rem',
           paddingTop: '2rem',
-          borderTop: '1px solid rgba(255,255,255,0.1)',
+          borderTop: '1px solid var(--t-hairline)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',

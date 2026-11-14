@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-view="terminal">
 
 <head>
   <meta charset="UTF-8" />
@@ -24,8 +24,8 @@
   <link rel="alternate icon" href="/favicon-dark.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fcfbf9" />
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1117" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f5f1" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e0e10" />
   <meta name="color-scheme" content="dark light" />
 
   <!-- Open Graph / Facebook / LinkedIn -->
@@ -201,19 +201,16 @@
   }
   </script>
 
-  <!-- View initialization to prevent theme / view flash -->
+  <!-- Pick the theme before first paint: saved choice, else the OS setting. ?view=paper is an old link to light. -->
   <script>
     (function () {
+      var d = document.documentElement, t;
       try {
         var p = new URLSearchParams(location.search).get('view');
-        var stored = localStorage.getItem('portfolio-view');
-        var v = (p === 'terminal' || p === 'paper') ? p
-          : (stored === 'terminal' || stored === 'paper') ? stored
-            : 'terminal';
-        document.documentElement.setAttribute('data-view', v);
-      } catch (e) {
-        document.documentElement.setAttribute('data-view', 'terminal');
-      }
+        t = p === 'paper' ? 'light' : p === 'terminal' ? 'dark' : localStorage.getItem('portfolio-theme');
+      } catch (e) {}
+      if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      d.setAttribute('data-theme', t);
     })();
   </script>
 </head>

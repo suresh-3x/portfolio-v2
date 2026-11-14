@@ -3,7 +3,7 @@ import { useLenis } from 'lenis/react';
 import { CalendarDays, Command, Menu, X } from 'lucide-react';
 import { profile } from '../data/profile';
 import { useRouter } from '../router';
-import ViewSwitch from './ViewSwitch';
+import ThemeSwitch from './ThemeSwitch';
 
 const NAV_ITEMS = [
   { label: 'about', href: '/about' },
@@ -113,7 +113,7 @@ export default function Navbar() {
             <Command size={13} aria-hidden="true" />
             <span>K</span>
           </button>
-          <ViewSwitch />
+          <ThemeSwitch />
           <button
             type="button"
             className="site-nav__menu"
@@ -127,7 +127,7 @@ export default function Navbar() {
 
       <div className={`site-nav__overlay${menuOpen ? ' is-open' : ''}`}>
         <div className="site-nav__overlay-head">
-          <ViewSwitch />
+          <ThemeSwitch />
           <button
             type="button"
             className="site-nav__close"

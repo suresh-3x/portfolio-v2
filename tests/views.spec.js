@@ -1,36 +1,41 @@
 import { test, expect } from '@playwright/test';
 
-test('defaults to terminal view, no flash', async ({ page }) => {
+test('theme follows the OS setting until the visitor picks one', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('data-view', 'terminal');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
 
-test('view switch flips layout and persists', async ({ page }) => {
+test('theme switch flips colors and persists', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/');
-  await page.getByRole('button', { name: 'paper', exact: true }).click();
-  await expect(page.locator('html')).toHaveAttribute('data-view', 'paper');
+  await page.getByRole('button', { name: 'light', exact: true }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.reload();
-  await expect(page.locator('html')).toHaveAttribute('data-view', 'paper');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
 
-test('deep link ?view=paper works', async ({ page }) => {
+test('old ?view=paper links open light mode', async ({ page }) => {
   await page.goto('/?view=paper');
-  await expect(page.locator('html')).toHaveAttribute('data-view', 'paper');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
 
-test('command palette opens and switches view', async ({ page }) => {
+test('command palette opens and switches theme', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/');
   await page.keyboard.press('Meta+k');
   const dialog = page.getByRole('dialog', { name: 'Command palette' });
   await expect(dialog).toBeVisible();
-  await page.getByPlaceholder('Type a command or search...').fill('paper');
+  await page.getByPlaceholder('Type a command or search...').fill('light');
   await page.keyboard.press('Enter');
-  await expect(page.locator('html')).toHaveAttribute('data-view', 'paper');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
 });
 
-test('key content + metrics present in both views', async ({ page }) => {
-  for (const v of ['terminal', 'paper']) {
-    await page.goto(`/?view=${v}`);
+test('key content + metrics present in both themes', async ({ page }) => {
+  for (const t of ['dark', 'light']) {
+    await page.emulateMedia({ colorScheme: t });
+    await page.goto('/');
     await expect(page.getByText('Revamp Engine').first()).toBeVisible();
     await expect(page.getByText('T-Systems', { exact: false }).first()).toBeVisible();
     await expect(page.getByText('10K', { exact: false }).first()).toBeVisible();
@@ -39,8 +44,9 @@ test('key content + metrics present in both views', async ({ page }) => {
 });
 
 test('no em or en dashes in rendered text', async ({ page }) => {
-  for (const v of ['terminal', 'paper']) {
-    await page.goto(`/?view=${v}`);
+  for (const t of ['dark', 'light']) {
+    await page.emulateMedia({ colorScheme: t });
+    await page.goto('/');
     const text = await page.locator('#main').innerText();
     expect(text).not.toMatch(/[–—]/);
   }
@@ -90,9 +96,10 @@ test('navbar menu links always open detailed pages from homepage and subpages', 
   await expect(page.locator('h1')).toHaveText(/Engineering Notes & Systems Architecture/);
 });
 
-test('homepage sections contain buttons linking to detailed pages in both views', async ({ page }) => {
-  for (const v of ['terminal', 'paper']) {
-    await page.goto(`/?view=${v}`);
+test('homepage sections contain buttons linking to detailed pages in both themes', async ({ page }) => {
+  for (const t of ['dark', 'light']) {
+    await page.emulateMedia({ colorScheme: t });
+    await page.goto('/');
 
     // About section has link to /about
     const aboutBtn = page.locator('#about a[href="/about"]');
@@ -116,11 +123,11 @@ test('homepage sections contain buttons linking to detailed pages in both views'
   }
 });
 
-test('homepage renders exactly 2 rows (4 projects) in both views', async ({ page }) => {
-  for (const v of ['terminal', 'paper']) {
-    await page.goto(`/?view=${v}`);
-    const cardSelector = v === 'terminal' ? '#work .t-card' : '#work .p-sysitem';
-    const cards = page.locator(cardSelector);
+test('homepage renders exactly 2 rows (4 projects) in both themes', async ({ page }) => {
+  for (const t of ['dark', 'light']) {
+    await page.emulateMedia({ colorScheme: t });
+    await page.goto('/');
+    const cards = page.locator('#work .t-card');
     await expect(cards).toHaveCount(4);
   }
 });

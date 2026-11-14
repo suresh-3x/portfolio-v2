@@ -139,16 +139,6 @@ const Hero = () => {
           --ok-color: var(--t-ok);
         }
 
-        [data-view="paper"] .hero {
-          --text-main: var(--p-text);
-          --text-muted: var(--p-muted);
-          --text-faint: var(--p-faint);
-          --accent: var(--p-accent);
-          --border-color: var(--p-rule);
-          --bg-panel: var(--p-chip);
-          --ok-color: var(--p-accent);
-        }
-
         .hero-topline {
           display: flex;
           align-items: center;
@@ -282,7 +272,7 @@ const Hero = () => {
           border-color: var(--accent);
           color: #fff;
         }
-        [data-view="terminal"] .hero-cta__btn--primary { color: #0e0e10; }
+        [data-view="terminal"] .hero-cta__btn--primary { color: var(--t-on-accent); }
         .hero-cta__btn--primary:hover { opacity: 0.88; border-color: var(--accent); }
         .hero-cta__note {
           color: var(--text-faint);

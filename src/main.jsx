@@ -5,10 +5,9 @@ import { ReactLenis } from 'lenis/react'
 import 'lenis/dist/lenis.css'
 import './index.css'
 import './styles/terminal.css'
-import './styles/paper.css'
 import './styles/subpages.css'
 import App from './App.jsx'
-import { ViewProvider } from './context/ViewContext'
+import { ThemeProvider } from './context/ThemeContext'
 import { RouterProvider } from './router/Router'
 import { initGoogleAnalytics } from './utils/analytics'
 
@@ -32,13 +31,13 @@ if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ViewProvider>
+    <ThemeProvider>
       <ReactLenis root options={lenisOptions}>
         <RouterProvider>
           <App />
           <Analytics mode='production' />
         </RouterProvider>
       </ReactLenis>
-    </ViewProvider>
+    </ThemeProvider>
   </StrictMode>,
 )

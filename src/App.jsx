@@ -4,9 +4,7 @@ import Layout from './components/Layout';
 import ScrollProgress from './components/ScrollProgress';
 import CommandPalette from './components/CommandPalette';
 import ResumeStructuredData from './components/seo/ResumeStructuredData';
-import { useView } from './context/ViewContext';
 import TerminalView from './views/terminal/TerminalView';
-import PaperView from './views/paper/PaperView';
 import { useRouter } from './router';
 import SeoHead from './components/seo/SeoHead';
 import ProjectsPage from './pages/ProjectsPage';
@@ -130,7 +128,6 @@ const HashScrollHandler = () => {
 };
 
 function App() {
-  const { view } = useView();
   const { route } = useRouter();
 
   const renderContent = () => {
@@ -157,8 +154,8 @@ function App() {
           <>
             <HashScrollHandler />
             <ResumeStructuredData />
-            <div key={view} className="view-fade">
-              {view === 'terminal' ? <TerminalView /> : <PaperView />}
+            <div className="view-fade">
+              <TerminalView />
             </div>
           </>
         );

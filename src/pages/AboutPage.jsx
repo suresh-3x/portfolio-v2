@@ -35,7 +35,7 @@ export default function AboutPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem', marginTop: '1.25rem' }}>
               <div className="sidebar-box" style={{ padding: '1.25rem' }}>
                 <h3 style={{ fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <CheckCircle2 size={16} color="#5bd672" /> The Queue Is the Spine
+                  <CheckCircle2 size={16} style={{ color: 'var(--t-ok)' }} /> The Queue Is the Spine
                 </h3>
                 <p style={{ fontSize: '0.85rem', opacity: 0.8, margin: 0, lineHeight: '1.5' }}>
                   External LLM APIs and remote microservices will fail or throttle. Decouple ingestion, orchestration, and execution through durable disk-backed message queues.
@@ -44,7 +44,7 @@ export default function AboutPage() {
 
               <div className="sidebar-box" style={{ padding: '1.25rem' }}>
                 <h3 style={{ fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <CheckCircle2 size={16} color="#5bd672" /> Idempotency First
+                  <CheckCircle2 size={16} style={{ color: 'var(--t-ok)' }} /> Idempotency First
                 </h3>
                 <p style={{ fontSize: '0.85rem', opacity: 0.8, margin: 0, lineHeight: '1.5' }}>
                   Networks drop connections; clients retry. In payments and state machines, every critical mutation must be strictly idempotent to guarantee zero duplicate financial side-effects.
@@ -53,7 +53,7 @@ export default function AboutPage() {
 
               <div className="sidebar-box" style={{ padding: '1.25rem' }}>
                 <h3 style={{ fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <CheckCircle2 size={16} color="#5bd672" /> Isolated Failure Domains
+                  <CheckCircle2 size={16} style={{ color: 'var(--t-ok)' }} /> Isolated Failure Domains
                 </h3>
                 <p style={{ fontSize: '0.85rem', opacity: 0.8, margin: 0, lineHeight: '1.5' }}>
                   A model provider outage or cache eviction should gracefully degrade an isolated capability rather than bringing down the entire platform.
@@ -62,7 +62,7 @@ export default function AboutPage() {
 
               <div className="sidebar-box" style={{ padding: '1.25rem' }}>
                 <h3 style={{ fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <CheckCircle2 size={16} color="#5bd672" /> Unglamorous Reliability
+                  <CheckCircle2 size={16} style={{ color: 'var(--t-ok)' }} /> Unglamorous Reliability
                 </h3>
                 <p style={{ fontSize: '0.85rem', opacity: 0.8, margin: 0, lineHeight: '1.5' }}>
                   Sustainable systems are won in clean database indexing, predictable thread pools, observable tracing, and thorough failure testing under realistic load.
@@ -129,8 +129,8 @@ export default function AboutPage() {
                     fontSize: '0.75rem',
                     padding: '2px 7px',
                     borderRadius: '4px',
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.08)'
+                    background: 'var(--t-wash-2)',
+                    border: '1px solid var(--t-hairline)'
                   }}
                 >
                   {kw}

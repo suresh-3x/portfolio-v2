@@ -72,7 +72,7 @@ export default function StackPage() {
             >
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                  <div style={{ padding: '8px', borderRadius: '6px', background: 'rgba(255,255,255,0.05)', display: 'flex' }}>
+                  <div style={{ padding: '8px', borderRadius: '6px', background: 'var(--t-wash-2)', display: 'flex' }}>
                     <IconComp size={18} />
                   </div>
                   <h2 style={{ fontSize: '1.2rem', fontWeight: 600, margin: 0 }}>
@@ -100,7 +100,7 @@ export default function StackPage() {
               </div>
 
               <div>
-                <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1rem' }}>
+                <div style={{ borderTop: '1px solid var(--t-hairline)', paddingTop: '1rem' }}>
                   <div style={{ fontSize: '0.78rem', opacity: 0.7, marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     Core Tools &amp; Technologies
                   </div>
@@ -113,8 +113,8 @@ export default function StackPage() {
                           fontSize: '0.75rem',
                           padding: '3px 8px',
                           borderRadius: '4px',
-                          background: 'rgba(255,255,255,0.04)',
-                          border: '1px solid rgba(255,255,255,0.08)'
+                          background: 'var(--t-wash-2)',
+                          border: '1px solid var(--t-hairline)'
                         }}
                       >
                         {tool}
@@ -129,7 +129,7 @@ export default function StackPage() {
       </div>
 
       {/* Cross-Link Footer */}
-      <div style={{ marginTop: '4rem', padding: '2rem', borderRadius: '8px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+      <div style={{ marginTop: '4rem', padding: '2rem', borderRadius: '8px', background: 'var(--t-wash-1)', border: '1px solid var(--t-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <h2 style={{ fontSize: '1.2rem', marginBottom: '0.25rem' }}>See this stack in production</h2>
           <p style={{ fontSize: '0.85rem', opacity: 0.8, margin: 0 }}>

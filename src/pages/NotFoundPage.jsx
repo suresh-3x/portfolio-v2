@@ -5,7 +5,7 @@ import { ArrowLeft, Home, FolderGit2, Briefcase, FileCode, BookOpen } from 'luci
 export default function NotFoundPage() {
   return (
     <div className="page-container" style={{ textAlign: 'center', padding: '5rem 1.5rem' }}>
-      <div className="mono" style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--t-accent, #1a56db)', marginBottom: '1rem' }}>
+      <div className="mono" style={{ fontSize: '3rem', fontWeight: 700, color: 'var(--t-accent)', marginBottom: '1rem' }}>
         404
       </div>
       <h1 style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>Page Not Found</h1>
