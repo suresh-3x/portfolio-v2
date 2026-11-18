@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { FileText } from 'lucide-react';
 import { profile } from '../../data/profile';
 import CompanyLogo from '../CompanyLogo';
@@ -21,8 +21,31 @@ function useMumbaiTime() {
   return time;
 }
 
+// Background grid is 64px from the page's left edge (terminal.css body background).
+const GRID = 64;
+
+// ponytail: nudge the logo panel left so its divider sits on a grid line; cheap measure on resize.
+function useSnapToGrid(ref) {
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const snap = () => {
+      el.style.transform = '';
+      if (getComputedStyle(el).borderLeftStyle === 'none') return; // mobile: no divider
+      const x = el.getBoundingClientRect().left + window.scrollX;
+      el.style.transform = `translateX(${-(x % GRID)}px)`;
+    };
+    snap();
+    document.fonts?.ready.then(snap);
+    window.addEventListener('resize', snap);
+    return () => window.removeEventListener('resize', snap);
+  }, [ref]);
+}
+
 const Hero = () => {
   const time = useMumbaiTime();
+  const logosRef = useRef(null);
+  useSnapToGrid(logosRef);
 
   return (
     <section className="hero" id="home">
@@ -50,7 +73,7 @@ const Hero = () => {
         </div>
         </div>
 
-        <ul className="hero-logos" aria-label="Where I've shipped">
+        <ul ref={logosRef} className="hero-logos" aria-label="Where I've shipped">
           {shippedAt.map((l) => (
             <li key={l.company}>
               <CompanyLogo logo={l} />
