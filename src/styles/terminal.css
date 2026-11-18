@@ -1084,3 +1084,21 @@
   [data-view="terminal"] .note-cards { grid-template-columns: 1fr; }
   [data-view="terminal"] .t-view > section:not(.hero) { margin-top: 3rem; }
 }
+
+/* ---------- Phone fixes ---------- */
+@media (max-width: 760px) {
+  /* contact rows: command left, value truncates on one line instead of wrapping/overflowing */
+  [data-view="terminal"] .t-prompt__line { gap: 10px; padding: 0.85rem 1rem; }
+  [data-view="terminal"] .t-prompt__line > :first-child,
+  [data-view="terminal"] .t-prompt__cmd { flex-shrink: 0; }
+  [data-view="terminal"] .t-prompt__val {
+    min-width: 0; flex: 1; text-align: right;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  /* footer chips never wrap their label */
+  [data-view="terminal"] .site-footer__right a { white-space: nowrap; }
+  /* section headers: tighter, action sits right under the headline */
+  [data-view="terminal"] .xp-head { gap: 0.75rem; padding-bottom: 1rem; }
+  [data-view="terminal"] .t-view > section > .xp-head + * { margin-top: 1.5rem; }
+  [data-view="terminal"] .t-view > section:not(.hero) { margin-top: 3.5rem; }
+}

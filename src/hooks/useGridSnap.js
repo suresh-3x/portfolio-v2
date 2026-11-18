@@ -2,6 +2,8 @@ import { useLayoutEffect } from 'react';
 
 // Background grid pitch (see body background in terminal.css).
 const G = 64;
+// ponytail: no snapping at phone widths; padding to 64px lines blows up spacing on a 375px screen.
+const PHONE = 760;
 
 /*
  * Snap structural lines onto the background grid.
@@ -114,6 +116,10 @@ function snapNow(root) {
     if (!el.dataset.snapped) continue;
     const orig = JSON.parse(el.dataset.snapped);
     for (const p of PROPS) el.style[p] = orig[p];
+  }
+  if (window.innerWidth <= PHONE) {
+    root.style.setProperty('--snap-pr', '0px');
+    return;
   }
   const save = (el) => {
     if (!el.dataset.snapped) {
