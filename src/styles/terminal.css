@@ -1102,3 +1102,7 @@
   [data-view="terminal"] .t-view > section > .xp-head + * { margin-top: 1.5rem; }
   [data-view="terminal"] .t-view > section:not(.hero) { margin-top: 3.5rem; }
 }
+/* Phones: blur behind a fixed header repaints every scroll frame; use a solid header instead */
+@media (max-width: 760px) {
+  [data-view="terminal"] .site-nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--t-bg); }
+}

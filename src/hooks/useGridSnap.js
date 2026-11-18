@@ -81,6 +81,13 @@ function pagePos(el) {
 
 function snap() {
   const root = document.documentElement;
+  // Phones: URL-bar show/hide fires resize constantly while scrolling. Undo snapping once, then bail early.
+  if (window.innerWidth <= PHONE) {
+    if (root.dataset.snapOff) return;
+    root.dataset.snapOff = '1';
+  } else {
+    delete root.dataset.snapOff;
+  }
   // Transitions on margin/min-height would make every read a half-animated value.
   root.classList.add('grid-snapping');
   try {

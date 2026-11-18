@@ -104,10 +104,11 @@ const HashScrollHandler = () => {
 
     const handleScroll = () => {
       if (isRestoring) return; // don't persist the clamped values mid-restore
-      if (saveRaf) cancelAnimationFrame(saveRaf);
-      saveRaf = requestAnimationFrame(() => {
-        localStorage.setItem(SCROLL_KEY, Math.round(window.scrollY).toString());
-      });
+      // localStorage is synchronous; writing it every frame makes mobile scrolling stutter.
+      clearTimeout(saveRaf);
+      saveRaf = setTimeout(() => {
+        try { localStorage.setItem(SCROLL_KEY, Math.round(window.scrollY).toString()); } catch { /* private mode */ }
+      }, 250);
     };
 
     const handleHashChange = () => {
@@ -122,7 +123,7 @@ const HashScrollHandler = () => {
     return () => {
       cancelled = true;
       docEl.style.scrollBehavior = prevScrollBehavior;
-      if (saveRaf) cancelAnimationFrame(saveRaf);
+      clearTimeout(saveRaf);
       window.removeEventListener('hashchange', handleHashChange);
       window.removeEventListener('scroll', handleScroll);
     };

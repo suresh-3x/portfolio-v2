@@ -269,3 +269,6 @@ html[data-view] :is(
   .site-nav__menu, .site-nav__close { padding: 12px; margin: -12px; }
   .site-footer a { display: inline-block; padding-block: 12px; }
 }
+
+/* Progress bar scales instead of resizing: compositor-only, no layout per frame */
+.scroll-progress-bar { width: 100%; transform: scaleX(0); transform-origin: left center; will-change: transform; }

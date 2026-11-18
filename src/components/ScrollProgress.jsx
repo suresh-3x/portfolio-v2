@@ -14,7 +14,7 @@ export default function ScrollProgress() {
       const totalScrollableHeight = documentHeight - windowHeight;
       const scrollProgress = totalScrollableHeight > 0 ? e.scroll / totalScrollableHeight : 0;
 
-      barRef.current.style.width = `${Math.min(scrollProgress, 1) * 100}%`;
+      barRef.current.style.transform = `scaleX(${Math.min(scrollProgress, 1)})`;
     };
 
     lenis.on('scroll', handleScroll);
