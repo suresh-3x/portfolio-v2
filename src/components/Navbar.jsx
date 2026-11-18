@@ -4,6 +4,7 @@ import { Command, Menu, X } from 'lucide-react';
 import { profile } from '../data/profile';
 import { useRouter } from '../router';
 import ThemeSwitch from './ThemeSwitch';
+import { scrollToSection } from '../utils/scrollToSection';
 
 const NAV_ITEMS = [
   { label: 'about', href: '/about' },
@@ -54,8 +55,7 @@ export default function Navbar() {
         const el = document.querySelector('#contact');
         if (el) {
           history.pushState(null, '', '#contact');
-          if (lenis) lenis.scrollTo('#contact', { duration: 0.7 });
-          else el.scrollIntoView({ behavior: 'smooth' });
+          scrollToSection(lenis, el);
         }
       } else {
         navigate('/#contact');

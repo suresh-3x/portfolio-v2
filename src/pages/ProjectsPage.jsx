@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { projects, projectCategories } from '../data/projects';
 import { Link } from '../router/Router';
-import { ExternalLink, Github, Search, ArrowRight } from 'lucide-react';
 
 function badgeFor(p) {
   if (p.tech_details && p.tech_details.host === 'Raspberry Pi 4B') {
@@ -13,17 +12,6 @@ function badgeFor(p) {
     return { text: 'open source', kind: 'ok' };
   }
   return { text: String(p.year), kind: 'amber' };
-}
-
-function edgeFor(p) {
-  const td = p.tech_details;
-  if (td) {
-    if (td.architecture) return td.architecture;
-    if (td.pipeline) return td.pipeline;
-    if (td.integrations) return 'integrations: ' + td.integrations;
-    if (td.backend) return td.backend;
-  }
-  return p.category;
 }
 
 export default function ProjectsPage() {
@@ -76,6 +64,16 @@ export default function ProjectsPage() {
           ))}
         </div>
 
+        {/* phones: one native dropdown instead of nine wrapping chips */}
+        <select
+          className="filter-select search-input mono"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          aria-label="Project category"
+        >
+          {projectCategories.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
+        </select>
+
         <div className="search-input-wrap">
           <input
             type="text"
@@ -88,84 +86,40 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      <div className="t-cards" style={{ marginTop: '1.5rem' }}>
+      <div className="pj-grid">
         {filteredProjects.map((p, i) => {
           const badge = badgeFor(p);
-          const id = 'sys/' + String(i + 1).padStart(2, '0');
-          const imageSrc = p.image || '/images/projects/default.svg';
-          const primaryExternal = p.links?.github || p.links?.demo || p.links?.external;
-
+          const featured = i === 0 && selectedCategory === 'All' && !searchQuery;
           return (
-            <article className="t-card" key={p.slug || p.title}>
-              {p.image && (
-                <div className="t-card__img">
-                  <img
-                    src={imageSrc}
-                    alt={`${p.title} - ${p.category || 'Architecture preview'}`}
-                    loading="lazy"
-                    decoding="async"
-                    onError={(e) => { e.target.src = '/images/projects/default.svg'; }}
-                  />
+            <Link
+              to={`/projects/${p.slug}`}
+              className={`pj-card${featured ? ' pj-card--featured' : ''}`}
+              key={p.slug || p.title}
+            >
+              <div className="pj-card__img">
+                <img
+                  src={p.image || '/images/projects/default.svg'}
+                  alt={`${p.title} screenshot`}
+                  loading={i < 3 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  // very wide shots would lose their sides under cover-crop; show them whole
+                  onLoad={(e) => { const im = e.currentTarget; if (im.naturalWidth / im.naturalHeight > 2) im.classList.add('is-wide'); }}
+                  onError={(e) => { e.currentTarget.src = '/images/projects/default.svg'; }}
+                />
+              </div>
+              <div className="pj-card__body">
+                <div className="pj-card__meta mono">
+                  <span>{p.category}</span>
+                  <span className={`pj-card__badge${badge.kind === 'ok' ? ' is-ok' : ''}`}>{badge.text}</span>
                 </div>
-              )}
-
-              <div className="t-card__top">
-                <span className="t-card__id mono">{id}</span>
-                <span
-                  className={
-                    't-card__badge mono' +
-                    (badge.kind === 'amber' ? ' t-card__badge--amber' : '')
-                  }
-                >
-                  {badge.text}
-                </span>
+                <h2 className="pj-card__title">{p.title}</h2>
+                <p className="pj-card__desc">{p.description}</p>
+                <div className="pj-card__tags mono">
+                  {p.tags.slice(0, featured ? 6 : 4).map((t) => <span key={t}>{t}</span>)}
+                </div>
+                <span className="pj-card__cta mono">View case study &rarr;</span>
               </div>
-
-              <h2 className="t-card__title" style={{ fontSize: '1.15rem', margin: '0.5rem 0' }}>
-                <Link to={`/projects/${p.slug}`}>
-                  {p.title}
-                </Link>
-              </h2>
-
-              <p className="t-card__desc">{p.description}</p>
-
-              <div className="t-card__edge mono">
-                <span className="t-card__arrow">&rarr;</span>
-                <b>{edgeFor(p)}</b>
-              </div>
-
-              <div className="t-card__stack">
-                {p.tags.slice(0, 6).map((t) => (
-                  <span className="mono" key={t}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <div style={{ marginTop: '1.25rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <Link
-                  to={`/projects/${p.slug}`}
-                  className="btn-action"
-                  style={{ fontSize: '0.78rem', padding: '0.4rem 0.75rem' }}
-                >
-                  View case study <ArrowRight size={13} />
-                </Link>
-
-                {primaryExternal && (
-                  <a
-                    href={primaryExternal}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-action"
-                    style={{ fontSize: '0.78rem', padding: '0.4rem 0.75rem' }}
-                    aria-label={`External link for ${p.title}`}
-                  >
-                    {p.links?.github ? <Github size={13} /> : <ExternalLink size={13} />}
-                    <span>{p.links?.github ? 'Repository' : 'Live Preview'}</span>
-                  </a>
-                )}
-              </div>
-            </article>
+            </Link>
           );
         })}
       </div>

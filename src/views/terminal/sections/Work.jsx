@@ -15,7 +15,7 @@ const featured = [
 export default function Work() {
   return (
     <section id="work" className="t-work">
-      <SectionHead title="work" to="/projects" more={`all ${projects.length} projects`} />
+      <SectionHead title="work" headline="Systems I'd walk you through." to="/projects" more={`all ${projects.length} projects`} />
 
       <div className="t-showcase">
         {featured.map((p) => (

@@ -15,7 +15,7 @@ const G = 64;
 const RULES = [
   // [selector, mode]
   // top:    element's top border -> grid line (adds margin-top)
-  // bottom: element's bottom border -> grid line (adds padding-bottom)
+  // bottom: element's bottom border -> grid line (grows min-height)
   // box:    top via margin-top, bottom via min-height
   // end:    element's bottom edge -> grid line (adds min-height); used for the hero
   // line:   left border via translateX (<= G-1 px left), or top border via margin-top
@@ -24,7 +24,6 @@ const RULES = [
   ['.hero', 'end'],
   ['.hero-logos', 'line'],
   ['.note-article', 'center'],
-  ['.t-sec-h', 'top'],
   ['.t-about__principles', 'top'],
   ['.t-about__principles li', 'bottom'],
   ['.xp-head', 'bottom'],
@@ -32,16 +31,14 @@ const RULES = [
   ['.xp-card', 'box'],
   ['.xp-rows', 'top'],
   ['.xp-rows li', 'bottom'],
-  ['.t-stack__row', 'bottom'],
-  ['.t-notes__item', 'bottom'],
   ['.t-prompt', 'box'],
   ['.page-header', 'bottom'],
   ['.project-metrics-grid', 'cols'],
   ['.metric-card', 'box'],
   ['.principles-grid', 'cols'],
   ['.stack-grid', 'cols'],
-  ['.t-cards', 'cols'],
-  ['.t-card', 'box'],
+  ['.pj-grid', 'cols'],
+  ['.pj-card', 'box'],
   ['.sidebar-box', 'box'],
   ['.note-takeaways', 'box'],
   ['.pager', 'top'],
@@ -60,13 +57,13 @@ function nudgeTop(el, cur, gy) {
   el.style.marginTop = `${base + d}px`;
   for (let i = 0; i < 3; i++) {
     const r = mod(-gy(pagePos(el).y));
-    if (r < 0.5 || r > G - 0.5) break;
+    if (r < 1 || r > G - 1) break; // offsetTop is whole px, origin may be fractional
     el.style.marginTop = `${px(el.style.marginTop) + r}px`;
   }
 }
 const px = (v) => parseFloat(v) || 0;
 
-const PROPS = ['marginTop', 'paddingBottom', 'minHeight', 'transform', 'marginLeft', 'marginRight', 'gridTemplateColumns', 'columnGap'];
+const PROPS = ['marginTop', 'paddingBottom', 'boxSizing', 'minHeight', 'transform', 'marginLeft', 'marginRight', 'gridTemplateColumns', 'columnGap'];
 const mod = (n) => ((n % G) + G) % G;
 
 // Layout position on the page, ignoring transforms (entrance animations would skew getBoundingClientRect).
@@ -132,9 +129,13 @@ function snapNow(root) {
     const cur = getComputedStyle(el);
     if (mode === 'top' || mode === 'box') nudgeTop(el, cur, gy);
     if (mode === 'bottom') {
+      // grow via min-height (border-box): padding alone does nothing when a CSS min-height dominates
       const { y, h } = pagePos(el);
       const d = mod(-gy(y + h - 1));
-      if (d) el.style.paddingBottom = `${px(cur.paddingBottom) + d}px`;
+      if (d) {
+        el.style.boxSizing = 'border-box';
+        el.style.minHeight = `${h + d}px`;
+      }
     }
     if (mode === 'box') {
       const h = el.offsetHeight;

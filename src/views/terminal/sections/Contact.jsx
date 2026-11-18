@@ -4,7 +4,7 @@ import SectionHead from '../SectionHead';
 export default function Contact() {
   return (
     <section id="contact" className="t-contact">
-      <SectionHead title="contact" />
+      <SectionHead title="contact" headline="Let's talk." />
 
       <div className="t-prompt">
         <a

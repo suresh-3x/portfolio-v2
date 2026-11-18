@@ -1023,3 +1023,64 @@
 /* Grid snapping: stop section margins collapsing so per-section nudges take effect. */
 [data-view="terminal"] .t-view > section:not(.hero) { display: flow-root; }
 [data-view="terminal"].grid-snapping * { transition: none !important; }
+
+/* ---------- Grid rhythm: list rows are exactly one grid cell tall ----------
+   List starts on a grid line (useGridSnap); a 1px top border (visible or transparent)
+   puts each row's bottom hairline exactly on the next line. Wrapped rows round up to 2 cells. */
+[data-view="terminal"] :is(.t-stack__list, .t-notes__list) { border-top: 1px solid transparent; margin-top: 0; }
+[data-view="terminal"] :is(.t-stack__row, .t-notes__item, .t-about__principles li, .xp-rows li) {
+  min-height: 64px;
+  box-sizing: border-box;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  align-content: center;
+}
+[data-view="terminal"] :is(.t-stack__row, .t-notes__item) { align-items: center; }
+[data-view="terminal"] .t-about__principles li { display: flex; align-items: center; }
+[data-view="terminal"] .t-about__principles { margin-top: 2rem; }
+/* Sections that open with a rule: let the snap supply the space instead of stacking margins. */
+[data-view="terminal"] .t-view > section:has(> .t-sec-h:first-child) { margin-top: 0; }
+[data-view="terminal"] .t-sec-h { margin-top: 2rem; }
+/* Section heading band is exactly one grid cell, so the list below starts on the next line. */
+[data-view="terminal"] .t-sec-h { padding: 0; min-height: 64px; box-sizing: border-box; align-items: center; }
+
+/* ---------- Homepage sections share one rhythm: same header, same top spacing ---------- */
+[data-view="terminal"] .t-view > section:not(.hero) { margin-top: 4.5rem; }
+[data-view="terminal"] .t-view > section > .xp-head + * { margin-top: 2.5rem; }
+
+/* Stack: icon + area, tools as chips, proof points underneath */
+[data-view="terminal"] .stack-cards .xp-card { justify-content: flex-start; min-height: 0; gap: 1.1rem; padding: 1.5rem; }
+[data-view="terminal"] .stack-cards__head { display: flex; align-items: center; gap: 0.7rem; }
+[data-view="terminal"] .stack-cards__head h3 { margin: 0; font-family: var(--font-sans); font-weight: 800; letter-spacing: -0.03em; font-size: 1.25rem; color: var(--t-text); }
+[data-view="terminal"] .stack-cards__icon {
+  display: inline-flex; padding: 8px; border-radius: 8px;
+  color: var(--t-accent); background: var(--t-accent-dim);
+}
+[data-view="terminal"] .stack-cards__tools { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+[data-view="terminal"] .stack-cards__tools li {
+  font-size: 0.78rem; padding: 0.3rem 0.6rem; border-radius: 5px;
+  border: 1px solid var(--t-border); background: var(--t-panel-2); color: var(--t-text);
+}
+[data-view="terminal"] .stack-cards__proof {
+  list-style: none; margin: auto 0 0; padding: 1rem 0 0; border-top: 1px dashed var(--t-border);
+  display: flex; flex-direction: column; gap: 0.35rem;
+}
+[data-view="terminal"] .stack-cards__proof li { font-size: 0.85rem; color: var(--t-muted); display: flex; gap: 0.5rem; }
+[data-view="terminal"] .stack-cards__proof li::before { content: '\2713'; color: var(--t-ok); }
+@media (max-width: 760px) { [data-view="terminal"] .stack-cards { grid-template-columns: 1fr; } }
+
+/* Notes: three cards */
+[data-view="terminal"] .note-cards { grid-template-columns: repeat(3, 1fr); }
+[data-view="terminal"] .note-card { padding: 0; min-height: 0; }
+[data-view="terminal"] .note-card:hover { border-color: var(--t-accent); }
+[data-view="terminal"] .note-card__link { display: flex; flex-direction: column; gap: 0.7rem; height: 100%; padding: 1.4rem; color: inherit; box-sizing: border-box; }
+[data-view="terminal"] .note-card .xp-card__co { margin-bottom: 0; }
+[data-view="terminal"] .note-card__title { font-family: var(--font-sans); font-weight: 800; letter-spacing: -0.03em; font-size: 1.3rem; line-height: 1.2; color: var(--t-text); }
+[data-view="terminal"] .note-card__abstract { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+[data-view="terminal"] .note-card__cta { margin-top: auto; font-size: 0.75rem; color: var(--t-muted); }
+[data-view="terminal"] .note-card:hover .note-card__cta { color: var(--t-accent); }
+@media (max-width: 1024px) { [data-view="terminal"] .note-cards { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 760px) {
+  [data-view="terminal"] .note-cards { grid-template-columns: 1fr; }
+  [data-view="terminal"] .t-view > section:not(.hero) { margin-top: 3rem; }
+}

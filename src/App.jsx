@@ -7,6 +7,7 @@ import ResumeStructuredData from './components/seo/ResumeStructuredData';
 import TerminalView from './views/terminal/TerminalView';
 import { useRouter } from './router';
 import SeoHead from './components/seo/SeoHead';
+import { sectionTop, scrollToSection } from './utils/scrollToSection';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import ExperiencePage from './pages/ExperiencePage';
@@ -16,7 +17,6 @@ import NotesPage from './pages/NotesPage';
 import NoteDetailPage from './pages/NoteDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 
-const HEADER_OFFSET = 156;
 const SCROLL_KEY = 'lastScrollPosition';
 
 const HashScrollHandler = () => {
@@ -58,16 +58,17 @@ const HashScrollHandler = () => {
       if (!hash || hash === '#') return null;
       const el = document.getElementById(hash.slice(1));
       if (!el) return null;
-      return Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET);
+      return sectionTop(el);
     };
 
     // The page is tall and content mounts progressively, so the document may be
     // too short to reach `target` on the first frame. Retry across frames until
     // we land within tolerance (or give up), then re-enable saving.
-    const restore = (target, smooth = false) => {
+    const restore = (getTarget, smooth = false) => {
       let attempts = 0;
       const step = () => {
         if (cancelled) return;
+        const target = getTarget();
         const l = lenisRef.current;
         if (l) {
           l.scrollTo(target, smooth ? { duration: 0.9 } : { immediate: true, force: true });
@@ -86,11 +87,16 @@ const HashScrollHandler = () => {
       requestAnimationFrame(step);
     };
 
-    const target = hashTarget(initialHash);
-    if (target !== null) {
-      restore(target);
+    if (hashTarget(initialHash) !== null) {
+      restore(() => hashTarget(initialHash) ?? 0);
+      // Images and grid snapping keep moving the target after the first frames; correct once loaded.
+      const settle = () => {
+        if (!cancelled) scrollToSection(lenisRef.current, document.getElementById(initialHash.slice(1)), 3, 0.25);
+      };
+      if (document.readyState === 'complete') setTimeout(settle, 300);
+      else window.addEventListener('load', () => setTimeout(settle, 300), { once: true });
     } else if (savedPosition > 0) {
-      restore(savedPosition);
+      restore(() => savedPosition);
     } else {
       window.scrollTo(0, 0);
       endRestore();
@@ -105,11 +111,9 @@ const HashScrollHandler = () => {
     };
 
     const handleHashChange = () => {
-      const t = hashTarget(window.location.hash);
-      if (t === null) return;
-      const l = lenisRef.current;
-      if (l) l.scrollTo(t, { duration: 0.9 });
-      else window.scrollTo({ top: t, behavior: 'smooth' });
+      const hash = window.location.hash;
+      if (!hash || hash === '#') return;
+      scrollToSection(lenisRef.current, document.getElementById(hash.slice(1)));
     };
 
     window.addEventListener('hashchange', handleHashChange);

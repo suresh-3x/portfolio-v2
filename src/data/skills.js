@@ -11,7 +11,7 @@ export const primarySkillsets = [
     title: 'Data & Messaging',
     icon: 'database',
     summary: 'Stores and queues that keep state correct when things fail.',
-    highlights: ['Event-driven consistency', 'Durable queues', 'Caching'],
+    highlights: ['Zero data loss on payments', 'Event-driven consistency', 'Durable queues'],
     skills: ['PostgreSQL', 'Redis', 'RabbitMQ', 'MongoDB'],
   },
   {
@@ -25,7 +25,7 @@ export const primarySkillsets = [
     title: 'Cloud & DevOps',
     icon: 'cloud',
     summary: 'Deploys, pipelines and production operations.',
-    highlights: ['AWS / GCP', 'CI/CD from scratch'],
+    highlights: ['Infra built from zero at Stride Ahead', 'Releases cut from 4 h to 15 min'],
     skills: ['AWS', 'GCP', 'Docker', 'GitHub Actions'],
   },
 ];
