@@ -32,7 +32,7 @@ export default function AboutPage() {
           {/* Core Philosophy */}
           <section className="detail-section">
             <h2>Core Engineering Principles</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem', marginTop: '1.25rem' }}>
+            <div className="principles-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem', marginTop: '1.25rem' }}>
               <div className="sidebar-box" style={{ padding: '1.25rem' }}>
                 <h3 style={{ fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
                   <CheckCircle2 size={16} style={{ color: 'var(--t-ok)' }} /> The Queue Is the Spine

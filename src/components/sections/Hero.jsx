@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { FileText } from 'lucide-react';
 import { profile } from '../../data/profile';
 import CompanyLogo from '../CompanyLogo';
@@ -21,31 +21,8 @@ function useMumbaiTime() {
   return time;
 }
 
-// Background grid is 64px from the page's left edge (terminal.css body background).
-const GRID = 64;
-
-// ponytail: nudge the logo panel left so its divider sits on a grid line; cheap measure on resize.
-function useSnapToGrid(ref) {
-  useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const snap = () => {
-      el.style.transform = '';
-      if (getComputedStyle(el).borderLeftStyle === 'none') return; // mobile: no divider
-      const x = el.getBoundingClientRect().left + window.scrollX;
-      el.style.transform = `translateX(${-(x % GRID)}px)`;
-    };
-    snap();
-    document.fonts?.ready.then(snap);
-    window.addEventListener('resize', snap);
-    return () => window.removeEventListener('resize', snap);
-  }, [ref]);
-}
-
 const Hero = () => {
   const time = useMumbaiTime();
-  const logosRef = useRef(null);
-  useSnapToGrid(logosRef);
 
   return (
     <section className="hero" id="home">
@@ -73,7 +50,7 @@ const Hero = () => {
         </div>
         </div>
 
-        <ul ref={logosRef} className="hero-logos" aria-label="Where I've shipped">
+        <ul className="hero-logos" aria-label="Where I've shipped">
           {shippedAt.map((l) => (
             <li key={l.company}>
               <CompanyLogo logo={l} />
@@ -191,11 +168,15 @@ const Hero = () => {
         .hero-cta__btn--primary:hover { opacity: 0.88; border-color: var(--t-accent); }
 
         .hero-foot {
+          height: 64px;
+          box-sizing: border-box;
+          align-items: center;
           display: flex;
-          flex-wrap: wrap;
+          flex-wrap: nowrap;
+          white-space: nowrap;
           justify-content: space-between;
           gap: 0.5rem 2rem;
-          padding: 1.25rem 0 1.5rem;
+          padding: 0;
           border-top: 1px solid var(--t-border);
           font-size: 0.75rem;
           color: var(--t-faint);

@@ -61,7 +61,7 @@ export default function StackPage() {
       </div>
 
       {/* Skillset Cards Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.5rem' }}>
+      <div className="stack-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(340px, 100%), 1fr))', gap: '1.5rem' }}>
         {displayedSkillsets.map((skillset) => {
           const IconComp = iconMap[skillset.icon] || Server;
           return (
