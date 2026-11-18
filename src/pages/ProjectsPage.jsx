@@ -56,9 +56,9 @@ export default function ProjectsPage() {
       </nav>
 
       <header className="page-header">
-        <h1>Engineering Projects &amp; Distributed Systems</h1>
+        <h1>Things I've built and run.</h1>
         <p className="page-header__sub">
-          Production systems, agentic AI pipelines, open source contributions, and high-scale backends engineered for resilience and performance.
+          Production systems, AI pipelines and open source work. Each one has a case study.
         </p>
       </header>
 
@@ -121,7 +121,7 @@ export default function ProjectsPage() {
                 </span>
               </div>
 
-              <h2 className="t-card__title mono" style={{ fontSize: '1.15rem', margin: '0.5rem 0' }}>
+              <h2 className="t-card__title" style={{ fontSize: '1.15rem', margin: '0.5rem 0' }}>
                 <Link to={`/projects/${p.slug}`}>
                   {p.title}
                 </Link>
@@ -145,10 +145,10 @@ export default function ProjectsPage() {
               <div style={{ marginTop: '1.25rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 <Link
                   to={`/projects/${p.slug}`}
-                  className="btn-action btn-action--primary"
+                  className="btn-action"
                   style={{ fontSize: '0.78rem', padding: '0.4rem 0.75rem' }}
                 >
-                  Deep Dive &amp; Specs <ArrowRight size={13} />
+                  View case study <ArrowRight size={13} />
                 </Link>
 
                 {primaryExternal && (

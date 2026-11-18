@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
-import { CalendarDays } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { profile } from '../../data/profile';
+import CompanyLogo from '../CompanyLogo';
+
+const shippedAt = [
+  { domain: 'www.t-systems.com', company: 'T-Systems', sub: 'Deutsche Telekom · AI platform', href: 'https://www.t-systems.com' },
+  { domain: 'gridlogic.in', company: 'Gridlogic', sub: 'Real-money gaming · 5M+ MAU', href: 'https://gridlogic.in' },
+  { domain: 'strideahead.io', company: 'Stride Ahead', sub: 'Founding engineer · 0 to 50K MAU', href: 'https://strideahead.io' },
+];
 
 // Local time in Mumbai, refreshed every 30s.
 function useMumbaiTime() {
@@ -20,39 +27,53 @@ const Hero = () => {
   return (
     <section className="hero" id="home">
       <div className="hero-main">
+        <div className="hero-copy">
         <h1 className="hero-name">Suresh Bhandari</h1>
         <p className="hero-intro">
-          I&apos;m a backend and AI engineer in Mumbai. For five years I&apos;ve kept systems up for real
+          I&apos;m a backend and AI engineer. For five years I&apos;ve kept systems up for real
           people: a gaming platform with 5M+ monthly players peaking at 10K requests a second, and now
-          15+ AI agents in production at T-Systems.
+          10+ AI agents in production at T-Systems.
         </p>
         <div className="hero-cta">
           <a
             className="hero-cta__btn hero-cta__btn--primary mono"
-            href={profile.bookingUrl}
+            href={profile.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <CalendarDays size={15} aria-hidden="true" />
-            Book a call
-          </a>
-          <a className="hero-cta__btn mono" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
+            <FileText size={15} aria-hidden="true" />
             Resume
           </a>
+          <a className="hero-cta__btn mono" href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
         </div>
+        </div>
+
+        <ul className="hero-logos" aria-label="Where I've shipped">
+          {shippedAt.map((l) => (
+            <li key={l.company}>
+              <CompanyLogo logo={l} />
+              <span>
+                <strong>{l.company}</strong>
+                <span className="mono">{l.sub}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
 
       <div className="hero-foot mono">
         <span>
           <span className="hero-foot__dot" aria-hidden="true" />
-          Backend engineer at T-Systems. Open to senior roles.
+          Backend engineer at T-Systems
         </span>
-        <span>Mumbai, {time} IST</span>
+        <span>{time} IST</span>
       </div>
 
       <style>{`
         [data-view="terminal"] .hero {
-          min-height: 100svh;
+          min-height: calc(100svh - var(--strip-h, 0px));
           display: flex;
           flex-direction: column;
           padding-top: 72px;
@@ -66,6 +87,39 @@ const Hero = () => {
           flex-direction: column;
           justify-content: center;
           padding: 3rem 0;
+        }
+
+        .hero-copy { min-width: 0; }
+
+        .hero-logos {
+          list-style: none;
+          margin: clamp(2.5rem, 6vh, 3.5rem) 0 0;
+          padding: 1.25rem 0 0;
+          border-top: 1px solid var(--t-border);
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem 2rem;
+        }
+        .hero-logos li { display: flex; align-items: center; gap: 0.75rem; }
+        .hero-logos .company-logo { width: 28px; height: 28px; border-radius: 6px; }
+        .hero-logos strong { display: block; font-family: var(--font-sans); font-size: 0.95rem; color: var(--t-text); }
+        .hero-logos .mono { font-size: 0.72rem; color: var(--t-faint); }
+
+        @media (min-width: 1024px) {
+          .hero-main {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 4rem;
+          }
+          .hero-logos {
+            margin: 0;
+            padding: 0 0 0 2rem;
+            border-top: 0;
+            border-left: 1px solid var(--t-border);
+            flex-direction: column;
+            gap: 1.75rem;
+          }
         }
 
         .hero-name {

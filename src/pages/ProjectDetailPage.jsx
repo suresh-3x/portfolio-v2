@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter, Link } from '../router';
+import PagerFooter from '../components/PagerFooter';
 import { projects } from '../data/projects';
 import { Github, ExternalLink, ArrowLeft, ArrowRight, Cpu, Maximize2, Layers } from 'lucide-react';
 
@@ -342,34 +343,13 @@ export default function ProjectDetailPage() {
               className="btn-action"
               style={{ width: '100%', boxSizing: 'border-box' }}
             >
-              Discuss Architecture
+              Email me about it &rarr;
             </a>
           </div>
         </aside>
       </div>
 
-      {/* Prev / Next Project Navigation */}
-      <footer style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--t-hairline)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-        {prevProject ? (
-          <Link to={`/projects/${prevProject.slug}`} className="btn-action">
-            <ArrowLeft size={14} /> Previous: {prevProject.title}
-          </Link>
-        ) : (
-          <span />
-        )}
-
-        <Link to="/projects" className="btn-action">
-          All Projects Catalog
-        </Link>
-
-        {nextProject ? (
-          <Link to={`/projects/${nextProject.slug}`} className="btn-action">
-            Next: {nextProject.title} <ArrowRight size={14} />
-          </Link>
-        ) : (
-          <span />
-        )}
-      </footer>
+      <PagerFooter prev={prevProject} next={nextProject} base="/projects" allLabel="all projects" />
 
       {/* Lightbox Modal */}
       {lightboxImg && (

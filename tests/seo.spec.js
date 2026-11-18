@@ -13,13 +13,13 @@ test.describe('SEO and Meta Verification', () => {
     await page.goto('/');
 
     // Title verification
-    await expect(page).toHaveTitle('Suresh Bhandari | Senior Backend & AI Engineer');
+    await expect(page).toHaveTitle('Suresh Bhandari | Backend & AI Engineer');
 
     // Meta description verification
     const description = await page.locator('meta[name="description"]').getAttribute('content');
     expect(description).toBeTruthy();
     expect(description?.length).toBeLessThanOrEqual(160);
-    expect(description).toContain('Senior Backend');
+    expect(description).toContain('Backend and AI');
     expect(description).toContain('FastAPI');
   });
 

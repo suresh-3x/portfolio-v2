@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '../router/Router';
-import { profile, summary, education, atsKeywords } from '../data/profile';
+import { profile, summary, education } from '../data/profile';
 import { Mail, Github, Linkedin, FileText, CheckCircle2, ArrowRight, CalendarDays } from 'lucide-react';
 
 export default function AboutPage() {
@@ -13,9 +13,9 @@ export default function AboutPage() {
       </nav>
 
       <header className="page-header">
-        <h1>About Suresh Bhandari</h1>
+        <h1>About me.</h1>
         <p className="page-header__sub">
-          {profile.title} based in {profile.location} ({profile.relocation}).
+          {profile.title} based in {profile.location}.
         </p>
       </header>
 
@@ -107,47 +107,17 @@ export default function AboutPage() {
                 <Mail size={15} /> {profile.email}
               </a>
               <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="btn-action">
-                <Linkedin size={15} /> LinkedIn Profile
+                <Linkedin size={15} /> LinkedIn
               </a>
               <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn-action">
-                <Github size={15} /> GitHub (@suresh-3x)
+                <Github size={15} /> GitHub
               </a>
               <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="btn-action">
-                <FileText size={15} /> Download Resume
+                <FileText size={15} /> Resume (PDF)
               </a>
             </div>
           </div>
 
-          <div className="sidebar-box">
-            <h3>Core Keywords &amp; Competencies</h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-              {atsKeywords.map((kw) => (
-                <span
-                  key={kw}
-                  className="mono"
-                  style={{
-                    fontSize: '0.75rem',
-                    padding: '2px 7px',
-                    borderRadius: '4px',
-                    background: 'var(--t-wash-2)',
-                    border: '1px solid var(--t-hairline)'
-                  }}
-                >
-                  {kw}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="sidebar-box">
-            <h3>Explore Systems</h3>
-            <p style={{ fontSize: '0.85rem', opacity: 0.8, marginBottom: '1rem' }}>
-              See live architectural implementations of durable queues, RAG pipelines, and self-hosted tools.
-            </p>
-            <Link to="/projects" className="btn-action" style={{ width: '100%', boxSizing: 'border-box' }}>
-              Browse Projects <ArrowRight size={14} />
-            </Link>
-          </div>
         </aside>
       </div>
     </div>

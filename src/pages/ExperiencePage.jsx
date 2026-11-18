@@ -14,9 +14,9 @@ export default function ExperiencePage() {
       </nav>
 
       <header className="page-header">
-        <h1>Engineering Experience &amp; Career History</h1>
+        <h1>Five years of owning production.</h1>
         <p className="page-header__sub">
-          5+ years building, scaling, and stabilizing distributed systems, high-throughput payment pipelines, and agentic AI architectures across enterprise and startup environments.
+          Payments at 5M+ MAU, a platform built from zero, and AI agents at Deutsche Telekom. Metric first, details after.
         </p>
       </header>
 
@@ -66,9 +66,9 @@ export default function ExperiencePage() {
 
             <div style={{ margin: '1.5rem 0' }}>
               <ul className="highlights-list">
-                {exp.description.map((point, idx) => (
-                  <li key={idx} style={{ marginBottom: '0.85rem' }}>
-                    {point}
+                {exp.points.map(([k, v]) => (
+                  <li key={k} style={{ marginBottom: '0.85rem' }}>
+                    <strong>{k}</strong> {v}
                   </li>
                 ))}
               </ul>
@@ -95,9 +95,9 @@ export default function ExperiencePage() {
       </div>
 
       <div style={{ marginTop: '4rem', textAlign: 'center', padding: '2.5rem', borderRadius: '8px', background: 'var(--t-wash-1)', border: '1px solid var(--t-hairline)' }}>
-        <h2 style={{ fontSize: '1.3rem', marginBottom: '0.75rem' }}>Looking for detailed architecture resumes or references?</h2>
+        <h2 style={{ fontSize: '1.3rem', marginBottom: '0.75rem' }}>Want the one-page version?</h2>
         <p style={{ opacity: 0.8, maxWidth: '600px', margin: '0 auto 1.5rem', fontSize: '0.95rem' }}>
-          Download the latest Senior Backend &amp; AI Engineer resume PDF or reach out directly to discuss technical fit.
+          Same story, recruiter format.
         </p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           <a
@@ -109,7 +109,7 @@ export default function ExperiencePage() {
             Download Resume (PDF)
           </a>
           <Link to="/projects" className="btn-action">
-            Explore Built Systems <ArrowRight size={14} />
+            See projects <ArrowRight size={14} />
           </Link>
         </div>
       </div>

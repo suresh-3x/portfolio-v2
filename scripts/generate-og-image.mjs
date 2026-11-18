@@ -279,7 +279,7 @@ async function generateOGImage() {
           <div class="metric-lbl">Req/Sec Peak Handled</div>
         </div>
         <div class="metric-card">
-          <div class="metric-val">15+</div>
+          <div class="metric-val">10+</div>
           <div class="metric-lbl">Production AI Agents</div>
         </div>
         <div class="metric-card">

@@ -7,7 +7,7 @@ export const experienceEntries = [
     company: 'T-Systems',
     employer: 'Pixeldust Technologies',
     companyLine:
-      'Employed by Pixeldust Technologies, deployed to T-Systems (Deutsche Telekom subsidiary) on contract · Mumbai, India (CET sync)',
+      'Employed by Pixeldust Technologies, deployed to T-Systems (Deutsche Telekom subsidiary) on contract · Mumbai, India',
     website: 'https://t-systems.com',
     logoDomain: 't-systems.com',
     logos: [
@@ -27,11 +27,17 @@ export const experienceEntries = [
     type: 'Hybrid',
     year: 2025,
     month: 9,
-    description: [
-      'Architected backend infrastructure and Google ADK orchestration layer for internal AI platform, designing and shipping 10+ production agents including enterprise knowledge graph RAG system that extracts structured insights from fragmented documentation (wikis, PDFs, spreadsheets, architecture diagrams), reducing knowledge base search and retrieval time from 40+ minutes to under 2 minutes.',
-      'Served as sole backend engineer for distributed European team, owning API design contracts with data science teams, persistent chat history infrastructure, JWT authentication, HTTP streaming for real-time agent responses, and end-to-end cloud deployment and CI/CD orchestration spanning ML infrastructure, backend services, and DevOps workflows.',
-      'Built knowledge extraction platform pipeline converting unstructured enterprise documentation into queryable knowledge graphs, integrating vector search and graph database technology to automatically surface relevant information.'
+    end: null,
+    tab: 'AI platform',
+    bar: 'T-Systems · now',
+    meta: 'via Pixeldust · German team',
+    intro: 'Internal AI platform at Deutsche Telekom. Sole backend engineer on a distributed European team.',
+    points: [
+      ['40 min → <2 min', 'knowledge search time, after I built a knowledge-graph RAG system over wikis, PDFs, sheets and diagrams.'],
+      ['10+ agents', 'shipped to production on a Google ADK orchestration layer I architected.'],
+      ['End to end:', 'API contracts with data science, chat history, JWT auth, streamed responses, cloud deploys and CI/CD.'],
     ],
+    tags: ['Google ADK', 'RAG', 'JWT', 'HTTP streaming', 'CI/CD'],
   },
   {
     sortOrder: 1,
@@ -53,36 +59,18 @@ export const experienceEntries = [
     type: 'Remote',
     year: 2023,
     month: 3,
-    description: [
-      'Owned wallet, payment processing, and third-party payment integration modules within 6-7 engineer backend platform team serving real-money gaming platform at 5M-10M monthly active users, sustaining 1K-10K requests per second steady-state load with 30-40K peak transactions per day during tournaments and events.',
-      'Maintained wallet balance integrity and transaction finality across distributed systems through idempotent transaction design, dual-verification for high-value operations, comprehensive audit logging, and event-driven consistency guarantees using RabbitMQ, ensuring zero financial data loss across entire tenure.',
-      'Debugged class of transient game engine errors affecting player experience by analyzing distributed event traces across millions of RabbitMQ messages using systematic log analysis and pattern matching; shipped targeted fixes that reduced mid-game error rates by approximately 30%.',
-      'Designed and deployed operator and business analytics dashboards tracking real-time revenue metrics, player cohort analysis, churn patterns, and transaction health, enabling operations to adjust incentive strategies.'
+    end: { year: 2025, month: 5 },
+    tab: 'payments',
+    bar: 'Gridlogic · payments',
+    meta: 'remote · 6 to 7 engineer platform team',
+    intro: 'Real-money gaming platform. I owned the wallet, payments and payment-provider integrations.',
+    points: [
+      ['0 data loss', 'on wallet and payments for 5M+ monthly players, through idempotent transactions, audit logs and RabbitMQ-driven consistency.'],
+      ['10K req/s', 'at peak, with 30K to 40K transactions a day during tournaments.'],
+      ['~30% fewer', 'mid-game errors after tracing a transient engine bug through millions of RabbitMQ messages.'],
+      ['Dashboards', 'for revenue, cohorts and churn that ops used to tune player incentives.'],
     ],
-  },
-  {
-    sortOrder: 2,
-    id: 'bizassist',
-    role: 'Solo Engineer, End-to-End Tech Owner (Freelance)',
-    company: 'BizAssist',
-    companyLine: 'Remote',
-    website: 'https://bizassist.co',
-    logoDomain: 'bizassist.co',
-    logos: [
-      {
-        domain: 'bizassist.online',
-        company: 'BizAssist',
-        href: 'https://bizassist.co',
-      },
-    ],
-    location: 'Remote',
-    period: 'Oct 2024 to Sept 2025',
-    type: 'Remote',
-    year: 2024,
-    month: 10,
-    description: [
-      'Built and shipped four production web apps solo (Next.js, Node.js, MongoDB, Vercel, AWS) with zero P0 incidents over 12 months, including a React Native booking app on a customized cal.com fork that cut client booking overhead by about 60%.',
-    ],
+    tags: ['Python', 'RabbitMQ', 'PostgreSQL', 'Redis', 'Payments'],
   },
   {
     sortOrder: 3,
@@ -105,10 +93,17 @@ export const experienceEntries = [
     type: 'Remote',
     year: 2025,
     month: 5,
-    description: [
-      'Returned to Stride Ahead to own platform engineering and stabilize a fragmented platform before moving to T-Systems via Pixeldust: standardized architecture across 5+ microservices and consolidated coupled authentication and token verification flows, resolving a recurring session corruption bug class in four weeks while mentoring 2 to 3 engineers.',
-      'Rebuilt CI/CD on GitHub Actions, cutting release cycles from about 4 hours to under 15 minutes and enabling daily production deploys.',
+    end: { year: 2025, month: 8 },
+    tab: 'rehired',
+    bar: 'SA',
+    meta: 'remote · rehired',
+    intro: 'Came back for a short stint to stabilize the platform I had built, then joined T-Systems.',
+    points: [
+      ['4 h → 15 min', 'release cycle after rebuilding CI/CD on GitHub Actions. Daily deploys became normal.'],
+      ['4 weeks', 'to kill a recurring session corruption bug, by consolidating auth and token flows across 5+ services.'],
+      ['2 to 3 engineers', 'mentored while standardizing the architecture.'],
     ],
+    tags: ['GitHub Actions', 'Microservices', 'Auth'],
   },
   {
     sortOrder: 4,
@@ -131,12 +126,33 @@ export const experienceEntries = [
     type: 'Remote',
     year: 2021,
     month: 3,
-    description: [
-      'Founding Engineer: took sole production ownership when CTO departed 6 months in; designed and stood up production architecture and infrastructure from scratch (Nginx, AWS, Docker, GitHub Actions CI/CD), managing full engineering stack with 1-2 junior engineers.',
-      'Architected complex learning platform from monolithic foundations into production-grade microservices suite, featuring assessment engine, quiz platform, automated PDF report generation (1000+ reports monthly), personalized recommendation loops, and SSO integration scaling from zero to 50K monthly active users (40K B2B, 10K B2C).',
-      'Promoted to Senior Software Engineer after first 10 months; led requirement gathering and scope negotiation for 8 B2B clients, owned end-to-end delivery of custom features and white-label solutions, scaling revenue 2-3X.',
-      'Built engineering team from zero, conducting technical interviews for 10+ candidates and making final hiring decisions, resulting in team of 5 engineers; mentored junior engineers in system design.',
-      'Achieved 99.9%+ uptime during peak load through automated horizontal scaling across 10+ production servers, zero downtime deployment strategies using blue-green deployments, and auto-remediation systems.'
+    end: { year: 2023, month: 3 },
+    tab: 'founding',
+    bar: 'Stride Ahead · founding',
+    meta: 'remote · founding engineer',
+    intro: 'Learning and assessment platform for B2B and B2C users. Joined as founding engineer, ended up owning production.',
+    points: [
+      ['Sole owner', 'of production after the CTO left, six months in. Built infra from scratch on AWS, Docker, Nginx and GitHub Actions.'],
+      ['0 → 50K MAU', 'on a learning platform I moved from monolith to microservices.'],
+      ['2 to 3x revenue', 'across 8 B2B clients after promotion to Senior SDE at month 10.'],
+      ['5-person team', 'hired from zero. I ran 10+ interviews and made the final calls.'],
+      ['99.9%+ uptime', 'across 10+ servers with blue-green deploys and auto-scaling.'],
     ],
+    tags: ['Python', 'Django', 'AWS', 'Docker', 'Nginx'],
   },
+];
+
+// ponytail: description derived from points so SEO/prerender keep plain strings.
+for (const e of experienceEntries) e.description = e.points.map(([k, v]) => `${k} ${v}`);
+
+/** "By results" view: headline wins across roles. tone: accent | ok | undefined */
+export const results = [
+  { co: 'T-Systems', big: '40 min → <2 min', text: 'Knowledge search time after a knowledge-graph RAG system I built.', tone: 'accent' },
+  { co: 'Gridlogic', big: '0 data loss', text: 'On wallet and payments for 5M+ monthly players.', tone: 'ok' },
+  { co: 'T-Systems', big: '10+ agents', text: 'In production on a Google ADK layer I architected.' },
+  { co: 'Stride Ahead', big: '4 h → 15 min', text: 'Release cycle after rebuilding CI/CD. Daily deploys.' },
+  { co: 'Stride Ahead', big: '0 → 50K MAU', text: 'Monolith to microservices as founding engineer.' },
+  { co: 'Gridlogic', big: '10K req/s', text: 'Peak load, 30K to 40K transactions a day at tournaments.' },
+  { co: 'Gridlogic', big: '~30% fewer', text: 'Mid-game errors after tracing a bug through millions of RabbitMQ messages.' },
+  { co: 'Stride Ahead', big: 'Sole owner', text: 'Of production after the CTO left, six months in.' },
 ];

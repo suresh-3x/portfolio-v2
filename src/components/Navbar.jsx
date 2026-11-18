@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLenis } from 'lenis/react';
-import { CalendarDays, Command, Menu, X } from 'lucide-react';
+import { Command, Menu, X } from 'lucide-react';
 import { profile } from '../data/profile';
 import { useRouter } from '../router';
 import ThemeSwitch from './ThemeSwitch';
@@ -70,6 +70,11 @@ export default function Navbar() {
 
   return (
     <header className={`site-nav${scrolled ? ' is-scrolled' : ''}`}>
+      <div className="site-strip mono">
+        <span className="site-strip__ok"><span className="site-strip__dot" aria-hidden="true" />Available · 60-day notice</span>
+        <span className="site-strip__hide-sm">Senior backend / AI roles</span>
+        <a className="site-strip__cta" href={profile.bookingUrl} target="_blank" rel="noopener noreferrer">book a call &rarr;</a>
+      </div>
       <div className="site-nav__inner">
         <a className="site-nav__mark" href="#home" onClick={(e) => go(e, '#home')}>
           suresh<span className="site-nav__dot">.</span>bhandari
@@ -95,15 +100,6 @@ export default function Navbar() {
         </nav>
 
         <div className="site-nav__actions">
-          <a
-            className="site-nav__book"
-            href={profile.bookingUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <CalendarDays size={13} aria-hidden="true" />
-            <span>book a call</span>
-          </a>
           <button
             type="button"
             className="site-nav__cmdk"

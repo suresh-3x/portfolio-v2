@@ -13,9 +13,9 @@ export default function NotesPage() {
       </nav>
 
       <header className="page-header">
-        <h1>Engineering Notes &amp; Systems Architecture</h1>
+        <h1>Notes from production.</h1>
         <p className="page-header__sub">
-          Practical reflections on distributed systems design, fault-tolerant queues, high-throughput payment architectures, and agentic AI pipelines.
+          Short write-ups on queues, payments and AI pipelines, mostly about what broke and why.
         </p>
       </header>
 
@@ -59,10 +59,10 @@ export default function NotesPage() {
             <div>
               <Link
                 to={`/notes/${note.slug}`}
-                className="btn-action btn-action--primary"
-                style={{ fontSize: '0.85rem' }}
+                className="btn-action"
+                style={{ fontSize: '0.8rem', padding: '0.4rem 0.75rem' }}
               >
-                Read Full Engineering Note <ArrowRight size={14} />
+                Read note <ArrowRight size={13} />
               </Link>
             </div>
           </article>

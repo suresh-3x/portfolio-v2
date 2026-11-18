@@ -31,9 +31,9 @@ export default function StackPage() {
       </nav>
 
       <header className="page-header">
-        <h1>Technical Stack &amp; Architectural Skills</h1>
+        <h1>Tools I'd defend in an interview.</h1>
         <p className="page-header__sub">
-          Comprehensive inventory of production technologies, frameworks, storage engines, and engineering practices battle-tested across distributed systems and agentic AI platforms.
+          Four areas, sixteen tools. Everything here has run in production.
         </p>
       </header>
 
@@ -137,7 +137,7 @@ export default function StackPage() {
           </p>
         </div>
         <Link to="/projects" className="btn-action btn-action--primary">
-          View Projects Architecture <ArrowRight size={14} />
+          See the projects <ArrowRight size={14} />
         </Link>
       </div>
     </div>

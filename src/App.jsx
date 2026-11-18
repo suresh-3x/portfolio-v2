@@ -16,7 +16,7 @@ import NotesPage from './pages/NotesPage';
 import NoteDetailPage from './pages/NoteDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
 
-const HEADER_OFFSET = 120;
+const HEADER_OFFSET = 156;
 const SCROLL_KEY = 'lastScrollPosition';
 
 const HashScrollHandler = () => {

@@ -738,3 +738,75 @@
   color: var(--t-accent);
 }
 
+
+/* Clear the fixed header (strip + nav) so breadcrumbs are visible. */
+[data-view="terminal"] .page-container { padding-top: calc(3.25rem + 1.75rem); }
+/* Long snapshot titles must not push the page wider than the viewport. */
+.detail-main, .project-preview-window { min-width: 0; }
+.preview-window__title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tech-specs-table td { overflow-wrap: anywhere; }
+
+/* ============================================================
+   Match homepage type: heavy tight sans headings, mono only for small labels.
+   ============================================================ */
+[data-view="terminal"] .page-container :is(h1, h2, h3, h4),
+[data-view="terminal"] .metric-card__value {
+  font-family: var(--font-sans);
+  letter-spacing: -0.03em;
+  color: var(--t-text);
+}
+[data-view="terminal"] .page-header h1 {
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.02;
+}
+[data-view="terminal"] .page-header__sub { font-size: clamp(1.05rem, 1.6vw, 1.25rem); max-width: 52ch; }
+[data-view="terminal"] .detail-section h2,
+[data-view="terminal"] .note-content h2 { font-weight: 800; font-size: clamp(1.35rem, 2.2vw, 1.7rem); }
+[data-view="terminal"] .sidebar-box h3 { font-weight: 700; font-size: 1.05rem; }
+[data-view="terminal"] .note-takeaways h3 { color: var(--t-text); font-weight: 800; }
+[data-view="terminal"] .metric-card__value { font-weight: 800; letter-spacing: -0.04em; }
+/* metric label reads as a sentence, not a terminal token */
+[data-view="terminal"] .metric-card__label { font-family: var(--font-sans); font-weight: 600; }
+[data-view="terminal"] .page-container h3 { font-weight: 700; letter-spacing: -0.02em; }
+
+/* Prev/next footer on note + project detail pages */
+.pager { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--t-hairline); }
+.pager__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.pager__card {
+  display: flex; flex-direction: column; gap: 0.4rem; min-width: 0;
+  padding: 1.1rem 1.25rem; border-radius: 8px;
+  border: 1px solid var(--t-border); background: var(--t-panel);
+  transition: border-color 0.15s ease;
+}
+.pager__card:hover { border-color: var(--t-accent); }
+.pager__card--next { text-align: right; }
+.pager__dir { font-size: 0.72rem; color: var(--t-faint); }
+.pager__card:hover .pager__dir { color: var(--t-accent); }
+.pager__title { font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.02em; font-size: 1.02rem; line-height: 1.35; color: var(--t-text); }
+.pager__all { display: block; width: fit-content; margin: 1.5rem auto 0; font-size: 0.8rem; color: var(--t-muted); }
+.pager__all:hover { color: var(--t-accent); }
+@media (max-width: 600px) {
+  .pager__grid { grid-template-columns: 1fr; }
+  .pager__card--next { text-align: left; }
+}
+
+/* Sidebar link stacks: primary stays a button, the rest read as a quiet link list */
+[data-view="terminal"] .sidebar-box .btn-action:not(.btn-action--primary) {
+  width: 100%; box-sizing: border-box; justify-content: flex-start;
+  background: none; border: 0; border-bottom: 1px solid var(--t-hairline); border-radius: 0;
+  padding: 0.7rem 0.1rem; font-size: 0.82rem; color: var(--t-text-2);
+}
+[data-view="terminal"] .sidebar-box .btn-action:not(.btn-action--primary):last-child { border-bottom: 0; }
+[data-view="terminal"] .sidebar-box .btn-action:not(.btn-action--primary):hover { background: none; color: var(--t-accent); }
+[data-view="terminal"] .sidebar-box .btn-action--primary { width: 100%; box-sizing: border-box; margin-bottom: 0.4rem; }
+
+/* 404 */
+.notfound { text-align: center; padding-top: 18vh !important; padding-bottom: 12vh; }
+.notfound__code { font-size: 0.85rem; color: var(--t-accent); margin: 0 0 0.75rem; }
+.notfound h1 { font-weight: 800; letter-spacing: -0.045em; font-size: clamp(2.2rem, 5vw, 3.4rem); margin: 0; }
+.notfound__sub { color: var(--t-muted); margin: 0.9rem 0 2rem; }
+.notfound__links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.75rem; font-size: 0.8rem; }
+.notfound__links a { color: var(--t-muted); }
+.notfound__links a:hover { color: var(--t-accent); }

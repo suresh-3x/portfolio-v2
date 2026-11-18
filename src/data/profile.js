@@ -1,10 +1,10 @@
 export const profile = {
   name: 'Suresh Bhandari',
-  title: 'Senior Backend & AI Engineer',
+  title: 'Backend & AI Engineer',
   tagline:
     'I build and scale the distributed systems and agentic AI platforms that keep products alive under real load.',
   location: 'Mumbai, India',
-  relocation: 'Open to relocation',
+  relocation: 'Relocating to NL/DE · Remote-EU',
   email: 'suresh.37x@gmail.com',
   phone: '+91-8451985962',
   phoneTel: 'tel:+918451985962',
@@ -56,7 +56,7 @@ export const atsKeywords = [
 export const impactMetrics = [
   { value: '5M+', label: 'MAU platform scaled', keyword: 'System scalability' },
   { value: '10+', label: 'Production AI agents', keyword: 'Google ADK' },
-  { value: '5+ yrs', label: 'Backend engineering', keyword: 'Senior Backend Engineer' },
+  { value: '5+ yrs', label: 'Backend engineering', keyword: 'Backend Engineer' },
   { value: '10K', label: 'Req/sec peak handled', keyword: 'High-throughput systems' },
 ];
 
@@ -72,7 +72,7 @@ export const education = {
 };
 
 export const seo = {
-  title: 'Suresh Bhandari | Senior Backend & AI Engineer',
+  title: 'Suresh Bhandari | Backend & AI Engineer',
   description:
-    'Senior Backend and AI Engineer specializing in distributed systems, FastAPI, and agentic AI (Google ADK). Scaled platforms to 5M+ MAU and 10K req/sec peak.',
+    'Backend and AI Engineer specializing in distributed systems, FastAPI, and agentic AI (Google ADK). Scaled platforms to 5M+ MAU and 10K req/sec peak.',
 };

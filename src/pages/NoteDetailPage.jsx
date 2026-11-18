@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter, Link } from '../router';
+import PagerFooter from '../components/PagerFooter';
 import { notes } from '../data/notes';
 import { profile } from '../data/profile';
 import { Calendar, Clock, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
@@ -102,39 +103,7 @@ export default function NoteDetailPage() {
         )}
       </article>
 
-      {/* Prev / Next Note Footer */}
-      <footer
-        style={{
-          marginTop: '4rem',
-          paddingTop: '2rem',
-          borderTop: '1px solid var(--t-hairline)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1rem'
-        }}
-      >
-        {prevNote ? (
-          <Link to={`/notes/${prevNote.slug}`} className="btn-action">
-            <ArrowLeft size={14} /> Previous: {prevNote.title}
-          </Link>
-        ) : (
-          <span />
-        )}
-
-        <Link to="/notes" className="btn-action">
-          All Notes
-        </Link>
-
-        {nextNote ? (
-          <Link to={`/notes/${nextNote.slug}`} className="btn-action">
-            Next: {nextNote.title} <ArrowRight size={14} />
-          </Link>
-        ) : (
-          <span />
-        )}
-      </footer>
+      <PagerFooter prev={prevNote} next={nextNote} base="/notes" allLabel="all notes" />
     </div>
   );
 }

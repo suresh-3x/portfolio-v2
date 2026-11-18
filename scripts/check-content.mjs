@@ -25,7 +25,7 @@ scan('notes', notes);
 if (!projects.some((p) => p.title === 'Revamp Engine' && p.featured)) {
   errors.push('Revamp Engine missing or not featured');
 }
-if (experienceEntries.length < 5) errors.push('expected >= 5 experience entries');
+if (experienceEntries.length < 4) errors.push('expected >= 4 experience entries');
 if (notes.length < 3) errors.push('expected >= 3 notes');
 
 if (errors.length) {

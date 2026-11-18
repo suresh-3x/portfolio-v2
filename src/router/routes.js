@@ -63,9 +63,9 @@ export function getPageMetadata(route) {
   switch (route.id) {
     case 'home':
       return {
-        title: 'Suresh Bhandari | Senior Backend & AI Engineer',
+        title: 'Suresh Bhandari | Backend & AI Engineer',
         description:
-          'Senior Backend and AI Engineer specializing in distributed systems, FastAPI, and agentic AI (Google ADK). Scaled platforms to 5M+ MAU and 10K req/sec peak.',
+          'Backend and AI Engineer specializing in distributed systems, FastAPI, and agentic AI (Google ADK). Scaled platforms to 5M+ MAU and 10K req/sec peak.',
         canonical: `${baseUrl}/`,
         ogType: 'profile',
         ogImage,
@@ -160,7 +160,7 @@ export function getPageMetadata(route) {
       return {
         title: 'Engineering Experience & Career History | Suresh Bhandari',
         description:
-          '5+ years scaling distributed systems: T-Systems (Deutsche Telekom), Gridlogic (5M+ MAU, 10K req/s), BizAssist, and Stride Ahead.',
+          '5+ years scaling distributed systems: T-Systems (Deutsche Telekom), Gridlogic (5M+ MAU, 10K req/s), and Stride Ahead.',
         canonical: `${baseUrl}/experience`,
         ogType: 'profile',
         ogImage,
@@ -184,9 +184,9 @@ export function getPageMetadata(route) {
 
     case 'about':
       return {
-        title: 'About Suresh Bhandari | Senior Backend & AI Engineer',
+        title: 'About Suresh Bhandari | Backend & AI Engineer',
         description:
-          'Senior Backend and AI Engineer journey: from 13-year-old hacker to scaling 5M+ MAU distributed platforms and enterprise Google ADK agentic AI.',
+          'Backend and AI Engineer journey: from 13-year-old hacker to scaling 5M+ MAU distributed platforms and enterprise Google ADK agentic AI.',
         canonical: `${baseUrl}/about`,
         ogType: 'profile',
         ogImage,

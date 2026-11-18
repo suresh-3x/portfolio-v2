@@ -161,7 +161,7 @@ export const notes = [
       {
         heading: 'The Stakes of Real-Money Gaming Infrastructure',
         paragraphs: [
-          'In a gaming platform serving 5M to 10M monthly active users with real stakes, user trust hinges entirely on transaction finality. If a user wins a tournament or deposits funds, balance discrepancies cannot be excused by eventual consistency lags.',
+          'In a gaming platform serving 5M+ monthly active users with real stakes, user trust hinges entirely on transaction finality. If a user wins a tournament or deposits funds, balance discrepancies cannot be excused by eventual consistency lags.',
           'During peak evening tournament events, transaction volume surged to 10,000 requests per second. At that velocity, database locks cause catastrophic connection pool exhaustion if architecture is not deliberately partitioned.'
         ]
       },
