@@ -12,7 +12,7 @@ if (!fs.existsSync(dir)) {
 
 // Geometric SVGs mapped to projects to perfectly align with Swiss / Industrial themes.
 const projects = [
-  { name: 'revamp-engine.svg', color: '#f5a623', symbol: '<rect x="30" y="30" width="40" height="40" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="50" r="10" fill="currentColor"/>' },
+  { name: 'revamp-engine.svg', color: '#ff4d3d', symbol: '<rect x="30" y="30" width="40" height="40" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="50" r="10" fill="currentColor"/>' },
   { name: 'nomad-mind.svg', color: '#1a56db', symbol: '<circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" stroke-width="4"/><line x1="10" y1="50" x2="90" y2="50" stroke="currentColor" stroke-width="4"/><line x1="50" y1="10" x2="50" y2="90" stroke="currentColor" stroke-width="4"/>' },
   { name: 'cal-self-hosted.svg', color: '#00E676', symbol: '<rect x="20" y="20" width="60" height="60" rx="4" fill="none" stroke="currentColor" stroke-width="4"/><line x1="20" y1="40" x2="80" y2="40" stroke="currentColor" stroke-width="4"/><circle cx="40" cy="60" r="4" fill="currentColor"/>' },
   { name: 'taiga.svg', color: '#FF3B30', symbol: '<path d="M20,80 L50,20 L80,80 Z" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="60" r="5" fill="currentColor"/>' },

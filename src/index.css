@@ -143,9 +143,9 @@ section[id] {
   pointer-events: none;
 }
 
-/* Terminal theme: yellowish/amber gradient */
+/* Terminal theme: accent gradient */
 [data-view="terminal"] .scroll-progress-bar {
-  background: linear-gradient(90deg, #f5a623, #ff8c42);
+  background: linear-gradient(90deg, var(--t-accent), var(--t-accent-hover));
 }
 
 [data-theme="light"] .scroll-progress-bar {
@@ -171,7 +171,7 @@ section[id] {
 [data-view="terminal"] section[id]:target::before {
   width: 40px;
   opacity: 1;
-  background: var(--t-accent, #f5a623);
+  background: var(--t-accent);
 }
 
 /* Stagger animation for list items */
