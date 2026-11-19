@@ -154,6 +154,12 @@ function snapNow(root) {
       const h = el.offsetHeight;
       el.style.minHeight = `${Math.ceil((h - 1) / G) * G + 1}px`;
     }
+    if (mode === 'end' && el !== main) {
+      // first-screen block: end on the last grid line that is still inside the viewport, so its foot is never cut off
+      const { y } = pagePos(el);
+      const fold = gyOrigin + Math.floor((window.innerHeight - gyOrigin) / G) * G;
+      if (fold > y) el.style.minHeight = `${fold - y}px`;
+    }
     if (mode === 'end') {
       const { y, h } = pagePos(el);
       const d = mod(-gy(y + h));

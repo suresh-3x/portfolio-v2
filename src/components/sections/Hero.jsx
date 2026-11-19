@@ -86,7 +86,7 @@ const Hero = () => {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: 3rem 0;
+          padding: clamp(1rem, 5vh, 3rem) 0;
         }
 
         .hero-copy { min-width: 0; }
@@ -124,7 +124,7 @@ const Hero = () => {
 
         .hero-name {
           font-family: var(--font-sans);
-          font-size: clamp(3.2rem, 8.5vw, 7.5rem);
+          font-size: clamp(3.2rem, min(8.5vw, 13vh), 7.5rem);
           line-height: 0.95;
           font-weight: 800;
           letter-spacing: -0.045em;
@@ -180,6 +180,26 @@ const Hero = () => {
           border-top: 1px solid var(--t-border);
           font-size: 0.75rem;
           color: var(--t-faint);
+        }
+        /* Phones: name, pitch, buttons, logos and foot all on the first screen */
+        @media (max-width: 760px) {
+          [data-view="terminal"] .hero { padding-top: 56px; }
+          .hero-main { padding: 1.5rem 0; justify-content: space-evenly; }
+          .hero-name { font-size: clamp(2.9rem, 13vw, 3.6rem); }
+          .hero-intro { margin-top: 1.1rem; font-size: 1.08rem; line-height: 1.5; }
+          .hero-cta { margin-top: 1.5rem; }
+          .hero-cta__btn { flex: 1; justify-content: center; }
+          .hero-logos { margin-top: 1.75rem; padding-top: 1.1rem; gap: 0.85rem; flex-direction: column; }
+          .hero-logos .company-logo { width: 24px; height: 24px; }
+          .hero-foot { height: 52px; }
+        }
+        /* short phones (SE-class): logos collapse to one row of names */
+        @media (max-width: 760px) and (max-height: 720px) {
+          .hero-logos { flex-direction: row; flex-wrap: nowrap; justify-content: space-between; gap: 0.5rem; }
+          .hero-logos .company-logo { width: 20px; height: 20px; }
+          .hero-logos .mono { display: none; }
+          .hero-logos strong { font-size: 0.8rem; white-space: nowrap; }
+          .hero-logos li { gap: 0.45rem; }
         }
         .hero-foot__dot {
           display: inline-block;
