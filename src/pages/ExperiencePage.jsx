@@ -54,7 +54,7 @@ export default function ExperiencePage() {
                 )}
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.35rem' }}>
+              <div className="xp-page__when" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.35rem' }}>
                 <div className="mono" style={{ fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <Calendar size={13} /> {exp.period}
                 </div>

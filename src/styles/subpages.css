@@ -869,3 +869,31 @@
 .pj-card--featured .pj-card__img img { position: absolute; inset: 0; }
 .pj-grid { margin-top: 0; }
 [data-view="terminal"] .page-container .filter-bar { margin-bottom: 0; }
+
+/* ============================================================
+   Phone polish: one gutter, one card padding, one rhythm
+   ============================================================ */
+@media (max-width: 760px) {
+  .page-container { padding-bottom: 1rem; }
+  .breadcrumbs { margin-bottom: 1.25rem; }
+  .breadcrumbs > span[aria-current] { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* metric tiles: 2 up instead of four full-width slabs */
+  .project-metrics-grid { grid-template-columns: 1fr 1fr !important; gap: 0.75rem !important; margin: 1.5rem 0 2rem !important; }
+  .metric-card { padding: 1rem !important; min-height: 0 !important; margin-top: 0 !important; }
+  [data-view="terminal"] .metric-card__value { font-size: 1.5rem; overflow-wrap: anywhere; }
+  .metric-card__label { font-size: 0.8rem; }
+  .metric-card__note { font-size: 0.7rem; }
+  /* cards: inline 2rem padding eats a third of a 390px screen */
+  .page-container .sidebar-box { padding: 1.25rem !important; }
+  .page-container > div[style*="column"] { gap: 1rem !important; }
+  .xp-page__when { align-items: flex-start !important; }
+  .page-container h2 { font-size: 1.25rem !important; }
+  /* projects: image shouldn't be taller than the story */
+  .pj-card--featured .pj-card__img { min-height: 0; aspect-ratio: 16 / 10; }
+  .pj-card__body, .pj-card--featured .pj-card__body { padding: 1.1rem 1.25rem 1.25rem; }
+  .pj-card--featured .pj-card__title { font-size: 1.6rem; }
+  .pj-grid { gap: 1rem; }
+  [data-view="terminal"] .page-container .filter-bar { margin-bottom: 1rem; }
+  .pager { margin-top: 2.5rem !important; }
+  .pager__all { margin-top: 1rem; }
+}

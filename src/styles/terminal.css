@@ -1106,3 +1106,25 @@
 @media (max-width: 760px) {
   [data-view="terminal"] .site-nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--t-bg); }
 }
+
+/* ---------- Phone polish ---------- */
+@media (max-width: 760px) {
+  /* no dead band above the footer */
+  [data-view="terminal"] .main-content { padding-bottom: 2.5rem; }
+  [data-view="terminal"] .site-footer { margin-top: 0; }
+  /* footer: brand, links, chips all start on the gutter */
+  [data-view="terminal"] .site-footer__inner { gap: 0.9rem; padding-top: 1.25rem; padding-bottom: 1.5rem; }
+  [data-view="terminal"] .site-footer__right { margin-left: 0; width: 100%; flex-wrap: wrap; gap: 0.5rem; }
+  [data-view="terminal"] .site-footer__top { margin-left: auto; }
+  /* work: tighter rhythm, titles fit one or two lines */
+  [data-view="terminal"] .t-showcase { gap: 3rem; margin-top: 1.5rem; }
+  [data-view="terminal"] .t-show { gap: 1.1rem; }
+  [data-view="terminal"] .t-show__title { font-size: 1.65rem; margin: 0.6rem 0 0.6rem; }
+  [data-view="terminal"] .t-show__desc { font-size: 0.98rem; line-height: 1.6; }
+  [data-view="terminal"] .t-show__badge { top: 8px; right: 8px; font-size: 0.64rem; padding: 3px 7px; }
+  /* stack + notes cards: same inner padding as experience tabs */
+  [data-view="terminal"] .stack-cards .xp-card { padding: 1.1rem 1.25rem; }
+  [data-view="terminal"] .note-card__link { padding: 1.1rem 1.25rem; }
+  [data-view="terminal"] .note-card__title { font-size: 1.15rem; }
+  [data-view="terminal"] .stack-cards, [data-view="terminal"] .note-cards { gap: 0.75rem; }
+}
