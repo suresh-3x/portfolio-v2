@@ -145,7 +145,7 @@ function snapNow(root) {
       // grow via min-height (border-box): padding alone does nothing when a CSS min-height dominates
       const { y, h } = pagePos(el);
       const d = mod(-gy(y + h - 1));
-      if (d) {
+      if (d >= 1 && d <= G - 1) { // sub-pixel misses come from rounding, not misalignment
         el.style.boxSizing = 'border-box';
         el.style.minHeight = `${h + d}px`;
       }
@@ -163,7 +163,7 @@ function snapNow(root) {
     if (mode === 'end') {
       const { y, h } = pagePos(el);
       const d = mod(-gy(y + h));
-      if (d) el.style.minHeight = `${h + d}px`;
+      if (d >= 1 && d <= G - 1) el.style.minHeight = `${h + d}px`;
     }
     if (mode === 'line') {
       if (cur.borderLeftStyle !== 'none') {
