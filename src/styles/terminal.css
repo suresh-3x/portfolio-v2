@@ -87,6 +87,9 @@
   border-radius: 8px;
 }
 
+/* .mono was only defined inside Hero, so it vanished on every other route */
+[data-view="terminal"] .mono { font-family: var(--font-mono); }
+
 /* ---------- Availability strip (inside fixed header) ---------- */
 [data-view="terminal"] { --strip-h: 36px; }
 [data-view="terminal"] .layout { padding-top: var(--strip-h); }

@@ -79,7 +79,6 @@ const Hero = () => {
           padding-top: 72px;
         }
 
-        .mono { font-family: var(--font-mono); }
 
         .hero-main {
           flex: 1;
